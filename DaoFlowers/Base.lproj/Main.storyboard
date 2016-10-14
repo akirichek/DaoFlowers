@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="zuw-Tc-Thj">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <scenes>
+        <!--Menu View Controller-->
+        <scene sceneID="Wrz-yk-dL2">
+            <objects>
+                <viewController id="GHG-WB-cXV" customClass="MenuViewController" customModule="DaoFlowers" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GOS-Ew-fNH"/>
+                        <viewControllerLayoutGuide type="bottom" id="Iyy-rv-zAT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="exI-mW-fLw">
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UGO-pA-F34">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuTableViewCellIdentifier" textLabel="q3O-tZ-N8s" style="IBUITableViewCellStyleDefault" id="SMi-32-AVg">
+                                        <rect key="frame" x="0.0" y="28" width="240" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SMi-32-AVg" id="yoa-Sd-t2a">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q3O-tZ-N8s">
+                                                    <rect key="frame" x="15" y="0.0" width="210" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="GHG-WB-cXV" id="oEe-8S-lO6"/>
+                                    <outlet property="delegate" destination="GHG-WB-cXV" id="50m-iL-UjE"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Iyy-rv-zAT" firstAttribute="top" secondItem="UGO-pA-F34" secondAttribute="bottom" id="N5i-Qs-dU0"/>
+                            <constraint firstAttribute="trailing" secondItem="UGO-pA-F34" secondAttribute="trailing" id="Syx-3f-SKR"/>
+                            <constraint firstItem="UGO-pA-F34" firstAttribute="leading" secondItem="exI-mW-fLw" secondAttribute="leading" id="mn1-ec-h9X"/>
+                            <constraint firstItem="UGO-pA-F34" firstAttribute="top" secondItem="GOS-Ew-fNH" secondAttribute="bottom" id="z8t-s7-Btf"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="UGO-pA-F34" id="axd-uu-fxf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mAy-hS-MEd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-744" y="1426"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="kPp-j0-1On">
+            <objects>
+                <viewController id="zuw-Tc-Thj" customClass="MainViewController" customModule="DaoFlowers" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7CL-zT-IU3"/>
+                        <viewControllerLayoutGuide type="bottom" id="TqX-KN-Lur"/>
+                    </layoutGuides>
+                    <view key="view" tag="2" contentMode="scaleToFill" id="f69-aA-kkF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EsG-nW-RKh">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </containerView>
+                            <containerView opaque="NO" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BBT-ji-HOg">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="568"/>
+                                <connections>
+                                    <segue destination="GHG-WB-cXV" kind="embed" id="H3P-qD-wKN"/>
+                                </connections>
+                            </containerView>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="68f-Rs-JHY" customClass="MenuHiddenView" customModule="DaoFlowers" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="BBT-ji-HOg" firstAttribute="leading" secondItem="f69-aA-kkF" secondAttribute="leading" id="5Pa-Lf-xCn"/>
+                            <constraint firstItem="BBT-ji-HOg" firstAttribute="width" secondItem="f69-aA-kkF" secondAttribute="width" multiplier="0.75" priority="999" id="5U6-af-4Jt"/>
+                            <constraint firstItem="EsG-nW-RKh" firstAttribute="leading" secondItem="f69-aA-kkF" secondAttribute="leading" id="GeU-xa-7JR"/>
+                            <constraint firstItem="TqX-KN-Lur" firstAttribute="top" secondItem="EsG-nW-RKh" secondAttribute="bottom" id="Kof-mZ-hEa"/>
+                            <constraint firstItem="68f-Rs-JHY" firstAttribute="leading" secondItem="f69-aA-kkF" secondAttribute="leading" id="R2c-sU-NBe"/>
+                            <constraint firstItem="EsG-nW-RKh" firstAttribute="top" secondItem="f69-aA-kkF" secondAttribute="top" id="U4C-uh-N5u"/>
+                            <constraint firstItem="TqX-KN-Lur" firstAttribute="top" secondItem="BBT-ji-HOg" secondAttribute="bottom" id="YAN-Qe-ISL"/>
+                            <constraint firstAttribute="trailing" secondItem="68f-Rs-JHY" secondAttribute="trailing" id="ZmB-zi-6Hl"/>
+                            <constraint firstItem="TqX-KN-Lur" firstAttribute="top" secondItem="68f-Rs-JHY" secondAttribute="bottom" id="btT-hl-OcK"/>
+                            <constraint firstItem="BBT-ji-HOg" firstAttribute="width" relation="lessThanOrEqual" secondItem="f69-aA-kkF" secondAttribute="height" multiplier="0.75" id="kVf-Vh-kTZ"/>
+                            <constraint firstItem="BBT-ji-HOg" firstAttribute="top" secondItem="f69-aA-kkF" secondAttribute="top" id="utK-Hu-W3q"/>
+                            <constraint firstItem="68f-Rs-JHY" firstAttribute="top" secondItem="f69-aA-kkF" secondAttribute="top" id="vvW-GF-0ZY"/>
+                            <constraint firstAttribute="trailing" secondItem="EsG-nW-RKh" secondAttribute="trailing" id="y8n-6b-eC6"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="5Un-Bd-cD3" appends="YES" id="chv-Om-SPz"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" id="oer-GB-h2U"/>
+                    <connections>
+                        <outlet property="containerView" destination="EsG-nW-RKh" id="r3h-N6-ZUQ"/>
+                        <outlet property="hiddenViewForDragging" destination="68f-Rs-JHY" id="1LM-Sa-hht"/>
+                        <outlet property="menuContainerLeadingConstraint" destination="5Pa-Lf-xCn" id="RTs-qO-KJh"/>
+                        <outlet property="menuContainerView" destination="BBT-ji-HOg" id="yyU-c0-1Bq"/>
+                        <outlet property="panGestureRecognizer" destination="5Un-Bd-cD3" id="O5e-XL-TPz"/>
+                        <segue destination="tOZ-OE-tHw" kind="custom" identifier="VarietiesViewControllerSegueIdentifier" customClass="MainViewControllerSegue" customModule="DaoFlowers" id="zv4-fp-J3p"/>
+                        <segue destination="nLJ-l6-1QU" kind="custom" identifier="PlantationsViewControllerSegueIdentifier" customClass="MainViewControllerSegue" customModule="DaoFlowers" id="8Mc-dd-xdZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y5F-7I-4ay" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="5Un-Bd-cD3">
+                    <connections>
+                        <action selector="dragging:" destination="zuw-Tc-Thj" id="F3t-My-ore"/>
+                        <outlet property="delegate" destination="zuw-Tc-Thj" id="9V2-a4-9K9"/>
+                    </connections>
+                </panGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-72" y="1387"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="6c3-Pg-EyN">
+            <objects>
+                <navigationController id="tOZ-OE-tHw" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pBC-gD-141">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="u66-Ap-ieb" kind="relationship" relationship="rootViewController" id="gvf-l1-cfG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="amX-Kb-Ux9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="677" y="1192"/>
+        </scene>
+        <!--Varieties View Controller-->
+        <scene sceneID="B9U-M1-77W">
+            <objects>
+                <viewController id="u66-Ap-ieb" customClass="VarietiesViewController" customModule="DaoFlowers" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="AwL-U7-Xya"/>
+                        <viewControllerLayoutGuide type="bottom" id="bJE-Bj-2vc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7lM-cn-Xhh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gi8-CR-sO6">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YHl-Lj-WCK">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="VarietiesCollectionViewCellIdentifier" id="vxa-a8-xda">
+                                        <rect key="frame" x="0.0" y="64" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mUG-WH-Tkf">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="u66-Ap-ieb" id="odf-20-qyc"/>
+                                    <outlet property="delegate" destination="u66-Ap-ieb" id="Qvc-SY-flZ"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.59607843140000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="4Rf-Hb-oE0">
+                        <barButtonItem key="leftBarButtonItem" image="icon_menu" id="nvQ-jz-ZLb">
+                            <connections>
+                                <action selector="menuButtonClicked:" destination="u66-Ap-ieb" id="e2O-Ac-hou"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WmH-Kt-yMU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1146" y="1197"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="DqS-z4-y9F">
+            <objects>
+                <navigationController id="nLJ-l6-1QU" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FuI-Hw-MWu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Ogx-Oo-Mta" kind="relationship" relationship="rootViewController" id="ttk-BK-Bjr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d4B-7p-tVi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="646" y="1907"/>
+        </scene>
+        <!--Plantations View Controller-->
+        <scene sceneID="hIo-IO-HsM">
+            <objects>
+                <viewController id="Ogx-Oo-Mta" customClass="PlantationsViewController" customModule="DaoFlowers" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4eK-Pf-kCd"/>
+                        <viewControllerLayoutGuide type="bottom" id="Qjc-DE-g7B"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mcR-bB-uXB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="nnm-wz-UcI">
+                        <barButtonItem key="leftBarButtonItem" image="icon_menu" id="2Wo-Wq-Jgq">
+                            <connections>
+                                <action selector="menuButtonClicked:" destination="Ogx-Oo-Mta" id="fuP-57-TuM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nrt-g9-T9O" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1145" y="1899"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icon_menu" width="44" height="44"/>
+    </resources>
+</document>
