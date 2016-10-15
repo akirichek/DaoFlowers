@@ -16,14 +16,18 @@
 		8299D36D1DAF8CC50088E550 /* MainViewControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D36C1DAF8CC50088E550 /* MainViewControllerSegue.swift */; };
 		8299D3701DAF8F110088E550 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D36F1DAF8F110088E550 /* MenuViewController.swift */; };
 		8299D3721DAF926E0088E550 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3711DAF926E0088E550 /* Constants.swift */; };
-		8299D3741DAF99940088E550 /* VarietiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3731DAF99940088E550 /* VarietiesViewController.swift */; };
+		8299D3741DAF99940088E550 /* FlowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3731DAF99940088E550 /* FlowersViewController.swift */; };
 		8299D3761DAF99B30088E550 /* PlantationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3751DAF99B30088E550 /* PlantationsViewController.swift */; };
 		8299D3781DAF9A0D0088E550 /* MenuButtonHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3771DAF9A0D0088E550 /* MenuButtonHandler.swift */; };
 		8299D37A1DAF9A930088E550 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3791DAF9A930088E550 /* MainViewController.swift */; };
-		8299D37C1DAFDD3B0088E550 /* MenuHiddenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D37B1DAFDD3B0088E550 /* MenuHiddenView.swift */; };
+		8299D37E1DB14E320088E550 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D37D1DB14E320088E550 /* ApiManager.swift */; };
+		8299D3811DB151F00088E550 /* Flower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3801DB151F00088E550 /* Flower.swift */; };
+		8299D3841DB155960088E550 /* FlowerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3831DB155960088E550 /* FlowerCollectionViewCell.swift */; };
+		F81CBF2D8B89C452C874F6B5 /* Pods_DaoFlowers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5BB758AC21055E3F306CB97 /* Pods_DaoFlowers.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		41BF2CE2A460955924CE8330 /* Pods-DaoFlowers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DaoFlowers.release.xcconfig"; path = "Pods/Target Support Files/Pods-DaoFlowers/Pods-DaoFlowers.release.xcconfig"; sourceTree = "<group>"; };
 		82457AC41DAEAA5900D87B21 /* DaoFlowers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DaoFlowers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82457AC71DAEAA5900D87B21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82457ACC1DAEAA5900D87B21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -35,11 +39,15 @@
 		8299D36C1DAF8CC50088E550 /* MainViewControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewControllerSegue.swift; sourceTree = "<group>"; };
 		8299D36F1DAF8F110088E550 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		8299D3711DAF926E0088E550 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		8299D3731DAF99940088E550 /* VarietiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietiesViewController.swift; sourceTree = "<group>"; };
+		8299D3731DAF99940088E550 /* FlowersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowersViewController.swift; sourceTree = "<group>"; };
 		8299D3751DAF99B30088E550 /* PlantationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlantationsViewController.swift; sourceTree = "<group>"; };
 		8299D3771DAF9A0D0088E550 /* MenuButtonHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButtonHandler.swift; sourceTree = "<group>"; };
 		8299D3791DAF9A930088E550 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		8299D37B1DAFDD3B0088E550 /* MenuHiddenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuHiddenView.swift; sourceTree = "<group>"; };
+		8299D37D1DB14E320088E550 /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
+		8299D3801DB151F00088E550 /* Flower.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flower.swift; sourceTree = "<group>"; };
+		8299D3831DB155960088E550 /* FlowerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowerCollectionViewCell.swift; sourceTree = "<group>"; };
+		B5BB758AC21055E3F306CB97 /* Pods_DaoFlowers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DaoFlowers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D506727F50AAD99682289838 /* Pods-DaoFlowers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DaoFlowers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DaoFlowers/Pods-DaoFlowers.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,17 +55,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F81CBF2D8B89C452C874F6B5 /* Pods_DaoFlowers.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F6A0ECB3DD6A855145C30AA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D506727F50AAD99682289838 /* Pods-DaoFlowers.debug.xcconfig */,
+				41BF2CE2A460955924CE8330 /* Pods-DaoFlowers.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		82457ABB1DAEAA5800D87B21 = {
 			isa = PBXGroup;
 			children = (
 				82457AC61DAEAA5900D87B21 /* DaoFlowers */,
 				82457AC51DAEAA5900D87B21 /* Products */,
+				0F6A0ECB3DD6A855145C30AA /* Pods */,
+				FAF5BFF843C063266E94F1E0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -72,6 +92,7 @@
 		82457AC61DAEAA5900D87B21 /* DaoFlowers */ = {
 			isa = PBXGroup;
 			children = (
+				8299D37F1DB151E20088E550 /* Models */,
 				8299D36E1DAF8EF30088E550 /* Views */,
 				82457AC71DAEAA5900D87B21 /* AppDelegate.swift */,
 				82457ACB1DAEAA5900D87B21 /* Main.storyboard */,
@@ -82,6 +103,7 @@
 				8299D36C1DAF8CC50088E550 /* MainViewControllerSegue.swift */,
 				8299D3711DAF926E0088E550 /* Constants.swift */,
 				8299D3771DAF9A0D0088E550 /* MenuButtonHandler.swift */,
+				8299D37D1DB14E320088E550 /* ApiManager.swift */,
 			);
 			path = DaoFlowers;
 			sourceTree = "<group>";
@@ -89,14 +111,38 @@
 		8299D36E1DAF8EF30088E550 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8299D3821DB155560088E550 /* Varieties */,
 				827BF85E1DAEAF4000054548 /* BaseViewController.swift */,
 				8299D3791DAF9A930088E550 /* MainViewController.swift */,
 				8299D36F1DAF8F110088E550 /* MenuViewController.swift */,
-				8299D3731DAF99940088E550 /* VarietiesViewController.swift */,
 				8299D3751DAF99B30088E550 /* PlantationsViewController.swift */,
-				8299D37B1DAFDD3B0088E550 /* MenuHiddenView.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		8299D37F1DB151E20088E550 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8299D3801DB151F00088E550 /* Flower.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		8299D3821DB155560088E550 /* Varieties */ = {
+			isa = PBXGroup;
+			children = (
+				8299D3731DAF99940088E550 /* FlowersViewController.swift */,
+				8299D3831DB155960088E550 /* FlowerCollectionViewCell.swift */,
+			);
+			name = Varieties;
+			sourceTree = "<group>";
+		};
+		FAF5BFF843C063266E94F1E0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B5BB758AC21055E3F306CB97 /* Pods_DaoFlowers.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -106,9 +152,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 82457AD91DAEAA5900D87B21 /* Build configuration list for PBXNativeTarget "DaoFlowers" */;
 			buildPhases = (
+				3AA3BD4E544A621E2FF0B294 /* [CP] Check Pods Manifest.lock */,
 				82457AC01DAEAA5900D87B21 /* Sources */,
 				82457AC11DAEAA5900D87B21 /* Frameworks */,
 				82457AC21DAEAA5900D87B21 /* Resources */,
+				AFD0B909EEB786CF4E7EE89F /* [CP] Embed Pods Frameworks */,
+				58642D9C2A07BE676B6F032E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -165,6 +214,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3AA3BD4E544A621E2FF0B294 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		58642D9C2A07BE676B6F032E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DaoFlowers/Pods-DaoFlowers-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AFD0B909EEB786CF4E7EE89F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DaoFlowers/Pods-DaoFlowers-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		82457AC01DAEAA5900D87B21 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -172,11 +269,13 @@
 			files = (
 				82457AD01DAEAA5900D87B21 /* DaoFlowers.xcdatamodeld in Sources */,
 				8299D3701DAF8F110088E550 /* MenuViewController.swift in Sources */,
+				8299D3811DB151F00088E550 /* Flower.swift in Sources */,
 				8299D3781DAF9A0D0088E550 /* MenuButtonHandler.swift in Sources */,
-				8299D3741DAF99940088E550 /* VarietiesViewController.swift in Sources */,
+				8299D3741DAF99940088E550 /* FlowersViewController.swift in Sources */,
 				82457AC81DAEAA5900D87B21 /* AppDelegate.swift in Sources */,
+				8299D3841DB155960088E550 /* FlowerCollectionViewCell.swift in Sources */,
 				827BF85F1DAEAF4000054548 /* BaseViewController.swift in Sources */,
-				8299D37C1DAFDD3B0088E550 /* MenuHiddenView.swift in Sources */,
+				8299D37E1DB14E320088E550 /* ApiManager.swift in Sources */,
 				8299D36D1DAF8CC50088E550 /* MainViewControllerSegue.swift in Sources */,
 				8299D3761DAF99B30088E550 /* PlantationsViewController.swift in Sources */,
 				8299D3721DAF926E0088E550 /* Constants.swift in Sources */,
@@ -293,6 +392,7 @@
 		};
 		82457ADA1DAEAA5900D87B21 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D506727F50AAD99682289838 /* Pods-DaoFlowers.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = DaoFlowers/Info.plist;
@@ -304,6 +404,7 @@
 		};
 		82457ADB1DAEAA5900D87B21 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 41BF2CE2A460955924CE8330 /* Pods-DaoFlowers.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = DaoFlowers/Info.plist;

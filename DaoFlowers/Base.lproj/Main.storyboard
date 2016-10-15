@@ -79,17 +79,20 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="68f-Rs-JHY">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.7490301724137931" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="YQZ-7q-OU9" appends="YES" id="tYA-dn-L77"/>
+                                </connections>
+                            </view>
                             <containerView opaque="NO" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BBT-ji-HOg">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="568"/>
                                 <connections>
                                     <segue destination="GHG-WB-cXV" kind="embed" id="H3P-qD-wKN"/>
                                 </connections>
                             </containerView>
-                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="68f-Rs-JHY" customClass="MenuHiddenView" customModule="DaoFlowers" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -110,26 +113,37 @@
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="5Un-Bd-cD3" appends="YES" id="chv-Om-SPz"/>
+                            <outletCollection property="gestureRecognizers" destination="4Ol-5T-bEZ" appends="YES" id="J0g-eP-R9Q"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="oer-GB-h2U"/>
                     <connections>
                         <outlet property="containerView" destination="EsG-nW-RKh" id="r3h-N6-ZUQ"/>
-                        <outlet property="hiddenViewForDragging" destination="68f-Rs-JHY" id="1LM-Sa-hht"/>
+                        <outlet property="hiddenView" destination="68f-Rs-JHY" id="kUS-P9-SmD"/>
                         <outlet property="menuContainerLeadingConstraint" destination="5Pa-Lf-xCn" id="RTs-qO-KJh"/>
                         <outlet property="menuContainerView" destination="BBT-ji-HOg" id="yyU-c0-1Bq"/>
                         <outlet property="panGestureRecognizer" destination="5Un-Bd-cD3" id="O5e-XL-TPz"/>
-                        <segue destination="tOZ-OE-tHw" kind="custom" identifier="VarietiesViewControllerSegueIdentifier" customClass="MainViewControllerSegue" customModule="DaoFlowers" id="zv4-fp-J3p"/>
+                        <segue destination="tOZ-OE-tHw" kind="custom" identifier="FlowersViewControllerSegueIdentifier" customClass="MainViewControllerSegue" customModule="DaoFlowers" id="zv4-fp-J3p"/>
                         <segue destination="nLJ-l6-1QU" kind="custom" identifier="PlantationsViewControllerSegueIdentifier" customClass="MainViewControllerSegue" customModule="DaoFlowers" id="8Mc-dd-xdZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y5F-7I-4ay" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="5Un-Bd-cD3">
                     <connections>
-                        <action selector="dragging:" destination="zuw-Tc-Thj" id="F3t-My-ore"/>
-                        <outlet property="delegate" destination="zuw-Tc-Thj" id="9V2-a4-9K9"/>
+                        <action selector="panGestureDidDragging:" destination="zuw-Tc-Thj" id="127-Ur-b1t"/>
                     </connections>
                 </panGestureRecognizer>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="4Ol-5T-bEZ">
+                    <rectEdge key="edges" left="YES"/>
+                    <connections>
+                        <action selector="screenEdgePanGestureDidDragging:" destination="zuw-Tc-Thj" id="z8c-q0-ihu"/>
+                    </connections>
+                </screenEdgePanGestureRecognizer>
+                <tapGestureRecognizer id="YQZ-7q-OU9">
+                    <connections>
+                        <action selector="hiddenViewClicked:" destination="zuw-Tc-Thj" id="dbj-ZB-gxK"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-72" y="1387"/>
         </scene>
@@ -149,10 +163,10 @@
             </objects>
             <point key="canvasLocation" x="677" y="1192"/>
         </scene>
-        <!--Varieties View Controller-->
+        <!--Flowers View Controller-->
         <scene sceneID="B9U-M1-77W">
             <objects>
-                <viewController id="u66-Ap-ieb" customClass="VarietiesViewController" customModule="DaoFlowers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="u66-Ap-ieb" customClass="FlowersViewController" customModule="DaoFlowers" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AwL-U7-Xya"/>
                         <viewControllerLayoutGuide type="bottom" id="bJE-Bj-2vc"/>
@@ -161,29 +175,97 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gi8-CR-sO6">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gi8-CR-sO6">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YHl-Lj-WCK">
-                                    <size key="itemSize" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="YHl-Lj-WCK">
+                                    <size key="itemSize" width="150" height="150"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="VarietiesCollectionViewCellIdentifier" id="vxa-a8-xda">
-                                        <rect key="frame" x="0.0" y="64" width="50" height="50"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FlowersCollectionViewCellIdentifier" id="vxa-a8-xda" customClass="FlowerCollectionViewCell" customModule="DaoFlowers" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="64" width="150" height="150"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mUG-WH-Tkf">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                    <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mUG-WH-Tkf" userLabel="Bordered Container View">
+                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                                    <subviews>
+                                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KUa-cn-NIl" userLabel="Container View">
+                                                            <rect key="frame" x="1" y="1" width="147" height="147"/>
+                                                            <subviews>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hRI-Oa-TP1">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="147" height="147"/>
+                                                                </imageView>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jMk-QZ-DCe" userLabel="Name Container View">
+                                                                    <rect key="frame" x="0.0" y="98" width="147" height="48.5"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flx-jW-k75">
+                                                                            <rect key="frame" x="7.5" y="0.0" width="132" height="24.5"/>
+                                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uwz-fw-Fi1">
+                                                                            <rect key="frame" x="7.5" y="24" width="132" height="24.5"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
+                                                                    <constraints>
+                                                                        <constraint firstItem="Uwz-fw-Fi1" firstAttribute="height" secondItem="flx-jW-k75" secondAttribute="height" id="2lm-CD-9dp"/>
+                                                                        <constraint firstItem="flx-jW-k75" firstAttribute="top" secondItem="jMk-QZ-DCe" secondAttribute="top" id="A9d-qv-yRj"/>
+                                                                        <constraint firstItem="Uwz-fw-Fi1" firstAttribute="width" secondItem="flx-jW-k75" secondAttribute="width" id="DS3-mO-83D"/>
+                                                                        <constraint firstItem="flx-jW-k75" firstAttribute="width" secondItem="jMk-QZ-DCe" secondAttribute="width" multiplier="0.9" id="NiP-3t-0Br"/>
+                                                                        <constraint firstItem="flx-jW-k75" firstAttribute="height" secondItem="jMk-QZ-DCe" secondAttribute="height" multiplier="0.5" id="T5a-CE-jyN"/>
+                                                                        <constraint firstItem="Uwz-fw-Fi1" firstAttribute="centerX" secondItem="jMk-QZ-DCe" secondAttribute="centerX" id="WmT-mO-j3d"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="Uwz-fw-Fi1" secondAttribute="bottom" id="bLm-NZ-z8m"/>
+                                                                        <constraint firstItem="flx-jW-k75" firstAttribute="centerX" secondItem="jMk-QZ-DCe" secondAttribute="centerX" id="hWY-KA-phV"/>
+                                                                    </constraints>
+                                                                </view>
+                                                            </subviews>
+                                                            <color key="backgroundColor" red="1" green="0.59607843140000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="jMk-QZ-DCe" secondAttribute="trailing" id="GPb-S5-iGC"/>
+                                                                <constraint firstAttribute="bottom" secondItem="jMk-QZ-DCe" secondAttribute="bottom" id="hQN-wX-jAW"/>
+                                                                <constraint firstItem="hRI-Oa-TP1" firstAttribute="leading" secondItem="KUa-cn-NIl" secondAttribute="leading" id="lx4-uL-62s"/>
+                                                                <constraint firstAttribute="bottom" secondItem="hRI-Oa-TP1" secondAttribute="bottom" id="oQZ-qB-ORa"/>
+                                                                <constraint firstItem="jMk-QZ-DCe" firstAttribute="height" secondItem="KUa-cn-NIl" secondAttribute="height" multiplier="0.33" id="s4Q-DN-9Sb"/>
+                                                                <constraint firstItem="hRI-Oa-TP1" firstAttribute="top" secondItem="KUa-cn-NIl" secondAttribute="top" id="vrh-tY-Qgm"/>
+                                                                <constraint firstAttribute="trailing" secondItem="hRI-Oa-TP1" secondAttribute="trailing" id="yVo-zH-g2c"/>
+                                                                <constraint firstItem="jMk-QZ-DCe" firstAttribute="leading" secondItem="KUa-cn-NIl" secondAttribute="leading" id="zWh-sO-mV6"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="KUa-cn-NIl" firstAttribute="width" secondItem="mUG-WH-Tkf" secondAttribute="width" multiplier="0.98" id="2du-2a-aDG"/>
+                                                        <constraint firstItem="KUa-cn-NIl" firstAttribute="height" secondItem="mUG-WH-Tkf" secondAttribute="height" multiplier="0.98" id="LyS-hj-hvL"/>
+                                                        <constraint firstItem="KUa-cn-NIl" firstAttribute="bottom" secondItem="mUG-WH-Tkf" secondAttribute="bottom" multiplier="0.99" id="a5W-YL-l55"/>
+                                                        <constraint firstItem="KUa-cn-NIl" firstAttribute="trailing" secondItem="mUG-WH-Tkf" secondAttribute="trailing" multiplier="0.99" id="u3J-DF-ux4"/>
+                                                    </constraints>
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="mUG-WH-Tkf" secondAttribute="trailing" id="GiG-2d-Un2"/>
+                                            <constraint firstItem="mUG-WH-Tkf" firstAttribute="top" secondItem="vxa-a8-xda" secondAttribute="top" id="Ls2-Bb-eMD"/>
+                                            <constraint firstAttribute="bottom" secondItem="mUG-WH-Tkf" secondAttribute="bottom" id="Twv-1D-zRC"/>
+                                            <constraint firstItem="mUG-WH-Tkf" firstAttribute="leading" secondItem="vxa-a8-xda" secondAttribute="leading" id="sNb-oG-kCG"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="containerView" destination="mUG-WH-Tkf" id="TNr-iM-fiS"/>
+                                            <outlet property="imageView" destination="hRI-Oa-TP1" id="h1x-SM-OS3"/>
+                                            <outlet property="nameLabel" destination="flx-jW-k75" id="0Lk-v0-t9v"/>
+                                            <outlet property="sortsCountLabel" destination="Uwz-fw-Fi1" id="PDd-Rp-JRM"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -193,6 +275,12 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.59607843140000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="bJE-Bj-2vc" firstAttribute="top" secondItem="gi8-CR-sO6" secondAttribute="bottom" id="CDI-iF-jZJ"/>
+                            <constraint firstItem="gi8-CR-sO6" firstAttribute="top" secondItem="7lM-cn-Xhh" secondAttribute="top" id="MBF-wA-lP8"/>
+                            <constraint firstAttribute="trailing" secondItem="gi8-CR-sO6" secondAttribute="trailing" id="bdO-dd-jHQ"/>
+                            <constraint firstItem="gi8-CR-sO6" firstAttribute="leading" secondItem="7lM-cn-Xhh" secondAttribute="leading" id="vlJ-Kk-rid"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="4Rf-Hb-oE0">
                         <barButtonItem key="leftBarButtonItem" image="icon_menu" id="nvQ-jz-ZLb">
@@ -201,6 +289,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="collectionView" destination="gi8-CR-sO6" id="2Bx-MV-XXV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WmH-Kt-yMU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

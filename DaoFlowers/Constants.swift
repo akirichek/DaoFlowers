@@ -9,9 +9,14 @@
 import Foundation
 
 struct K {
+    struct Api {
+        static let BaseUrl = "http://77.91.147.26:9000"
+        static let FlowersTypesPath = "/catalog/flowers/types"
+    }
+    
     struct Storyboard {
         struct SegueIdentifier {
-            static let Varieties = "VarietiesViewControllerSegueIdentifier"
+            static let Flowers = "FlowersViewControllerSegueIdentifier"
             static let Plantations = "PlantationsViewControllerSegueIdentifier"
         }
     }

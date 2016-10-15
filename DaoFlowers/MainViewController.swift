@@ -8,50 +8,29 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UIGestureRecognizerDelegate, MenuViewControllerDelegate, MenuButtonHandler {
+class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButtonHandler {
     
     @IBOutlet weak var menuContainerView: UIView!
     @IBOutlet weak var containerView: UIView!
-   // @IBOutlet weak var hiddenView: UIView!
+    @IBOutlet weak var hiddenView: UIView!
     @IBOutlet weak var menuContainerLeadingConstraint: NSLayoutConstraint!
-    var currentViewController: UIViewController?
     @IBOutlet weak var panGestureRecognizer: UIPanGestureRecognizer!
+    
+    var currentViewController: UIViewController?
     var previousTouchPoint: CGPoint!
-    @IBOutlet weak var hiddenViewForDragging: MenuHiddenView!
+    
     // MARK: Override Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
         let menuViewController = self.childViewControllers.first as! MenuViewController
         menuViewController.delegate = self
-        
-//        let pan = UIPanGestureRecognizer(target: self, action: #selector(MainViewController.test1(_:)))
-//        pan.delegate = self;
-//        pan.cancelsTouchesInView = false
-//        self.hiddenViewForDragging.addGestureRecognizer(pan)
-//        let edgeGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: "userSwipedFromEdge:")
-//        edgeGestureRecognizer.edges = UIRectEdge.Left
-//        edgeGestureRecognizer.delegate = self
-//        self.view.addGestureRecognizer(edgeGestureRecognizer)
-    }
-    
-    
-    func test1(pan: UIPanGestureRecognizer) {
-        print(#function)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Varieties, sender: self)
-//        
-//        self.menuContainerLeadingConstraint.constant = -500
-//        //self.view.layoutIfNeeded()
-
-//        self.hiddenViewForDragging.menuContainerView = menuViewController.tableView
-//        self.hiddenViewForDragging.menuContainerLeadingConstraint = self.menuContainerLeadingConstraint
-        
+        self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Flowers, sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -65,55 +44,73 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, MenuVie
     
     // MARK: Private Methods
     
-    func animateMenu() {
+    func animateMenu(drugged: Bool) {
         var newConstant: CGFloat;
-        
-        if self.menuContainerLeadingConstraint.constant == 0 {
-            newConstant = -(self.menuContainerView.bounds.size.width)
-        } else if self.menuContainerLeadingConstraint.constant == -(self.menuContainerView.bounds.size.width) {
-            
-            newConstant = 0
-        } else if abs(self.menuContainerLeadingConstraint.constant) >= (self.menuContainerView.frame.width / 3) {
-            newConstant = -(self.menuContainerView.bounds.size.width)
+        if drugged {
+            if abs(self.menuContainerLeadingConstraint.constant) >= (self.menuContainerView.frame.width / 2) {
+                newConstant = -(self.menuContainerView.bounds.size.width)
+            } else {
+                newConstant = 0
+            }
         } else {
-            newConstant = 0
+            if self.menuContainerLeadingConstraint.constant == 0 {
+                newConstant = -(self.menuContainerView.bounds.size.width)
+            } else {
+                newConstant = 0
+            }
         }
         
         self.panGestureRecognizer.enabled = !Bool(newConstant)
-        
         self.menuContainerLeadingConstraint.constant = newConstant
+        let alpha: CGFloat
+        
+        if newConstant == 0 {
+            alpha = 0.75
+        } else {
+            alpha = 0
+        }
         
         UIView.animateWithDuration(0.3) {
+            self.hiddenView.alpha = alpha
             self.view.layoutIfNeeded()
+        }
+    }
+    
+    func dragMenu(sender: UIGestureRecognizer) {
+        let point: CGPoint = sender.locationInView(self.view)
+        if self.previousTouchPoint != nil {
+            let deltaX = point.x - self.previousTouchPoint.x
+            if (self.menuContainerLeadingConstraint.constant + deltaX <= 0) {
+                self.hiddenView.alpha = (self.menuContainerView.frame.width + self.menuContainerLeadingConstraint.constant) / self.view.frame.width
+                self.menuContainerLeadingConstraint.constant += deltaX
+            }
+        }
+        
+        self.previousTouchPoint = point
+        
+        if sender.state == UIGestureRecognizerState.Ended ||
+            sender.state == UIGestureRecognizerState.Cancelled {
+            self.previousTouchPoint = nil
+            self.animateMenu(true)
         }
     }
     
     // MARK: Actions
     
     @IBAction func hiddenViewClicked(sender: UITapGestureRecognizer) {
-        self.animateMenu()
+        self.animateMenu(false)
     }
     
-    @IBAction func dragging(sender: UIPanGestureRecognizer) {
+    @IBAction func panGestureDidDragging(sender: UIPanGestureRecognizer) {
         let point: CGPoint = sender.locationInView(self.view)
-        if (point.x - menuContainerView.frame.width - self.menuContainerLeadingConstraint.constant <= 0) ||
+        if (point.x - self.menuContainerView.frame.width - self.menuContainerLeadingConstraint.constant <= 0) ||
             self.previousTouchPoint != nil {
-            if self.previousTouchPoint != nil {
-                let deltaX = point.x - self.previousTouchPoint.x
-                if (self.menuContainerLeadingConstraint.constant + deltaX <= 0) {
-                    self.menuContainerLeadingConstraint.constant += deltaX
-                }
-            }
-            
-            self.previousTouchPoint = point
-            
+            self.dragMenu(sender)
         }
-        
-        if sender.state == UIGestureRecognizerState.Ended ||
-            sender.state == UIGestureRecognizerState.Cancelled {
-            self.previousTouchPoint = nil
-            self.animateMenu()
-        }
+    }
+    
+    @IBAction func screenEdgePanGestureDidDragging(sender: UIScreenEdgePanGestureRecognizer) {
+        self.dragMenu(sender)
     }
 
     // MARK: MenuViewControllerDelegate
@@ -121,26 +118,18 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate, MenuVie
     func menuViewController(menuViewController: MenuViewController, didSelectMenuSection menuSection: MenuSection) {
         switch menuSection {
         case .Varieties:
-            self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Varieties, sender: self)
+            self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Flowers, sender: self)
         case .Plantations:
             self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Plantations, sender: self)
         }
         
         self.view.layoutIfNeeded()
-        self.animateMenu()
+        self.animateMenu(false)
     }
     
     // MARK: MenuButtonHandler
     
     func menuButtonClicked() {
-        self.animateMenu()
-    }
-    
-    // MARK: UIGestureRecognizerDelegate
-    
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
-        print(#function)
-        self.previousTouchPoint = nil
-        return true
+        self.animateMenu(false)
     }
 }
