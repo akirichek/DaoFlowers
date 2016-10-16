@@ -26,6 +26,19 @@ class FlowersViewController: BaseViewController, UICollectionViewDataSource, UIC
         super.viewWillAppear(animated)
     }
     
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        self.collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let destinationViewController = segue.destinationViewController
+        if let colorsViewController = destinationViewController as? ColorsViewController {
+            let cell = sender as! UICollectionViewCell
+            let indexPath = self.collectionView.indexPathForCell(cell)!
+            colorsViewController.flower = self.flowers[indexPath.row]
+        }
+    }
+    
     // MARK: UICollectionViewDataSource
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -39,17 +52,27 @@ class FlowersViewController: BaseViewController, UICollectionViewDataSource, UIC
         return cell
     }
     
+    // MARK: UICollectionViewDelegate
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+         self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Colors,
+                                         sender: collectionView.cellForItemAtIndexPath(indexPath))
+    }
+    
+    // MARK: UICollectionViewDelegateFlowLayout
+    
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let width = collectionView.frame.size.width * 0.482
+        
+        let columnCount: Int
+        
+        if self.view.bounds.width < self.view.bounds.height {
+            columnCount = 2
+        } else {
+            columnCount = 4
+        }
+        
+        let width = collectionView.frame.size.width / CGFloat(columnCount)
+        
         return CGSize(width: width, height: width)
-    }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        let width = collectionView.frame.size.width * 0.01
-        return UIEdgeInsets(top: width, left: width, bottom: width, right: width)
-    }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return collectionView.frame.size.width * 0.012
     }
 }

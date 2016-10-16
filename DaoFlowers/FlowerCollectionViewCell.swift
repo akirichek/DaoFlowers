@@ -24,6 +24,7 @@ class FlowerCollectionViewCell: UICollectionViewCell {
         self.containerView.layer.cornerRadius = 5
         
         nameLabel.text = flower.name
+        //nameLabel.fitFontForSize(minFontSize: 5, maxFontSize: 100, accuracy: 0.5)
         
         if flower.sortsCount == 1 {
             sortsCountLabel.text = "\(flower.sortsCount) variety"

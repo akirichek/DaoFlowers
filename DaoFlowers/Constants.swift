@@ -12,12 +12,15 @@ struct K {
     struct Api {
         static let BaseUrl = "http://77.91.147.26:9000"
         static let FlowersTypesPath = "/catalog/flowers/types"
+        static let FlowersColorsPath = "/catalog/flowers/colors"
+        static let VarietiesPath = "/catalog/flowers"
     }
     
     struct Storyboard {
         struct SegueIdentifier {
             static let Flowers = "FlowersViewControllerSegueIdentifier"
             static let Plantations = "PlantationsViewControllerSegueIdentifier"
+            static let Colors = "ColorsViewControllerSegueIdentifier"
         }
     }
 }
