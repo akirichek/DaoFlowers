@@ -6,7 +6,7 @@
 //  Copyright © 2016 Dao Flowers. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct K {
     struct Api {
@@ -21,7 +21,12 @@ struct K {
             static let Flowers = "FlowersViewControllerSegueIdentifier"
             static let Plantations = "PlantationsViewControllerSegueIdentifier"
             static let Colors = "ColorsViewControllerSegueIdentifier"
+            static let Varieties = "VarietiesViewControllerSegueIdentifier"
         }
+    }
+    
+    struct Colors {
+        static let MainBlue = UIColor(red: 0/255, green: 125/255, blue: 196/255, alpha: 1)
     }
 }
 

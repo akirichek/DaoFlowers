@@ -8,8 +8,10 @@
 
 import UIKit
 
-class VarietiesViewController: BaseViewController {
+class VarietiesViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var tableView: UITableView!
+    
     var flower: Flower!
     var color: Color!
     var varieties: [Variety] = []
@@ -22,9 +24,27 @@ class VarietiesViewController: BaseViewController {
         ApiManager.fetchVarietiesByFlower(flower, color: color) { (varieties, error) in
             if let varieties = varieties {
                 self.varieties = varieties
+                self.tableView.reloadData()
             } else {
                 Utils.showError(error!, inViewController: self)
             }
         }
     }
+    
+    // MARK: UITableViewDataSource
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.varieties.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("VarietyTableViewCellIdentifier",
+                                                               forIndexPath: indexPath) as! VarietyTableViewCell
+        cell.variety  = self.varieties[indexPath.row]
+        cell.numberLabel.text = String(indexPath.row + 1)
+        
+        return cell
+    }
+    
+    // MARK: UITableViewDelegate
 }

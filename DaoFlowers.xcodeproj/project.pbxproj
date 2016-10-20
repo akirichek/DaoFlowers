@@ -31,6 +31,13 @@
 		8299D3901DB3BD800088E550 /* VarietyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D38F1DB3BD800088E550 /* VarietyTableViewCell.swift */; };
 		8299D3921DB3BDFA0088E550 /* Variety.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3911DB3BDFA0088E550 /* Variety.swift */; };
 		8299D3961DB3C2BF0088E550 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3951DB3C2BF0088E550 /* Utils.swift */; };
+		8299D3981DB5041E0088E550 /* PageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3971DB5041E0088E550 /* PageViewer.swift */; };
+		8299D39B1DB505620088E550 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D39A1DB505620088E550 /* PageViewController.swift */; };
+		8299D39D1DB506D00088E550 /* ColorsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D39C1DB506D00088E550 /* ColorsCollectionViewCell.swift */; };
+		8299D39F1DB558820088E550 /* LGHorizontalLinearFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D39E1DB558820088E550 /* LGHorizontalLinearFlowLayout.swift */; };
+		8299D3A21DB622FA0088E550 /* HeaderPageViewerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3A11DB622FA0088E550 /* HeaderPageViewerCollectionViewCell.swift */; };
+		8299D3A41DB7BD000088E550 /* HeaderFlagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3A31DB7BD000088E550 /* HeaderFlagView.swift */; };
+		8299D3A61DB8C6090088E550 /* PageViewerFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3A51DB8C6090088E550 /* PageViewerFlowLayout.swift */; };
 		F81CBF2D8B89C452C874F6B5 /* Pods_DaoFlowers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5BB758AC21055E3F306CB97 /* Pods_DaoFlowers.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +69,13 @@
 		8299D38F1DB3BD800088E550 /* VarietyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietyTableViewCell.swift; sourceTree = "<group>"; };
 		8299D3911DB3BDFA0088E550 /* Variety.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Variety.swift; sourceTree = "<group>"; };
 		8299D3951DB3C2BF0088E550 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		8299D3971DB5041E0088E550 /* PageViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewer.swift; sourceTree = "<group>"; };
+		8299D39A1DB505620088E550 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		8299D39C1DB506D00088E550 /* ColorsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsCollectionViewCell.swift; sourceTree = "<group>"; };
+		8299D39E1DB558820088E550 /* LGHorizontalLinearFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGHorizontalLinearFlowLayout.swift; sourceTree = "<group>"; };
+		8299D3A11DB622FA0088E550 /* HeaderPageViewerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderPageViewerCollectionViewCell.swift; sourceTree = "<group>"; };
+		8299D3A31DB7BD000088E550 /* HeaderFlagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderFlagView.swift; sourceTree = "<group>"; };
+		8299D3A51DB8C6090088E550 /* PageViewerFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewerFlowLayout.swift; sourceTree = "<group>"; };
 		B5BB758AC21055E3F306CB97 /* Pods_DaoFlowers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DaoFlowers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D506727F50AAD99682289838 /* Pods-DaoFlowers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DaoFlowers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DaoFlowers/Pods-DaoFlowers.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,6 +143,7 @@
 		8299D36E1DAF8EF30088E550 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8299D3991DB504600088E550 /* PageViewer */,
 				8299D3821DB155560088E550 /* Varieties */,
 				8299D3791DAF9A930088E550 /* MainViewController.swift */,
 				827BF85E1DAEAF4000054548 /* BaseViewController.swift */,
@@ -159,6 +174,20 @@
 				8299D38F1DB3BD800088E550 /* VarietyTableViewCell.swift */,
 			);
 			name = Varieties;
+			sourceTree = "<group>";
+		};
+		8299D3991DB504600088E550 /* PageViewer */ = {
+			isa = PBXGroup;
+			children = (
+				8299D3971DB5041E0088E550 /* PageViewer.swift */,
+				8299D39A1DB505620088E550 /* PageViewController.swift */,
+				8299D39E1DB558820088E550 /* LGHorizontalLinearFlowLayout.swift */,
+				8299D39C1DB506D00088E550 /* ColorsCollectionViewCell.swift */,
+				8299D3A11DB622FA0088E550 /* HeaderPageViewerCollectionViewCell.swift */,
+				8299D3A31DB7BD000088E550 /* HeaderFlagView.swift */,
+				8299D3A51DB8C6090088E550 /* PageViewerFlowLayout.swift */,
+			);
+			name = PageViewer;
 			sourceTree = "<group>";
 		};
 		FAF5BFF843C063266E94F1E0 /* Frameworks */ = {
@@ -292,17 +321,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				8299D38C1DB376EE0088E550 /* ColorCollectionViewCell.swift in Sources */,
+				8299D39F1DB558820088E550 /* LGHorizontalLinearFlowLayout.swift in Sources */,
 				8299D3901DB3BD800088E550 /* VarietyTableViewCell.swift in Sources */,
 				82457AD01DAEAA5900D87B21 /* DaoFlowers.xcdatamodeld in Sources */,
 				8299D3701DAF8F110088E550 /* MenuViewController.swift in Sources */,
+				8299D3981DB5041E0088E550 /* PageViewer.swift in Sources */,
 				8299D3811DB151F00088E550 /* Flower.swift in Sources */,
+				8299D39B1DB505620088E550 /* PageViewController.swift in Sources */,
 				8299D3781DAF9A0D0088E550 /* MenuButtonHandler.swift in Sources */,
 				8299D3741DAF99940088E550 /* FlowersViewController.swift in Sources */,
 				8299D38A1DB375AA0088E550 /* Color.swift in Sources */,
+				8299D39D1DB506D00088E550 /* ColorsCollectionViewCell.swift in Sources */,
 				8299D38E1DB3BD5B0088E550 /* VarietiesViewController.swift in Sources */,
+				8299D3A41DB7BD000088E550 /* HeaderFlagView.swift in Sources */,
 				82457AC81DAEAA5900D87B21 /* AppDelegate.swift in Sources */,
 				8299D3841DB155960088E550 /* FlowerCollectionViewCell.swift in Sources */,
 				827BF85F1DAEAF4000054548 /* BaseViewController.swift in Sources */,
+				8299D3A21DB622FA0088E550 /* HeaderPageViewerCollectionViewCell.swift in Sources */,
 				8299D37E1DB14E320088E550 /* ApiManager.swift in Sources */,
 				8299D36D1DAF8CC50088E550 /* MainViewControllerSegue.swift in Sources */,
 				8299D3881DB373AA0088E550 /* ColorsViewController.swift in Sources */,
@@ -311,6 +346,7 @@
 				8299D3961DB3C2BF0088E550 /* Utils.swift in Sources */,
 				8299D3721DAF926E0088E550 /* Constants.swift in Sources */,
 				8299D37A1DAF9A930088E550 /* MainViewController.swift in Sources */,
+				8299D3A61DB8C6090088E550 /* PageViewerFlowLayout.swift in Sources */,
 				8299D3861DB2752A0088E550 /* UILabel+FitFontForSize.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RBHUD
 
 class FlowersViewController: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
@@ -16,14 +17,21 @@ class FlowersViewController: BaseViewController, UICollectionViewDataSource, UIC
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        RBHUD.sharedInstance.showLoader(self.view, withTitle: nil, withSubTitle: nil, withProgress: true)
         ApiManager.fetchFlowers { (flowers, error) in
-            self.flowers = flowers
-            self.collectionView.reloadData()
+            RBHUD.sharedInstance.hideLoader()
+            if let flowers = flowers {
+                self.flowers = flowers
+                self.collectionView.reloadData()
+            } else {
+                Utils.showError(error!, inViewController: self)
+            }
         }
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.collectionView.collectionViewLayout.invalidateLayout()
     }
     
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
@@ -36,6 +44,12 @@ class FlowersViewController: BaseViewController, UICollectionViewDataSource, UIC
             let cell = sender as! UICollectionViewCell
             let indexPath = self.collectionView.indexPathForCell(cell)!
             colorsViewController.flower = self.flowers[indexPath.row]
+        } else if let pageViewController = destinationViewController as? PageViewController {
+            print(sender)
+            let cell = sender as! UICollectionViewCell
+            let indexPath = self.collectionView.indexPathForCell(cell)!
+            pageViewController.currentFlower = self.flowers[indexPath.row]
+            pageViewController.flowers = self.flowers
         }
     }
     

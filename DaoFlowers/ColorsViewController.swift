@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RBHUD
 
 class ColorsViewController: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
@@ -19,9 +20,15 @@ class ColorsViewController: BaseViewController, UICollectionViewDataSource, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        RBHUD.sharedInstance.showLoader(self.view, withTitle: nil, withSubTitle: nil, withProgress: true)
         ApiManager.fetchColorsByFlower(self.flower, completion: { (colors, error) in
-            self.colors = colors
-            self.collectionView.reloadData()
+            RBHUD.sharedInstance.hideLoader()
+            if let colors = colors {
+                self.colors = colors
+                self.collectionView.reloadData()
+            } else {
+                Utils.showError(error!, inViewController: self)
+            }            
         })
     }
     
@@ -31,6 +38,16 @@ class ColorsViewController: BaseViewController, UICollectionViewDataSource, UICo
     
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
         self.collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let destinationViewController = segue.destinationViewController
+        if let varietiesViewController = destinationViewController as? VarietiesViewController {
+            let cell = sender as! UICollectionViewCell
+            let indexPath = self.collectionView.indexPathForCell(cell)!
+            varietiesViewController.color = self.colors[indexPath.row]
+            varietiesViewController.flower = self.flower
+        }
     }
     
     // MARK: UICollectionViewDataSource
@@ -45,6 +62,15 @@ class ColorsViewController: BaseViewController, UICollectionViewDataSource, UICo
         
         return cell
     }
+    
+    // MARK: UICollectionViewDelegate
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Varieties,
+                                        sender: collectionView.cellForItemAtIndexPath(indexPath))
+    }
+    
+    // MARK: UICollectionViewDelegateFlowLayout
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
