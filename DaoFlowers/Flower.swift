@@ -12,6 +12,6 @@ struct Flower {
     var id: Int
     var name: String
     var abr: String?
-    var imageUrl: String
+    var imageUrl: String?
     var sortsCount: Int
 }

@@ -27,7 +27,7 @@ class ApiManager: NSObject {
                         let flower = Flower(id: dictionary["id"] as! Int,
                                             name: dictionary["name"] as! String,
                                             abr: dictionary["abr"] as? String,
-                                            imageUrl: dictionary["imgUrl"] as! String,
+                                            imageUrl: dictionary["imgUrl"] as? String,
                                             sortsCount: dictionary["sortsCount"] as! Int)
                         flowers.append(flower)
                     }

@@ -43,10 +43,8 @@ class ColorsViewController: BaseViewController, UICollectionViewDataSource, UICo
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let destinationViewController = segue.destinationViewController
         if let varietiesViewController = destinationViewController as? VarietiesViewController {
-            let cell = sender as! UICollectionViewCell
-            let indexPath = self.collectionView.indexPathForCell(cell)!
-            varietiesViewController.color = self.colors[indexPath.row]
             varietiesViewController.flower = self.flower
+            varietiesViewController.colors = self.colors
         }
     }
     

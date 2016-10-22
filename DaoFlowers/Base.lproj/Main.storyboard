@@ -346,8 +346,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="gi8-CR-sO6" id="2Bx-MV-XXV"/>
-                        <segue destination="XxA-Og-RCM" kind="show" identifier="" id="2oZ-vv-su9"/>
-                        <segue destination="y7S-3U-qRA" kind="show" identifier="ColorsViewControllerSegueIdentifier" id="IhB-Hy-nnB"/>
+                        <segue destination="XxA-Og-RCM" kind="show" identifier="ColorsViewControllerSegueIdentifier" id="2oZ-vv-su9"/>
+                        <segue destination="y7S-3U-qRA" kind="show" identifier="" id="IhB-Hy-nnB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WmH-Kt-yMU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -436,7 +436,7 @@
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x5D-yA-a2W" userLabel="Header Flag View" customClass="HeaderFlagView" customModule="DaoFlowers" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x5D-yA-a2W" customClass="HeaderPageViewerHighlightView" customModule="DaoFlowers" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         </view>
@@ -516,7 +516,7 @@
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <outlet property="headerFlagView" destination="x5D-yA-a2W" id="bbS-Kt-qJJ"/>
+                                            <outlet property="headerHighlightView" destination="x5D-yA-a2W" id="fdv-gB-PIm"/>
                                             <outlet property="textLabel" destination="Dbj-H9-ubS" id="Urq-UJ-G6X"/>
                                         </connections>
                                     </collectionViewCell>
@@ -789,7 +789,7 @@
                             <constraint firstItem="BL5-dF-LZ3" firstAttribute="leading" secondItem="HkU-if-0lW" secondAttribute="leading" id="2u0-Xq-qAb"/>
                             <constraint firstItem="uLC-09-EEs" firstAttribute="top" secondItem="BL5-dF-LZ3" secondAttribute="bottom" id="CnL-pb-CoD"/>
                             <constraint firstItem="uLC-09-EEs" firstAttribute="leading" secondItem="HkU-if-0lW" secondAttribute="leading" id="F4w-Rb-APC"/>
-                            <constraint firstItem="BL5-dF-LZ3" firstAttribute="top" secondItem="Y60-hA-UP0" secondAttribute="bottom" id="MNy-zP-8s7"/>
+                            <constraint firstItem="BL5-dF-LZ3" firstAttribute="top" secondItem="Y60-hA-UP0" secondAttribute="bottom" id="PYj-vC-0Ur"/>
                             <constraint firstAttribute="bottom" secondItem="uLC-09-EEs" secondAttribute="bottom" id="Qzk-6O-elH"/>
                             <constraint firstAttribute="trailing" secondItem="uLC-09-EEs" secondAttribute="trailing" id="oWI-Lh-Kej"/>
                             <constraint firstAttribute="trailing" secondItem="BL5-dF-LZ3" secondAttribute="trailing" id="u7S-Le-KlJ"/>
@@ -801,7 +801,6 @@
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="2u0-Xq-qAb"/>
-                                <exclude reference="MNy-zP-8s7"/>
                                 <exclude reference="u7S-Le-KlJ"/>
                                 <exclude reference="CnL-pb-CoD"/>
                                 <exclude reference="F4w-Rb-APC"/>
@@ -816,7 +815,6 @@
                             </mask>
                             <mask key="constraints">
                                 <include reference="2u0-Xq-qAb"/>
-                                <include reference="MNy-zP-8s7"/>
                                 <include reference="u7S-Le-KlJ"/>
                                 <include reference="CnL-pb-CoD"/>
                                 <include reference="F4w-Rb-APC"/>
@@ -1011,12 +1009,68 @@
                     <navigationItem key="navigationItem" id="tIo-xD-ojK"/>
                     <connections>
                         <outlet property="collectionView" destination="oBX-yU-tfs" id="K0G-ai-jOa"/>
-                        <segue destination="Fys-JL-vGV" kind="show" identifier="VarietiesViewControllerSegueIdentifier" id="Xo5-Va-Rup"/>
+                        <segue destination="Fys-JL-vGV" kind="show" identifier="" id="Xo5-Va-Rup"/>
+                        <segue destination="zeR-dU-8Qg" kind="show" identifier="VarietiesViewControllerSegueIdentifier" id="Zrn-6S-taC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y9b-hy-Hv6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2905.5" y="1264"/>
+        </scene>
+        <!--Varieties View Controller-->
+        <scene sceneID="9v5-v9-2so">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="zeR-dU-8Qg" customClass="VarietiesViewController" customModule="DaoFlowers" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LNJ-Ww-lNO"/>
+                        <viewControllerLayoutGuide type="bottom" id="dnz-re-N0R"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pde-jD-2hV">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tqG-YX-tQ3">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dnz-re-N0R" firstAttribute="top" secondItem="tqG-YX-tQ3" secondAttribute="bottom" id="CRa-p8-u5b"/>
+                            <constraint firstAttribute="trailing" secondItem="tqG-YX-tQ3" secondAttribute="trailing" id="TTZ-fm-rZJ"/>
+                            <constraint firstItem="tqG-YX-tQ3" firstAttribute="top" secondItem="LNJ-Ww-lNO" secondAttribute="bottom" id="XMi-kW-DEu"/>
+                            <constraint firstItem="tqG-YX-tQ3" firstAttribute="leading" secondItem="pde-jD-2hV" secondAttribute="leading" id="wnK-C2-Msw"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="tqG-YX-tQ3"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="TTZ-fm-rZJ"/>
+                                <exclude reference="XMi-kW-DEu"/>
+                                <exclude reference="wnK-C2-Msw"/>
+                                <exclude reference="CRa-p8-u5b"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="tqG-YX-tQ3"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="TTZ-fm-rZJ"/>
+                                <include reference="XMi-kW-DEu"/>
+                                <include reference="wnK-C2-Msw"/>
+                                <include reference="CRa-p8-u5b"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="pageViewerContainerView" destination="tqG-YX-tQ3" id="mb9-nu-Jmq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pBL-2I-Xla" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3667.5" y="1139"/>
         </scene>
         <!--Varieties View Controller-->
         <scene sceneID="Jy1-GX-rXA">
@@ -1139,7 +1193,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GdX-Tn-y4P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3706.5" y="1264"/>
+            <point key="canvasLocation" x="4278" y="1723"/>
         </scene>
     </scenes>
     <resources>

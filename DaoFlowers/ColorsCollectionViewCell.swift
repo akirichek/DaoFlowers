@@ -80,18 +80,13 @@ class ColorsCollectionViewCell: UICollectionViewCell, UICollectionViewDataSource
     // MARK: UICollectionViewDelegateFlowLayout
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        
         let columnCount: Int
-        
         if self.bounds.width < self.bounds.height {
             columnCount = 2
         } else {
             columnCount = 4
         }
-        
         let width = self.bounds.width / CGFloat(columnCount)
-        
-        print(width, self.bounds.width, self.bounds.height)
         
         return CGSize(width: width, height: width)
     }

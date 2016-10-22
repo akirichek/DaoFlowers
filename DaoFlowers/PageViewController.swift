@@ -40,14 +40,6 @@ class PageViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
         self.headerCollectionView.collectionViewLayout.invalidateLayout()
         self.contentCollectionView.reloadData()
-//        self.contentCollectionView.collectionViewLayout.invalidateLayout()
-//        
-//        for i in (0..<self.flowers.count) {
-//            let indexPath = NSIndexPath(forRow: i, inSection: 0)
-//            if let cell = self.contentCollectionView.cellForItemAtIndexPath(indexPath) as? ColorsCollectionViewCell {
-//                cell.collectionView.collectionViewLayout.invalidateLayout()
-//            }
-//        }
     }
     
     // MARK: UICollectionViewDataSource

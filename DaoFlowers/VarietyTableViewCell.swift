@@ -23,7 +23,9 @@ class VarietyTableViewCell: UITableViewCell {
     }
     
     func populateView() {
-        nameLabel.text = variety.name
+        self.resetView()
+
+        nameLabel.text = "\(variety.name) (\(variety.abr))"
         
         if let sizeFrom = variety.sizeFrom {
             if let sizeTo = variety.sizeTo {
@@ -32,12 +34,27 @@ class VarietyTableViewCell: UITableViewCell {
         }
         
         if let purchasePercent = variety.purchasePercent {
-            purchasePercentLabel.text = String(purchasePercent) + "%"
+            let rounded = Double(round(10000 * purchasePercent) / 10000)
+            purchasePercentLabel.text = String(rounded) + "%"
+            
+            nameLabel.textColor = K.Colors.MainBlue
+            sizeLabel.textColor = K.Colors.MainBlue
+            purchasePercentLabel.textColor = K.Colors.MainBlue
+        } else {
+            nameLabel.textColor = K.Colors.DarkGrey
+            sizeLabel.textColor = K.Colors.DarkGrey
+            purchasePercentLabel.textColor = K.Colors.DarkGrey
         }
         
-        varietyImageView.image = nil
         if let imageUrl = variety.smallImageUrl {
             varietyImageView.af_setImageWithURL(NSURL(string: imageUrl)!)
         }
+    }
+    
+    func resetView() {
+        nameLabel.text = ""
+        sizeLabel.text = ""
+        purchasePercentLabel.text = ""
+        varietyImageView.image = nil
     }
 }

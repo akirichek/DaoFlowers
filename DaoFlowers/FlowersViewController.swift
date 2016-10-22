@@ -13,6 +13,7 @@ class FlowersViewController: BaseViewController, UICollectionViewDataSource, UIC
     
     var flowers: [Flower] = []
     @IBOutlet weak var collectionView: UICollectionView!
+    var viewWillTransitionToSize: CGSize?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +35,8 @@ class FlowersViewController: BaseViewController, UICollectionViewDataSource, UIC
         self.collectionView.collectionViewLayout.invalidateLayout()
     }
     
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        self.viewWillTransitionToSize = size
         self.collectionView.collectionViewLayout.invalidateLayout()
     }
     
@@ -76,17 +78,20 @@ class FlowersViewController: BaseViewController, UICollectionViewDataSource, UIC
     // MARK: UICollectionViewDelegateFlowLayout
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        var screenSize: CGSize = UIScreen.mainScreen().bounds.size
+        if self.viewWillTransitionToSize != nil {
+            screenSize = self.viewWillTransitionToSize!
+        }
         
         let columnCount: Int
-        
-        if self.view.bounds.width < self.view.bounds.height {
+        if screenSize.width < screenSize.height {
             columnCount = 2
         } else {
             columnCount = 4
         }
         
-        let width = collectionView.frame.size.width / CGFloat(columnCount)
-        
+        let width = screenSize.width / CGFloat(columnCount)
+        print(width, screenSize)
         return CGSize(width: width, height: width)
     }
 }

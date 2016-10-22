@@ -11,7 +11,7 @@ import UIKit
 class HeaderPageViewerCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var textLabel: UILabel!
-    @IBOutlet weak var headerFlagView: HeaderFlagView!
+    @IBOutlet weak var headerHighlightView: HeaderPageViewerHighlightView!
     
     
     func selectCellWithMultiplier(multiplier: CGFloat, directionRight: Bool) {
@@ -20,9 +20,9 @@ class HeaderPageViewerCollectionViewCell: UICollectionViewCell {
             self.textLabel.textColor = UIColor(red: 0, green: 105/255, blue: 169/255, alpha: 1)
         }
         
-        self.headerFlagView.selectedMultiplier = multiplier
-        self.headerFlagView.selectedRightPart = !directionRight
-        self.headerFlagView.setNeedsDisplay()
+        self.headerHighlightView.selectedMultiplier = multiplier
+        self.headerHighlightView.selectedRightPart = !directionRight
+        self.headerHighlightView.setNeedsDisplay()
     }
     
     func deselectCellWithMultiplier(multiplier: CGFloat, directionRight: Bool) {
@@ -31,8 +31,8 @@ class HeaderPageViewerCollectionViewCell: UICollectionViewCell {
             self.textLabel.textColor = UIColor.darkGrayColor()
         }
         
-        self.headerFlagView.selectedMultiplier = 1 - multiplier
-        self.headerFlagView.selectedRightPart = directionRight
-        self.headerFlagView.setNeedsDisplay()
+        self.headerHighlightView.selectedMultiplier = 1 - multiplier
+        self.headerHighlightView.selectedRightPart = directionRight
+        self.headerHighlightView.setNeedsDisplay()
     }
 }

@@ -17,91 +17,16 @@ public class PageViewerFlowLayout: UICollectionViewFlowLayout {
     public var velocity: CGFloat = 0.2
     public var scaleItems: Bool = true
     
-    
-    static func configureLayout(collectionView collectionView: UICollectionView, itemSize: CGSize, minimumLineSpacing: CGFloat) -> LGHorizontalLinearFlowLayout {
-        let layout = LGHorizontalLinearFlowLayout()
+    static func configureLayout(collectionView: UICollectionView) -> PageViewerFlowLayout {
+        let layout = PageViewerFlowLayout()
         layout.scrollDirection = .Horizontal
-        layout.minimumLineSpacing = minimumLineSpacing
-        layout.itemSize = itemSize
-        
-        collectionView.decelerationRate = UIScrollViewDecelerationRateFast
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
         collectionView.collectionViewLayout = layout
-        
+        collectionView.decelerationRate = UIScrollViewDecelerationRateFast
+            
         return layout
     }
-    
-    //    override public func invalidateLayoutWithContext(context: UICollectionViewLayoutInvalidationContext) {
-    //        super.invalidateLayoutWithContext(context)
-    //
-    //        if self.collectionView == nil {
-    //            return
-    //        }
-    //
-    //        let currentCollectionViewSize = self.collectionView!.bounds.size
-    //
-    //        if !CGSizeEqualToSize(currentCollectionViewSize, self.lastCollectionViewSize) {
-    //            //self.configureInset()
-    //            self.lastCollectionViewSize = currentCollectionViewSize
-    //        }
-    //    }
-    //
-    //    private func configureInset() -> Void {
-    //        if self.collectionView == nil {
-    //            return
-    //        }
-    //
-    //        let inset = self.collectionView!.bounds.size.width / 2 - self.itemSize.width / 2
-    //        self.collectionView!.contentInset = UIEdgeInsetsMake(0, inset, 0, inset)
-    //        self.collectionView!.contentOffset = CGPointMake(-inset, 0)
-    //    }
-    //
-    //    public override func targetContentOffsetForProposedContentOffset(proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-    //        if self.collectionView == nil {
-    //            return proposedContentOffset
-    //        }
-    //
-    //        let collectionViewSize = self.collectionView!.bounds.size
-    //        let proposedRect = CGRectMake(proposedContentOffset.x, 0, collectionViewSize.width, collectionViewSize.height)
-    //
-    //        let layoutAttributes = self.layoutAttributesForElementsInRect(proposedRect)
-    //
-    //        if layoutAttributes == nil {
-    //            return proposedContentOffset
-    //        }
-    //
-    //        var candidateAttributes: UICollectionViewLayoutAttributes?
-    //        let proposedContentOffsetCenterX = proposedContentOffset.x + collectionViewSize.width / 2
-    //
-    //        for attributes: UICollectionViewLayoutAttributes in layoutAttributes! {
-    //            if attributes.representedElementCategory != .Cell {
-    //                continue
-    //            }
-    //
-    //            if candidateAttributes == nil {
-    //                candidateAttributes = attributes
-    //                continue
-    //            }
-    //
-    //            if fabs(attributes.center.x - proposedContentOffsetCenterX) < fabs(candidateAttributes!.center.x - proposedContentOffsetCenterX) {
-    //                candidateAttributes = attributes
-    //            }
-    //        }
-    //
-    //        if candidateAttributes == nil {
-    //            return proposedContentOffset
-    //        }
-    //
-    //        var newOffsetX = candidateAttributes!.center.x - self.collectionView!.bounds.size.width / 2
-    //
-    //        let offset = newOffsetX - self.collectionView!.contentOffset.x
-    //
-    //        if (velocity.x < 0 && offset > 0) || (velocity.x > 0 && offset < 0) {
-    //            let pageWidth = self.itemSize.width + self.minimumLineSpacing
-    //            newOffsetX += velocity.x > 0 ? pageWidth : -pageWidth
-    //        }
-    //
-    //        return CGPointMake(newOffsetX, proposedContentOffset.y)
-    //    }
     
     public override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
         return true

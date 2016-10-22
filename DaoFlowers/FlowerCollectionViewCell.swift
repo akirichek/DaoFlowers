@@ -33,6 +33,8 @@ class FlowerCollectionViewCell: UICollectionViewCell {
         }
         
         imageView.image = nil
-        imageView.af_setImageWithURL(NSURL(string: flower.imageUrl)!)
+        if let imageUrl = flower.imageUrl {
+            imageView.af_setImageWithURL(NSURL(string: imageUrl)!)
+        }
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 
 struct K {
     struct Api {
-        static let BaseUrl = "http://77.91.147.26:9000"
+        static let BaseUrl = "https://daoflowers.com:7443"
         static let FlowersTypesPath = "/catalog/flowers/types"
         static let FlowersColorsPath = "/catalog/flowers/colors"
         static let VarietiesPath = "/catalog/flowers"
@@ -27,6 +27,8 @@ struct K {
     
     struct Colors {
         static let MainBlue = UIColor(red: 0/255, green: 125/255, blue: 196/255, alpha: 1)
+        static let LightGrey = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+        static let DarkGrey = UIColor(red: 117/255, green: 117/255, blue: 117/255, alpha: 1)
     }
 }
 

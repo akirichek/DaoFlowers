@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HeaderFlagView: UIView {
+class HeaderPageViewerHighlightView: UIView {
     
     var selectedMultiplier: CGFloat = 1.0
     var selectedRightPart: Bool = true
