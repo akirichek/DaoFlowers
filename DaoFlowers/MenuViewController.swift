@@ -15,7 +15,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     let menuItems: [String]
     
     required init?(coder aDecoder: NSCoder) {
-        menuItems = ["Varieties", "Plantation"]
+        menuItems = ["Varieties", "Plantation", "Login"]
         super.init(coder: aDecoder)
     }
 
@@ -26,7 +26,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return self.menuItems.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

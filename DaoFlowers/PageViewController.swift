@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RBHUD
 
 class PageViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 

@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import RBHUD
 
-class VarietiesViewController: BaseViewController, PageViewerDataSource {
+class VarietiesViewController: BaseViewController, PageViewerDataSource, VarietiesPageViewDelegate {
     
     @IBOutlet weak var pageViewerContainerView: UIView!
     var pageViewer: PageViewer!
@@ -17,6 +16,7 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource {
     var flower: Flower!
     var colors: [Color] = []
     var varietiesWithColors: [Int: [Variety]] = [:]
+    var selectedVariety: Variety!
     
     // MARK: Override Methods
     
@@ -36,10 +36,12 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource {
         self.pageViewer.reloadData()
     }
     
-//    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
-//        self.pageViewer.reloadData()
-//    }
-    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let destinationViewController = segue.destinationViewController
+        if let varietyDetailsViewController = destinationViewController as? VarietyDetailsViewController {
+            varietyDetailsViewController.variety = self.selectedVariety
+        }
+    }
     
     // MARK: Private Methods
     
@@ -104,6 +106,7 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource {
         
         if varietiesPageView == nil {
             varietiesPageView = NSBundle.mainBundle().loadNibNamed("VarietiesPageView", owner: self, options: nil).first as? VarietiesPageView
+            varietiesPageView?.delegate = self
         }
         
         let color = self.colors[index]
@@ -115,5 +118,12 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource {
         }
         
         return varietiesPageView!
+    }
+    
+    // MARK: VarietiesPageViewDelegate
+    
+    func varietiesPageView(varietiesPageView: VarietiesPageView, didSelectVariety variety: Variety) {
+        self.selectedVariety = variety
+        self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.VarietyDetails, sender: self)
     }
 }

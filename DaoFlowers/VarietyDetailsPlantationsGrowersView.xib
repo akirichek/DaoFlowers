@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="VarietyDetailsPlantationsGrowersView" customModule="DaoFlowers" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JPl-U1-kBs">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <outlet property="dataSource" destination="iN0-l3-epB" id="JbN-li-EQW"/>
+                        <outlet property="delegate" destination="iN0-l3-epB" id="QgF-vj-RRu"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="JPl-U1-kBs" secondAttribute="bottom" id="1HC-BI-RC8"/>
+                <constraint firstItem="JPl-U1-kBs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Ga0-EA-JHv"/>
+                <constraint firstItem="JPl-U1-kBs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="NhH-gP-fRx"/>
+                <constraint firstAttribute="trailing" secondItem="JPl-U1-kBs" secondAttribute="trailing" id="SOS-Ft-Bqi"/>
+            </constraints>
+            <connections>
+                <outlet property="tableView" destination="JPl-U1-kBs" id="d5S-y6-gG2"/>
+            </connections>
+        </view>
+    </objects>
+</document>

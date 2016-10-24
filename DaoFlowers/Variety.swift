@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct Variety {
+class Variety: NSObject {
+    
     var id: Int
     var name: String
     var abr: String
@@ -20,6 +21,12 @@ struct Variety {
     var color: Color
     var sizeFrom: SizeFrom?
     var sizeTo: SizeTo?
+    var breeder: Breeder?
+    var liveDaysFrom: Int?
+    var liveDaysTo: Int?
+    var productiveFrom: Int?
+    var productiveTo: Int?
+    var images: [String]?
     
     struct SizeFrom {
         var id: Int
@@ -29,5 +36,55 @@ struct Variety {
     struct SizeTo {
         var id: Int
         var name: String
+    }
+
+    struct Breeder {
+        var id: Int
+        var name: String
+        var url: String
+    }
+    
+    init(dictionary: [String: AnyObject]) {
+        if let sizeFromDictionary = dictionary["sizeFrom"] as? [String: AnyObject] {
+            sizeFrom = Variety.SizeFrom(id: sizeFromDictionary["id"] as! Int,
+                                        name: sizeFromDictionary["name"] as! String)
+        }
+        
+        if let sizeToDictionary = dictionary["sizeTo"] as? [String: AnyObject] {
+            sizeTo = Variety.SizeTo(id: sizeToDictionary["id"] as! Int,
+                                    name: sizeToDictionary["name"] as! String)
+        }
+        
+        id = dictionary["id"] as! Int
+        name = dictionary["name"] as! String
+        abr = dictionary["abr"] as! String
+        imageUrl = dictionary["imgUrl"] as? String
+        smallImageUrl = dictionary["smallImgUrl"] as? String
+        invoicesDone = dictionary["invoicesDone"] as! Double
+        purchasePercent = dictionary["purchasePercent"] as? Double
+        flower = Flower(dictionary: dictionary["flowerType"] as! [String: AnyObject])
+        color = Color(dictionary: dictionary["color"] as! [String: AnyObject])
+    }
+    
+    func addGeneralInfoFromDictionary(dictionary: [String: AnyObject]) {
+        let generalInfo = dictionary["general"] as! [String: AnyObject]
+        liveDaysFrom = generalInfo["liveDaysFrom"] as? Int
+        liveDaysTo = generalInfo["liveDaysTo"] as? Int
+        productiveFrom = generalInfo["productiveFrom"] as? Int
+        productiveTo = generalInfo["productiveTo"] as? Int
+        
+        if let breeder = generalInfo["breeder"] as? [String: AnyObject] {
+            self.breeder = Breeder(id: breeder["id"] as! Int,
+                                   name: breeder["name"] as! String,
+                                   url: breeder["url"] as! String)
+        }
+        
+        var images: [String] = []
+        for image in dictionary["images"] as! [[String: AnyObject]] {
+            if let imageUrl = image["imgUrl"] as? String {
+                images.append(imageUrl)
+            }
+        }
+        self.images = images
     }
 }

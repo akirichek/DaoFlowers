@@ -113,7 +113,7 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="WZc-LL-38J" firstAttribute="trailing" secondItem="Xzj-jO-qXl" secondAttribute="trailing" multiplier="0.99" id="b9w-gP-1g6"/>
                     <constraint firstItem="WZc-LL-38J" firstAttribute="height" secondItem="Xzj-jO-qXl" secondAttribute="height" multiplier="0.92" id="kOf-Qz-Cua"/>

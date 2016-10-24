@@ -16,16 +16,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ync-U0-hK1" userLabel="Content View">
-                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                        <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cY3-ue-gA5">
-                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wgg-Go-hIF" customClass="HeaderPageViewerHighlightView" customModule="DaoFlowers" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <rect key="frame" x="0.0" y="40" width="100" height="10"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -39,38 +39,6 @@
                             <constraint firstAttribute="trailing" secondItem="wgg-Go-hIF" secondAttribute="trailing" id="pYZ-bT-9qc"/>
                             <constraint firstAttribute="trailing" secondItem="cY3-ue-gA5" secondAttribute="trailing" id="wfa-2S-1EX"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="cY3-ue-gA5"/>
-                                <exclude reference="wgg-Go-hIF"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="HSB-iQ-sXq"/>
-                                <exclude reference="Tuh-RK-Fa7"/>
-                                <exclude reference="k5E-ga-lKl"/>
-                                <exclude reference="wfa-2S-1EX"/>
-                                <exclude reference="SUR-r5-gzc"/>
-                                <exclude reference="kfR-Le-xgj"/>
-                                <exclude reference="l9E-Bu-ici"/>
-                                <exclude reference="pYZ-bT-9qc"/>
-                            </mask>
-                        </variation>
-                        <variation key="widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="cY3-ue-gA5"/>
-                                <include reference="wgg-Go-hIF"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="HSB-iQ-sXq"/>
-                                <include reference="Tuh-RK-Fa7"/>
-                                <include reference="k5E-ga-lKl"/>
-                                <include reference="wfa-2S-1EX"/>
-                                <include reference="SUR-r5-gzc"/>
-                                <include reference="kfR-Le-xgj"/>
-                                <include reference="l9E-Bu-ici"/>
-                                <include reference="pYZ-bT-9qc"/>
-                            </mask>
-                        </variation>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -81,32 +49,11 @@
                 <constraint firstItem="Ync-U0-hK1" firstAttribute="leading" secondItem="v0u-Ft-Se3" secondAttribute="leading" id="c8T-De-U1Y"/>
                 <constraint firstAttribute="bottom" secondItem="Ync-U0-hK1" secondAttribute="bottom" id="lCc-8o-3gR"/>
             </constraints>
-            <variation key="default">
-                <mask key="subviews">
-                    <exclude reference="Ync-U0-hK1"/>
-                </mask>
-                <mask key="constraints">
-                    <exclude reference="32k-77-wVU"/>
-                    <exclude reference="AZE-9D-mKk"/>
-                    <exclude reference="c8T-De-U1Y"/>
-                    <exclude reference="lCc-8o-3gR"/>
-                </mask>
-            </variation>
-            <variation key="widthClass=compact">
-                <mask key="subviews">
-                    <include reference="Ync-U0-hK1"/>
-                </mask>
-                <mask key="constraints">
-                    <include reference="32k-77-wVU"/>
-                    <include reference="AZE-9D-mKk"/>
-                    <include reference="c8T-De-U1Y"/>
-                    <include reference="lCc-8o-3gR"/>
-                </mask>
-            </variation>
             <connections>
                 <outlet property="headerHighlightView" destination="wgg-Go-hIF" id="pCb-2f-9wl"/>
                 <outlet property="textLabel" destination="cY3-ue-gA5" id="BQB-sy-dFm"/>
             </connections>
+            <point key="canvasLocation" x="189" y="252"/>
         </collectionViewCell>
     </objects>
 </document>

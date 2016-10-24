@@ -14,6 +14,10 @@ struct K {
         static let FlowersTypesPath = "/catalog/flowers/types"
         static let FlowersColorsPath = "/catalog/flowers/colors"
         static let VarietiesPath = "/catalog/flowers"
+        static let AuthorizePath = "/authorize"
+        static let SimilarVarietiesPath = "/catalog/flowers/details/similar"
+        static let PlantationsGrowersPath = "/catalog/flowers/details/growers"
+        static let GeneralInfoPath = "/catalog/flowers/details/general"
     }
     
     struct Storyboard {
@@ -22,6 +26,12 @@ struct K {
             static let Plantations = "PlantationsViewControllerSegueIdentifier"
             static let Colors = "ColorsViewControllerSegueIdentifier"
             static let Varieties = "VarietiesViewControllerSegueIdentifier"
+            static let VarietyDetails = "VarietyDetailsViewControllerSegueIdentifier"
+            static let Login = "LoginViewControllerSegueIdentifier"
+        }
+        
+        struct ViewControllerIdentifier {
+            static let VarietyDetails = "VarietyDetailsViewControllerIdentifier"
         }
     }
     
@@ -30,8 +40,12 @@ struct K {
         static let LightGrey = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
         static let DarkGrey = UIColor(red: 117/255, green: 117/255, blue: 117/255, alpha: 1)
     }
+    
+    struct UserDefaultKey {
+        static let Login = "LoginUserDefaultKey"
+    }
 }
 
 enum MenuSection: Int {
-    case Varieties, Plantations
+    case Varieties, Plantations, Login
 }

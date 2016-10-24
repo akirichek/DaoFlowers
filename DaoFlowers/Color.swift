@@ -12,5 +12,12 @@ struct Color {
     var id: Int
     var name: String
     var imageUrl: String?
-    var sortsCount: Int
+    var sortsCount: Int?
+    
+    init(dictionary: [String: AnyObject]) {
+        id = dictionary["id"] as! Int
+        name = dictionary["name"] as! String
+        imageUrl = dictionary["imgUrl"] as? String
+        sortsCount = dictionary["sortsCount"] as? Int
+    }
 }

@@ -26,10 +26,12 @@ class FlowerCollectionViewCell: UICollectionViewCell {
         nameLabel.text = flower.name
         //nameLabel.fitFontForSize(minFontSize: 5, maxFontSize: 100, accuracy: 0.5)
         
-        if flower.sortsCount == 1 {
-            sortsCountLabel.text = "\(flower.sortsCount) variety"
-        } else {
-            sortsCountLabel.text = "\(flower.sortsCount) varieties"
+        if let sortsCount = flower.sortsCount {
+            if sortsCount == 1 {
+                sortsCountLabel.text = "\(sortsCount) variety"
+            } else {
+                sortsCountLabel.text = "\(sortsCount) varieties"
+            }
         }
         
         imageView.image = nil

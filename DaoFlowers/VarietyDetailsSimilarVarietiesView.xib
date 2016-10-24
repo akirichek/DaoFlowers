@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="VarietyDetailsSimilarVarietiesView" customModule="DaoFlowers" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Similar sorts list is empty" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haa-t4-h9K">
+                    <rect key="frame" x="0.0" y="217" width="600" height="23"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="HaN-ok-qP7">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="njw-r2-Z61">
+                        <size key="itemSize" width="100" height="100"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="iN0-l3-epB" id="25g-o1-1rw"/>
+                        <outlet property="delegate" destination="iN0-l3-epB" id="S2e-w9-Er3"/>
+                    </connections>
+                </collectionView>
+            </subviews>
+            <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="haa-t4-h9K" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Mpe-jh-WtY"/>
+                <constraint firstItem="haa-t4-h9K" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" multiplier="0.4" id="Pct-Qx-bla"/>
+                <constraint firstAttribute="bottom" secondItem="HaN-ok-qP7" secondAttribute="bottom" id="S0x-0I-kTJ"/>
+                <constraint firstAttribute="trailing" secondItem="haa-t4-h9K" secondAttribute="trailing" id="olx-5X-3Uj"/>
+                <constraint firstAttribute="trailing" secondItem="HaN-ok-qP7" secondAttribute="trailing" id="rr0-nh-RDa"/>
+                <constraint firstItem="HaN-ok-qP7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="uVu-m8-XOR"/>
+                <constraint firstItem="HaN-ok-qP7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="vym-tV-aHz"/>
+            </constraints>
+            <connections>
+                <outlet property="collectionView" destination="HaN-ok-qP7" id="c8E-3R-Sl9"/>
+            </connections>
+        </view>
+    </objects>
+</document>

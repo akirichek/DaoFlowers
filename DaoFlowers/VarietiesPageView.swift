@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RBHUD
 
 class VarietiesPageView: UIView, UITableViewDataSource, UITableViewDelegate{
     
@@ -64,8 +63,13 @@ class VarietiesPageView: UIView, UITableViewDataSource, UITableViewDelegate{
     }
     
     // MARK: UITableViewDelegate
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        self.delegate?.varietiesPageView(self, didSelectVariety: self.varieties[indexPath.row])
+    }
 }
 
 protocol VarietiesPageViewDelegate: NSObjectProtocol {
-    
+    func varietiesPageView(varietiesPageView: VarietiesPageView, didSelectVariety variety: Variety)
 }

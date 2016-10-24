@@ -24,11 +24,7 @@ class ApiManager: NSObject {
                 if let json = response.result.value {
                     //print("JSON: \(json)")
                     for dictionary in json as! [[String: AnyObject]] {
-                        let flower = Flower(id: dictionary["id"] as! Int,
-                                            name: dictionary["name"] as! String,
-                                            abr: dictionary["abr"] as? String,
-                                            imageUrl: dictionary["imgUrl"] as? String,
-                                            sortsCount: dictionary["sortsCount"] as! Int)
+                        let flower = Flower(dictionary: dictionary)
                         flowers.append(flower)
                     }
                 }
@@ -55,10 +51,7 @@ class ApiManager: NSObject {
                 if let json = response.result.value {
                     //print("JSON: \(json)")
                     for dictionary in json as! [[String: AnyObject]] {
-                        let color = Color(id: dictionary["id"] as! Int,
-                            name: dictionary["name"] as! String,
-                            imageUrl: dictionary["imgUrl"] as? String,
-                            sortsCount: dictionary["sortsCount"] as! Int)
+                        let color = Color(dictionary: dictionary)
                         colors.append(color)
                     }
                 }
@@ -76,42 +69,76 @@ class ApiManager: NSObject {
         Alamofire.request(.GET, url).responseJSON { response in
             if response.result.isSuccess {
                 var varieties: [Variety] = []
-                
                 if let json = response.result.value {
                     //print("JSON: \(json)")
                     for dictionary in json as! [[String: AnyObject]] {
-                        var sizeFrom: Variety.SizeFrom?
-                        if let sizeFromDictionary = dictionary["sizeFrom"] as? [String: AnyObject] {
-                            sizeFrom = Variety.SizeFrom(id: sizeFromDictionary["id"] as! Int,
-                                name: sizeFromDictionary["name"] as! String)
-                        }
-                        
-                        var sizeTo: Variety.SizeTo?
-                        if let sizeToDictionary = dictionary["sizeTo"] as? [String: AnyObject] {
-                            sizeTo = Variety.SizeTo(id: sizeToDictionary["id"] as! Int,
-                                name: sizeToDictionary["name"] as! String)
-                        }
-                        
-                        let variety = Variety(id: dictionary["id"] as! Int,
-                            name: dictionary["name"] as! String,
-                            abr: dictionary["abr"] as! String,
-                            imageUrl: dictionary["imgUrl"] as? String,
-                            smallImageUrl: dictionary["smallImgUrl"] as? String,
-                            invoicesDone: dictionary["invoicesDone"] as! Double,
-                            purchasePercent: dictionary["purchasePercent"] as? Double,
-                            flower: flower,
-                            color: color,
-                            sizeFrom: sizeFrom,
-                            sizeTo: sizeTo)
-                        
+                        let variety = Variety(dictionary: dictionary)
                         varieties.append(variety)
                     }
                 }
-                
+                varieties = Utils.sortedVarieties(varieties)
                 completion(varieties: varieties, error: nil)
             } else {
                 print("Error: \(response.result.error)")
                 completion(varieties: nil, error: response.result.error)
+            }
+        }
+    }
+    
+    static func fetchSimilarVarieties(variety: Variety, completion: (varieties: [Variety]?, error: NSError?) -> ()) {
+        let url = K.Api.BaseUrl + K.Api.SimilarVarietiesPath + "/\(variety.id)"
+        Alamofire.request(.GET, url).responseJSON { response in
+            if response.result.isSuccess {
+                var varieties: [Variety] = []
+                if let json = response.result.value {
+                    //print("JSON: \(json)")
+                    for dictionary in json as! [[String: AnyObject]] {
+                        let variety = Variety(dictionary: dictionary)
+                        varieties.append(variety)
+                    }
+                }
+                varieties = Utils.sortedVarieties(varieties)
+                completion(varieties: varieties, error: nil)
+            } else {
+                print("Error: \(response.result.error)")
+                completion(varieties: nil, error: response.result.error)
+            }
+        }
+    }
+    
+    static func fetchPlantationsGrowersByVariety(variety: Variety, user: User, completion: (plantations: [Plantation]?, error: NSError?) -> ()) {
+        let url = K.Api.BaseUrl + K.Api.PlantationsGrowersPath + "/\(variety.id)"
+        Alamofire.request(.GET, url, headers:["Authorization": user.token]).responseJSON { response in
+            if response.result.isSuccess {
+                var plantations: [Plantation] = []
+                if let json = response.result.value {
+                    //print("JSON: \(json)")
+                    for dictionary in json as! [[String: AnyObject]] {
+                        let plantation = Plantation(dictionary: dictionary)
+                        plantations.append(plantation)
+                    }
+                }
+                completion(plantations: plantations, error: nil)
+            } else {
+                print("Error: \(response.result.error)")
+                completion(plantations: nil, error: response.result.error)
+            }
+        }
+    }
+    
+    static func fetchGeneralInfoForVariety(variety: Variety, completion: (success: Bool, error: NSError?) -> ()) {
+        print(variety)
+        let url = K.Api.BaseUrl + K.Api.GeneralInfoPath + "/\(variety.id)"
+        Alamofire.request(.GET, url).responseJSON { response in
+            if response.result.isSuccess {
+                if let json = response.result.value {
+                    print("JSON: \(json)")
+                    variety.addGeneralInfoFromDictionary(json as! [String: AnyObject])
+                }
+                completion(success: true, error: nil)
+            } else {
+                print("Error: \(response.result.error)")
+                completion(success: false, error: response.result.error)
             }
         }
     }

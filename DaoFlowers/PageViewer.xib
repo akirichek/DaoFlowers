@@ -12,7 +12,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bI0-v0-yTU">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
                     <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="Eaz-l3-ABT"/>
@@ -24,23 +24,13 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                     <cells/>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="Eaz-l3-ABT"/>
-                        </mask>
-                    </variation>
-                    <variation key="widthClass=compact">
-                        <mask key="constraints">
-                            <include reference="Eaz-l3-ABT"/>
-                        </mask>
-                    </variation>
                     <connections>
                         <outlet property="dataSource" destination="5Gq-jO-hpZ" id="P54-iR-QbS"/>
                         <outlet property="delegate" destination="5Gq-jO-hpZ" id="fQi-7Y-js8"/>
                     </connections>
                 </collectionView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nZW-mI-Q9c">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <rect key="frame" x="0.0" y="50" width="600" height="550"/>
                     <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="59c-AY-RFt">
                         <size key="itemSize" width="400" height="550"/>
@@ -65,40 +55,11 @@
                 <constraint firstItem="bI0-v0-yTU" firstAttribute="leading" secondItem="5Gq-jO-hpZ" secondAttribute="leading" id="hC5-iS-nyv"/>
                 <constraint firstItem="nZW-mI-Q9c" firstAttribute="top" secondItem="bI0-v0-yTU" secondAttribute="bottom" id="q2s-dN-rBY"/>
             </constraints>
-            <variation key="default">
-                <mask key="subviews">
-                    <exclude reference="bI0-v0-yTU"/>
-                    <exclude reference="nZW-mI-Q9c"/>
-                </mask>
-                <mask key="constraints">
-                    <exclude reference="50e-8T-w4U"/>
-                    <exclude reference="8vc-9k-qzN"/>
-                    <exclude reference="hC5-iS-nyv"/>
-                    <exclude reference="1uN-BU-3IM"/>
-                    <exclude reference="AyL-VG-YvC"/>
-                    <exclude reference="Rd5-Xf-MNq"/>
-                    <exclude reference="q2s-dN-rBY"/>
-                </mask>
-            </variation>
-            <variation key="widthClass=compact">
-                <mask key="subviews">
-                    <include reference="bI0-v0-yTU"/>
-                    <include reference="nZW-mI-Q9c"/>
-                </mask>
-                <mask key="constraints">
-                    <include reference="50e-8T-w4U"/>
-                    <include reference="8vc-9k-qzN"/>
-                    <include reference="hC5-iS-nyv"/>
-                    <include reference="1uN-BU-3IM"/>
-                    <include reference="AyL-VG-YvC"/>
-                    <include reference="Rd5-Xf-MNq"/>
-                    <include reference="q2s-dN-rBY"/>
-                </mask>
-            </variation>
             <connections>
                 <outlet property="contentCollectionView" destination="nZW-mI-Q9c" id="rS0-wI-g98"/>
                 <outlet property="headerCollectionView" destination="bI0-v0-yTU" id="ciY-Py-bRb"/>
             </connections>
+            <point key="canvasLocation" x="255" y="252"/>
         </view>
     </objects>
 </document>

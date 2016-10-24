@@ -12,7 +12,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="r91-y5-zkf">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="h0f-hh-a6r" id="Gtn-0E-QDF"/>
@@ -27,31 +27,10 @@
                 <constraint firstAttribute="bottom" secondItem="r91-y5-zkf" secondAttribute="bottom" id="Ua2-d7-LDi"/>
                 <constraint firstItem="r91-y5-zkf" firstAttribute="leading" secondItem="h0f-hh-a6r" secondAttribute="leading" id="w9X-qr-liI"/>
             </constraints>
-            <variation key="default">
-                <mask key="subviews">
-                    <exclude reference="r91-y5-zkf"/>
-                </mask>
-                <mask key="constraints">
-                    <exclude reference="3JH-bl-sVw"/>
-                    <exclude reference="6fs-ps-adD"/>
-                    <exclude reference="Ua2-d7-LDi"/>
-                    <exclude reference="w9X-qr-liI"/>
-                </mask>
-            </variation>
-            <variation key="widthClass=compact">
-                <mask key="subviews">
-                    <include reference="r91-y5-zkf"/>
-                </mask>
-                <mask key="constraints">
-                    <include reference="3JH-bl-sVw"/>
-                    <include reference="6fs-ps-adD"/>
-                    <include reference="Ua2-d7-LDi"/>
-                    <include reference="w9X-qr-liI"/>
-                </mask>
-            </variation>
             <connections>
                 <outlet property="tableView" destination="r91-y5-zkf" id="sTu-aV-Tmv"/>
             </connections>
+            <point key="canvasLocation" x="269" y="252"/>
         </view>
     </objects>
 </document>

@@ -87,10 +87,17 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
             let reusableView = contentCell.contentView.subviews.first
             let pageView = self.dataSource.pageViewer(self, pageForItemAtIndex: indexPath.row, reusableView:reusableView)
             
-            if reusableView == nil {
+            let addPageView = {
                 pageView.translatesAutoresizingMaskIntoConstraints = false
                 contentCell.contentView.addSubview(pageView)
                 self.adjustConstraintsForItem(pageView, toItem: contentCell.contentView)
+            }
+            
+            if reusableView == nil {
+                addPageView()
+            } else if !reusableView!.isEqual(pageView) {
+                reusableView?.removeFromSuperview()
+                addPageView()
             }
         }
         
@@ -133,9 +140,7 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if scrollView == self.contentCollectionView {
-            print(self.contentCollectionView.contentOffset)
             let (indexOfPreviousPage, indexOfNextPage) = self.indexOfPreviousAndNextPage()
-            
             if (indexOfNextPage < self.countOfPages &&
                 indexOfPreviousPage < self.countOfPages &&
                 indexOfNextPage >= 0 &&
@@ -163,6 +168,8 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
                 let indexOfCurrentPage = Int(round(scrollView.contentOffset.x / self.contentCollectionViewSize().width))
                 self.indexOfCurrentPage = indexOfCurrentPage
                 self.selectHeaderInScrollView()
+            } else {
+                self.updateAllHeaderCellsExcept()
             }
             
             self.currentContentOffsetX = scrollView.contentOffset.x
@@ -178,10 +185,11 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
         }
         
         var height = screenSize.height - self.headerCollectionView.bounds.height
+        let viewController = self.dataSource as! UIViewController
+        let navigationBarHeight = viewController.navigationController!.navigationBar.frame.height
+        height -= navigationBarHeight
         if !UIApplication.sharedApplication().statusBarHidden {
-            height -= 64
-        } else {
-            height -= 32
+            height -= 20
         }
         
         return CGSizeMake(screenSize.width, height)

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		822C1ED31DBE375600A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822C1ED21DBE375600A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.swift */; };
+		822C1ED51DBE37A500A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 822C1ED41DBE37A500A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.xib */; };
 		82457AC81DAEAA5900D87B21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82457AC71DAEAA5900D87B21 /* AppDelegate.swift */; };
 		82457ACD1DAEAA5900D87B21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82457ACB1DAEAA5900D87B21 /* Main.storyboard */; };
 		82457AD01DAEAA5900D87B21 /* DaoFlowers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 82457ACE1DAEAA5900D87B21 /* DaoFlowers.xcdatamodeld */; };
@@ -45,11 +47,29 @@
 		8299D3B01DB8E4240088E550 /* ContentPageViewerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8299D3AF1DB8E4240088E550 /* ContentPageViewerCollectionViewCell.xib */; };
 		8299D3B31DB8FBCB0088E550 /* VarietyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8299D3B21DB8FBCB0088E550 /* VarietyTableViewCell.xib */; };
 		8299D3B51DB903D50088E550 /* PageViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8299D3B41DB903D50088E550 /* PageViewer.xib */; };
+		8299D3B91DBBACD50088E550 /* RBHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3B81DBBACD50088E550 /* RBHUD.swift */; };
+		8299D3BC1DBBADD80088E550 /* VarietyDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3BB1DBBADD80088E550 /* VarietyDetailsViewController.swift */; };
+		8299D3C21DBBAFBF0088E550 /* VarietyDetailsGeneralInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3C11DBBAFBF0088E550 /* VarietyDetailsGeneralInfoView.swift */; };
+		8299D3C41DBBAFDC0088E550 /* VarietyDetailsPlantationsGrowersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3C31DBBAFDC0088E550 /* VarietyDetailsPlantationsGrowersView.swift */; };
+		8299D3C61DBBAFF90088E550 /* VarietyDetailsSimilarVarietiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3C51DBBAFF90088E550 /* VarietyDetailsSimilarVarietiesView.swift */; };
+		8299D3C81DBBB1150088E550 /* VarietyDetailsGeneralInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8299D3C71DBBB1150088E550 /* VarietyDetailsGeneralInfoView.xib */; };
+		8299D3CA1DBBB11F0088E550 /* VarietyDetailsPlantationsGrowersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8299D3C91DBBB11F0088E550 /* VarietyDetailsPlantationsGrowersView.xib */; };
+		8299D3CC1DBBB1360088E550 /* VarietyDetailsSimilarVarietiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8299D3CB1DBBB1360088E550 /* VarietyDetailsSimilarVarietiesView.xib */; };
+		8299D3CF1DBBDB160088E550 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3CE1DBBDB160088E550 /* LoginViewController.swift */; };
+		8299D3D11DBBE36C0088E550 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3D01DBBE36C0088E550 /* User.swift */; };
+		8299D3D61DBBF5C30088E550 /* ApiManager+Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3D51DBBF5C30088E550 /* ApiManager+Authorization.swift */; };
+		8299D3D81DBCC17E0088E550 /* SimilarVarietyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3D71DBCC17E0088E550 /* SimilarVarietyCollectionViewCell.swift */; };
+		8299D3DA1DBCC1A30088E550 /* SimilarVarietyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8299D3D91DBCC1A30088E550 /* SimilarVarietyCollectionViewCell.xib */; };
+		82E5659E1DBCF775005F18F5 /* Plantation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5659D1DBCF775005F18F5 /* Plantation.swift */; };
+		82E565A01DBD072F005F18F5 /* VarietyDetailsPlantationsGrowerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5659F1DBD072F005F18F5 /* VarietyDetailsPlantationsGrowerTableViewCell.swift */; };
+		82E565A21DBD0737005F18F5 /* VarietyDetailsPlantationsGrowerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82E565A11DBD0737005F18F5 /* VarietyDetailsPlantationsGrowerTableViewCell.xib */; };
 		F81CBF2D8B89C452C874F6B5 /* Pods_DaoFlowers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5BB758AC21055E3F306CB97 /* Pods_DaoFlowers.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		41BF2CE2A460955924CE8330 /* Pods-DaoFlowers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DaoFlowers.release.xcconfig"; path = "Pods/Target Support Files/Pods-DaoFlowers/Pods-DaoFlowers.release.xcconfig"; sourceTree = "<group>"; };
+		822C1ED21DBE375600A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietyDetailsGeneralInfoCollectionViewCell.swift; sourceTree = "<group>"; };
+		822C1ED41DBE37A500A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VarietyDetailsGeneralInfoCollectionViewCell.xib; sourceTree = "<group>"; };
 		82457AC41DAEAA5900D87B21 /* DaoFlowers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DaoFlowers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82457AC71DAEAA5900D87B21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82457ACC1DAEAA5900D87B21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -90,6 +110,22 @@
 		8299D3AF1DB8E4240088E550 /* ContentPageViewerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentPageViewerCollectionViewCell.xib; sourceTree = "<group>"; };
 		8299D3B21DB8FBCB0088E550 /* VarietyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VarietyTableViewCell.xib; sourceTree = "<group>"; };
 		8299D3B41DB903D50088E550 /* PageViewer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PageViewer.xib; sourceTree = "<group>"; };
+		8299D3B81DBBACD50088E550 /* RBHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RBHUD.swift; sourceTree = "<group>"; };
+		8299D3BB1DBBADD80088E550 /* VarietyDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietyDetailsViewController.swift; sourceTree = "<group>"; };
+		8299D3C11DBBAFBF0088E550 /* VarietyDetailsGeneralInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietyDetailsGeneralInfoView.swift; sourceTree = "<group>"; };
+		8299D3C31DBBAFDC0088E550 /* VarietyDetailsPlantationsGrowersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietyDetailsPlantationsGrowersView.swift; sourceTree = "<group>"; };
+		8299D3C51DBBAFF90088E550 /* VarietyDetailsSimilarVarietiesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietyDetailsSimilarVarietiesView.swift; sourceTree = "<group>"; };
+		8299D3C71DBBB1150088E550 /* VarietyDetailsGeneralInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VarietyDetailsGeneralInfoView.xib; sourceTree = "<group>"; };
+		8299D3C91DBBB11F0088E550 /* VarietyDetailsPlantationsGrowersView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VarietyDetailsPlantationsGrowersView.xib; sourceTree = "<group>"; };
+		8299D3CB1DBBB1360088E550 /* VarietyDetailsSimilarVarietiesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VarietyDetailsSimilarVarietiesView.xib; sourceTree = "<group>"; };
+		8299D3CE1DBBDB160088E550 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		8299D3D01DBBE36C0088E550 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8299D3D51DBBF5C30088E550 /* ApiManager+Authorization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ApiManager+Authorization.swift"; sourceTree = "<group>"; };
+		8299D3D71DBCC17E0088E550 /* SimilarVarietyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimilarVarietyCollectionViewCell.swift; sourceTree = "<group>"; };
+		8299D3D91DBCC1A30088E550 /* SimilarVarietyCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimilarVarietyCollectionViewCell.xib; sourceTree = "<group>"; };
+		82E5659D1DBCF775005F18F5 /* Plantation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plantation.swift; sourceTree = "<group>"; };
+		82E5659F1DBD072F005F18F5 /* VarietyDetailsPlantationsGrowerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietyDetailsPlantationsGrowerTableViewCell.swift; sourceTree = "<group>"; };
+		82E565A11DBD0737005F18F5 /* VarietyDetailsPlantationsGrowerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VarietyDetailsPlantationsGrowerTableViewCell.xib; sourceTree = "<group>"; };
 		B5BB758AC21055E3F306CB97 /* Pods_DaoFlowers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DaoFlowers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D506727F50AAD99682289838 /* Pods-DaoFlowers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DaoFlowers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DaoFlowers/Pods-DaoFlowers.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -136,6 +172,8 @@
 		82457AC61DAEAA5900D87B21 /* DaoFlowers */ = {
 			isa = PBXGroup;
 			children = (
+				8299D3B61DBBACB70088E550 /* Third Party */,
+				82E5659C1DBCF637005F18F5 /* Core */,
 				8299D37F1DB151E20088E550 /* Models */,
 				8299D36E1DAF8EF30088E550 /* Views */,
 				82457AC71DAEAA5900D87B21 /* AppDelegate.swift */,
@@ -145,13 +183,23 @@
 				82457AD61DAEAA5900D87B21 /* Info.plist */,
 				82457ACE1DAEAA5900D87B21 /* DaoFlowers.xcdatamodeld */,
 				8299D36C1DAF8CC50088E550 /* MainViewControllerSegue.swift */,
-				8299D3711DAF926E0088E550 /* Constants.swift */,
 				8299D3771DAF9A0D0088E550 /* MenuButtonHandler.swift */,
 				8299D37D1DB14E320088E550 /* ApiManager.swift */,
+				8299D3D51DBBF5C30088E550 /* ApiManager+Authorization.swift */,
 				8299D3851DB2752A0088E550 /* UILabel+FitFontForSize.swift */,
-				8299D3951DB3C2BF0088E550 /* Utils.swift */,
 			);
 			path = DaoFlowers;
+			sourceTree = "<group>";
+		};
+		828189011DBD435F0064F906 /* General Info */ = {
+			isa = PBXGroup;
+			children = (
+				8299D3C11DBBAFBF0088E550 /* VarietyDetailsGeneralInfoView.swift */,
+				8299D3C71DBBB1150088E550 /* VarietyDetailsGeneralInfoView.xib */,
+				822C1ED21DBE375600A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.swift */,
+				822C1ED41DBE37A500A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.xib */,
+			);
+			name = "General Info";
 			sourceTree = "<group>";
 		};
 		8299D36E1DAF8EF30088E550 /* Views */ = {
@@ -159,6 +207,7 @@
 			children = (
 				8299D3991DB504600088E550 /* PageViewer */,
 				8299D3821DB155560088E550 /* Varieties */,
+				8299D3CD1DBBDB020088E550 /* Login */,
 				8299D3791DAF9A930088E550 /* MainViewController.swift */,
 				827BF85E1DAEAF4000054548 /* BaseViewController.swift */,
 				8299D36F1DAF8F110088E550 /* MenuViewController.swift */,
@@ -173,6 +222,8 @@
 				8299D3801DB151F00088E550 /* Flower.swift */,
 				8299D3891DB375AA0088E550 /* Color.swift */,
 				8299D3911DB3BDFA0088E550 /* Variety.swift */,
+				8299D3D01DBBE36C0088E550 /* User.swift */,
+				82E5659D1DBCF775005F18F5 /* Plantation.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -185,6 +236,7 @@
 				8299D3871DB373AA0088E550 /* ColorsViewController.swift */,
 				8299D38B1DB376EE0088E550 /* ColorCollectionViewCell.swift */,
 				8299D3B11DB8FBB20088E550 /* Varieties */,
+				8299D3BA1DBBADB90088E550 /* Variety Details */,
 			);
 			name = Varieties;
 			sourceTree = "<group>";
@@ -217,6 +269,72 @@
 				8299D3B21DB8FBCB0088E550 /* VarietyTableViewCell.xib */,
 			);
 			name = Varieties;
+			sourceTree = "<group>";
+		};
+		8299D3B61DBBACB70088E550 /* Third Party */ = {
+			isa = PBXGroup;
+			children = (
+				8299D3B71DBBACBF0088E550 /* RBHUD */,
+			);
+			name = "Third Party";
+			sourceTree = "<group>";
+		};
+		8299D3B71DBBACBF0088E550 /* RBHUD */ = {
+			isa = PBXGroup;
+			children = (
+				8299D3B81DBBACD50088E550 /* RBHUD.swift */,
+			);
+			name = RBHUD;
+			sourceTree = "<group>";
+		};
+		8299D3BA1DBBADB90088E550 /* Variety Details */ = {
+			isa = PBXGroup;
+			children = (
+				8299D3BB1DBBADD80088E550 /* VarietyDetailsViewController.swift */,
+				828189011DBD435F0064F906 /* General Info */,
+				8299D3DB1DBCE0E30088E550 /* Plantations Growers */,
+				8299D3D21DBBF1440088E550 /* Similar Varieties */,
+			);
+			name = "Variety Details";
+			sourceTree = "<group>";
+		};
+		8299D3CD1DBBDB020088E550 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				8299D3CE1DBBDB160088E550 /* LoginViewController.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		8299D3D21DBBF1440088E550 /* Similar Varieties */ = {
+			isa = PBXGroup;
+			children = (
+				8299D3C51DBBAFF90088E550 /* VarietyDetailsSimilarVarietiesView.swift */,
+				8299D3CB1DBBB1360088E550 /* VarietyDetailsSimilarVarietiesView.xib */,
+				8299D3D71DBCC17E0088E550 /* SimilarVarietyCollectionViewCell.swift */,
+				8299D3D91DBCC1A30088E550 /* SimilarVarietyCollectionViewCell.xib */,
+			);
+			name = "Similar Varieties";
+			sourceTree = "<group>";
+		};
+		8299D3DB1DBCE0E30088E550 /* Plantations Growers */ = {
+			isa = PBXGroup;
+			children = (
+				8299D3C31DBBAFDC0088E550 /* VarietyDetailsPlantationsGrowersView.swift */,
+				8299D3C91DBBB11F0088E550 /* VarietyDetailsPlantationsGrowersView.xib */,
+				82E5659F1DBD072F005F18F5 /* VarietyDetailsPlantationsGrowerTableViewCell.swift */,
+				82E565A11DBD0737005F18F5 /* VarietyDetailsPlantationsGrowerTableViewCell.xib */,
+			);
+			name = "Plantations Growers";
+			sourceTree = "<group>";
+		};
+		82E5659C1DBCF637005F18F5 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				8299D3711DAF926E0088E550 /* Constants.swift */,
+				8299D3951DB3C2BF0088E550 /* Utils.swift */,
+			);
+			name = Core;
 			sourceTree = "<group>";
 		};
 		FAF5BFF843C063266E94F1E0 /* Frameworks */ = {
@@ -288,12 +406,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8299D3CA1DBBB11F0088E550 /* VarietyDetailsPlantationsGrowersView.xib in Resources */,
+				8299D3CC1DBBB1360088E550 /* VarietyDetailsSimilarVarietiesView.xib in Resources */,
+				82E565A21DBD0737005F18F5 /* VarietyDetailsPlantationsGrowerTableViewCell.xib in Resources */,
 				82457AD51DAEAA5900D87B21 /* LaunchScreen.storyboard in Resources */,
 				82457AD21DAEAA5900D87B21 /* Assets.xcassets in Resources */,
 				8299D3AC1DB8D2170088E550 /* VarietiesPageView.xib in Resources */,
+				8299D3DA1DBCC1A30088E550 /* SimilarVarietyCollectionViewCell.xib in Resources */,
+				8299D3C81DBBB1150088E550 /* VarietyDetailsGeneralInfoView.xib in Resources */,
 				8299D3B01DB8E4240088E550 /* ContentPageViewerCollectionViewCell.xib in Resources */,
 				82457ACD1DAEAA5900D87B21 /* Main.storyboard in Resources */,
 				8299D3AE1DB8DFA90088E550 /* HeaderPageViewerCollectionViewCell.xib in Resources */,
+				822C1ED51DBE37A500A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.xib in Resources */,
 				8299D3B51DB903D50088E550 /* PageViewer.xib in Resources */,
 				8299D3B31DB8FBCB0088E550 /* VarietyTableViewCell.xib in Resources */,
 			);
@@ -354,32 +478,44 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8299D3CF1DBBDB160088E550 /* LoginViewController.swift in Sources */,
 				8299D38C1DB376EE0088E550 /* ColorCollectionViewCell.swift in Sources */,
 				8299D39F1DB558820088E550 /* LGHorizontalLinearFlowLayout.swift in Sources */,
 				8299D3901DB3BD800088E550 /* VarietyTableViewCell.swift in Sources */,
 				82457AD01DAEAA5900D87B21 /* DaoFlowers.xcdatamodeld in Sources */,
 				8299D3701DAF8F110088E550 /* MenuViewController.swift in Sources */,
 				8299D3AA1DB8CF660088E550 /* ContentPageViewerCollectionViewCell.swift in Sources */,
+				8299D3C61DBBAFF90088E550 /* VarietyDetailsSimilarVarietiesView.swift in Sources */,
 				8299D3A81DB8CD940088E550 /* VarietiesPageView.swift in Sources */,
+				822C1ED31DBE375600A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.swift in Sources */,
 				8299D3981DB5041E0088E550 /* PageViewer.swift in Sources */,
 				8299D3811DB151F00088E550 /* Flower.swift in Sources */,
+				8299D3B91DBBACD50088E550 /* RBHUD.swift in Sources */,
 				8299D39B1DB505620088E550 /* PageViewController.swift in Sources */,
+				82E5659E1DBCF775005F18F5 /* Plantation.swift in Sources */,
+				8299D3D81DBCC17E0088E550 /* SimilarVarietyCollectionViewCell.swift in Sources */,
 				8299D3781DAF9A0D0088E550 /* MenuButtonHandler.swift in Sources */,
+				8299D3C21DBBAFBF0088E550 /* VarietyDetailsGeneralInfoView.swift in Sources */,
 				8299D3741DAF99940088E550 /* FlowersViewController.swift in Sources */,
 				8299D38A1DB375AA0088E550 /* Color.swift in Sources */,
 				8299D39D1DB506D00088E550 /* ColorsCollectionViewCell.swift in Sources */,
 				8299D38E1DB3BD5B0088E550 /* VarietiesViewController.swift in Sources */,
+				8299D3BC1DBBADD80088E550 /* VarietyDetailsViewController.swift in Sources */,
 				8299D3A41DB7BD000088E550 /* HeaderPageViewerHighlightView.swift in Sources */,
 				82457AC81DAEAA5900D87B21 /* AppDelegate.swift in Sources */,
 				8299D3841DB155960088E550 /* FlowerCollectionViewCell.swift in Sources */,
+				8299D3D11DBBE36C0088E550 /* User.swift in Sources */,
 				827BF85F1DAEAF4000054548 /* BaseViewController.swift in Sources */,
 				8299D3A21DB622FA0088E550 /* HeaderPageViewerCollectionViewCell.swift in Sources */,
+				8299D3C41DBBAFDC0088E550 /* VarietyDetailsPlantationsGrowersView.swift in Sources */,
 				8299D37E1DB14E320088E550 /* ApiManager.swift in Sources */,
 				8299D36D1DAF8CC50088E550 /* MainViewControllerSegue.swift in Sources */,
+				8299D3D61DBBF5C30088E550 /* ApiManager+Authorization.swift in Sources */,
 				8299D3881DB373AA0088E550 /* ColorsViewController.swift in Sources */,
 				8299D3761DAF99B30088E550 /* PlantationsViewController.swift in Sources */,
 				8299D3921DB3BDFA0088E550 /* Variety.swift in Sources */,
 				8299D3961DB3C2BF0088E550 /* Utils.swift in Sources */,
+				82E565A01DBD072F005F18F5 /* VarietyDetailsPlantationsGrowerTableViewCell.swift in Sources */,
 				8299D3721DAF926E0088E550 /* Constants.swift in Sources */,
 				8299D37A1DAF9A930088E550 /* MainViewController.swift in Sources */,
 				8299D3A61DB8C6090088E550 /* PageViewerFlowLayout.swift in Sources */,

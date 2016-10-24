@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RBHUD
 
 class FlowersViewController: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
@@ -37,7 +36,9 @@ class FlowersViewController: BaseViewController, UICollectionViewDataSource, UIC
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         self.viewWillTransitionToSize = size
-        self.collectionView.collectionViewLayout.invalidateLayout()
+        if self.collectionView != nil {
+            self.collectionView.collectionViewLayout.invalidateLayout()
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -47,7 +48,6 @@ class FlowersViewController: BaseViewController, UICollectionViewDataSource, UIC
             let indexPath = self.collectionView.indexPathForCell(cell)!
             colorsViewController.flower = self.flowers[indexPath.row]
         } else if let pageViewController = destinationViewController as? PageViewController {
-            print(sender)
             let cell = sender as! UICollectionViewCell
             let indexPath = self.collectionView.indexPathForCell(cell)!
             pageViewController.currentFlower = self.flowers[indexPath.row]
@@ -62,7 +62,7 @@ class FlowersViewController: BaseViewController, UICollectionViewDataSource, UIC
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("FlowersCollectionViewCellIdentifier", forIndexPath: indexPath) as! FlowerCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("FlowerCollectionViewCellIdentifier", forIndexPath: indexPath) as! FlowerCollectionViewCell
         cell.flower = self.flowers[indexPath.row]
         
         return cell
@@ -91,7 +91,6 @@ class FlowersViewController: BaseViewController, UICollectionViewDataSource, UIC
         }
         
         let width = screenSize.width / CGFloat(columnCount)
-        print(width, screenSize)
         return CGSize(width: width, height: width)
     }
 }

@@ -121,6 +121,8 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
             self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Flowers, sender: self)
         case .Plantations:
             self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Plantations, sender: self)
+        case .Login:
+            self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Login, sender: self)
         }
         
         self.view.layoutIfNeeded()

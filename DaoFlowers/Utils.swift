@@ -22,4 +22,21 @@ class Utils: NSObject {
         alertController.addAction(okAlertAction)
         viewController.presentViewController(alertController, animated: true, completion: nil)
     }
+    
+    static func sortedVarieties(varieties: [Variety]) -> [Variety] {
+        var array = varieties
+        array.sortInPlace({ (obj1, obj2) -> Bool in
+            if let purchasePercent1 = obj1.purchasePercent {
+                if let purchasePercent2 = obj2.purchasePercent {
+                    return purchasePercent1 > purchasePercent2
+                } else {
+                    return true
+                }
+            } else {
+                return false
+            }
+        })
+        
+        return array
+    }
 }

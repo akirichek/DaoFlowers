@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RBHUD
 
 class ColorsViewController: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
@@ -55,7 +54,7 @@ class ColorsViewController: BaseViewController, UICollectionViewDataSource, UICo
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ColorsCollectionViewCellIdentifier", forIndexPath: indexPath) as! ColorCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ColorCollectionViewCellIdentifier", forIndexPath: indexPath) as! ColorCollectionViewCell
         cell.color = self.colors[indexPath.row]
         
         return cell

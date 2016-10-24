@@ -23,10 +23,12 @@ class ColorCollectionViewCell: UICollectionViewCell {
         self.containerView.layer.cornerRadius = 5
         nameLabel.text = color.name
         
-        if color.sortsCount == 1 {
-            sortsCountLabel.text = "\(color.sortsCount) sort"
-        } else {
-            sortsCountLabel.text = "\(color.sortsCount) sorts"
+        if let sortsCount = color.sortsCount {
+            if sortsCount == 1 {
+                sortsCountLabel.text = "\(sortsCount) sort"
+            } else {
+                sortsCountLabel.text = "\(sortsCount) sorts"
+            }
         }
         
         imageView.image = nil
