@@ -142,4 +142,57 @@ class ApiManager: NSObject {
             }
         }
     }
+    
+    static func searchVarietiesByTerm(term: String, flower: Flower?, color: Color?, breeder: Breeder?, completion: (varieties: [Variety]?, error: NSError?) -> ()) {
+        let parameters: [String: AnyObject] = [
+            "name_or_abr": term
+        ]
+        let url = K.Api.BaseUrl + K.Api.SearchFlowersPath
+        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+            if response.result.isSuccess {
+                var varieties: [Variety] = []
+                if let json = response.result.value {
+                    //print("JSON: \(json)")
+                    for dictionary in json as! [[String: AnyObject]] {
+                        let variety = Variety(dictionary: dictionary)
+                        varieties.append(variety)
+                    }
+                }
+                varieties = Utils.sortedVarieties(varieties)
+                completion(varieties: varieties, error: nil)
+            } else {
+                print("Error: \(response.result.error)")
+                completion(varieties: nil, error: response.result.error)
+            }
+        }
+    }
+    
+    static func fetchVarietiesSearchParameters(completion: (searchParams: ([Flower], [Color], [Breeder])?, error: NSError?) -> ()) {
+        let url = K.Api.BaseUrl + K.Api.FlowersSearchParametersPath
+        Alamofire.request(.GET, url).responseJSON { response in
+            if response.result.isSuccess {
+                var flowers: [Flower] = []
+                var colors: [Color] = []
+                var breeders: [Breeder] = []
+                if let json = response.result.value {
+                    print("JSON: \(json)")
+                    for flowerDictionary in json["flowerTypes"] as! [[String: AnyObject]] {
+                        flowers.append(Flower(dictionary: flowerDictionary))
+                    }
+                    
+                    for colorDictionary in json["flowerColors"] as! [[String: AnyObject]] {
+                        colors.append(Color(dictionary: colorDictionary))
+                    }
+                    
+                    for breederDictionary in json["breeders"] as! [[String: AnyObject]] {
+                        breeders.append(Breeder(dictionary: breederDictionary))
+                    }
+                }
+                completion(searchParams: (flowers, colors, breeders), error: nil)
+            } else {
+                print("Error: \(response.result.error)")
+                completion(searchParams: nil, error: response.result.error)
+            }
+        }
+    }
 }

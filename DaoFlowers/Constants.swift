@@ -18,6 +18,8 @@ struct K {
         static let SimilarVarietiesPath = "/catalog/flowers/details/similar"
         static let PlantationsGrowersPath = "/catalog/flowers/details/growers"
         static let GeneralInfoPath = "/catalog/flowers/details/general"
+        static let SearchFlowersPath = "/catalog/search/flowers"
+        static let FlowersSearchParametersPath = "/catalog/search/flowers/params"
     }
     
     struct Storyboard {
@@ -46,6 +48,16 @@ struct K {
     }
 }
 
-enum MenuSection: Int {
-    case Varieties, Plantations, Login
+enum MenuSection: String {
+    case UserProfile = "User Profile"
+    case Varieties = "Varieties"
+    case Plantations = "Plantations"
+    case Documents = "Documents"
+    case Claims = "Claims"
+    case CurrentOrders = "Current Orders"
+    case Contacts = "Contacts"
+    case Settings = "Settings"
+    case Login = "Log in"
+    case Logout = "Log out"
+    case About = "About"
 }

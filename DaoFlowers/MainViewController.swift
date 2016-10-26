@@ -45,6 +45,7 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
     // MARK: Private Methods
     
     func animateMenu(drugged: Bool) {
+        self.view.layoutIfNeeded()
         var newConstant: CGFloat;
         if drugged {
             if abs(self.menuContainerLeadingConstraint.constant) >= (self.menuContainerView.frame.width / 2) {
@@ -119,14 +120,20 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
         switch menuSection {
         case .Varieties:
             self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Flowers, sender: self)
+            self.animateMenu(false)
         case .Plantations:
             self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Plantations, sender: self)
+            self.animateMenu(false)
         case .Login:
             self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Login, sender: self)
+            self.animateMenu(false)
+        case .Logout:
+            User.currentUser()?.logOut()
+            let menuViewController = self.childViewControllers.first as! MenuViewController
+            menuViewController.reloadData()
+        default:
+            break
         }
-        
-        self.view.layoutIfNeeded()
-        self.animateMenu(false)
     }
     
     // MARK: MenuButtonHandler

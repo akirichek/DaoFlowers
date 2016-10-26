@@ -10,8 +10,10 @@ import UIKit
 
 class VarietyDetailsGeneralInfoView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
+    @IBOutlet weak var generalInfoContainerView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var varietyLabel: UILabel!
     @IBOutlet weak var abbrLabel: UILabel!
     @IBOutlet weak var flowerLabel: UILabel!
@@ -31,6 +33,7 @@ class VarietyDetailsGeneralInfoView: UIView, UICollectionViewDataSource, UIColle
     // MARK: Override Methods
     
     override func awakeFromNib() {
+        
         let nib = UINib(nibName:"VarietyDetailsGeneralInfoCollectionViewCell", bundle: nil)
         self.collectionView.registerNib(nib, forCellWithReuseIdentifier: "VarietyDetailsGeneralInfoCollectionViewCellIdentifier")
     }
@@ -38,6 +41,7 @@ class VarietyDetailsGeneralInfoView: UIView, UICollectionViewDataSource, UIColle
     // MARK: Private Methods
     
     func populateView() {
+        self.generalInfoContainerView.layer.cornerRadius = 5
         self.varietyLabel.text = self.variety?.name
         self.abbrLabel.text = self.variety?.abr
         self.flowerLabel.text = self.variety?.flower.name
@@ -52,6 +56,11 @@ class VarietyDetailsGeneralInfoView: UIView, UICollectionViewDataSource, UIColle
             self.vaseLifeLabel.text = "\(liveDaysFrom) - \(self.variety?.liveDaysTo)"
         }
         self.breederLabel.text = self.variety?.breeder?.name
+        
+        if let imageUrl = self.variety?.imageUrl {
+            self.imageView.af_setImageWithURL(NSURL(string: imageUrl)!)
+        }
+    
         self.collectionView.reloadData()
     }
     

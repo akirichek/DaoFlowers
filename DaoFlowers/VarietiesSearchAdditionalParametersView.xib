@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="VarietiesSearchAdditionalParametersView" customModule="DaoFlowers" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lbM-iu-LBP" userLabel="Container View">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="khj-dm-g7N" userLabel="Values Stack View">
+                            <rect key="frame" x="150" y="10" width="430" height="130"/>
+                            <subviews>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="All" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="22P-f1-bYZ">
+                                    <rect key="frame" x="0.0" y="0.0" width="430" height="30.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <action selector="flowerTextFieldClicked:" destination="iN0-l3-epB" eventType="editingDidBegin" id="1Uq-Ju-oZI"/>
+                                    </connections>
+                                </textField>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="All" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8CN-U2-fQA">
+                                    <rect key="frame" x="0.0" y="49" width="430" height="31"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <action selector="colorTextFieldClicked:" destination="iN0-l3-epB" eventType="editingDidBegin" id="KIA-uR-iPM"/>
+                                    </connections>
+                                </textField>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="All" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mSq-yv-jWA">
+                                    <rect key="frame" x="0.0" y="99" width="430" height="30.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <action selector="breederTextFieldClicked:" destination="iN0-l3-epB" eventType="editingDidBegin" id="nmy-m6-WKs"/>
+                                    </connections>
+                                </textField>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="mSq-yv-jWA" firstAttribute="width" secondItem="22P-f1-bYZ" secondAttribute="width" id="JB3-re-BP3"/>
+                                <constraint firstItem="8CN-U2-fQA" firstAttribute="width" secondItem="22P-f1-bYZ" secondAttribute="width" id="LVP-Eq-Br3"/>
+                                <constraint firstItem="8CN-U2-fQA" firstAttribute="height" secondItem="22P-f1-bYZ" secondAttribute="height" id="fIh-Fg-lup"/>
+                                <constraint firstItem="mSq-yv-jWA" firstAttribute="height" secondItem="22P-f1-bYZ" secondAttribute="height" id="zS7-md-yMh"/>
+                            </constraints>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8mC-Xk-xSn" userLabel="Labels Stack View">
+                            <rect key="frame" x="20" y="0.0" width="120" height="150"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flower Types:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5N-yp-M7q">
+                                    <rect key="frame" x="0.0" y="0.0" width="120" height="50"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flower Color:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31m-lV-gEs">
+                                    <rect key="frame" x="0.0" y="50" width="120" height="50"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Breeder:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kXO-RD-6s2">
+                                    <rect key="frame" x="0.0" y="100" width="120" height="50"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="kXO-RD-6s2" firstAttribute="width" secondItem="w5N-yp-M7q" secondAttribute="width" id="8Le-5y-Ted"/>
+                                <constraint firstItem="31m-lV-gEs" firstAttribute="width" secondItem="w5N-yp-M7q" secondAttribute="width" id="HEg-hq-zfQ"/>
+                                <constraint firstItem="31m-lV-gEs" firstAttribute="height" secondItem="w5N-yp-M7q" secondAttribute="height" id="V9s-lO-4Fr"/>
+                                <constraint firstItem="kXO-RD-6s2" firstAttribute="height" secondItem="w5N-yp-M7q" secondAttribute="height" id="ZAG-uu-9cH"/>
+                                <constraint firstAttribute="width" constant="120" id="fx7-fb-EU2"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="0qp-AR-Qxf"/>
+                        <constraint firstAttribute="bottom" secondItem="8mC-Xk-xSn" secondAttribute="bottom" id="1Vd-jn-ruM"/>
+                        <constraint firstItem="khj-dm-g7N" firstAttribute="top" secondItem="lbM-iu-LBP" secondAttribute="top" constant="10" id="4Vq-jD-i9M"/>
+                        <constraint firstItem="8mC-Xk-xSn" firstAttribute="leading" secondItem="lbM-iu-LBP" secondAttribute="leading" constant="20" id="Dv9-kM-ajU"/>
+                        <constraint firstAttribute="trailing" secondItem="khj-dm-g7N" secondAttribute="trailing" constant="20" id="K6D-A2-VSM"/>
+                        <constraint firstItem="8mC-Xk-xSn" firstAttribute="top" secondItem="lbM-iu-LBP" secondAttribute="top" id="Kis-6i-Kln"/>
+                        <constraint firstItem="khj-dm-g7N" firstAttribute="leading" secondItem="8mC-Xk-xSn" secondAttribute="trailing" constant="10" id="gbo-ic-w1V"/>
+                        <constraint firstAttribute="bottom" secondItem="khj-dm-g7N" secondAttribute="bottom" constant="10" id="xat-TA-Zfg"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="lbM-iu-LBP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BOQ-xU-VaD"/>
+                <constraint firstAttribute="trailing" secondItem="lbM-iu-LBP" secondAttribute="trailing" id="Dvv-Vl-FlE"/>
+                <constraint firstItem="lbM-iu-LBP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="cQY-KK-cFU"/>
+            </constraints>
+            <connections>
+                <outlet property="breederTextField" destination="mSq-yv-jWA" id="u7M-vQ-xi3"/>
+                <outlet property="colorTypeTextField" destination="8CN-U2-fQA" id="03u-pK-uQR"/>
+                <outlet property="flowerTypeTextField" destination="22P-f1-bYZ" id="rnD-PB-yXg"/>
+            </connections>
+            <point key="canvasLocation" x="370" y="227"/>
+        </view>
+    </objects>
+</document>

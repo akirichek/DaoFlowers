@@ -29,6 +29,12 @@ class User: NSObject, NSCoding {
         userDefaults.synchronize()
     }
     
+    func logOut() {
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        userDefaults.removeObjectForKey(K.UserDefaultKey.Login)
+        userDefaults.synchronize()
+    }
+    
     static func currentUser() -> User? {
         var user: User?
         let userDefaults = NSUserDefaults.standardUserDefaults()

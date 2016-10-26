@@ -63,7 +63,7 @@
                 <constraint firstItem="0EO-cR-Zzn" firstAttribute="leading" secondItem="HKj-sb-VCa" secondAttribute="leading" id="wpw-MD-TvR"/>
             </constraints>
             <connections>
-                <outlet property="containerView" destination="Whg-6Z-aol" id="Y0O-Hy-QCt"/>
+                <outlet property="containerView" destination="tbU-Cd-hyy" id="MaI-uc-tLk"/>
                 <outlet property="imageView" destination="wr9-a6-VQM" id="jgH-Eh-Po4"/>
             </connections>
         </collectionViewCell>

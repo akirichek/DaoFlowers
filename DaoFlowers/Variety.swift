@@ -37,12 +37,6 @@ class Variety: NSObject {
         var id: Int
         var name: String
     }
-
-    struct Breeder {
-        var id: Int
-        var name: String
-        var url: String
-    }
     
     init(dictionary: [String: AnyObject]) {
         if let sizeFromDictionary = dictionary["sizeFrom"] as? [String: AnyObject] {
@@ -74,9 +68,7 @@ class Variety: NSObject {
         productiveTo = generalInfo["productiveTo"] as? Int
         
         if let breeder = generalInfo["breeder"] as? [String: AnyObject] {
-            self.breeder = Breeder(id: breeder["id"] as! Int,
-                                   name: breeder["name"] as! String,
-                                   url: breeder["url"] as! String)
+            self.breeder = Breeder(dictionary: breeder)
         }
         
         var images: [String] = []
