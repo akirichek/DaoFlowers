@@ -132,7 +132,7 @@ class ApiManager: NSObject {
         Alamofire.request(.GET, url).responseJSON { response in
             if response.result.isSuccess {
                 if let json = response.result.value {
-                    print("JSON: \(json)")
+                    //print("JSON: \(json)")
                     variety.addGeneralInfoFromDictionary(json as! [String: AnyObject])
                 }
                 completion(success: true, error: nil)
@@ -143,10 +143,41 @@ class ApiManager: NSObject {
         }
     }
     
-    static func searchVarietiesByTerm(term: String, flower: Flower?, color: Color?, breeder: Breeder?, completion: (varieties: [Variety]?, error: NSError?) -> ()) {
-        let parameters: [String: AnyObject] = [
+    static func searchVarietiesByTerm(term: String, flowers: [Flower]?, colors: [Color]?, breeders: [Breeder]?, completion: (varieties: [Variety]?, error: NSError?) -> ()) {
+        var parameters: [String: AnyObject] = [
             "name_or_abr": term
         ]
+        
+        if let flowers = flowers {
+            if flowers.count > 0 {
+                var flowerIds: [String] = []
+                for flower in flowers {
+                    flowerIds.append(String(flower.id))
+                }
+                parameters["flower_type_ids"] = flowerIds.joinWithSeparator(",")
+            }
+        }
+        
+        if let colors = colors {
+            if colors.count > 0 {
+                var colorIds: [String] = []
+                for color in colors {
+                    colorIds.append(String(color.id))
+                }
+                parameters["flower_color_ids"] = colorIds.joinWithSeparator(",")
+            }
+        }
+        
+        if let breeders = breeders {
+            if breeders.count > 0 {
+                var breederIds: [String] = []
+                for breeder in breeders {
+                    breederIds.append(String(breeder.id))
+                }
+                parameters["breeder_ids"] = breederIds.joinWithSeparator(",")
+            }
+        }
+        
         let url = K.Api.BaseUrl + K.Api.SearchFlowersPath
         Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
             if response.result.isSuccess {

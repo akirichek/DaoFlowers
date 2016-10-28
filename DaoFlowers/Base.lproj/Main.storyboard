@@ -781,7 +781,19 @@
                             </collectionView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OpP-cO-eAK">
                                 <rect key="frame" x="0.0" y="94" width="600" height="506"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B8m-G2-Y04">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="455.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="B8m-G2-Y04" firstAttribute="height" secondItem="OpP-cO-eAK" secondAttribute="height" multiplier="0.9" identifier="AdditionalParametersContainerViewHeightConstraint" id="ArM-kW-B6r"/>
+                                    <constraint firstItem="B8m-G2-Y04" firstAttribute="leading" secondItem="OpP-cO-eAK" secondAttribute="leading" id="ioa-GG-83a"/>
+                                    <constraint firstItem="B8m-G2-Y04" firstAttribute="top" secondItem="OpP-cO-eAK" secondAttribute="top" id="jqv-pe-M1b"/>
+                                    <constraint firstAttribute="trailing" secondItem="B8m-G2-Y04" secondAttribute="trailing" id="nlO-ee-Xs1"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -815,7 +827,11 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="bKv-LF-QUO" firstAttribute="top" secondItem="GzM-k5-b5F" secondAttribute="top" id="BoX-kT-xT9"/>
                                 <constraint firstItem="bKv-LF-QUO" firstAttribute="leading" secondItem="GzM-k5-b5F" secondAttribute="leading" id="C48-cc-Cmr"/>
+                                <constraint firstItem="bKv-LF-QUO" firstAttribute="leading" secondItem="GzM-k5-b5F" secondAttribute="leading" id="Ejd-UV-yOJ"/>
+                                <constraint firstAttribute="bottom" secondItem="bKv-LF-QUO" secondAttribute="bottom" id="M35-oh-LJL"/>
+                                <constraint firstAttribute="trailing" secondItem="bKv-LF-QUO" secondAttribute="trailing" id="NOV-JH-vNz"/>
                                 <constraint firstItem="bKv-LF-QUO" firstAttribute="top" secondItem="GzM-k5-b5F" secondAttribute="top" id="XTX-MZ-Zlq"/>
                                 <constraint firstAttribute="trailing" secondItem="bKv-LF-QUO" secondAttribute="trailing" id="dxL-zR-kDu"/>
                                 <constraint firstAttribute="bottom" secondItem="bKv-LF-QUO" secondAttribute="bottom" id="mgs-ew-NOV"/>
@@ -829,7 +845,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="additionalParametersArrowImageView" destination="j7D-0I-BCQ" id="JQQ-gv-LtM"/>
-                        <outlet property="additionalParametersContainerView" destination="OpP-cO-eAK" id="BdR-2O-ohE"/>
+                        <outlet property="additionalParametersContainerView" destination="B8m-G2-Y04" id="J6m-XC-Lfd"/>
+                        <outlet property="additionalParametersOverlayView" destination="OpP-cO-eAK" id="ncv-gN-qRJ"/>
                         <outlet property="collectionView" destination="4cg-5O-4TC" id="bXu-rX-kB2"/>
                         <outlet property="searchBar" destination="bKv-LF-QUO" id="cI1-36-p7T"/>
                         <segue destination="Mmv-Cm-4EB" kind="show" identifier="VarietyDetailsViewControllerSegueIdentifier" id="vEG-G1-PwC"/>

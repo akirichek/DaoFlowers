@@ -14,6 +14,8 @@ class VarietiesSearchViewController: UIViewController, UICollectionViewDataSourc
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var additionalParametersArrowImageView: UIImageView!
     @IBOutlet weak var additionalParametersContainerView: UIView!
+    @IBOutlet weak var additionalParametersOverlayView: UIView!
+
     var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
     var searchResults: [Variety] = []
     var flowersSearchParams: [Flower]?
@@ -38,6 +40,16 @@ class VarietiesSearchViewController: UIViewController, UICollectionViewDataSourc
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         self.viewWillTransitionToSize = size
         self.collectionView.reloadData()
+        let additionalParametersView = self.additionalParametersContainerView.subviews.first as? VarietiesSearchAdditionalParametersView
+        additionalParametersView?.viewWillTransitionToSize = size
+        additionalParametersView?.reloadView()
+        
+        let screenSize = self.viewWillTransitionToSize
+        if screenSize.width < screenSize.height {
+            additionalParametersOverlayView.constraintByIdentifier("AdditionalParametersContainerViewHeightConstraint")!.changeMultiplier(0.9)
+        } else {
+            additionalParametersOverlayView.constraintByIdentifier("AdditionalParametersContainerViewHeightConstraint")!.changeMultiplier(1)
+        }
     }
     
     // MARK: - Private Methods
@@ -47,9 +59,9 @@ class VarietiesSearchViewController: UIViewController, UICollectionViewDataSourc
         
         RBHUD.sharedInstance.showLoader(self.view, withTitle: nil, withSubTitle: nil, withProgress: true)
         ApiManager.searchVarietiesByTerm(self.searchBar.text!,
-                                         flower: additionalParametersView?.selectedFlower,
-                                         color: additionalParametersView?.selectedColor,
-                                         breeder: additionalParametersView?.selectedBreeder) { (varieties, error) in
+                                         flowers: additionalParametersView?.selectedFlowers,
+                                         colors: additionalParametersView?.selectedColors,
+                                         breeders: additionalParametersView?.selectedBreeders) { (varieties, error) in
             RBHUD.sharedInstance.hideLoader()
             if let varieties = varieties {
                 self.searchResults = varieties
@@ -93,13 +105,13 @@ class VarietiesSearchViewController: UIViewController, UICollectionViewDataSourc
             self.additionalParametersContainerView.addSubview(additionalParametersView)
         }
         
-        if self.additionalParametersContainerView.hidden {
-            self.additionalParametersArrowImageView.image = UIImage(named: "down_arrow")
-        } else {
+        if self.additionalParametersOverlayView.hidden {
             self.additionalParametersArrowImageView.image = UIImage(named: "up_arrow")
+        } else {
+            self.additionalParametersArrowImageView.image = UIImage(named: "down_arrow")
         }
         
-        self.additionalParametersContainerView.hidden = !self.additionalParametersContainerView.hidden
+        self.additionalParametersOverlayView.hidden = !self.additionalParametersOverlayView.hidden
     }
     
     // MARK: - UICollectionViewDataSource
