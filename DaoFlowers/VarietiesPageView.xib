@@ -3,15 +3,120 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VarietiesPageView" customModule="DaoFlowers" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="h0f-hh-a6r" customClass="VarietiesPageView" customModule="DaoFlowers" customModuleProvider="target">
+        <view userInteractionEnabled="NO" contentMode="scaleToFill" id="h0f-hh-a6r" customClass="VarietiesPageView" customModule="DaoFlowers" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="r91-y5-zkf">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2xp-dO-bme" userLabel="Filter Container View">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="zE2-lD-Wma">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ex0-9H-f4h" userLabel="Assortment Container View">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GI9-3W-Pms" userLabel="Field Container View">
+                                            <rect key="frame" x="30" y="6" width="540" height="32"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assortment:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGD-7C-B67">
+                                                    <rect key="frame" x="27" y="0.0" width="84" height="32"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="by % of purchase" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KSh-8b-Dha">
+                                                    <rect key="frame" x="121" y="0.0" width="419" height="32"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="assortmentTextFieldClicked:" destination="h0f-hh-a6r" eventType="editingDidBegin" id="sf6-fN-2Ir"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="gGD-7C-B67" firstAttribute="bottom" secondItem="GI9-3W-Pms" secondAttribute="bottom" id="D9L-Ec-k6Q"/>
+                                                <constraint firstItem="gGD-7C-B67" firstAttribute="top" secondItem="GI9-3W-Pms" secondAttribute="top" id="Ia1-ct-g4W"/>
+                                                <constraint firstItem="KSh-8b-Dha" firstAttribute="top" secondItem="GI9-3W-Pms" secondAttribute="top" id="ahC-No-DAy"/>
+                                                <constraint firstAttribute="trailing" secondItem="KSh-8b-Dha" secondAttribute="trailing" id="guk-mW-Xrt"/>
+                                                <constraint firstItem="KSh-8b-Dha" firstAttribute="leading" secondItem="gGD-7C-B67" secondAttribute="trailing" constant="10" id="o7w-Y2-gND"/>
+                                                <constraint firstAttribute="bottom" secondItem="KSh-8b-Dha" secondAttribute="bottom" id="qdg-ze-8k9"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="GI9-3W-Pms" firstAttribute="height" secondItem="ex0-9H-f4h" secondAttribute="height" multiplier="0.8" id="2wk-I3-5R8"/>
+                                        <constraint firstItem="GI9-3W-Pms" firstAttribute="bottom" secondItem="ex0-9H-f4h" secondAttribute="bottom" multiplier="0.95" id="Y3S-hk-f1i"/>
+                                        <constraint firstItem="GI9-3W-Pms" firstAttribute="width" secondItem="ex0-9H-f4h" secondAttribute="width" multiplier="0.9" id="qwA-Bv-2sk"/>
+                                        <constraint firstItem="GI9-3W-Pms" firstAttribute="trailing" secondItem="ex0-9H-f4h" secondAttribute="trailing" multiplier="0.95" id="ufi-Nh-w1W"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S53-Fe-QiP" userLabel="Search Container View">
+                                    <rect key="frame" x="0.0" y="40" width="600" height="40"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Npf-tP-hB5" userLabel="Field Container View">
+                                            <rect key="frame" x="30" y="4" width="540" height="32"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type name/abbr to search..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xdZ-7f-7ah">
+                                                    <rect key="frame" x="27" y="0.0" width="486" height="32"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="h0f-hh-a6r" id="DiL-fF-Wuq"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="xdZ-7f-7ah" secondAttribute="bottom" id="L68-MQ-62s"/>
+                                                <constraint firstItem="xdZ-7f-7ah" firstAttribute="top" secondItem="Npf-tP-hB5" secondAttribute="top" id="hOk-eO-krf"/>
+                                                <constraint firstItem="xdZ-7f-7ah" firstAttribute="width" secondItem="Npf-tP-hB5" secondAttribute="width" multiplier="0.9" id="u74-aV-8XS"/>
+                                                <constraint firstItem="xdZ-7f-7ah" firstAttribute="trailing" secondItem="Npf-tP-hB5" secondAttribute="trailing" multiplier="0.95" id="vPK-Kz-el0"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="Npf-tP-hB5" firstAttribute="bottom" secondItem="S53-Fe-QiP" secondAttribute="bottom" multiplier="0.9" id="dUA-DX-ClE"/>
+                                        <constraint firstItem="Npf-tP-hB5" firstAttribute="width" secondItem="S53-Fe-QiP" secondAttribute="width" multiplier="0.9" id="ejo-ac-lPe"/>
+                                        <constraint firstItem="Npf-tP-hB5" firstAttribute="trailing" secondItem="S53-Fe-QiP" secondAttribute="trailing" multiplier="0.95" id="eup-JF-QgD"/>
+                                        <constraint firstItem="Npf-tP-hB5" firstAttribute="height" secondItem="S53-Fe-QiP" secondAttribute="height" multiplier="0.8" id="oGC-f1-JEN"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="S53-Fe-QiP" secondAttribute="trailing" id="3Rl-IT-2De"/>
+                                <constraint firstAttribute="bottom" secondItem="S53-Fe-QiP" secondAttribute="bottom" id="Ade-CK-Mje"/>
+                                <constraint firstItem="gGD-7C-B67" firstAttribute="leading" secondItem="xdZ-7f-7ah" secondAttribute="leading" id="An7-Jc-aBB"/>
+                                <constraint firstAttribute="trailing" secondItem="ex0-9H-f4h" secondAttribute="trailing" id="GZI-w8-NvD"/>
+                                <constraint firstItem="ex0-9H-f4h" firstAttribute="top" secondItem="zE2-lD-Wma" secondAttribute="top" id="XQf-XR-aBv"/>
+                                <constraint firstItem="ex0-9H-f4h" firstAttribute="leading" secondItem="zE2-lD-Wma" secondAttribute="leading" id="auZ-aM-q99"/>
+                                <constraint firstItem="ex0-9H-f4h" firstAttribute="height" secondItem="zE2-lD-Wma" secondAttribute="height" multiplier="0.5" id="dIe-kD-GE1"/>
+                                <constraint firstItem="S53-Fe-QiP" firstAttribute="leading" secondItem="zE2-lD-Wma" secondAttribute="leading" id="idx-YY-f0K"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstItem="zE2-lD-Wma" firstAttribute="width" secondItem="2xp-dO-bme" secondAttribute="width" id="HRP-eW-WXJ"/>
+                        <constraint firstAttribute="trailing" secondItem="zE2-lD-Wma" secondAttribute="trailing" id="HwP-Pm-qW8"/>
+                        <constraint firstAttribute="bottom" secondItem="zE2-lD-Wma" secondAttribute="bottom" id="Lch-oa-54W"/>
+                        <constraint firstAttribute="height" constant="80" id="auv-Mm-BNN"/>
+                        <constraint firstItem="zE2-lD-Wma" firstAttribute="height" secondItem="2xp-dO-bme" secondAttribute="height" id="iOh-Ja-HLp"/>
+                    </constraints>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="T6s-wS-DeF" appends="YES" id="4if-r4-jx5"/>
+                    </connections>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="r91-y5-zkf">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
@@ -24,13 +129,23 @@
             <constraints>
                 <constraint firstItem="r91-y5-zkf" firstAttribute="top" secondItem="h0f-hh-a6r" secondAttribute="top" id="3JH-bl-sVw"/>
                 <constraint firstAttribute="trailing" secondItem="r91-y5-zkf" secondAttribute="trailing" id="6fs-ps-adD"/>
+                <constraint firstItem="2xp-dO-bme" firstAttribute="leading" secondItem="h0f-hh-a6r" secondAttribute="leading" id="Efd-iS-W5a"/>
                 <constraint firstAttribute="bottom" secondItem="r91-y5-zkf" secondAttribute="bottom" id="Ua2-d7-LDi"/>
+                <constraint firstAttribute="trailing" secondItem="2xp-dO-bme" secondAttribute="trailing" id="aGg-0o-oaq"/>
+                <constraint firstItem="2xp-dO-bme" firstAttribute="top" secondItem="h0f-hh-a6r" secondAttribute="top" id="nl5-f7-boB"/>
                 <constraint firstItem="r91-y5-zkf" firstAttribute="leading" secondItem="h0f-hh-a6r" secondAttribute="leading" id="w9X-qr-liI"/>
             </constraints>
             <connections>
+                <outlet property="assortmentContainerView" destination="GI9-3W-Pms" id="ijH-72-dWc"/>
+                <outlet property="assortmentTextField" destination="KSh-8b-Dha" id="pgf-3N-dBT"/>
+                <outlet property="filterContainerView" destination="2xp-dO-bme" id="OPZ-Mh-pTa"/>
+                <outlet property="searchContainerView" destination="Npf-tP-hB5" id="hRg-dg-Kv1"/>
+                <outlet property="searchTextField" destination="xdZ-7f-7ah" id="a8e-n0-b09"/>
                 <outlet property="tableView" destination="r91-y5-zkf" id="sTu-aV-Tmv"/>
+                <outlet property="tableViewTopConstraint" destination="3JH-bl-sVw" id="ovF-4X-MKg"/>
             </connections>
-            <point key="canvasLocation" x="269" y="252"/>
+            <point key="canvasLocation" x="285" y="257"/>
         </view>
+        <tapGestureRecognizer id="T6s-wS-DeF"/>
     </objects>
 </document>

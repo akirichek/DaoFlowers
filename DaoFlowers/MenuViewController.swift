@@ -65,7 +65,6 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
             cell = sectionCell
         }
 
-        
         return cell
     }
     

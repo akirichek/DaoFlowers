@@ -23,7 +23,16 @@ class Utils: NSObject {
         viewController.presentViewController(alertController, animated: true, completion: nil)
     }
     
-    static func sortedVarieties(varieties: [Variety]) -> [Variety] {
+    static func sortedVarietiesByName(varieties: [Variety]) -> [Variety] {
+        var array = varieties
+        array.sortInPlace({ (obj1, obj2) -> Bool in
+            return obj1.name < obj2.name
+        })
+        
+        return array
+    }
+    
+    static func sortedVarietiesByPercentsOfPurchase(varieties: [Variety]) -> [Variety] {
         var array = varieties
         array.sortInPlace({ (obj1, obj2) -> Bool in
             if let purchasePercent1 = obj1.purchasePercent {
@@ -36,6 +45,31 @@ class Utils: NSObject {
                 return false
             }
         })
+        
+        return array
+    }
+    
+    
+    static func sortedVarietiesByBoughtLastMonth(varieties: [Variety]) -> [Variety] {
+        var array = varieties
+        array.sortInPlace({ (obj1, obj2) -> Bool in
+            return obj1.invoicesDone > obj2.invoicesDone
+        })
+        
+        return array
+    }
+    
+    
+    static func sortedVarieties(varieties: [Variety], byAssortmentType assortmentType: VarietiesAssortmentType) -> [Variety] {
+        var array: [Variety]!
+        switch assortmentType {
+        case .ByName:
+            array = sortedVarietiesByName(varieties)
+        case .ByPercentsOfPurchase:
+            array = sortedVarietiesByPercentsOfPurchase(varieties)
+        case .BoughtLastMonth:
+            array = sortedVarietiesByBoughtLastMonth(varieties)
+        }
         
         return array
     }

@@ -15,10 +15,10 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
     
     var flower: Flower!
     var colors: [Color] = []
-    var varietiesWithColors: [Int: [Variety]] = [:]
     var selectedVariety: Variety!
+    var pageViewStates: [Int: VarietiesPageViewState] = [:]
     
-    // MARK: Override Methods
+    // MARK: - Override Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,14 +43,30 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
         }
     }
     
-    // MARK: Private Methods
+    // MARK: - Actions
     
-    func fetchVarietiesByColor(color: Color) {
-        ApiManager.fetchVarietiesByFlower(self.flower, color: color) { (varieties, error) in
+    @IBAction func searchButtonClicked(sender: UIBarButtonItem) {
+        if let page = self.pageViewer.pageAtIndex(pageViewer.indexOfCurrentPage) as? VarietiesPageView {
+            let indexOfCurrentPage = pageViewer.indexOfCurrentPage
+            var pageViewState = pageViewStates[indexOfCurrentPage]!
+            pageViewState.filter = !pageViewState.filter
+            page.state = pageViewState
+            page.reloadData()
+            pageViewStates[indexOfCurrentPage] = pageViewState
+        }
+    }
+    
+    // MARK: - Private Methods
+    
+    func fetchVarietiesForPageViewState(pageViewState: VarietiesPageViewState) {
+        ApiManager.fetchVarietiesByFlower(self.flower, color: pageViewState.color) { (varieties, error) in
             if let varieties = varieties {
-                self.varietiesWithColors[color.id] = varieties
-                if let page = self.pageViewer.pageAtIndex(self.colors.indexOf({$0.id == color.id})!) as? VarietiesPageView {
-                    page.varieties = varieties
+                if let page = self.pageViewer.pageAtIndex(pageViewState.index) as? VarietiesPageView {
+                    var state = pageViewState
+                    state.varieties = varieties
+                    page.state = state
+                    page.reloadData()
+                    self.pageViewStates[state.index] = state
                 }
             } else {
                 Utils.showError(error!, inViewController: self)
@@ -91,7 +107,7 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
     }
     
     
-    // MARK: PageViewerDataSource
+    // MARK: - PageViewerDataSource
     
     func pageViewerNumberOfPages(pageViewer: PageViewer) -> Int {
         return self.colors.count
@@ -102,28 +118,45 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
     }
     
     func pageViewer(pageViewer: PageViewer, pageForItemAtIndex index: Int, reusableView: UIView?) -> UIView {
-        var varietiesPageView = reusableView as? VarietiesPageView
+        var pageView: VarietiesPageView! = reusableView as? VarietiesPageView
         
-        if varietiesPageView == nil {
-            varietiesPageView = NSBundle.mainBundle().loadNibNamed("VarietiesPageView", owner: self, options: nil).first as? VarietiesPageView
-            varietiesPageView?.delegate = self
+        if pageView == nil {
+            pageView = NSBundle.mainBundle().loadNibNamed("VarietiesPageView", owner: self, options: nil).first as! VarietiesPageView
+            pageView.delegate = self
         }
         
-        let color = self.colors[index]
-        if let varieties = self.varietiesWithColors[color.id] {
-            varietiesPageView?.varieties = varieties
+        var pageViewState: VarietiesPageViewState!
+        if self.pageViewStates[index] == nil {
+            pageViewState = VarietiesPageViewState(filter: false,
+                                                   assortment: .ByPercentsOfPurchase,
+                                                   searchString: "",
+                                                   varieties: nil,
+                                                   color: self.colors[index],
+                                                   index: index)
+            
+            self.pageViewStates[index] = pageViewState
+            self.fetchVarietiesForPageViewState(pageViewState)
         } else {
-            varietiesPageView?.varieties = []
-            self.fetchVarietiesByColor(color)
+            pageViewState = self.pageViewStates[index]
         }
         
-        return varietiesPageView!
+        pageView.state = pageViewState
+        pageView.reloadData()
+        
+        self.view.endEditing(true)
+        
+        return pageView!
     }
     
-    // MARK: VarietiesPageViewDelegate
+    // MARK: - VarietiesPageViewDelegate
     
     func varietiesPageView(varietiesPageView: VarietiesPageView, didSelectVariety variety: Variety) {
         self.selectedVariety = variety
         self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.VarietyDetails, sender: self)
+    }
+    
+    func varietiesPageView(varietiesPageView: VarietiesPageView, didChangeState state: VarietiesPageViewState) {
+        let indexOfCurrentPage = pageViewer.indexOfCurrentPage
+        self.pageViewStates[indexOfCurrentPage] = state
     }
 }

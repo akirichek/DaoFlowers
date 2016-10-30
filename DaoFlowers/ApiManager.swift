@@ -76,7 +76,7 @@ class ApiManager: NSObject {
                         varieties.append(variety)
                     }
                 }
-                varieties = Utils.sortedVarieties(varieties)
+                varieties = Utils.sortedVarietiesByPercentsOfPurchase(varieties)
                 completion(varieties: varieties, error: nil)
             } else {
                 print("Error: \(response.result.error)")
@@ -97,7 +97,7 @@ class ApiManager: NSObject {
                         varieties.append(variety)
                     }
                 }
-                varieties = Utils.sortedVarieties(varieties)
+                varieties = Utils.sortedVarietiesByPercentsOfPurchase(varieties)
                 completion(varieties: varieties, error: nil)
             } else {
                 print("Error: \(response.result.error)")
@@ -189,7 +189,7 @@ class ApiManager: NSObject {
                         varieties.append(variety)
                     }
                 }
-                varieties = Utils.sortedVarieties(varieties)
+                varieties = Utils.sortedVarietiesByPercentsOfPurchase(varieties)
                 completion(varieties: varieties, error: nil)
             } else {
                 print("Error: \(response.result.error)")

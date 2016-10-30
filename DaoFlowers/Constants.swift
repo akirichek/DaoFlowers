@@ -61,3 +61,9 @@ enum MenuSection: String {
     case Logout = "Log out"
     case About = "About"
 }
+
+enum VarietiesAssortmentType: String {
+    case ByName = "by name"
+    case ByPercentsOfPurchase = "by % of purchase"
+    case BoughtLastMonth = "bought last month, FB"
+}
