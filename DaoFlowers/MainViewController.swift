@@ -127,6 +127,9 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
         case .Login:
             self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Login, sender: self)
             self.animateMenu(false)
+        case .Settings:
+            self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Settings, sender: self)
+            self.animateMenu(false)
         case .Logout:
             User.currentUser()?.logOut()
             let menuViewController = self.childViewControllers.first as! MenuViewController

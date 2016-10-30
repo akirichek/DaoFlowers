@@ -116,33 +116,39 @@
                         <outletCollection property="gestureRecognizers" destination="T6s-wS-DeF" appends="YES" id="4if-r4-jx5"/>
                     </connections>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="r91-y5-zkf">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="EHy-HW-nXD">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="c1Y-k0-YWm">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
                     <connections>
-                        <outlet property="dataSource" destination="h0f-hh-a6r" id="Gtn-0E-QDF"/>
-                        <outlet property="delegate" destination="h0f-hh-a6r" id="g9D-4q-h7a"/>
+                        <outlet property="dataSource" destination="h0f-hh-a6r" id="oML-Ls-m6d"/>
+                        <outlet property="delegate" destination="h0f-hh-a6r" id="t0P-fk-mjD"/>
                     </connections>
-                </tableView>
+                </collectionView>
             </subviews>
             <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="r91-y5-zkf" firstAttribute="top" secondItem="h0f-hh-a6r" secondAttribute="top" id="3JH-bl-sVw"/>
-                <constraint firstAttribute="trailing" secondItem="r91-y5-zkf" secondAttribute="trailing" id="6fs-ps-adD"/>
+                <constraint firstItem="EHy-HW-nXD" firstAttribute="top" secondItem="h0f-hh-a6r" secondAttribute="top" id="BD8-Hl-EqP"/>
+                <constraint firstAttribute="trailing" secondItem="EHy-HW-nXD" secondAttribute="trailing" id="Ea2-2B-mkK"/>
                 <constraint firstItem="2xp-dO-bme" firstAttribute="leading" secondItem="h0f-hh-a6r" secondAttribute="leading" id="Efd-iS-W5a"/>
-                <constraint firstAttribute="bottom" secondItem="r91-y5-zkf" secondAttribute="bottom" id="Ua2-d7-LDi"/>
+                <constraint firstItem="EHy-HW-nXD" firstAttribute="leading" secondItem="h0f-hh-a6r" secondAttribute="leading" id="JjK-aM-ngJ"/>
                 <constraint firstAttribute="trailing" secondItem="2xp-dO-bme" secondAttribute="trailing" id="aGg-0o-oaq"/>
+                <constraint firstAttribute="bottom" secondItem="EHy-HW-nXD" secondAttribute="bottom" id="am9-nl-di4"/>
                 <constraint firstItem="2xp-dO-bme" firstAttribute="top" secondItem="h0f-hh-a6r" secondAttribute="top" id="nl5-f7-boB"/>
-                <constraint firstItem="r91-y5-zkf" firstAttribute="leading" secondItem="h0f-hh-a6r" secondAttribute="leading" id="w9X-qr-liI"/>
             </constraints>
             <connections>
                 <outlet property="assortmentContainerView" destination="GI9-3W-Pms" id="ijH-72-dWc"/>
                 <outlet property="assortmentTextField" destination="KSh-8b-Dha" id="pgf-3N-dBT"/>
+                <outlet property="collectionView" destination="EHy-HW-nXD" id="8NA-1f-dtm"/>
+                <outlet property="collectionViewTopConstraint" destination="BD8-Hl-EqP" id="wkR-G7-K1W"/>
                 <outlet property="filterContainerView" destination="2xp-dO-bme" id="OPZ-Mh-pTa"/>
                 <outlet property="searchContainerView" destination="Npf-tP-hB5" id="hRg-dg-Kv1"/>
                 <outlet property="searchTextField" destination="xdZ-7f-7ah" id="a8e-n0-b09"/>
-                <outlet property="tableView" destination="r91-y5-zkf" id="sTu-aV-Tmv"/>
-                <outlet property="tableViewTopConstraint" destination="3JH-bl-sVw" id="ovF-4X-MKg"/>
             </connections>
             <point key="canvasLocation" x="285" y="257"/>
         </view>

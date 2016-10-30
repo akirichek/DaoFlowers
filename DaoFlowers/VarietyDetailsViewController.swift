@@ -22,6 +22,7 @@ class VarietyDetailsViewController: UIViewController, PageViewerDataSource, Vari
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "\(variety.name) (\(variety.flower.name))"
         let pageViewer = NSBundle.mainBundle().loadNibNamed("PageViewer", owner: self, options: nil).first as! PageViewer
         pageViewer.dataSource = self
         pageViewer.translatesAutoresizingMaskIntoConstraints = false

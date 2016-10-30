@@ -2,85 +2,121 @@
 //  ColorsViewController.swift
 //  DaoFlowers
 //
-//  Created by Artem Kirichek on 10/16/16.
+//  Created by Artem Kirichek on 10/30/16.
 //  Copyright © 2016 Dao Flowers. All rights reserved.
 //
 
 import UIKit
 
-class ColorsViewController: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class ColorsViewController: BaseViewController, PageViewerDataSource, ColorsPageViewDelegate {
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var pageViewerContainerView: UIView!
+    var pageViewer: PageViewer!
+    var flowers: [Flower] = []
+    var selectedFlower: Flower!
+    var colors: [Int: [Color]] = [:]
+    var selectedColor: Color?
+    var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
+    var needsSelectPageView: Bool = true
     
-    var flower: Flower!
-    var colors: [Color] = []
-    
-    
+    // MARK - Override Methods
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        RBHUD.sharedInstance.showLoader(self.view, withTitle: nil, withSubTitle: nil, withProgress: true)
-        ApiManager.fetchColorsByFlower(self.flower, completion: { (colors, error) in
-            RBHUD.sharedInstance.hideLoader()
-            if let colors = colors {
-                self.colors = colors
-                self.collectionView.reloadData()
-            } else {
-                Utils.showError(error!, inViewController: self)
-            }            
-        })
+
+        let pageViewer = NSBundle.mainBundle().loadNibNamed("PageViewer", owner: self, options: nil).first as! PageViewer
+        pageViewer.dataSource = self
+        pageViewer.translatesAutoresizingMaskIntoConstraints = false
+        self.pageViewerContainerView.addSubview(pageViewer)
+        self.pageViewer = pageViewer
+        self.adjustConstraintsForItem(self.pageViewer, toItem: self.pageViewerContainerView)
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if needsSelectPageView {
+            let index = flowers.indexOf({$0.id == self.selectedFlower.id})!
+            self.pageViewer.selectPageAtIndex(index)
+        }
     }
     
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
-        self.collectionView.collectionViewLayout.invalidateLayout()
+    override func viewDidAppear(animated: Bool) {
+        needsSelectPageView = false
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        self.viewWillTransitionToSize = size
+        if let page = self.pageViewer.pageAtIndex(self.pageViewer.indexOfCurrentPage) as? ColorsPageView {
+            page.viewWillTransitionToSize = size
+            page.reloadData()
+        }
+        self.pageViewer.viewWillTransitionToSize = size
+        self.pageViewer.reloadData()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let destinationViewController = segue.destinationViewController
         if let varietiesViewController = destinationViewController as? VarietiesViewController {
-            varietiesViewController.flower = self.flower
-            varietiesViewController.colors = self.colors
+            let colorsPageView = sender as! ColorsPageView
+            varietiesViewController.flower = self.flowers[self.pageViewer.indexOfCurrentPage]
+            varietiesViewController.colors = colorsPageView.colors!
+            varietiesViewController.selectedColor = self.selectedColor
         }
     }
     
-    // MARK: UICollectionViewDataSource
+    // MARK: - Private Methods
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return colors.count
+    func fetchColorsForPageViewIndex(indexOfPageView: Int) {
+        let flower = flowers[indexOfPageView]
+        ApiManager.fetchColorsByFlower(flower, completion: { (colors, error) in
+            if let colors = colors {
+                if let page = self.pageViewer.pageAtIndex(indexOfPageView) as? ColorsPageView {
+                    page.colors = colors
+                    self.colors[indexOfPageView] = colors
+                }
+            } else {
+                Utils.showError(error!, inViewController: self)
+            }
+        })
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ColorCollectionViewCellIdentifier", forIndexPath: indexPath) as! ColorCollectionViewCell
-        cell.color = self.colors[indexPath.row]
-        
-        return cell
+    // MARK: - PageViewerDataSource
+    
+    func pageViewerNumberOfPages(pageViewer: PageViewer) -> Int {
+        return self.flowers.count
     }
     
-    // MARK: UICollectionViewDelegate
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Varieties,
-                                        sender: collectionView.cellForItemAtIndexPath(indexPath))
+    func pageViewer(pageViewer: PageViewer, headerForItemAtIndex index: Int) -> String {
+        return self.flowers[index].name
     }
     
-    // MARK: UICollectionViewDelegateFlowLayout
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func pageViewer(pageViewer: PageViewer, pageForItemAtIndex index: Int, reusableView: UIView?) -> UIView {
+        var pageView: ColorsPageView! = reusableView as? ColorsPageView
         
-        let columnCount: Int
+        if pageView == nil {
+            pageView = NSBundle.mainBundle().loadNibNamed("ColorsPageView", owner: self, options: nil).first as! ColorsPageView
+            pageView.delegate = self
+        }
         
-        if self.view.bounds.width < self.view.bounds.height {
-            columnCount = 2
+        pageView.viewWillTransitionToSize = self.viewWillTransitionToSize
+        
+        if let colors = self.colors[index] {
+            pageView.colors = colors
         } else {
-            columnCount = 4
+            pageView.colors = nil
+            fetchColorsForPageViewIndex(index)
         }
         
-        let width = collectionView.frame.size.width / CGFloat(columnCount)
+        self.view.endEditing(true)
         
-        return CGSize(width: width, height: width)
+        return pageView!
+    }
+
+    // MARK: - ColorsPageViewDelegate
+    
+    func colorsPageView(colorsPageView: ColorsPageView, didSelectColor color: Color) {
+        self.selectedColor = color
+        self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Varieties,
+                                        sender: colorsPageView)
     }
 }

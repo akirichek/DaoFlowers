@@ -30,6 +30,7 @@ struct K {
             static let Varieties = "VarietiesViewControllerSegueIdentifier"
             static let VarietyDetails = "VarietyDetailsViewControllerSegueIdentifier"
             static let Login = "LoginViewControllerSegueIdentifier"
+            static let Settings = "SettingsViewControllerSegueIdentifier"
         }
         
         struct ViewControllerIdentifier {
@@ -66,4 +67,24 @@ enum VarietiesAssortmentType: String {
     case ByName = "by name"
     case ByPercentsOfPurchase = "by % of purchase"
     case BoughtLastMonth = "bought last month, FB"
+}
+
+enum Language: String {
+    case English = "English"
+    case Russian = "Русский"
+    case Spanish = "Español"
+    
+    func flagImageName() -> String {
+        var flagImageName: String!
+        switch self {
+        case .English:
+            flagImageName = "flag_uk"
+        case .Russian:
+            flagImageName = "flag_russia"
+        case .Spanish:
+            flagImageName = "flag_spain"
+        }
+        
+        return flagImageName
+    }
 }

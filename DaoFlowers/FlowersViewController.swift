@@ -46,17 +46,8 @@ class FlowersViewController: BaseViewController, UICollectionViewDataSource, UIC
         if let colorsViewController = destinationViewController as? ColorsViewController {
             let cell = sender as! UICollectionViewCell
             let indexPath = self.collectionView.indexPathForCell(cell)!
-            colorsViewController.flower = self.flowers[indexPath.row]
-        } else if let colorsViewController = destinationViewController as? Colors2ViewController {
-            let cell = sender as! UICollectionViewCell
-            let indexPath = self.collectionView.indexPathForCell(cell)!
             colorsViewController.selectedFlower = self.flowers[indexPath.row]
             colorsViewController.flowers = self.flowers
-        } else if let pageViewController = destinationViewController as? PageViewController {
-            let cell = sender as! UICollectionViewCell
-            let indexPath = self.collectionView.indexPathForCell(cell)!
-            pageViewController.currentFlower = self.flowers[indexPath.row]
-            pageViewController.flowers = self.flowers
         }
     }
     

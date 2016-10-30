@@ -16,7 +16,10 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
     var flower: Flower!
     var colors: [Color] = []
     var selectedVariety: Variety!
+    var selectedColor: Color!
     var pageViewStates: [Int: VarietiesPageViewState] = [:]
+    var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
+    var needsSelectPageView: Bool = true
     
     // MARK: - Override Methods
     
@@ -29,9 +32,15 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
         self.pageViewerContainerView.addSubview(pageViewer)
         self.pageViewer = pageViewer
         self.adjustConstraintsForItem(self.pageViewer, toItem: self.pageViewerContainerView)
+        self.title = flower.name
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        self.viewWillTransitionToSize = size
+        if let page = self.pageViewer.pageAtIndex(self.pageViewer.indexOfCurrentPage) as? ColorsPageView {
+            page.viewWillTransitionToSize = size
+            page.reloadData()
+        }
         self.pageViewer.viewWillTransitionToSize = size
         self.pageViewer.reloadData()
     }
@@ -41,6 +50,18 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
         if let varietyDetailsViewController = destinationViewController as? VarietyDetailsViewController {
             varietyDetailsViewController.variety = self.selectedVariety
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if needsSelectPageView {
+            let index = colors.indexOf({$0.id == self.selectedColor.id})!
+            self.pageViewer.selectPageAtIndex(index)
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        needsSelectPageView = false
     }
     
     // MARK: - Actions
@@ -92,6 +113,8 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
             pageView.delegate = self
         }
         
+        pageView.viewWillTransitionToSize = self.viewWillTransitionToSize
+        
         var pageViewState: VarietiesPageViewState!
         if self.pageViewStates[index] == nil {
             pageViewState = VarietiesPageViewState(filter: false,
@@ -104,6 +127,9 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
             self.fetchVarietiesForPageViewState(pageViewState)
         } else {
             pageViewState = self.pageViewStates[index]
+            if pageViewState.varieties == nil {
+                self.fetchVarietiesForPageViewState(pageViewState)
+            }
         }
         
         pageView.state = pageViewState

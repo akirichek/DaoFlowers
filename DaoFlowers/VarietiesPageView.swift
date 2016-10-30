@@ -8,10 +8,10 @@
 
 import UIKit
 
-class VarietiesPageView: UIView, UITableViewDataSource, UITableViewDelegate,UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
+class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var filterContainerView: UIView!
     @IBOutlet weak var assortmentContainerView: UIView!
     @IBOutlet weak var searchContainerView: UIView!
@@ -23,10 +23,11 @@ class VarietiesPageView: UIView, UITableViewDataSource, UITableViewDelegate,UIPi
     var assortmentTypes: [VarietiesAssortmentType] = [.ByName, .ByPercentsOfPurchase, .BoughtLastMonth]
     var assortmentPickerView: UIPickerView!
     var state: VarietiesPageViewState!
+    var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
     
     var filteredVarieties: [Variety]? {
         didSet {
-            self.tableView.reloadData()
+            self.collectionView.reloadData()
         }
     }
     
@@ -40,15 +41,15 @@ class VarietiesPageView: UIView, UITableViewDataSource, UITableViewDelegate,UIPi
         }
         self.assortmentTextField.text = state.assortment.rawValue
         self.searchTextField.text = state.searchString
-        self.tableView.contentOffset = CGPointZero
+        self.collectionView.contentOffset = CGPointZero
         self.filterVarieties()
     }
     
     // MARK: - Override Methods
     
     override func awakeFromNib() {
-        let nib = UINib(nibName:"VarietyTableViewCell", bundle: nil)
-        self.tableView.registerNib(nib, forCellReuseIdentifier: "VarietyTableViewCellIdentifier")
+        let nib = UINib(nibName:"VarietyCollectionViewCell", bundle: nil)
+        self.collectionView.registerNib(nib, forCellWithReuseIdentifier: "VarietyCollectionViewCellIdentifier")
         assortmentContainerView.layer.cornerRadius = 5
         searchContainerView.layer.cornerRadius = 5
         self.assortmentPickerView = self.createPickerViewForTextField(self.assortmentTextField)
@@ -88,26 +89,25 @@ class VarietiesPageView: UIView, UITableViewDataSource, UITableViewDelegate,UIPi
     
     func showFilterContainerView() {
         filterContainerView.hidden = false
-        tableViewTopConstraint.constant = 80
+        collectionViewTopConstraint.constant = 80
     }
     
     func hideFilterContainerView() {
-        tableViewTopConstraint.constant = 0
+        collectionViewTopConstraint.constant = 0
         filterContainerView.hidden = true
     }
     
     func filterVarieties() {
         let term = state.searchString.lowercaseString
-        if term.characters.count > 0 {
-            if let varieties = state.varieties {
-                let filteredVarienties = varieties.filter({$0.name.lowercaseString.containsString(term) || $0.abr.lowercaseString.containsString(term)})
-                filteredVarieties = Utils.sortedVarieties(filteredVarienties, byAssortmentType: state.assortment)
+        var filteredVarieties = state.varieties
+        if filteredVarieties != nil {
+            if term.characters.count > 0 {
+                filteredVarieties = filteredVarieties!.filter({$0.name.lowercaseString.containsString(term) || $0.abr.lowercaseString.containsString(term)})
             }
-        } else {
-            if let varieties = state.varieties {
-                filteredVarieties = Utils.sortedVarieties(varieties, byAssortmentType: state.assortment)
-            }
+            filteredVarieties = Utils.sortedVarieties(filteredVarieties!, byAssortmentType: state.assortment)
         }
+        
+        self.filteredVarieties = filteredVarieties
     }
     
     // MARK: - Private Methods
@@ -124,9 +124,9 @@ class VarietiesPageView: UIView, UITableViewDataSource, UITableViewDelegate,UIPi
         self.delegate?.varietiesPageView(self, didChangeState: state)
     }
     
-    // MARK: - UITableViewDataSource
+    // MARK: - UICollectionViewDataSource
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var numberOfRows = 0
         if let filteredVarieties = self.filteredVarieties {
             self.spinner.hideLoader()
@@ -137,20 +137,33 @@ class VarietiesPageView: UIView, UITableViewDataSource, UITableViewDelegate,UIPi
         return numberOfRows
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("VarietyTableViewCellIdentifier",
-                                                               forIndexPath: indexPath) as! VarietyTableViewCell
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("VarietyCollectionViewCellIdentifier", forIndexPath: indexPath) as! VarietyCollectionViewCell
         cell.variety  = self.filteredVarieties![indexPath.row]
         cell.numberLabel.text = String(indexPath.row + 1)
         
         return cell
     }
     
-    // MARK: UITableViewDelegate
+    // MARK: - UICollectionViewDelegate
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         self.delegate?.varietiesPageView(self, didSelectVariety: self.filteredVarieties![indexPath.row])
+    }
+    
+    // MARK: - UICollectionViewDelegateFlowLayout
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let screenSize = self.viewWillTransitionToSize
+        let columnCount: Int
+        if screenSize.width < screenSize.height {
+            columnCount = 1
+        } else {
+            columnCount = 2
+        }
+        
+        let width = screenSize.width / CGFloat(columnCount)
+        return CGSize(width: width, height: 60)
     }
     
     // MARK: - UIPickerViewDataSource
