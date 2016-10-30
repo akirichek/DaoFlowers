@@ -28,7 +28,7 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
         pageViewer.translatesAutoresizingMaskIntoConstraints = false
         self.pageViewerContainerView.addSubview(pageViewer)
         self.pageViewer = pageViewer
-        self.adjustConstraints()
+        self.adjustConstraintsForItem(self.pageViewer, toItem: self.pageViewerContainerView)
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
@@ -74,39 +74,6 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
         }
     }
     
-    func adjustConstraints() {
-        let leadingConstraint = NSLayoutConstraint(item: self.pageViewer,
-                                                   attribute: NSLayoutAttribute.Leading,
-                                                   relatedBy: NSLayoutRelation.Equal,
-                                                   toItem: self.pageViewerContainerView,
-                                                   attribute: NSLayoutAttribute.Leading,
-                                                   multiplier: 1,
-                                                   constant: 0)
-        let trailingConstraint = NSLayoutConstraint(item: self.pageViewer,
-                                                    attribute: NSLayoutAttribute.Trailing,
-                                                    relatedBy: NSLayoutRelation.Equal,
-                                                    toItem: self.pageViewerContainerView,
-                                                    attribute: NSLayoutAttribute.Trailing,
-                                                    multiplier: 1,
-                                                    constant: 0)
-        let topConstraint = NSLayoutConstraint(item: self.pageViewer,
-                                               attribute: NSLayoutAttribute.Top,
-                                               relatedBy: NSLayoutRelation.Equal,
-                                               toItem: self.pageViewerContainerView,
-                                               attribute: NSLayoutAttribute.Top,
-                                               multiplier: 1,
-                                               constant: 0)
-        let bottomConstraint = NSLayoutConstraint(item: self.pageViewer,
-                                                  attribute: NSLayoutAttribute.Bottom,
-                                                  relatedBy: NSLayoutRelation.Equal,
-                                                  toItem: self.pageViewerContainerView,
-                                                  attribute: NSLayoutAttribute.Bottom,
-                                                  multiplier: 1,
-                                                  constant: 0)
-        NSLayoutConstraint.activateConstraints([leadingConstraint, trailingConstraint, topConstraint, bottomConstraint])
-    }
-    
-    
     // MARK: - PageViewerDataSource
     
     func pageViewerNumberOfPages(pageViewer: PageViewer) -> Int {
@@ -133,7 +100,6 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
                                                    varieties: nil,
                                                    color: self.colors[index],
                                                    index: index)
-            
             self.pageViewStates[index] = pageViewState
             self.fetchVarietiesForPageViewState(pageViewState)
         } else {

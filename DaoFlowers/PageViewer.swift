@@ -46,6 +46,12 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
         return cell?.contentView.subviews.first
     }
     
+    func selectPageAtIndex(index: Int) {
+        let contentCollectionViewSize = self.contentCollectionViewSize()
+        let currentContentOffsetX = CGFloat(index) * contentCollectionViewSize.width
+        self.contentCollectionView.setContentOffset(CGPoint(x: currentContentOffsetX, y: 0), animated: false)
+    }
+    
     // MARK: Override Methods
     
     override func awakeFromNib() {

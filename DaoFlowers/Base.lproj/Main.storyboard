@@ -426,8 +426,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="gi8-CR-sO6" id="2Bx-MV-XXV"/>
-                        <segue destination="XxA-Og-RCM" kind="show" identifier="ColorsViewControllerSegueIdentifier" id="2oZ-vv-su9"/>
+                        <segue destination="XxA-Og-RCM" kind="show" identifier="" id="2oZ-vv-su9"/>
                         <segue destination="y7S-3U-qRA" kind="show" identifier="" id="IhB-Hy-nnB"/>
+                        <segue destination="Yer-fV-acS" kind="show" identifier="ColorsViewControllerSegueIdentifier" id="n82-81-u9A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WmH-Kt-yMU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1238,8 +1239,8 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="oBX-yU-tfs" secondAttribute="trailing" id="3hJ-q8-KW7"/>
                             <constraint firstItem="oBX-yU-tfs" firstAttribute="top" secondItem="jxz-DY-eoy" secondAttribute="top" id="Hzh-8C-SPe"/>
-                            <constraint firstItem="umg-2a-dJu" firstAttribute="top" secondItem="oBX-yU-tfs" secondAttribute="bottom" id="aN1-um-zcM"/>
                             <constraint firstItem="oBX-yU-tfs" firstAttribute="leading" secondItem="jxz-DY-eoy" secondAttribute="leading" id="bMV-3l-QzV"/>
+                            <constraint firstItem="umg-2a-dJu" firstAttribute="top" secondItem="oBX-yU-tfs" secondAttribute="bottom" id="yOt-XI-tu0"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Varieties" id="tIo-xD-ojK"/>
@@ -1252,6 +1253,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y9b-hy-Hv6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2905.5" y="1263.9999999999998"/>
+        </scene>
+        <!--Colors-->
+        <scene sceneID="Nbc-Lg-3i9">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Yer-fV-acS" userLabel="Colors" customClass="Colors2ViewController" customModule="DaoFlowers" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="86l-1D-Q6C"/>
+                        <viewControllerLayoutGuide type="bottom" id="bU8-d8-ixS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ujb-AC-r6r">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e6u-qa-j9G">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bU8-d8-ixS" firstAttribute="top" secondItem="e6u-qa-j9G" secondAttribute="bottom" id="6B0-bF-8Za"/>
+                            <constraint firstItem="e6u-qa-j9G" firstAttribute="top" secondItem="86l-1D-Q6C" secondAttribute="bottom" id="AmU-hl-zC1"/>
+                            <constraint firstAttribute="trailing" secondItem="e6u-qa-j9G" secondAttribute="trailing" id="M37-xs-0UB"/>
+                            <constraint firstItem="e6u-qa-j9G" firstAttribute="leading" secondItem="Ujb-AC-r6r" secondAttribute="leading" id="ZHm-WP-4Vm"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Varieties" id="WGa-Nv-jBz">
+                        <barButtonItem key="backBarButtonItem" title=" " id="PI9-GL-hJ1"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="ohp-To-U4F">
+                            <connections>
+                                <action selector="searchButtonClicked:" destination="Yer-fV-acS" id="6jq-81-u2S"/>
+                                <segue destination="JNp-LH-dgF" kind="show" id="HEc-uQ-G51"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="pageViewerContainerView" destination="e6u-qa-j9G" id="uzG-E6-kxu"/>
+                        <segue destination="zeR-dU-8Qg" kind="show" identifier="VarietiesViewControllerSegueIdentifier" id="OQd-5A-bzp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DyC-WC-m41" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2905" y="1967"/>
         </scene>
         <!--Varieties View Controller-->
         <scene sceneID="9v5-v9-2so">
@@ -1413,6 +1457,8 @@
         <image name="logo" width="188" height="135"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="HEc-uQ-G51"/>
+        <segue reference="OQd-5A-bzp"/>
         <segue reference="NKZ-VK-4df"/>
     </inferredMetricsTieBreakers>
 </document>
