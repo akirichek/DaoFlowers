@@ -22,6 +22,8 @@ class VarietyDetailsGeneralInfoView: UIView, UICollectionViewDataSource, UIColle
     @IBOutlet weak var possibleLengthLabel: UILabel!
     @IBOutlet weak var vaseLifeLabel: UILabel!
     @IBOutlet weak var breederLabel: UILabel!
+    @IBOutlet weak var collectionContainerViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var collectionContainerView: UIView!
     
     var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
     var variety: Variety? {
@@ -47,13 +49,13 @@ class VarietyDetailsGeneralInfoView: UIView, UICollectionViewDataSource, UIColle
         self.flowerLabel.text = self.variety?.flower.name
         self.colorLabel.text = self.variety?.color.name
         if let productiveFrom = self.variety?.productiveFrom {
-            self.productivityLabel.text = "\(productiveFrom) - \(self.variety?.productiveTo)"
+            self.productivityLabel.text = "\(productiveFrom) - \(self.variety!.productiveTo!)"
         }
         if let sizeFrom = self.variety?.sizeFrom {
-            self.possibleLengthLabel.text = "\(sizeFrom.name) - \(self.variety?.sizeTo?.name)"
+            self.possibleLengthLabel.text = "\(sizeFrom.name) - \(self.variety!.sizeTo!.name)"
         }
         if let liveDaysFrom = self.variety?.liveDaysFrom {
-            self.vaseLifeLabel.text = "\(liveDaysFrom) - \(self.variety?.liveDaysTo)"
+            self.vaseLifeLabel.text = "\(liveDaysFrom) - \(self.variety!.liveDaysTo!)"
         }
         self.breederLabel.text = self.variety?.breeder?.name
         
@@ -62,6 +64,11 @@ class VarietyDetailsGeneralInfoView: UIView, UICollectionViewDataSource, UIColle
         }
     
         self.collectionView.reloadData()
+        
+        let contentSizeHeight = self.collectionView.collectionViewLayout.collectionViewContentSize().height + self.collectionContainerView.frame.origin.y
+        
+        self.collectionContainerViewHeightConstraint.constant = self.collectionView.collectionViewLayout.collectionViewContentSize().height
+        self.scrollView.contentSize = CGSizeMake(0, contentSizeHeight)
     }
     
     // MARK: UICollectionViewDataSource

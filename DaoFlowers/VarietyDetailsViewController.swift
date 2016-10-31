@@ -16,6 +16,7 @@ class VarietyDetailsViewController: UIViewController, PageViewerDataSource, Vari
     var variety: Variety!
     var similarVarieties: [Variety]?
     var plantationsGrowers: [Plantation]?
+    var varietyDetailsGeneralInfoView: VarietyDetailsGeneralInfoView!
     
     // MARK: Override Methods
     
@@ -34,6 +35,13 @@ class VarietyDetailsViewController: UIViewController, PageViewerDataSource, Vari
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         self.pageViewer.viewWillTransitionToSize = size
         self.pageViewer.reloadData()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if let page = self.pageViewer.pageAtIndex(0) as? VarietyDetailsGeneralInfoView {
+            page.variety = self.variety
+        }
     }
 
     // MARK: Private Methods
@@ -86,8 +94,9 @@ class VarietyDetailsViewController: UIViewController, PageViewerDataSource, Vari
             ApiManager.fetchPlantationsGrowersByVariety(self.variety, user: user) { (plantations, error) in
                 if let plantations = plantations {
                     self.plantationsGrowers = plantations
-                    let page = self.pageViewer.pageAtIndex(1) as! VarietyDetailsPlantationsGrowersView
-                    page.plantations = plantations
+                    if let page = self.pageViewer.pageAtIndex(1) as? VarietyDetailsPlantationsGrowersView {
+                        page.plantations = plantations
+                    }
                 } else {
                     Utils.showError(error!, inViewController: self)
                 }
@@ -133,22 +142,20 @@ class VarietyDetailsViewController: UIViewController, PageViewerDataSource, Vari
     func pageViewer(pageViewer: PageViewer, pageForItemAtIndex index: Int, reusableView: UIView?) -> UIView {
         let nibName: String
         switch index {
-            case 0:
-                nibName = "VarietyDetailsGeneralInfoView"
-            case 1:
-                nibName = "VarietyDetailsPlantationsGrowersView"
-            case 2:
-                nibName = "VarietyDetailsSimilarVarietiesView"
-            default:
-                nibName = ""
+        case 0:
+            nibName = "VarietyDetailsGeneralInfoView"
+        case 1:
+            nibName = "VarietyDetailsPlantationsGrowersView"
+        case 2:
+            nibName = "VarietyDetailsSimilarVarietiesView"
+        default:
+            nibName = ""
         }
-        let pageView = NSBundle.mainBundle().loadNibNamed(nibName, owner: self, options: nil).first as? UIView
         
+        var pageView =  NSBundle.mainBundle().loadNibNamed(nibName, owner: self, options: nil).first as? UIView
         if let varietyDetailsGeneralInfoView = pageView as? VarietyDetailsGeneralInfoView {
-            if self.variety.breeder == nil {
+            if varietyDetailsGeneralInfoView.variety == nil {
                 self.fetchGeneralInfo()
-            } else {
-                varietyDetailsGeneralInfoView.variety = self.variety
             }
         } else if let varietyDetailsPlantationsGrowersView = pageView as? VarietyDetailsPlantationsGrowersView {
             if let plantations = self.plantationsGrowers {

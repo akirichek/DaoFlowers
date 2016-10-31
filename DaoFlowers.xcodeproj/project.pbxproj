@@ -63,6 +63,8 @@
 		82C059801DC675E100F061E6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C0597F1DC675E100F061E6 /* SettingsViewController.swift */; };
 		82C059821DC6873F00F061E6 /* LanguagePickerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C059811DC6873F00F061E6 /* LanguagePickerViewCell.swift */; };
 		82C059841DC6874E00F061E6 /* LanguagePickerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82C059831DC6874E00F061E6 /* LanguagePickerViewCell.xib */; };
+		82C0598A1DC68E4900F061E6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 82C0598C1DC68E4900F061E6 /* Localizable.strings */; };
+		82C059931DC68ED000F061E6 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C059921DC68ED000F061E6 /* LanguageManager.swift */; };
 		82E5659E1DBCF775005F18F5 /* Plantation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5659D1DBCF775005F18F5 /* Plantation.swift */; };
 		82E565A01DBD072F005F18F5 /* VarietyDetailsPlantationsGrowerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5659F1DBD072F005F18F5 /* VarietyDetailsPlantationsGrowerTableViewCell.swift */; };
 		82E565A21DBD0737005F18F5 /* VarietyDetailsPlantationsGrowerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82E565A11DBD0737005F18F5 /* VarietyDetailsPlantationsGrowerTableViewCell.xib */; };
@@ -138,6 +140,12 @@
 		82C0597F1DC675E100F061E6 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		82C059811DC6873F00F061E6 /* LanguagePickerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguagePickerViewCell.swift; sourceTree = "<group>"; };
 		82C059831DC6874E00F061E6 /* LanguagePickerViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LanguagePickerViewCell.xib; sourceTree = "<group>"; };
+		82C059881DC68E3600F061E6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		82C059891DC68E3E00F061E6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		82C0598D1DC68E5F00F061E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		82C0598F1DC68E8E00F061E6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		82C059901DC68E9000F061E6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		82C059921DC68ED000F061E6 /* LanguageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		82E5659D1DBCF775005F18F5 /* Plantation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plantation.swift; sourceTree = "<group>"; };
 		82E5659F1DBD072F005F18F5 /* VarietyDetailsPlantationsGrowerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietyDetailsPlantationsGrowerTableViewCell.swift; sourceTree = "<group>"; };
 		82E565A11DBD0737005F18F5 /* VarietyDetailsPlantationsGrowerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VarietyDetailsPlantationsGrowerTableViewCell.xib; sourceTree = "<group>"; };
@@ -208,9 +216,9 @@
 				82457AD61DAEAA5900D87B21 /* Info.plist */,
 				82457ACE1DAEAA5900D87B21 /* DaoFlowers.xcdatamodeld */,
 				8299D36C1DAF8CC50088E550 /* MainViewControllerSegue.swift */,
-				8299D37D1DB14E320088E550 /* ApiManager.swift */,
-				8299D3D51DBBF5C30088E550 /* ApiManager+Authorization.swift */,
+				82C059911DC68EB200F061E6 /* Managers */,
 				8299D3851DB2752A0088E550 /* UILabel+FitFontForSize.swift */,
+				82C0598C1DC68E4900F061E6 /* Localizable.strings */,
 			);
 			path = DaoFlowers;
 			sourceTree = "<group>";
@@ -407,6 +415,16 @@
 			name = Main;
 			sourceTree = "<group>";
 		};
+		82C059911DC68EB200F061E6 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				8299D37D1DB14E320088E550 /* ApiManager.swift */,
+				8299D3D51DBBF5C30088E550 /* ApiManager+Authorization.swift */,
+				82C059921DC68ED000F061E6 /* LanguageManager.swift */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
 		82E5659C1DBCF637005F18F5 /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -490,6 +508,8 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
+				es,
 			);
 			mainGroup = 82457ABB1DAEAA5800D87B21;
 			productRefGroup = 82457AC51DAEAA5900D87B21 /* Products */;
@@ -511,6 +531,7 @@
 				8299D3CC1DBBB1360088E550 /* VarietyDetailsSimilarVarietiesView.xib in Resources */,
 				82E565A21DBD0737005F18F5 /* VarietyDetailsPlantationsGrowerTableViewCell.xib in Resources */,
 				82457AD51DAEAA5900D87B21 /* LaunchScreen.storyboard in Resources */,
+				82C0598A1DC68E4900F061E6 /* Localizable.strings in Resources */,
 				82457AD21DAEAA5900D87B21 /* Assets.xcassets in Resources */,
 				8299D3AC1DB8D2170088E550 /* VarietiesPageView.xib in Resources */,
 				82C0597B1DC6449C00F061E6 /* VarietyCollectionViewCell.xib in Resources */,
@@ -612,6 +633,7 @@
 				82C059741DC617D100F061E6 /* ColorsPageView.swift in Sources */,
 				8299D3841DB155960088E550 /* FlowerCollectionViewCell.swift in Sources */,
 				82FBA1A91DC287C1001CE265 /* UIView+ConstraintByIdentifier.swift in Sources */,
+				82C059931DC68ED000F061E6 /* LanguageManager.swift in Sources */,
 				8299D3D11DBBE36C0088E550 /* User.swift in Sources */,
 				827BF85F1DAEAF4000054548 /* BaseViewController.swift in Sources */,
 				8299D3A21DB622FA0088E550 /* HeaderPageViewerCollectionViewCell.swift in Sources */,
@@ -650,8 +672,20 @@
 			isa = PBXVariantGroup;
 			children = (
 				82457AD41DAEAA5900D87B21 /* Base */,
+				82C059881DC68E3600F061E6 /* es */,
+				82C059891DC68E3E00F061E6 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		82C0598C1DC68E4900F061E6 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				82C0598D1DC68E5F00F061E6 /* Base */,
+				82C0598F1DC68E8E00F061E6 /* es */,
+				82C059901DC68E9000F061E6 /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -88,3 +88,7 @@ enum Language: String {
         return flagImageName
     }
 }
+
+func CustomLocalisedString() {
+    
+}

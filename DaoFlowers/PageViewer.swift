@@ -97,6 +97,7 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
                 pageView.translatesAutoresizingMaskIntoConstraints = false
                 contentCell.contentView.addSubview(pageView)
                 self.adjustConstraintsForItem(pageView, toItem: contentCell.contentView)
+                pageView.setNeedsLayout()
             }
             
             if reusableView == nil {

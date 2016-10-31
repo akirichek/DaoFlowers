@@ -127,7 +127,6 @@ class ApiManager: NSObject {
     }
     
     static func fetchGeneralInfoForVariety(variety: Variety, completion: (success: Bool, error: NSError?) -> ()) {
-        print(variety)
         let url = K.Api.BaseUrl + K.Api.GeneralInfoPath + "/\(variety.id)"
         Alamofire.request(.GET, url).responseJSON { response in
             if response.result.isSuccess {
