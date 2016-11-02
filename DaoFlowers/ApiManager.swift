@@ -131,7 +131,7 @@ class ApiManager: NSObject {
         Alamofire.request(.GET, url).responseJSON { response in
             if response.result.isSuccess {
                 if let json = response.result.value {
-                    //print("JSON: \(json)")
+                    print("JSON: \(json)")
                     variety.addGeneralInfoFromDictionary(json as! [String: AnyObject])
                 }
                 completion(success: true, error: nil)

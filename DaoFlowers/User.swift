@@ -25,13 +25,13 @@ class User: NSObject, NSCoding {
     func save() {
         let data = NSKeyedArchiver.archivedDataWithRootObject(self)
         let userDefaults = NSUserDefaults.standardUserDefaults()
-        userDefaults.setObject(data, forKey: K.UserDefaultKey.Login)
+        userDefaults.setObject(data, forKey: K.UserDefaultsKey.Login)
         userDefaults.synchronize()
     }
     
     func logOut() {
         let userDefaults = NSUserDefaults.standardUserDefaults()
-        userDefaults.removeObjectForKey(K.UserDefaultKey.Login)
+        userDefaults.removeObjectForKey(K.UserDefaultsKey.Login)
         userDefaults.synchronize()
     }
     
@@ -39,7 +39,7 @@ class User: NSObject, NSCoding {
         var user: User?
         let userDefaults = NSUserDefaults.standardUserDefaults()
         
-        if let data = userDefaults.objectForKey(K.UserDefaultKey.Login) as? NSData {
+        if let data = userDefaults.objectForKey(K.UserDefaultsKey.Login) as? NSData {
            user =  NSKeyedUnarchiver.unarchiveObjectWithData(data) as? User
         }
         

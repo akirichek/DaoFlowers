@@ -82,6 +82,7 @@
 
 /* Begin PBXFileReference section */
 		41BF2CE2A460955924CE8330 /* Pods-DaoFlowers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DaoFlowers.release.xcconfig"; path = "Pods/Target Support Files/Pods-DaoFlowers/Pods-DaoFlowers.release.xcconfig"; sourceTree = "<group>"; };
+		821327621DC7E46C006E5E8B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		822C1ED21DBE375600A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietyDetailsGeneralInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		822C1ED41DBE37A500A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VarietyDetailsGeneralInfoCollectionViewCell.xib; sourceTree = "<group>"; };
 		82457AC41DAEAA5900D87B21 /* DaoFlowers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DaoFlowers.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -684,6 +685,7 @@
 				82C0598D1DC68E5F00F061E6 /* Base */,
 				82C0598F1DC68E8E00F061E6 /* es */,
 				82C059901DC68E9000F061E6 /* ru */,
+				821327621DC7E46C006E5E8B /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

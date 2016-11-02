@@ -11,6 +11,7 @@ import UIKit
 class VarietyDetailsPlantationsGrowersView: UIView {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var unavailableContentContainerView: UIView!
     
     var spinner = RBHUD()
     var plantations: [Plantation]? {
@@ -30,7 +31,8 @@ class VarietyDetailsPlantationsGrowersView: UIView {
         super.layoutSubviews()
         
         if self.plantations == nil {
-            self.spinner.showLoader(self, withTitle: nil, withSubTitle: nil, withProgress: true)
+            self.tableView.hidden = true
+            //self.spinner.showLoader(self, withTitle: nil, withSubTitle: nil, withProgress: true)
         }
     }
     
@@ -41,7 +43,7 @@ class VarietyDetailsPlantationsGrowersView: UIView {
         if self.plantations == nil {
             self.setNeedsLayout()
         } else {
-            self.spinner.hideLoader()
+            //self.spinner.hideLoader()
             numberOfRows = self.plantations!.count
         }
         return numberOfRows

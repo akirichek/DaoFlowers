@@ -22,8 +22,8 @@ class VarietyDetailsGeneralInfoView: UIView, UICollectionViewDataSource, UIColle
     @IBOutlet weak var possibleLengthLabel: UILabel!
     @IBOutlet weak var vaseLifeLabel: UILabel!
     @IBOutlet weak var breederLabel: UILabel!
-    @IBOutlet weak var collectionContainerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var collectionContainerView: UIView!
+    @IBOutlet weak var linkImageView: UIImageView!
     
     var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
     var variety: Variety? {
@@ -61,14 +61,29 @@ class VarietyDetailsGeneralInfoView: UIView, UICollectionViewDataSource, UIColle
         
         if let imageUrl = self.variety?.imageUrl {
             self.imageView.af_setImageWithURL(NSURL(string: imageUrl)!)
+        } else {
+            self.imageView.image = UIImage(named: "img_def_flower_rose")
         }
     
         self.collectionView.reloadData()
         
         let contentSizeHeight = self.collectionView.collectionViewLayout.collectionViewContentSize().height + self.collectionContainerView.frame.origin.y
+        print(contentSizeHeight, self.collectionView.collectionViewLayout.collectionViewContentSize().height, collectionContainerView.frame.origin.y, self.scrollView.frame)
+        var collectionContainerViewFrame = self.collectionContainerView.frame
+        collectionContainerViewFrame.size.height = self.collectionView.collectionViewLayout.collectionViewContentSize().height
+        self.collectionContainerView.frame = collectionContainerViewFrame
         
-        self.collectionContainerViewHeightConstraint.constant = self.collectionView.collectionViewLayout.collectionViewContentSize().height
+        self.linkImageView.center = CGPointMake(self.breederLabel.frame.origin.x + self.breederLabel.frame.size.width + 7, self.linkImageView.center.y)
+//        self.collectionContainerViewHeightConstraint.constant = self.collectionView.collectionViewLayout.collectionViewContentSize().height
         self.scrollView.contentSize = CGSizeMake(0, contentSizeHeight)
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func breederLinkClicked(sender: UIButton) {
+        if let url = self.variety?.breeder?.url {
+            UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+        }
     }
     
     // MARK: UICollectionViewDataSource

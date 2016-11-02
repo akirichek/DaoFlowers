@@ -32,10 +32,10 @@
                                 </variation>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CAk-tg-Kaq" userLabel="Into Conteiner View">
-                                <rect key="frame" x="55" y="2.5" width="282" height="51"/>
+                                <rect key="frame" x="55" y="2" width="246.5" height="51"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="natbeaty" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2L-HN-qNE">
-                                        <rect key="frame" x="0.0" y="0.0" width="282" height="25.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="246.5" height="25.5"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.49019607840000001" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -44,7 +44,7 @@
                                         </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="kate flowers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GoM-dP-0tW">
-                                        <rect key="frame" x="0.0" y="25" width="282" height="25.5"/>
+                                        <rect key="frame" x="0.0" y="25" width="246.5" height="25.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.49019607840000001" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -65,11 +65,11 @@
                                     <constraint firstAttribute="bottom" secondItem="GoM-dP-0tW" secondAttribute="bottom" id="wrD-eK-ipt"/>
                                 </constraints>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vib-O3-J6g" userLabel="Image Container View">
-                                <rect key="frame" x="337" y="0.0" width="54.5" height="54.5"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vib-O3-J6g" userLabel="Image Container View">
+                                <rect key="frame" x="301.5" y="0.0" width="90" height="54.5"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pJS-g1-5ic">
-                                        <rect key="frame" x="0.0" y="0.0" width="54.5" height="54.5"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pJS-g1-5ic">
+                                        <rect key="frame" x="0.0" y="0.0" width="90" height="54.5"/>
                                         <variation key="widthClass=compact" fixedFrame="YES">
                                             <rect key="frame" x="268" y="0.0" width="124" height="43"/>
                                         </variation>
@@ -77,7 +77,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="Vib-O3-J6g" secondAttribute="height" multiplier="1:1" id="8gp-dA-nrR"/>
+                                    <constraint firstAttribute="width" constant="90" id="8wA-YO-QMf"/>
                                     <constraint firstItem="pJS-g1-5ic" firstAttribute="top" secondItem="Vib-O3-J6g" secondAttribute="top" id="EB4-mJ-72e"/>
                                     <constraint firstAttribute="bottom" secondItem="pJS-g1-5ic" secondAttribute="bottom" id="T7x-vH-Jqa"/>
                                     <constraint firstItem="pJS-g1-5ic" firstAttribute="leading" secondItem="Vib-O3-J6g" secondAttribute="leading" id="cf9-Ko-o0C"/>
@@ -87,14 +87,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Vib-O3-J6g" secondAttribute="trailing" id="4YD-sU-2be"/>
+                            <constraint firstItem="Vib-O3-J6g" firstAttribute="trailing" secondItem="KjT-Hb-yqh" secondAttribute="trailing" id="4YD-sU-2be"/>
                             <constraint firstItem="sdU-iE-65K" firstAttribute="leading" secondItem="KjT-Hb-yqh" secondAttribute="leading" id="5fx-nD-eNR"/>
                             <constraint firstItem="Vib-O3-J6g" firstAttribute="leading" secondItem="CAk-tg-Kaq" secondAttribute="trailing" id="GHy-Xl-8Ia"/>
                             <constraint firstItem="CAk-tg-Kaq" firstAttribute="bottom" secondItem="KjT-Hb-yqh" secondAttribute="bottom" multiplier="0.97" id="Pwv-X4-t8H"/>
                             <constraint firstItem="CAk-tg-Kaq" firstAttribute="leading" secondItem="sdU-iE-65K" secondAttribute="trailing" id="bDd-Xg-Tg2"/>
                             <constraint firstItem="Vib-O3-J6g" firstAttribute="top" secondItem="KjT-Hb-yqh" secondAttribute="top" id="gwF-DW-Xby"/>
                             <constraint firstItem="sdU-iE-65K" firstAttribute="top" secondItem="KjT-Hb-yqh" secondAttribute="top" id="iFP-Ob-ReD"/>
-                            <constraint firstAttribute="bottom" secondItem="Vib-O3-J6g" secondAttribute="bottom" id="o8v-6Z-8vP"/>
+                            <constraint firstItem="Vib-O3-J6g" firstAttribute="bottom" secondItem="KjT-Hb-yqh" secondAttribute="bottom" id="o8v-6Z-8vP"/>
                             <constraint firstAttribute="bottom" secondItem="sdU-iE-65K" secondAttribute="bottom" id="sJ2-Yz-oAS"/>
                             <constraint firstItem="CAk-tg-Kaq" firstAttribute="height" secondItem="KjT-Hb-yqh" secondAttribute="height" multiplier="0.94" id="vy4-Ow-Lmb"/>
                         </constraints>

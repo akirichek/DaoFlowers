@@ -32,7 +32,11 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         ApiManager.loginWithUsername(self.usernameTextField.text!, andPassword: self.passwordTextField.text!) { (user, error) in
             RBHUD.sharedInstance.hideLoader()
             if let user = user {
+                let userDefaults = NSUserDefaults.standardUserDefaults()
+                userDefaults.setObject(Language.Russian.rawValue, forKey: K.UserDefaultsKey.Language)
+                userDefaults.synchronize()
                 user.save()
+                self.navigationController!.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
             } else {
                 Utils.showError(error!, inViewController: self)
             }

@@ -10,23 +10,57 @@ import UIKit
 
 class SettingsViewController: BaseViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     @IBOutlet weak var languageTextField: UITextField!
+    @IBOutlet weak var arrowImageView: UIImageView!
+    @IBOutlet weak var languageLabel: UILabel!
+    @IBOutlet weak var flagImageView: UIImageView!
+    @IBOutlet weak var languageValueLabel: UILabel!
     
+    var languagePickerView: UIPickerView!
     var languages: [Language] = [Language.English, Language.Russian, Language.Spanish]
+    var selectedLanguage: Language! {
+        didSet {
+            populateView()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        createPickerViewForTextField(self.languageTextField)
+        self.languagePickerView = createPickerViewForTextField(self.languageTextField)
+        
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        if let selectedLanguage = userDefaults.stringForKey(K.UserDefaultsKey.Language) {
+            self.selectedLanguage = Language(rawValue:selectedLanguage)!
+        } else {
+            self.selectedLanguage = Language.English
+        }
     }
-
 
     @IBAction func languageButtonClicked(sender: UIButton) {
         languageTextField.becomeFirstResponder()
+        let row = self.languages.indexOf(self.selectedLanguage)!
+        self.languagePickerView.selectRow(row, inComponent: 0, animated: false)
+        self.arrowImageView.image = UIImage(named: "up_arrow")
+        
     }
     
     // MARK: - Private Methods
     
+    func populateView() {
+        self.languageLabel.text = CustomLocalisedString("Language", comment: "")
+        self.title = CustomLocalisedString("Settings", comment: "")
+        self.languageValueLabel.text = self.selectedLanguage.rawValue
+        self.flagImageView.image = UIImage(named: self.selectedLanguage.flagImageName())
+    }
+    
     func doneButtonClicked(sender: UIBarButtonItem) {
         self.languageTextField.resignFirstResponder()
+        self.arrowImageView.image = UIImage(named: "down_arrow")
+        let row = self.languagePickerView.selectedRowInComponent(0)
+        let selectedLanguage = languages[row]
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        userDefaults.setObject(selectedLanguage.rawValue, forKey: K.UserDefaultsKey.Language)
+        userDefaults.synchronize()
+        self.selectedLanguage = selectedLanguage
     }
     
     func createPickerViewForTextField(textField: UITextField) -> UIPickerView {
@@ -66,6 +100,6 @@ class SettingsViewController: BaseViewController, UIPickerViewDataSource, UIPick
     }
     
     func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 100
+        return 80
     }
 }

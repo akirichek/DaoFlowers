@@ -158,11 +158,13 @@ class VarietyDetailsViewController: UIViewController, PageViewerDataSource, Vari
                 self.fetchGeneralInfo()
             }
         } else if let varietyDetailsPlantationsGrowersView = pageView as? VarietyDetailsPlantationsGrowersView {
-            if let plantations = self.plantationsGrowers {
-                varietyDetailsPlantationsGrowersView.plantations = plantations
-            } else {
-                varietyDetailsPlantationsGrowersView.plantations = []
-                self.fetchPlantationsGrowers()
+            if User.currentUser() != nil {
+                if let plantations = self.plantationsGrowers {
+                    varietyDetailsPlantationsGrowersView.plantations = plantations
+                } else {
+                    varietyDetailsPlantationsGrowersView.plantations = []
+                    self.fetchPlantationsGrowers()
+                }
             }
         } else if let similarVarietiesView = pageView as? VarietyDetailsSimilarVarietiesView {
             similarVarietiesView.delegate = self

@@ -28,9 +28,17 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
         menuViewController.delegate = self
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        let menuViewController = self.childViewControllers.first as! MenuViewController
+        menuViewController.reloadData()
+        self.animateMenu(false)
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Flowers, sender: self)
+        self.animateMenu(false)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -126,7 +134,7 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
             self.animateMenu(false)
         case .Login:
             self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Login, sender: self)
-            self.animateMenu(false)
+            //self.animateMenu(false)
         case .Settings:
             self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Settings, sender: self)
             self.animateMenu(false)
@@ -142,6 +150,8 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
     // MARK: MenuButtonHandler
     
     func menuButtonClicked() {
+        let menuViewController = self.childViewControllers.first as! MenuViewController
+        menuViewController.reloadData()
         self.animateMenu(false)
     }
 }

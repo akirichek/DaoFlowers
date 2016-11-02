@@ -9,8 +9,14 @@
 import Foundation
 
 class LanguageManager: NSObject {
-    func getTranslationForKey(key: String) -> String {
-        let languageCode = NSUserDefaults.standardUserDefaults().stringForKey("")
+    
+    static func getTranslationForKey(key: String) -> String {
+        var languageCode = "Base"
+        if let languageRawValue = NSUserDefaults.standardUserDefaults().stringForKey(K.UserDefaultsKey.Language) {
+            let language = Language(rawValue: languageRawValue)!
+            languageCode = language.code()
+        }
+        
         let bundlePath = NSBundle.mainBundle().pathForResource(languageCode, ofType: "lproj")!
         let languageBundle = NSBundle(path: bundlePath)
         

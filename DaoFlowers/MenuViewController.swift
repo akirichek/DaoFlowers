@@ -20,6 +20,11 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.reloadData()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+    
     func reloadData() {
         self.menuItems = []
         if User.currentUser() != nil {
@@ -56,11 +61,18 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: UITableViewCell
         if indexPath.row == 0 {
-            cell = tableView.dequeueReusableCellWithIdentifier("MenuHeaderTableViewCellIdentifier", forIndexPath: indexPath)
+            let headerCell = tableView.dequeueReusableCellWithIdentifier("MenuHeaderTableViewCellIdentifier", forIndexPath: indexPath) as! MenuTableViewCell
+            if let currentUser = User.currentUser() {
+                headerCell.customerLabel.text = currentUser.name
+            } else {
+                headerCell.customerLabel.text = "Guest"
+            }
+            
+            cell = headerCell
         } else {
             let sectionCell = tableView.dequeueReusableCellWithIdentifier("MenuTableViewCellIdentifier", forIndexPath: indexPath) as! MenuTableViewCell
             let menuItem = self.menuItems[indexPath.row - 1]
-            sectionCell.sectionLabel.text = menuItem["name"]
+            sectionCell.sectionLabel.text = CustomLocalisedString(menuItem["name"]!, comment: "")
             sectionCell.iconImageView?.image = UIImage(named: menuItem["image"]!)
             cell = sectionCell
         }

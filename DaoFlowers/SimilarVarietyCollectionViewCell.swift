@@ -24,6 +24,8 @@ class SimilarVarietyCollectionViewCell: UICollectionViewCell {
         imageView.image = nil
         if let imageUrl = variety.imageUrl {
             imageView.af_setImageWithURL(NSURL(string: imageUrl)!)
+        } else {
+            imageView.image = UIImage(named: "img_def_flower_rose")
         }
     }
 }

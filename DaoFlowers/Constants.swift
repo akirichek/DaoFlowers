@@ -44,8 +44,9 @@ struct K {
         static let DarkGrey = UIColor(red: 117/255, green: 117/255, blue: 117/255, alpha: 1)
     }
     
-    struct UserDefaultKey {
-        static let Login = "LoginUserDefaultKey"
+    struct UserDefaultsKey {
+        static let Login = "LoginUserDefaultsKey"
+        static let Language = "LanguageUserDefaultsKey"
     }
 }
 
@@ -87,8 +88,22 @@ enum Language: String {
         
         return flagImageName
     }
+    
+    func code() -> String {
+        var flagImageName: String!
+        switch self {
+        case .English:
+            flagImageName = "en"
+        case .Russian:
+            flagImageName = "ru"
+        case .Spanish:
+            flagImageName = "es"
+        }
+        
+        return flagImageName
+    }
 }
 
-func CustomLocalisedString() {
-    
+func CustomLocalisedString(key: String, comment: String) -> String {
+    return LanguageManager.getTranslationForKey(key)
 }

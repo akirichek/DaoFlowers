@@ -5,3 +5,16 @@
   Created by Artem Kirichek on 10/30/16.
   Copyright © 2016 Dao Flowers. All rights reserved.
 */
+
+"Language" = "Язык";
+"User Profile" = "Профиль Пользователя";
+"Varieties" = "Сорта";
+"Plantations" = "Плантации";
+"Documents" = "Документы";
+"Claims" = "Рекламация";
+"Current Orders" = "Текущие заказы";
+"Contacts" = "Контакты";
+"Settings" = "Настройки";
+"Log in" = "Войти";
+"Log out" = "Выйти";
+"About" = "О приложении";
