@@ -16,7 +16,6 @@ class ColorsViewController: BaseViewController, PageViewerDataSource, ColorsPage
     var selectedFlower: Flower!
     var colors: [Int: [Color]] = [:]
     var selectedColor: Color?
-    var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
     var needsSelectPageView: Bool = true
     
     // MARK - Override Methods
@@ -24,12 +23,12 @@ class ColorsViewController: BaseViewController, PageViewerDataSource, ColorsPage
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.pageViewerContainerView.frame = self.contentViewFrame()
         let pageViewer = NSBundle.mainBundle().loadNibNamed("PageViewer", owner: self, options: nil).first as! PageViewer
+        pageViewer.frame = self.pageViewerContainerView.bounds
         pageViewer.dataSource = self
-        pageViewer.translatesAutoresizingMaskIntoConstraints = false
         self.pageViewerContainerView.addSubview(pageViewer)
         self.pageViewer = pageViewer
-        self.adjustConstraintsForItem(self.pageViewer, toItem: self.pageViewerContainerView)
     }
     
     override func viewDidLayoutSubviews() {
@@ -46,6 +45,8 @@ class ColorsViewController: BaseViewController, PageViewerDataSource, ColorsPage
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         self.viewWillTransitionToSize = size
+        self.pageViewerContainerView.frame = self.contentViewFrame()
+        
         if let page = self.pageViewer.pageAtIndex(self.pageViewer.indexOfCurrentPage) as? ColorsPageView {
             page.viewWillTransitionToSize = size
             page.reloadData()

@@ -23,8 +23,8 @@ class VarietyDetailsPlantationsGrowersView: UIView {
     // MARK: Override Methods
     
     override func awakeFromNib() {
-        let nib = UINib(nibName:"VarietyDetailsPlantationsGrowerTableViewCell", bundle: nil)
-        self.tableView.registerNib(nib, forCellReuseIdentifier: "VarietyDetailsPlantationsGrowerTableViewCellIdentifier")
+        let nib = UINib(nibName:"PlantationTableViewCell", bundle: nil)
+        self.tableView.registerNib(nib, forCellReuseIdentifier: "PlantationTableViewCellIdentifier")
     }
     
     override func layoutSubviews() {
@@ -50,8 +50,8 @@ class VarietyDetailsPlantationsGrowersView: UIView {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("VarietyDetailsPlantationsGrowerTableViewCellIdentifier",
-                                                               forIndexPath: indexPath) as! VarietyDetailsPlantationsGrowerTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("PlantationTableViewCellIdentifier",
+                                                               forIndexPath: indexPath) as! PlantationTableViewCell
         cell.plantation  = self.plantations![indexPath.row]
         cell.numberLabel.text = String(indexPath.row + 1)
         

@@ -205,7 +205,7 @@ class ApiManager: NSObject {
                 var colors: [Color] = []
                 var breeders: [Breeder] = []
                 if let json = response.result.value {
-                    print("JSON: \(json)")
+                    //print("JSON: \(json)")
                     for flowerDictionary in json["flowerTypes"] as! [[String: AnyObject]] {
                         flowers.append(Flower(dictionary: flowerDictionary))
                     }
@@ -222,6 +222,51 @@ class ApiManager: NSObject {
             } else {
                 print("Error: \(response.result.error)")
                 completion(searchParams: nil, error: response.result.error)
+            }
+        }
+    }
+    
+    static func fetchCountries(completion: (countries: [Country]?, error: NSError?) -> ()) {
+        let url = K.Api.BaseUrl + K.Api.CountriesPath
+        Alamofire.request(.GET, url).responseJSON { response in
+            if response.result.isSuccess {
+                var countries: [Country] = []
+                if let json = response.result.value {
+                    //print("JSON: \(json)")
+                    for dictionary in json as! [[String: AnyObject]] {
+                        let country = Country(dictionary: dictionary)
+                        countries.append(country)
+                    }
+                }
+                
+                completion(countries: countries, error: nil)
+            } else {
+                print("Error: \(response.result.error)")
+                completion(countries: nil, error: response.result.error)
+            }
+        }
+    }
+    
+    static func fetchPlantationsByCountry(country: Country, completion: (plantations: [Plantation]?, error: NSError?) -> ()) {
+        let parameters: [String: AnyObject] = [
+            "country_id": country.id
+        ]
+        let url = K.Api.BaseUrl + K.Api.PlantationsPath
+        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+            if response.result.isSuccess {
+                var plantations: [Plantation] = []
+                if let json = response.result.value {
+                    print("JSON: \(json)")
+                    for dictionary in json as! [[String: AnyObject]] {
+                        let plantation = Plantation(dictionary: dictionary)
+                        plantations.append(plantation)
+                    }
+                }
+                
+                completion(plantations: plantations, error: nil)
+            } else {
+                print("Error: \(response.result.error)")
+                completion(plantations: nil, error: response.result.error)
             }
         }
     }

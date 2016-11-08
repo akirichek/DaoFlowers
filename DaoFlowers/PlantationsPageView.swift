@@ -1,17 +1,16 @@
 //
-//  VarietiesPageView.swift
+//  PlantationsPageView.swift
 //  DaoFlowers
 //
-//  Created by Artem Kirichek on 10/20/16.
+//  Created by Artem Kirichek on 11/6/16.
 //  Copyright © 2016 Dao Flowers. All rights reserved.
 //
 
 import UIKit
 
-class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
+class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var collectionViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var filterContainerView: UIView!
     @IBOutlet weak var assortmentContainerView: UIView!
     @IBOutlet weak var searchContainerView: UIView!
@@ -19,13 +18,13 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
     @IBOutlet weak var searchTextField: UITextField!
     
     var spinner = RBHUD()
-    weak var delegate: VarietiesPageViewDelegate?
-    var assortmentTypes: [VarietiesAssortmentType] = [.ByName, .ByPercentsOfPurchase, .BoughtLastMonth]
+    weak var delegate: PlantationsPageViewDelegate?
+    var assortmentTypes: [PlantationsAssortmentType] = [.ByName, .ByActivePlantations, .ByPercentsOfPurchase,]
     var assortmentPickerView: UIPickerView!
-    var state: VarietiesPageViewState!
+    var state: PlantationsPageViewState!
     var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
     
-    var filteredVarieties: [Variety]? {
+    var filteredPlantations: [Plantation]? {
         didSet {
             self.collectionView.reloadData()
         }
@@ -42,14 +41,14 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
         self.assortmentTextField.text = state.assortment.rawValue
         self.searchTextField.text = state.searchString
         self.collectionView.contentOffset = CGPointZero
-        self.filterVarieties()
+        self.filterPlantations()
     }
     
     // MARK: - Override Methods
     
     override func awakeFromNib() {
-        let nib = UINib(nibName:"VarietyCollectionViewCell", bundle: nil)
-        self.collectionView.registerNib(nib, forCellWithReuseIdentifier: "VarietyCollectionViewCellIdentifier")
+        let nib = UINib(nibName:"PlantationCollectionViewCell", bundle: nil)
+        self.collectionView.registerNib(nib, forCellWithReuseIdentifier: "PlantationCollectionViewCellIdentifier")
         assortmentContainerView.layer.cornerRadius = 5
         searchContainerView.layer.cornerRadius = 5
         self.assortmentPickerView = self.createPickerViewForTextField(self.assortmentTextField)
@@ -58,7 +57,7 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        if self.filteredVarieties == nil {
+        if self.filteredPlantations == nil {
             self.spinner.showLoader(self, withTitle: nil, withSubTitle: nil, withProgress: true)
         }
     }
@@ -88,26 +87,32 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
     }
     
     func showFilterContainerView() {
+        var collectionViewFrame = collectionView.frame
+        collectionViewFrame.origin.y = 80
+        collectionViewFrame.size.height = 374
+        collectionView.frame = collectionViewFrame
         filterContainerView.hidden = false
-        collectionViewTopConstraint.constant = 80
     }
     
     func hideFilterContainerView() {
-        collectionViewTopConstraint.constant = 0
+        var collectionViewFrame = collectionView.frame
+        collectionViewFrame.origin.y = 0
+        collectionViewFrame.size.height = 454
+        collectionView.frame = collectionViewFrame
         filterContainerView.hidden = true
     }
     
-    func filterVarieties() {
+    func filterPlantations() {
         let term = state.searchString.lowercaseString
-        var filteredVarieties = state.varieties
-        if filteredVarieties != nil {
+        var filteredPlantations = state.plantations
+        if filteredPlantations != nil {
             if term.characters.count > 0 {
-                filteredVarieties = filteredVarieties!.filter({$0.name.lowercaseString.containsString(term) || $0.abr.lowercaseString.containsString(term)})
+                filteredPlantations = filteredPlantations!.filter({$0.name.lowercaseString.containsString(term)})
             }
-            filteredVarieties = Utils.sortedVarieties(filteredVarieties!, byAssortmentType: state.assortment)
+            filteredPlantations = Utils.sortedPlantations(filteredPlantations!, byAssortmentType: state.assortment)
         }
         
-        self.filteredVarieties = filteredVarieties
+        self.filteredPlantations = filteredPlantations
     }
     
     // MARK: - Private Methods
@@ -118,28 +123,29 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
         self.assortmentTextField.text = assortmentType.rawValue
         self.assortmentTextField.resignFirstResponder()
         self.state.assortment = assortmentType
-        if let filteredVarieties = self.filteredVarieties {
-            self.filteredVarieties = Utils.sortedVarieties(filteredVarieties, byAssortmentType: assortmentType)
+        if let filteredPlantations = self.filteredPlantations {
+            self.filteredPlantations = Utils.sortedPlantations(filteredPlantations, byAssortmentType: assortmentType)
         }
-        self.delegate?.varietiesPageView(self, didChangeState: state)
+        self.delegate?.plantationsPageView(self, didChangeState: state)
     }
     
     // MARK: - UICollectionViewDataSource
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var numberOfRows = 0
-        if let filteredVarieties = self.filteredVarieties {
+        if let filteredPlantations = self.filteredPlantations {
             self.spinner.hideLoader()
-            numberOfRows = filteredVarieties.count
+            numberOfRows = filteredPlantations.count
         } else {
             self.setNeedsLayout()
         }
+    
         return numberOfRows
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("VarietyCollectionViewCellIdentifier", forIndexPath: indexPath) as! VarietyCollectionViewCell
-        cell.variety  = self.filteredVarieties![indexPath.row]
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PlantationCollectionViewCellIdentifier", forIndexPath: indexPath) as! PlantationCollectionViewCell
+        cell.plantation = self.filteredPlantations![indexPath.row]
         cell.numberLabel.text = String(indexPath.row + 1)
         
         return cell
@@ -148,7 +154,8 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
     // MARK: - UICollectionViewDelegate
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.delegate?.varietiesPageView(self, didSelectVariety: self.filteredVarieties![indexPath.row])
+//        self.delegate?.plantationsPageView(
+//        self.delegate?.varietiesPageView(self, didSelectVariety: self.filteredVarieties![indexPath.row])
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
@@ -190,8 +197,8 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
             var term = NSString(string: searchTextField.text!)
             term = term.stringByReplacingCharactersInRange(range, withString: string)
             state.searchString = term as String
-            self.filterVarieties()
-            self.delegate?.varietiesPageView(self, didChangeState: state)
+            self.filterPlantations()
+            self.delegate?.plantationsPageView(self, didChangeState: state)
         }
         
         return true
@@ -205,16 +212,16 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
     }
 }
 
-protocol VarietiesPageViewDelegate: NSObjectProtocol {
-    func varietiesPageView(varietiesPageView: VarietiesPageView, didSelectVariety variety: Variety)
-    func varietiesPageView(varietiesPageView: VarietiesPageView, didChangeState state: VarietiesPageViewState)
+protocol PlantationsPageViewDelegate: NSObjectProtocol {
+    func plantationsPageView(plantationsPageView: PlantationsPageView, didSelectPlantation plantation: Plantation)
+    func plantationsPageView(plantationsPageView: PlantationsPageView, didChangeState state: PlantationsPageViewState)
 }
 
-struct VarietiesPageViewState {
+struct PlantationsPageViewState {
     var filter: Bool
-    var assortment: VarietiesAssortmentType
+    var assortment: PlantationsAssortmentType
     var searchString: String
-    var varieties: [Variety]?
-    var color: Color
+    var plantations: [Plantation]?
+    var country: Country
     var index: Int
 }

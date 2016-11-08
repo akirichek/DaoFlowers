@@ -49,6 +49,10 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         self.login()
     }
     
+    @IBAction func backButtonClicked(sender: UIBarButtonItem) {
+        self.navigationController!.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     // MARK: UITextFieldDelegate
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {

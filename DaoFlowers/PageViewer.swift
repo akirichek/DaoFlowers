@@ -20,7 +20,7 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
     var dataSource: PageViewerDataSource!
     var countOfPages: Int {
         get {
-            return Int(contentCollectionView.contentSize.width / self.contentCollectionViewSize().width)
+            return self.dataSource.pageViewerNumberOfPages(self)
         }
     }
     var currentContentOffsetX: CGFloat = 0.0
@@ -148,6 +148,7 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if scrollView == self.contentCollectionView {
             let (indexOfPreviousPage, indexOfNextPage) = self.indexOfPreviousAndNextPage()
+            
             if (indexOfNextPage < self.countOfPages &&
                 indexOfPreviousPage < self.countOfPages &&
                 indexOfNextPage >= 0 &&
@@ -162,7 +163,7 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
                 let deltaContentOffsetX = (attributesOfNextPage.center.x - attributesOfPreviousPage.center.x) * selecetedMultiplierOfPage
                 let contentOffsetX = (attributesOfPreviousPage.center.x - self.bounds.size.width / 2) + deltaContentOffsetX
                 
-                let maximumContentOffset = self.headerCollectionView.contentSize.width - self.headerCollectionView.bounds.size.width
+                let maximumContentOffset = self.headerCollectionView.collectionViewLayout.collectionViewContentSize().width - self.headerCollectionView.bounds.size.width
                 
                 if 0 > contentOffsetX {
                     self.headerCollectionView.contentOffset = CGPointZero

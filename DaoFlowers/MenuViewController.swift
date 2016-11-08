@@ -93,7 +93,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let heightForRow: CGFloat
         
         if indexPath.row == 0 {
-            heightForRow = round(max(screenSize.width, screenSize.height) * 0.33)
+            heightForRow = 200
         } else {
             heightForRow = round(max(screenSize.width, screenSize.height) / 10)
         }

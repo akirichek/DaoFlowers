@@ -20,12 +20,15 @@ struct K {
         static let GeneralInfoPath = "/catalog/flowers/details/general"
         static let SearchFlowersPath = "/catalog/search/flowers"
         static let FlowersSearchParametersPath = "/catalog/search/flowers/params"
+        static let CountriesPath = "/catalog/countries"
+        static let PlantationsPath = "/catalog/plantations"
     }
     
     struct Storyboard {
         struct SegueIdentifier {
             static let Flowers = "FlowersViewControllerSegueIdentifier"
             static let Plantations = "PlantationsViewControllerSegueIdentifier"
+            static let Countries = "CountriesViewControllerSegueIdentifier"
             static let Colors = "ColorsViewControllerSegueIdentifier"
             static let Varieties = "VarietiesViewControllerSegueIdentifier"
             static let VarietyDetails = "VarietyDetailsViewControllerSegueIdentifier"
@@ -68,6 +71,12 @@ enum VarietiesAssortmentType: String {
     case ByName = "by name"
     case ByPercentsOfPurchase = "by % of purchase"
     case BoughtLastMonth = "bought last month, FB"
+}
+
+enum PlantationsAssortmentType: String {
+    case ByName = "by name"
+    case ByActivePlantations = "active plantations"
+    case ByPercentsOfPurchase = "by % of purchase"
 }
 
 enum Language: String {

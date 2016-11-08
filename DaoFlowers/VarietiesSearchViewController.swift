@@ -8,15 +8,15 @@
 
 import UIKit
 
-class VarietiesSearchViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate {
+class VarietiesSearchViewController: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var additionalParametersArrowImageView: UIImageView!
     @IBOutlet weak var additionalParametersContainerView: UIView!
     @IBOutlet weak var additionalParametersOverlayView: UIView!
+    @IBOutlet weak var containerView: UIView!
 
-    var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
     var searchResults: [Variety] = []
     var flowersSearchParams: [Flower]?
     var colorsSearchParams: [Color]?
@@ -26,6 +26,7 @@ class VarietiesSearchViewController: UIViewController, UICollectionViewDataSourc
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.containerView.frame = self.contentViewFrame()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -39,17 +40,11 @@ class VarietiesSearchViewController: UIViewController, UICollectionViewDataSourc
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         self.viewWillTransitionToSize = size
+        self.containerView.frame = self.contentViewFrame()
         self.collectionView.reloadData()
         let additionalParametersView = self.additionalParametersContainerView.subviews.first as? VarietiesSearchAdditionalParametersView
         additionalParametersView?.viewWillTransitionToSize = size
         additionalParametersView?.reloadView()
-        
-        let screenSize = self.viewWillTransitionToSize
-        if screenSize.width < screenSize.height {
-            additionalParametersOverlayView.constraintByIdentifier("AdditionalParametersContainerViewHeightConstraint")!.changeMultiplier(0.9)
-        } else {
-            additionalParametersOverlayView.constraintByIdentifier("AdditionalParametersContainerViewHeightConstraint")!.changeMultiplier(1)
-        }
     }
     
     // MARK: - Private Methods

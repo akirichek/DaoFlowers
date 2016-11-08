@@ -10,6 +10,7 @@ import UIKit
 
 class BaseViewController: UIViewController {
     var menuButtonHandler: MenuButtonHandler!
+    var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
     
     @IBAction func menuButtonClicked(sender: UIBarButtonItem) {
         self.menuButtonHandler.menuButtonClicked()
@@ -45,5 +46,17 @@ class BaseViewController: UIViewController {
                                                   multiplier: 1,
                                                   constant: 0)
         NSLayoutConstraint.activateConstraints([leadingConstraint, trailingConstraint, topConstraint, bottomConstraint])
+    }
+    
+    
+    
+    func contentViewFrame() -> CGRect {
+        let screenSize: CGSize = self.viewWillTransitionToSize
+        var frame = CGRectMake(0, 64, 320, 504)
+        if screenSize.width == 568 {
+            frame = CGRectMake(0, 32, 568, 288)
+        }
+        
+        return frame
     }
 }

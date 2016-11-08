@@ -12,7 +12,7 @@ class VarietyDetailsSimilarVarietiesView: UIView, UICollectionViewDataSource, UI
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var delegate: VarietyDetailsSimilarVarietiesViewDelegate?
+    weak var delegate: VarietyDetailsSimilarVarietiesViewDelegate?
     var spinner = RBHUD()
     var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
     var varieties: [Variety]? {

@@ -12,7 +12,7 @@ class ColorsPageView: UIView, UICollectionViewDataSource, UICollectionViewDelega
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var delegate: ColorsPageViewDelegate?
+    weak var delegate: ColorsPageViewDelegate?
     var spinner = RBHUD()
     var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
     var colors: [Color]? {

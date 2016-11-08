@@ -15,12 +15,7 @@ class Utils: NSObject {
     }
     
     static func showErrorWithMessage(message: String, inViewController viewController: UIViewController) {
-        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .Alert)
-        let okAlertAction = UIAlertAction(title: "OK", style: .Default) { alertAction in
-            viewController.dismissViewControllerAnimated(true, completion: nil)
-        }
-        alertController.addAction(okAlertAction)
-        viewController.presentViewController(alertController, animated: true, completion: nil)
+        UIAlertView(title: "Error", message: message, delegate: nil, cancelButtonTitle: "OK").show()
     }
     
     static func sortedVarietiesByName(varieties: [Variety]) -> [Variety] {
@@ -70,6 +65,42 @@ class Utils: NSObject {
         case .BoughtLastMonth:
             array = sortedVarietiesByBoughtLastMonth(varieties)
         }
+        
+        return array
+    }
+    
+    static func sortedPlantations(plantations: [Plantation], byAssortmentType assortmentType: PlantationsAssortmentType) -> [Plantation] {
+        var array: [Plantation]!
+        switch assortmentType {
+        case .ByName:
+            array = sortedPlantationsByName(plantations)
+        case .ByActivePlantations:
+            array = sortedPlantationsByActivePlantations(plantations)
+        case .ByPercentsOfPurchase:
+            array = sortedPlantationsByPercentsOfPurchase(plantations)
+        }
+        
+        return array
+    }
+    
+    static func sortedPlantationsByName(plantations: [Plantation]) -> [Plantation] {
+        var array = plantations
+        array.sortInPlace({ (obj1, obj2) -> Bool in
+            return obj1.name.lowercaseString < obj2.name.lowercaseString
+        })
+        
+        return array
+    }
+    
+    static func sortedPlantationsByActivePlantations(plantations: [Plantation]) -> [Plantation] {
+        return plantations
+    }
+    
+    static func sortedPlantationsByPercentsOfPurchase(plantations: [Plantation]) -> [Plantation] {
+        var array = plantations
+        array.sortInPlace({ (obj1, obj2) -> Bool in
+            return obj1.fbSum > obj2.fbSum
+        })
         
         return array
     }

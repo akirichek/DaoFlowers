@@ -13,7 +13,6 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
     @IBOutlet weak var menuContainerView: UIView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var hiddenView: UIView!
-    @IBOutlet weak var menuContainerLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var panGestureRecognizer: UIPanGestureRecognizer!
     
     var currentViewController: UIViewController?
@@ -32,13 +31,15 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
         super.viewWillAppear(animated)
         let menuViewController = self.childViewControllers.first as! MenuViewController
         menuViewController.reloadData()
-        self.animateMenu(false)
+        //self.animateMenu(false)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Flowers, sender: self)
-        self.animateMenu(false)
+        if currentViewController == nil {
+            self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Flowers, sender: self)
+        }
+        //self.animateMenu(false)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -55,14 +56,15 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
     func animateMenu(drugged: Bool) {
         self.view.layoutIfNeeded()
         var newConstant: CGFloat;
+        var menuViewFrame = self.menuContainerView.frame
         if drugged {
-            if abs(self.menuContainerLeadingConstraint.constant) >= (self.menuContainerView.frame.width / 2) {
+            if abs(menuViewFrame.origin.x) >= (self.menuContainerView.frame.width / 2) {
                 newConstant = -(self.menuContainerView.bounds.size.width)
             } else {
                 newConstant = 0
             }
         } else {
-            if self.menuContainerLeadingConstraint.constant == 0 {
+            if menuViewFrame.origin.x == 0 {
                 newConstant = -(self.menuContainerView.bounds.size.width)
             } else {
                 newConstant = 0
@@ -70,7 +72,7 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
         }
         
         self.panGestureRecognizer.enabled = !Bool(newConstant)
-        self.menuContainerLeadingConstraint.constant = newConstant
+        menuViewFrame.origin.x = newConstant
         let alpha: CGFloat
         
         if newConstant == 0 {
@@ -81,7 +83,7 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
         
         UIView.animateWithDuration(0.3) {
             self.hiddenView.alpha = alpha
-            self.view.layoutIfNeeded()
+            self.menuContainerView.frame = menuViewFrame
         }
     }
     
@@ -89,9 +91,11 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
         let point: CGPoint = sender.locationInView(self.view)
         if self.previousTouchPoint != nil {
             let deltaX = point.x - self.previousTouchPoint.x
-            if (self.menuContainerLeadingConstraint.constant + deltaX <= 0) {
-                self.hiddenView.alpha = (self.menuContainerView.frame.width + self.menuContainerLeadingConstraint.constant) / self.view.frame.width
-                self.menuContainerLeadingConstraint.constant += deltaX
+            if (self.menuContainerView.frame.origin.x + deltaX <= 0) {
+                self.hiddenView.alpha = (self.menuContainerView.frame.width + self.menuContainerView.frame.origin.x) / self.view.frame.width
+                var menuViewFrame = self.menuContainerView.frame
+                menuViewFrame.origin.x += deltaX
+                self.menuContainerView.frame = menuViewFrame
             }
         }
         
@@ -112,7 +116,7 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
     
     @IBAction func panGestureDidDragging(sender: UIPanGestureRecognizer) {
         let point: CGPoint = sender.locationInView(self.view)
-        if (point.x - self.menuContainerView.frame.width - self.menuContainerLeadingConstraint.constant <= 0) ||
+        if (point.x - self.menuContainerView.frame.width - self.menuContainerView.frame.origin.x <= 0) ||
             self.previousTouchPoint != nil {
             self.dragMenu(sender)
         }
@@ -130,7 +134,7 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
             self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Flowers, sender: self)
             self.animateMenu(false)
         case .Plantations:
-            self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Plantations, sender: self)
+            self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Countries, sender: self)
             self.animateMenu(false)
         case .Login:
             self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Login, sender: self)

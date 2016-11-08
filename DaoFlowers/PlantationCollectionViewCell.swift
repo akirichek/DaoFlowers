@@ -1,14 +1,14 @@
 //
-//  VarietyDetailsPlantationsGrowerTableViewCell.swift
+//  PlantationCollectionViewCell.swift
 //  DaoFlowers
 //
-//  Created by Artem Kirichek on 10/23/16.
+//  Created by Artem Kirichek on 11/6/16.
 //  Copyright © 2016 Dao Flowers. All rights reserved.
 //
 
 import UIKit
 
-class VarietyDetailsPlantationsGrowerTableViewCell: UITableViewCell {
+class PlantationCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var brandLabel: UILabel!
