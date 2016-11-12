@@ -106,32 +106,12 @@ class ApiManager: NSObject {
         }
     }
     
-    static func fetchPlantationsGrowersByVariety(variety: Variety, user: User, completion: (plantations: [Plantation]?, error: NSError?) -> ()) {
-        let url = K.Api.BaseUrl + K.Api.PlantationsGrowersPath + "/\(variety.id)"
-        Alamofire.request(.GET, url, headers:["Authorization": user.token]).responseJSON { response in
-            if response.result.isSuccess {
-                var plantations: [Plantation] = []
-                if let json = response.result.value {
-                    //print("JSON: \(json)")
-                    for dictionary in json as! [[String: AnyObject]] {
-                        let plantation = Plantation(dictionary: dictionary)
-                        plantations.append(plantation)
-                    }
-                }
-                completion(plantations: plantations, error: nil)
-            } else {
-                print("Error: \(response.result.error)")
-                completion(plantations: nil, error: response.result.error)
-            }
-        }
-    }
-    
     static func fetchGeneralInfoForVariety(variety: Variety, completion: (success: Bool, error: NSError?) -> ()) {
         let url = K.Api.BaseUrl + K.Api.GeneralInfoPath + "/\(variety.id)"
         Alamofire.request(.GET, url).responseJSON { response in
             if response.result.isSuccess {
                 if let json = response.result.value {
-                    print("JSON: \(json)")
+                    //print("JSON: \(json)")
                     variety.addGeneralInfoFromDictionary(json as! [String: AnyObject])
                 }
                 completion(success: true, error: nil)
@@ -226,47 +206,27 @@ class ApiManager: NSObject {
         }
     }
     
-    static func fetchCountries(completion: (countries: [Country]?, error: NSError?) -> ()) {
-        let url = K.Api.BaseUrl + K.Api.CountriesPath
-        Alamofire.request(.GET, url).responseJSON { response in
+    static func fetchVarietiesByPlantation(plantation: Plantation,
+                                           user: User,
+                                           completion: (varieties: [Variety]?, error: NSError?) -> ()) {
+        let url = K.Api.BaseUrl + K.Api.PlantationsPath + "/\(plantation.id)"
+        var headers: [String: String] = [:]
+        headers["Authorization"] = user.token
+        Alamofire.request(.GET, url, headers:headers).responseJSON { response in
             if response.result.isSuccess {
-                var countries: [Country] = []
-                if let json = response.result.value {
-                    //print("JSON: \(json)")
-                    for dictionary in json as! [[String: AnyObject]] {
-                        let country = Country(dictionary: dictionary)
-                        countries.append(country)
-                    }
-                }
-                
-                completion(countries: countries, error: nil)
-            } else {
-                print("Error: \(response.result.error)")
-                completion(countries: nil, error: response.result.error)
-            }
-        }
-    }
-    
-    static func fetchPlantationsByCountry(country: Country, completion: (plantations: [Plantation]?, error: NSError?) -> ()) {
-        let parameters: [String: AnyObject] = [
-            "country_id": country.id
-        ]
-        let url = K.Api.BaseUrl + K.Api.PlantationsPath
-        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
-            if response.result.isSuccess {
-                var plantations: [Plantation] = []
+                var varieties: [Variety] = []
                 if let json = response.result.value {
                     print("JSON: \(json)")
-                    for dictionary in json as! [[String: AnyObject]] {
-                        let plantation = Plantation(dictionary: dictionary)
-                        plantations.append(plantation)
+                    for dictionary in json["fsorts"] as! [[String: AnyObject]] {
+                        let variety = Variety(dictionary: dictionary)
+                        varieties.append(variety)
                     }
                 }
                 
-                completion(plantations: plantations, error: nil)
+                completion(varieties: varieties, error: nil)
             } else {
                 print("Error: \(response.result.error)")
-                completion(plantations: nil, error: response.result.error)
+                completion(varieties: nil, error: response.result.error)
             }
         }
     }

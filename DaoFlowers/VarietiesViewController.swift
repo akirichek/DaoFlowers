@@ -29,9 +29,9 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
         let pageViewer = NSBundle.mainBundle().loadNibNamed("PageViewer", owner: self, options: nil).first as! PageViewer
         pageViewer.frame = self.pageViewerContainerView.bounds
         pageViewer.dataSource = self
+        pageViewer.viewWillTransitionToSize = self.contentViewFrame().size
         self.pageViewerContainerView.addSubview(pageViewer)
         self.pageViewer = pageViewer
-        //self.pageViewer.setSelectedPage(colors.indexOf({$0.id == self.selectedColor.id})!)
         self.title = flower.name
     }
     
@@ -42,7 +42,7 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
             page.viewWillTransitionToSize = size
             page.reloadData()
         }
-        self.pageViewer.viewWillTransitionToSize = size
+        self.pageViewer.viewWillTransitionToSize = self.contentViewFrame().size
         self.pageViewer.reloadData()
     }
     

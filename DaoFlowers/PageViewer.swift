@@ -16,7 +16,7 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
     @IBOutlet weak var headerCollectionView: UICollectionView!
     @IBOutlet weak var contentCollectionView: UICollectionView!
     
-    var viewWillTransitionToSize: CGSize?
+    var viewWillTransitionToSize: CGSize!
     var dataSource: PageViewerDataSource!
     var countOfPages: Int {
         get {
@@ -34,11 +34,6 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
         let contentCollectionViewSize = self.contentCollectionViewSize()
         let currentContentOffsetX = CGFloat(self.indexOfCurrentPage) * contentCollectionViewSize.width
         self.contentCollectionView.setContentOffset(CGPoint(x: currentContentOffsetX, y: 0), animated: true)
-    }
-    
-    func reloadDataItemAtIndex(index: Int) {
-        self.headerCollectionView.reloadItemsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)])
-        self.contentCollectionView.reloadItemsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)])
     }
     
     func pageAtIndex(index: Int) -> UIView? {
@@ -173,8 +168,7 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
                     self.headerCollectionView.contentOffset = CGPointMake(contentOffsetX, 0)
                 }
                 
-                let indexOfCurrentPage = Int(round(scrollView.contentOffset.x / self.contentCollectionViewSize().width))
-                self.indexOfCurrentPage = indexOfCurrentPage
+                self.indexOfCurrentPage = Int(round(scrollView.contentOffset.x / self.contentCollectionViewSize().width))
                 self.selectHeaderInScrollView()
             } else {
                 self.updateAllHeaderCellsExcept()
@@ -187,20 +181,7 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
     // MARK: Private Methods
     
     func contentCollectionViewSize() -> CGSize {
-        var screenSize: CGSize = UIScreen.mainScreen().bounds.size
-        if self.viewWillTransitionToSize != nil {
-            screenSize = self.viewWillTransitionToSize!
-        }
-        
-        var height = screenSize.height - self.headerCollectionView.bounds.height
-        let viewController = self.dataSource as! UIViewController
-        let navigationBarHeight = viewController.navigationController!.navigationBar.frame.height
-        height -= navigationBarHeight
-        if !UIApplication.sharedApplication().statusBarHidden {
-            height -= 20
-        }
-        
-        return CGSizeMake(screenSize.width, height)
+        return CGSizeMake(viewWillTransitionToSize.width, viewWillTransitionToSize.height - self.headerCollectionView.bounds.height)
     }
     
     func adjustConstraintsForItem(forItem: UIView, toItem: UIView) {

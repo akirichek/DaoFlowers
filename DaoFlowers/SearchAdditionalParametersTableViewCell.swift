@@ -1,5 +1,5 @@
 //
-//  VarietiesSearchAdditionalParametersTableViewCell.swift
+//  SearchAdditionalParametersTableViewCell.swift
 //  DaoFlowers
 //
 //  Created by Artem Kirichek on 10/28/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VarietiesSearchAdditionalParametersTableViewCell: UITableViewCell {
+class SearchAdditionalParametersTableViewCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     

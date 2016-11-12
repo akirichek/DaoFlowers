@@ -28,6 +28,7 @@ class VarietyDetailsViewController: BaseViewController, PageViewerDataSource, Va
         let pageViewer = NSBundle.mainBundle().loadNibNamed("PageViewer", owner: self, options: nil).first as! PageViewer
         pageViewer.frame = self.pageViewerContainerView.bounds
         pageViewer.dataSource = self
+        pageViewer.viewWillTransitionToSize = self.contentViewFrame().size
         self.pageViewerContainerView.addSubview(pageViewer)
         self.pageViewer = pageViewer
     }
@@ -35,7 +36,7 @@ class VarietyDetailsViewController: BaseViewController, PageViewerDataSource, Va
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         self.viewWillTransitionToSize = size
         self.pageViewerContainerView.frame = self.contentViewFrame()
-        self.pageViewer.viewWillTransitionToSize = size
+        self.pageViewer.viewWillTransitionToSize = self.contentViewFrame().size
         self.pageViewer.reloadData()
     }
     

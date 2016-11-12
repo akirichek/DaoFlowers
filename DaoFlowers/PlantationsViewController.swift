@@ -17,6 +17,7 @@ class PlantationsViewController: BaseViewController, PageViewerDataSource, Plant
     var selectedCountry: Country!
     var pageViewStates: [Int: PlantationsPageViewState] = [:]
     var needsSelectPageView: Bool = true
+    var selectedPlantation: Plantation!
     
     // MARK: - Override Methods
     
@@ -27,6 +28,7 @@ class PlantationsViewController: BaseViewController, PageViewerDataSource, Plant
         let pageViewer = NSBundle.mainBundle().loadNibNamed("PageViewer", owner: self, options: nil).first as! PageViewer
         pageViewer.frame = self.pageViewerContainerView.bounds
         pageViewer.dataSource = self
+        pageViewer.viewWillTransitionToSize = self.contentViewFrame().size
         self.pageViewerContainerView.addSubview(pageViewer)
         self.pageViewer = pageViewer
     }
@@ -38,16 +40,16 @@ class PlantationsViewController: BaseViewController, PageViewerDataSource, Plant
             page.viewWillTransitionToSize = size
             page.reloadData()
         }
-        self.pageViewer.viewWillTransitionToSize = size
+        self.pageViewer.viewWillTransitionToSize = self.contentViewFrame().size
         self.pageViewer.reloadData()
     }
     
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        let destinationViewController = segue.destinationViewController
-//        if let varietyDetailsViewController = destinationViewController as? VarietyDetailsViewController {
-//            varietyDetailsViewController.variety = self.selectedVariety
-//        }
-//    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let destinationViewController = segue.destinationViewController
+        if let plantationDetailsViewController = destinationViewController as? PlantationDetailsViewController {
+            plantationDetailsViewController.plantation = self.selectedPlantation
+        }
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -99,7 +101,6 @@ class PlantationsViewController: BaseViewController, PageViewerDataSource, Plant
     }
     
     func pageViewer(pageViewer: PageViewer, headerForItemAtIndex index: Int) -> String {
-        print(self.countries[index].name)
         return self.countries[index].name
     }
     
@@ -141,8 +142,8 @@ class PlantationsViewController: BaseViewController, PageViewerDataSource, Plant
     // MARK: - PlantationsPageViewDelegate
     
     func plantationsPageView(plantationsPageView: PlantationsPageView, didSelectPlantation plantation: Plantation) {
-//        self.selectedVariety = variety
-//        self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.VarietyDetails, sender: self)
+        self.selectedPlantation = plantation
+        self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.PlantationDetails, sender: self)
     }
     
     func plantationsPageView(plantationsPageView: PlantationsPageView, didChangeState state: PlantationsPageViewState) {

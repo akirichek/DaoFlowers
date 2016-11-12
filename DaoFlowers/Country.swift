@@ -12,14 +12,16 @@ struct Country {
     var id: Int
     var name: String
     var abr: String
-    var imageUrl: String
-    var plantCount: Int
+    var imageUrl: String?
+    var plantCount: Int = 0
     
     init(dictionary: [String: AnyObject]) {
         id = dictionary["id"] as! Int
         name = dictionary["name"] as! String
         abr = dictionary["abr"] as! String
-        imageUrl = dictionary["imgUrl"] as! String
-        plantCount = dictionary["plantCount"] as! Int
+        imageUrl = dictionary["imgUrl"] as? String
+        if let plantCount = dictionary["plantCount"] as? Int {
+            self.plantCount = plantCount
+        }
     }
 }

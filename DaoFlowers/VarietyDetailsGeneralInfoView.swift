@@ -68,7 +68,6 @@ class VarietyDetailsGeneralInfoView: UIView, UICollectionViewDataSource, UIColle
         self.collectionView.reloadData()
         
         let contentSizeHeight = self.collectionView.collectionViewLayout.collectionViewContentSize().height + self.collectionContainerView.frame.origin.y
-        print(contentSizeHeight, self.collectionView.collectionViewLayout.collectionViewContentSize().height, collectionContainerView.frame.origin.y, self.scrollView.frame)
         var collectionContainerViewFrame = self.collectionContainerView.frame
         collectionContainerViewFrame.size.height = self.collectionView.collectionViewLayout.collectionViewContentSize().height
         self.collectionContainerView.frame = collectionContainerViewFrame

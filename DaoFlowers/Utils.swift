@@ -93,7 +93,10 @@ class Utils: NSObject {
     }
     
     static func sortedPlantationsByActivePlantations(plantations: [Plantation]) -> [Plantation] {
-        return plantations
+        var activePlantations = sortedPlantationsByName(plantations.filter({$0.fbSum > 0}))
+        let deactivePlantations = sortedPlantationsByName(plantations.filter({$0.fbSum == 0}))
+        activePlantations += deactivePlantations
+        return activePlantations
     }
     
     static func sortedPlantationsByPercentsOfPurchase(plantations: [Plantation]) -> [Plantation] {

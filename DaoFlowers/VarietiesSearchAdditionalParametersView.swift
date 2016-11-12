@@ -34,7 +34,7 @@ class VarietiesSearchAdditionalParametersView: UIView, UITableViewDataSource, UI
         self.adjustShadowForView(flowersTableContainerView)
         self.adjustShadowForView(colorsTableContainerView)
         self.adjustShadowForView(breedersTableContainerView)
-        let cellNib = UINib(nibName: "VarietiesSearchAdditionalParametersTableViewCell", bundle: nil)
+        let cellNib = UINib(nibName: "SearchAdditionalParametersTableViewCell", bundle: nil)
         flowersTableView.registerNib(cellNib, forCellReuseIdentifier: "VarietiesSearchAdditionalParametersTableViewCellIdentifier")
         colorsTableView.registerNib(cellNib, forCellReuseIdentifier: "VarietiesSearchAdditionalParametersTableViewCellIdentifier")
         breedersTableView.registerNib(cellNib, forCellReuseIdentifier: "VarietiesSearchAdditionalParametersTableViewCellIdentifier")
@@ -85,7 +85,7 @@ class VarietiesSearchAdditionalParametersView: UIView, UITableViewDataSource, UI
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = "VarietiesSearchAdditionalParametersTableViewCellIdentifier"
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! VarietiesSearchAdditionalParametersTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! SearchAdditionalParametersTableViewCell
 
         switch tableView {
         case self.flowersTableView:

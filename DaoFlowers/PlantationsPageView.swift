@@ -154,8 +154,7 @@ class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewD
     // MARK: - UICollectionViewDelegate
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-//        self.delegate?.plantationsPageView(
-//        self.delegate?.varietiesPageView(self, didSelectVariety: self.filteredVarieties![indexPath.row])
+        self.delegate?.plantationsPageView(self, didSelectPlantation: self.filteredPlantations![indexPath.row])
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
