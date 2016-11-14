@@ -24,6 +24,7 @@ struct K {
         static let PlantationsPath = "/catalog/plantations"
         static let PlantationsSearchParametersPath = "/catalog/search/plantations/params"
         static let SearchPlantationsPath = "/catalog/search/plantations"
+        static let CurrentOrdersPath = "/orders/current"
     }
     
     struct Storyboard {
@@ -37,6 +38,8 @@ struct K {
             static let Login = "LoginViewControllerSegueIdentifier"
             static let Settings = "SettingsViewControllerSegueIdentifier"
             static let PlantationDetails = "PlantationDetailsViewControllerSegueIdentifier"
+            static let CurrentOrders = "CurrentOrdersViewControllerSegueIdentifier"
+            static let OrderDetails = "OrderDetailsViewControllerSegueIdentifier"
         }
         
         struct ViewControllerIdentifier {

@@ -83,7 +83,7 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
         filterContainerView.hidden = false
         var collectionViewFrame = self.collectionView.frame
         collectionViewFrame.origin.y = 50
-        collectionViewFrame.size.height -= 50
+        collectionViewFrame.size.height = self.frame.height - 50
         self.collectionView.frame = collectionViewFrame
     }
     
@@ -91,7 +91,7 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
         filterContainerView.hidden = true
         var collectionViewFrame = self.collectionView.frame
         collectionViewFrame.origin.y = 0
-        collectionViewFrame.size.height += 50
+        collectionViewFrame.size.height = self.frame.height
         self.collectionView.frame = collectionViewFrame
     }
     
@@ -147,12 +147,6 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         //self.delegate?.varietiesPageView(self, didSelectVariety: self.filteredVarieties![indexPath.row])
-    }
-    
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        if scrollView == collectionView {
-            //self.delegate?.varietiesByPlantationPageView(self, scrollViewDidScroll: scrollView)
-        }
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
@@ -218,7 +212,6 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
 protocol VarietiesByPlantationPageViewDelegate: NSObjectProtocol {
     func varietiesByPlantationPageView(varietiesByPlantationPageView: VarietiesByPlantationPageView, didSelectVariety variety: Variety)
     func varietiesByPlantationPageView(varietiesByPlantationPageView: VarietiesByPlantationPageView, didChangeState state: VarietiesByPlantationPageViewState)
-    func varietiesByPlantationPageView(varietiesByPlantationPageView: VarietiesByPlantationPageView, scrollViewDidScroll scrollView: UIScrollView)
 }
 
 struct VarietiesByPlantationPageViewState {

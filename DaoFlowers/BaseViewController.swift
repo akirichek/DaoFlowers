@@ -48,8 +48,6 @@ class BaseViewController: UIViewController {
         NSLayoutConstraint.activateConstraints([leadingConstraint, trailingConstraint, topConstraint, bottomConstraint])
     }
     
-    
-    
     func contentViewFrame() -> CGRect {
         let screenSize: CGSize = self.viewWillTransitionToSize
         var frame = CGRectMake(0, 64, 320, 504)
@@ -58,5 +56,13 @@ class BaseViewController: UIViewController {
         }
         
         return frame
+    }
+    
+    func isPortraitOrientation() -> Bool {
+        return self.viewWillTransitionToSize.width < self.viewWillTransitionToSize.height
+    }
+    
+    func isLandscapeOrientation() -> Bool {
+        return !self.isPortraitOrientation()
     }
 }

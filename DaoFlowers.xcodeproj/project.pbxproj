@@ -28,8 +28,17 @@
 		82606BB81DD383A600A9E8D8 /* PlantationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82606BB71DD383A600A9E8D8 /* PlantationDetailsViewController.swift */; };
 		82606BBC1DD3A9DF00A9E8D8 /* VarietiesByPlantationPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82606BBB1DD3A9DF00A9E8D8 /* VarietiesByPlantationPageView.swift */; };
 		82606BBE1DD3A9EB00A9E8D8 /* VarietiesByPlantationPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82606BBD1DD3A9EB00A9E8D8 /* VarietiesByPlantationPageView.xib */; };
+		82606BC31DD76FAB00A9E8D8 /* VarietiesListHintView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82606BC21DD76FAB00A9E8D8 /* VarietiesListHintView.xib */; };
+		82606BC51DD770C800A9E8D8 /* AHintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82606BC41DD770C800A9E8D8 /* AHintView.swift */; };
+		82606BC71DD7985800A9E8D8 /* ApiManager+Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82606BC61DD7985800A9E8D8 /* ApiManager+Orders.swift */; };
+		82606BCA1DD7992C00A9E8D8 /* CurrentOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82606BC91DD7992C00A9E8D8 /* CurrentOrdersViewController.swift */; };
+		82606BCE1DD7AA9700A9E8D8 /* OrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82606BCD1DD7AA9700A9E8D8 /* OrderTableViewCell.swift */; };
 		827BAC2C1DBF675200B50C2B /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827BAC2B1DBF675200B50C2B /* MenuTableViewCell.swift */; };
 		827BF85F1DAEAF4000054548 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827BF85E1DAEAF4000054548 /* BaseViewController.swift */; };
+		827E8B041DD8C10E000A8EAE /* OrderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827E8B031DD8C10E000A8EAE /* OrderDetailsViewController.swift */; };
+		827E8B071DD8DEC6000A8EAE /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827E8B061DD8DEC6000A8EAE /* Order.swift */; };
+		827E8B091DD8DEFB000A8EAE /* OrderDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827E8B081DD8DEFB000A8EAE /* OrderDetails.swift */; };
+		827E8B0B1DD8E0B8000A8EAE /* OrderDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827E8B0A1DD8E0B8000A8EAE /* OrderDetailsTableViewCell.swift */; };
 		8299D36D1DAF8CC50088E550 /* MainViewControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D36C1DAF8CC50088E550 /* MainViewControllerSegue.swift */; };
 		8299D3701DAF8F110088E550 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D36F1DAF8F110088E550 /* MenuViewController.swift */; };
 		8299D3721DAF926E0088E550 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3711DAF926E0088E550 /* Constants.swift */; };
@@ -120,8 +129,17 @@
 		82606BB71DD383A600A9E8D8 /* PlantationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlantationDetailsViewController.swift; sourceTree = "<group>"; };
 		82606BBB1DD3A9DF00A9E8D8 /* VarietiesByPlantationPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietiesByPlantationPageView.swift; sourceTree = "<group>"; };
 		82606BBD1DD3A9EB00A9E8D8 /* VarietiesByPlantationPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VarietiesByPlantationPageView.xib; sourceTree = "<group>"; };
+		82606BC21DD76FAB00A9E8D8 /* VarietiesListHintView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VarietiesListHintView.xib; sourceTree = "<group>"; };
+		82606BC41DD770C800A9E8D8 /* AHintView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHintView.swift; sourceTree = "<group>"; };
+		82606BC61DD7985800A9E8D8 /* ApiManager+Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ApiManager+Orders.swift"; sourceTree = "<group>"; };
+		82606BC91DD7992C00A9E8D8 /* CurrentOrdersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentOrdersViewController.swift; sourceTree = "<group>"; };
+		82606BCD1DD7AA9700A9E8D8 /* OrderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderTableViewCell.swift; sourceTree = "<group>"; };
 		827BAC2B1DBF675200B50C2B /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		827BF85E1DAEAF4000054548 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		827E8B031DD8C10E000A8EAE /* OrderDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailsViewController.swift; sourceTree = "<group>"; };
+		827E8B061DD8DEC6000A8EAE /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		827E8B081DD8DEFB000A8EAE /* OrderDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetails.swift; sourceTree = "<group>"; };
+		827E8B0A1DD8E0B8000A8EAE /* OrderDetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		8299D36C1DAF8CC50088E550 /* MainViewControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewControllerSegue.swift; sourceTree = "<group>"; };
 		8299D36F1DAF8F110088E550 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		8299D3711DAF926E0088E550 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -296,6 +314,26 @@
 			name = "Plantation Details";
 			sourceTree = "<group>";
 		};
+		82606BC11DD76F7900A9E8D8 /* Hints */ = {
+			isa = PBXGroup;
+			children = (
+				82606BC41DD770C800A9E8D8 /* AHintView.swift */,
+				82606BC21DD76FAB00A9E8D8 /* VarietiesListHintView.xib */,
+			);
+			name = Hints;
+			sourceTree = "<group>";
+		};
+		82606BC81DD7990E00A9E8D8 /* Current Orders */ = {
+			isa = PBXGroup;
+			children = (
+				82606BC91DD7992C00A9E8D8 /* CurrentOrdersViewController.swift */,
+				82606BCD1DD7AA9700A9E8D8 /* OrderTableViewCell.swift */,
+				827E8B031DD8C10E000A8EAE /* OrderDetailsViewController.swift */,
+				827E8B0A1DD8E0B8000A8EAE /* OrderDetailsTableViewCell.swift */,
+			);
+			name = "Current Orders";
+			sourceTree = "<group>";
+		};
 		827BAC2A1DBF672A00B50C2B /* Menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,11 +358,13 @@
 		8299D36E1DAF8EF30088E550 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				82606BC11DD76F7900A9E8D8 /* Hints */,
 				82C0597E1DC675BC00F061E6 /* Main */,
 				827BAC2A1DBF672A00B50C2B /* Menu */,
 				8299D3991DB504600088E550 /* PageViewer */,
 				8299D3821DB155560088E550 /* Varieties */,
 				82C0597D1DC675AF00F061E6 /* Plantations */,
+				82606BC81DD7990E00A9E8D8 /* Current Orders */,
 				8299D3CD1DBBDB020088E550 /* Login */,
 				82C0597C1DC675A000F061E6 /* Settings */,
 			);
@@ -341,6 +381,8 @@
 				82E5659D1DBCF775005F18F5 /* Plantation.swift */,
 				82FBA1A11DC0D73E001CE265 /* Breeder.swift */,
 				82606B9D1DCF7F8800A9E8D8 /* Country.swift */,
+				827E8B061DD8DEC6000A8EAE /* Order.swift */,
+				827E8B081DD8DEFB000A8EAE /* OrderDetails.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -495,6 +537,7 @@
 				8299D37D1DB14E320088E550 /* ApiManager.swift */,
 				8299D3D51DBBF5C30088E550 /* ApiManager+Authorization.swift */,
 				82606BB01DD1FF9500A9E8D8 /* ApiManager+Plantations.swift */,
+				82606BC61DD7985800A9E8D8 /* ApiManager+Orders.swift */,
 				82C059921DC68ED000F061E6 /* LanguageManager.swift */,
 			);
 			name = Managers;
@@ -603,6 +646,7 @@
 			files = (
 				82C059841DC6874E00F061E6 /* LanguagePickerViewCell.xib in Resources */,
 				8299D3CA1DBBB11F0088E550 /* VarietyDetailsPlantationsGrowersView.xib in Resources */,
+				82606BC31DD76FAB00A9E8D8 /* VarietiesListHintView.xib in Resources */,
 				8299D3CC1DBBB1360088E550 /* VarietyDetailsSimilarVarietiesView.xib in Resources */,
 				82E565A21DBD0737005F18F5 /* PlantationTableViewCell.xib in Resources */,
 				82457AD51DAEAA5900D87B21 /* LaunchScreen.storyboard in Resources */,
@@ -698,6 +742,7 @@
 				82E5659E1DBCF775005F18F5 /* Plantation.swift in Sources */,
 				82FBA1A71DC2797E001CE265 /* NSLayoutConstraint+ChangeMultiplier.swift in Sources */,
 				8299D3D81DBCC17E0088E550 /* SimilarVarietyCollectionViewCell.swift in Sources */,
+				82606BC51DD770C800A9E8D8 /* AHintView.swift in Sources */,
 				8299D3781DAF9A0D0088E550 /* MenuButtonHandler.swift in Sources */,
 				8299D3C21DBBAFBF0088E550 /* VarietyDetailsGeneralInfoView.swift in Sources */,
 				8299D3741DAF99940088E550 /* FlowersViewController.swift in Sources */,
@@ -705,6 +750,7 @@
 				82606BB31DD201EC00A9E8D8 /* PlantationsSearchAdditionalParametersView.swift in Sources */,
 				8299D38A1DB375AA0088E550 /* Color.swift in Sources */,
 				82FBA1AD1DC3753A001CE265 /* SearchAdditionalParametersTableViewCell.swift in Sources */,
+				82606BCA1DD7992C00A9E8D8 /* CurrentOrdersViewController.swift in Sources */,
 				8299D38E1DB3BD5B0088E550 /* VarietiesViewController.swift in Sources */,
 				8299D3BC1DBBADD80088E550 /* VarietyDetailsViewController.swift in Sources */,
 				82606BB81DD383A600A9E8D8 /* PlantationDetailsViewController.swift in Sources */,
@@ -720,6 +766,7 @@
 				82606BA61DCFA55200A9E8D8 /* PlantationsPageView.swift in Sources */,
 				8299D3D11DBBE36C0088E550 /* User.swift in Sources */,
 				827BF85F1DAEAF4000054548 /* BaseViewController.swift in Sources */,
+				827E8B0B1DD8E0B8000A8EAE /* OrderDetailsTableViewCell.swift in Sources */,
 				82606BAF1DD1F48C00A9E8D8 /* PlantationsSearchViewController.swift in Sources */,
 				8299D3A21DB622FA0088E550 /* HeaderPageViewerCollectionViewCell.swift in Sources */,
 				8299D3C41DBBAFDC0088E550 /* VarietyDetailsPlantationsGrowersView.swift in Sources */,
@@ -729,10 +776,15 @@
 				8299D36D1DAF8CC50088E550 /* MainViewControllerSegue.swift in Sources */,
 				82FBA1A01DC0D017001CE265 /* VarietiesSearchAdditionalParametersView.swift in Sources */,
 				8299D3D61DBBF5C30088E550 /* ApiManager+Authorization.swift in Sources */,
+				827E8B071DD8DEC6000A8EAE /* Order.swift in Sources */,
 				82606BAC1DCFC35C00A9E8D8 /* PlantationCollectionViewCell.swift in Sources */,
+				827E8B041DD8C10E000A8EAE /* OrderDetailsViewController.swift in Sources */,
 				82C059721DC60DDE00F061E6 /* ColorsViewController.swift in Sources */,
+				82606BCE1DD7AA9700A9E8D8 /* OrderTableViewCell.swift in Sources */,
 				82606BA41DCF900D00A9E8D8 /* PlantationsViewController.swift in Sources */,
 				8299D3761DAF99B30088E550 /* CountriesViewController.swift in Sources */,
+				82606BC71DD7985800A9E8D8 /* ApiManager+Orders.swift in Sources */,
+				827E8B091DD8DEFB000A8EAE /* OrderDetails.swift in Sources */,
 				8299D3921DB3BDFA0088E550 /* Variety.swift in Sources */,
 				827BAC2C1DBF675200B50C2B /* MenuTableViewCell.swift in Sources */,
 				82606B9E1DCF7F8800A9E8D8 /* Country.swift in Sources */,

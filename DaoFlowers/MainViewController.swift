@@ -136,6 +136,9 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
         case .Plantations:
             self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Countries, sender: self)
             self.animateMenu(false)
+        case .CurrentOrders:
+            self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.CurrentOrders, sender: self)
+            self.animateMenu(false)
         case .Login:
             self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Login, sender: self)
             //self.animateMenu(false)

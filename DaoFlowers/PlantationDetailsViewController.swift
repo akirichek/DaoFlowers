@@ -17,15 +17,13 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var topContainerView: UIView!
-    @IBOutlet weak var contentContainerView: UIView!
     
-    var pageScrollViewContentOffsetY: CGFloat = 0
     var pageViewer: PageViewer!
     var plantation: Plantation!
+    var country: Country!
     var varieties: [Int:[Variety]] = [:]
     var flowers: [Flower] = []
     var colors: [Color] = []
-//    var selectedVariety: Variety!
     var selectedColor: Color?
     var pageViewStates: [Int: VarietiesByPlantationPageViewState] = [:]
     
@@ -45,24 +43,15 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
         self.title = "\(plantation.name) (\(plantation.brand))"
         self.fetchVarieties()
         self.infoContainerView.layer.cornerRadius = 5
+        populateInfoView()
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        var contentContainerViewFrame = self.contentContainerView.frame
-        contentContainerViewFrame.origin.y = 0
-        contentContainerViewFrame.size.height = self.viewWillTransitionToSize.height
-        self.contentContainerView.frame = contentContainerViewFrame
         self.viewWillTransitionToSize = size
         self.topContainerView.frame = self.topContainerViewFrame()
-        
-        var pageViewerContainerViewFrame = self.pageViewerContainerView.frame
-        pageViewerContainerViewFrame.size.height += pageViewerContainerViewFrame.origin.y - self.pageViewerFrame().origin.y
-        pageViewerContainerViewFrame.origin.y = self.pageViewerFrame().origin.y
-        self.pageViewerContainerView.frame = pageViewerContainerViewFrame
+        self.pageViewerContainerView.frame = self.pageViewerFrame()
         
         if let page = self.pageViewer.pageAtIndex(self.pageViewer.indexOfCurrentPage) as? VarietiesByPlantationPageView {
-            page.collectionView.contentOffset = CGPointMake(0, 0)
-            pageScrollViewContentOffsetY = 0
             page.viewWillTransitionToSize = size
             page.reloadData()
         }
@@ -91,10 +80,22 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
     }
     
     @IBAction func infoButtonClicked(sender: UIBarButtonItem) {
-        
+        let hintView = NSBundle.mainBundle().loadNibNamed("VarietiesListHintView", owner: self, options: nil).first as! AHintView
+        self.view.addSubview(hintView)
     }
     
     // MARK: - Private Methods
+    
+    func populateInfoView() {
+        farmLabel.text = plantation.name
+        brandLabel.text = plantation.brand
+        countryLabel.text = country.name
+        if let imageUrl = plantation.imageUrl {
+            if let url = NSURL(string: imageUrl) {
+                logoImageView.af_setImageWithURL(url)
+            }
+        }
+    }
     
     func fetchVarieties() {
         if let currentUser = User.currentUser() {
@@ -130,7 +131,7 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
     func pageViewerFrame() -> CGRect {
         let contentViewFrame = self.contentViewFrame()
         let topContainerViewFrame = self.topContainerView.frame
-        let pageViewerFrame = CGRectMake(contentViewFrame.origin.x, contentViewFrame.origin.y + topContainerViewFrame.height + self.contentContainerView.frame.origin.y, contentViewFrame.width, contentViewFrame.height - topContainerViewFrame.height - contentContainerView.frame.origin.y)
+        let pageViewerFrame = CGRectMake(contentViewFrame.origin.x, contentViewFrame.origin.y + topContainerViewFrame.height, contentViewFrame.width, contentViewFrame.height - topContainerViewFrame.height)
         return pageViewerFrame
     }
     
@@ -189,46 +190,7 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
     }
     
     func varietiesByPlantationPageView(varietiesByPlantationPageView: VarietiesByPlantationPageView, didChangeState state: VarietiesByPlantationPageViewState) {
-        
-    }
-    
-    func varietiesByPlantationPageView(varietiesByPlantationPageView: VarietiesByPlantationPageView, scrollViewDidScroll scrollView: UIScrollView) {
-        if scrollView.contentOffset.y < 0 {
-            var contentContainerViewFrame = self.contentContainerView.frame
-            if contentContainerViewFrame.origin.y < 0 {
-                let deltaContentOffsetY = pageScrollViewContentOffsetY - scrollView.contentOffset.y
-                if contentContainerViewFrame.origin.y + deltaContentOffsetY > 0 {
-                    contentContainerViewFrame.origin.y = 0
-                    contentContainerViewFrame.size.height = self.viewWillTransitionToSize.height
-                } else {
-                    contentContainerViewFrame.origin.y += deltaContentOffsetY
-                    contentContainerViewFrame.size.height -= deltaContentOffsetY
-                }
-                
-                self.contentContainerView.frame = contentContainerViewFrame
-                self.pageViewer.viewWillTransitionToSize = self.pageViewerFrame().size
-                self.pageViewer.reloadData()
-                
-                scrollView.contentOffset = CGPointMake(0, 0)
-            }
-        } else {
-            if self.contentContainerView.frame.origin.y > -self.topContainerView.frame.height {
-                var contentContainerViewFrame = self.contentContainerView.frame
-                if contentContainerViewFrame.origin.y - scrollView.contentOffset.y < -self.topContainerView.frame.height {
-                    contentContainerViewFrame.origin.y = -self.topContainerView.frame.height
-                    contentContainerViewFrame.size.height = self.viewWillTransitionToSize.height + self.topContainerView.frame.height
-                } else {
-                    contentContainerViewFrame.origin.y -= scrollView.contentOffset.y
-                    contentContainerViewFrame.size.height += scrollView.contentOffset.y
-                }
-                
-                self.contentContainerView.frame = contentContainerViewFrame
-                scrollView.contentOffset = CGPointMake(0, 0)
-                self.pageViewer.viewWillTransitionToSize = self.pageViewerFrame().size
-                self.pageViewer.reloadData()
-            }
-        }
-        
-        pageScrollViewContentOffsetY = scrollView.contentOffset.y
+        let indexOfCurrentPage = pageViewer.indexOfCurrentPage
+        self.pageViewStates[indexOfCurrentPage] = state
     }
 }

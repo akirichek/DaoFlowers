@@ -107,4 +107,12 @@ class Utils: NSObject {
         
         return array
     }
+    
+    static func heightForText(text: String, havingWidth widthValue: CGFloat, andFont font: UIFont) -> CGFloat{
+        var size = CGSizeZero;
+        let nsstring = NSString(string: text)
+        let frame = nsstring.boundingRectWithSize(CGSizeMake(widthValue, CGFloat.max), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        size = CGSizeMake(frame.size.width, frame.size.height + 1)
+        return size.height
+    }
 }

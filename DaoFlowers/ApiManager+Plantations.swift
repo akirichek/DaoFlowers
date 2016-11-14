@@ -40,7 +40,7 @@ extension ApiManager {
             if response.result.isSuccess {
                 var plantations: [Plantation] = []
                 if let json = response.result.value {
-                   //print("JSON: \(json)")
+                   print("JSON: \(json)")
                     for dictionary in json as! [[String: AnyObject]] {
                         let plantation = Plantation(dictionary: dictionary)
                         plantations.append(plantation)

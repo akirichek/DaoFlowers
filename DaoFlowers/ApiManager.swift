@@ -216,7 +216,7 @@ class ApiManager: NSObject {
             if response.result.isSuccess {
                 var varieties: [Variety] = []
                 if let json = response.result.value {
-                    print("JSON: \(json)")
+                    //print("JSON: \(json)")
                     for dictionary in json["fsorts"] as! [[String: AnyObject]] {
                         let variety = Variety(dictionary: dictionary)
                         varieties.append(variety)
