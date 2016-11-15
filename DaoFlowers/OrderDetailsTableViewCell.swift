@@ -22,6 +22,12 @@ class OrderDetailsTableViewCell: UITableViewCell {
         }
     }
     
+    var totalOrderDetails: [OrderDetails]! {
+        didSet {
+            populateTotalFBView()
+        }
+    }
+    
     func populateView() {
         flowerLabel.text = orderDetails.flowerType.name + ". " + orderDetails.flowerSort.name
         sizeLabel.text = orderDetails.flowerSize.name
@@ -42,6 +48,29 @@ class OrderDetailsTableViewCell: UITableViewCell {
             couLabel.text = country.abr
         } else {
             couLabel.text = ""
+        }
+    }
+    
+    func populateTotalFBView() {
+        var totalFbOrd: Double = 0
+        var totalFbConf: Double = 0
+        var totalFbDif: Double = 0
+        
+        for orderDetails in totalOrderDetails {
+            totalFbOrd += orderDetails.orderFb
+            totalFbConf += orderDetails.confFb
+            totalFbDif += orderDetails.orderFb - orderDetails.confFb
+        }
+        
+        fbOrdLabel.text = String(totalFbOrd)
+        fbConfLabel.text = String(totalFbConf)
+        
+        if totalFbDif == 0 {
+            fbDifLabel.text = String(totalFbDif)
+            fbDifLabel.textColor = UIColor.blackColor()
+        } else {
+            fbDifLabel.text = "-\(totalFbDif)"
+            fbDifLabel.textColor = UIColor(red: 202/255, green: 5/255, blue: 15/255, alpha: 1)
         }
     }
 }

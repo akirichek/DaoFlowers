@@ -58,6 +58,11 @@ class BaseViewController: UIViewController {
         return frame
     }
     
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        self.viewWillTransitionToSize = size
+    }
+    
     func isPortraitOrientation() -> Bool {
         return self.viewWillTransitionToSize.width < self.viewWillTransitionToSize.height
     }

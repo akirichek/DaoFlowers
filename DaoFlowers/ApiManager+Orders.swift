@@ -35,11 +35,12 @@ extension ApiManager {
             if response.result.isSuccess {
                 var orderDetails: [OrderDetails] = []
                 if let json = response.result.value {
-                    print("JSON: \(json)")
+                    //print("JSON: \(json)")
                     for orderDetailsDictionary in json["rows"] as! [[String: AnyObject]] {
                         orderDetails.append(OrderDetails(dictionary: orderDetailsDictionary))
                     }
                 }
+                orderDetails = Utils.sortedOrderDetailsByName(orderDetails)
                 completion(orderDetails: orderDetails, error: nil)
             } else {
                 print("Error: \(response.result.error)")

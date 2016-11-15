@@ -92,6 +92,17 @@ class Utils: NSObject {
         return array
     }
     
+    static func sortedOrderDetailsByName(orders: [OrderDetails]) -> [OrderDetails] {
+        var array = orders
+        array.sortInPlace({ (obj1, obj2) -> Bool in
+            let str1 = obj1.flowerType.name + ". " + obj1.flowerSort.name
+            let str2 = obj2.flowerType.name + ". " + obj2.flowerSort.name
+            return str1.lowercaseString < str2.lowercaseString
+        })
+        
+        return array
+    }
+    
     static func sortedPlantationsByActivePlantations(plantations: [Plantation]) -> [Plantation] {
         var activePlantations = sortedPlantationsByName(plantations.filter({$0.fbSum > 0}))
         let deactivePlantations = sortedPlantationsByName(plantations.filter({$0.fbSum == 0}))
