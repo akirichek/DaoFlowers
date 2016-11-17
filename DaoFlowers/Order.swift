@@ -49,7 +49,5 @@ struct Order {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         headDate = dateFormatter.dateFromString(dictionary["headDate"] as! String)!
         ordersDate = dateFormatter.dateFromString(dictionary["ordersDate"] as! String)!
-        
-        
     }
 }

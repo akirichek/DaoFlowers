@@ -139,6 +139,9 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
         case .CurrentOrders:
             self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.CurrentOrders, sender: self)
             self.animateMenu(false)
+        case .Documents:
+            self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Documents, sender: self)
+            self.animateMenu(false)
         case .Login:
             self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Login, sender: self)
             //self.animateMenu(false)

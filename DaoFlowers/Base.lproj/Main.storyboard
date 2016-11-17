@@ -166,6 +166,7 @@
                         <segue destination="7lp-Bb-GxS" kind="custom" identifier="SettingsViewControllerSegueIdentifier" customClass="MainViewControllerSegue" customModule="DaoFlowers" id="XRu-1v-xye"/>
                         <segue destination="1Nt-QN-NRh" kind="modal" identifier="LoginViewControllerSegueIdentifier" id="Imt-Wq-glQ"/>
                         <segue destination="SUt-PN-cjC" kind="custom" identifier="CurrentOrdersViewControllerSegueIdentifier" customClass="MainViewControllerSegue" customModule="DaoFlowers" id="lfX-hD-SQr"/>
+                        <segue destination="O2g-2U-PT5" kind="custom" identifier="DocumentsViewControllerSegueIdentifier" customClass="MainViewControllerSegue" customModule="DaoFlowers" id="LIy-id-ggK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y5F-7I-4ay" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -229,7 +230,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FlowerCollectionViewCellIdentifier" id="vxa-a8-xda" customClass="FlowerCollectionViewCell" customModule="DaoFlowers" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="64" width="160" height="150"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="160" height="150"/>
@@ -364,6 +365,27 @@
             </objects>
             <point key="canvasLocation" x="648" y="3203"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wx8-JX-b3x">
+            <objects>
+                <navigationController id="O2g-2U-PT5" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aFP-Pl-ij8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.0" green="0.49019607840000001" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="cp4-60-3vt" kind="relationship" relationship="rootViewController" id="HQF-PV-mhl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nx0-nx-vDM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="648" y="3905"/>
+        </scene>
         <!--Plantations-->
         <scene sceneID="hIo-IO-HsM">
             <objects>
@@ -384,7 +406,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CountryCollectionViewCellIdentifier" id="oDB-45-ZPH" customClass="CountryCollectionViewCell" customModule="DaoFlowers" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="64" width="160" height="190"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="190"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="160" height="190"/>
@@ -917,7 +939,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IDH-QI-2wX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1113" y="3203"/>
+            <point key="canvasLocation" x="1124" y="3203"/>
         </scene>
         <!--Order Details-->
         <scene sceneID="oNF-pc-9jL">
@@ -1350,6 +1372,65 @@
             </objects>
             <point key="canvasLocation" x="1571" y="3203"/>
         </scene>
+        <!--Documents-->
+        <scene sceneID="FBZ-NU-hqb">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="cp4-60-3vt" customClass="DocumentsViewController" customModule="DaoFlowers" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HAb-IM-XSr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="iZb-cc-unZ">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Documents" id="dOr-tL-ZM8">
+                        <barButtonItem key="backBarButtonItem" title=" " id="OVW-qr-9p9"/>
+                        <barButtonItem key="leftBarButtonItem" image="icon_menu" id="PLJ-9K-tZv">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="menuButtonClicked:" destination="cp4-60-3vt" id="3ZZ-Go-lm8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="pageViewerContainerView" destination="iZb-cc-unZ" id="tRF-4B-x0a"/>
+                        <segue destination="Fey-7d-IAl" kind="push" identifier="InvoiceDetailsSegueIdentifier" id="goM-Xm-fBI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lWe-go-rL9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1114" y="3905"/>
+        </scene>
+        <!--Invoice Details-->
+        <scene sceneID="zQH-j5-zZf">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Fey-7d-IAl" customClass="InvoiceDetailsViewController" customModule="DaoFlowers" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QGH-uj-zQd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="4GE-gb-HLQ">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Invoice Details" id="HSF-QG-dWl"/>
+                    <connections>
+                        <outlet property="pageViewerContainerView" destination="4GE-gb-HLQ" id="I09-t9-wUe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rqd-54-7xF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1584" y="3905"/>
+        </scene>
         <!--Plantations-->
         <scene sceneID="e0u-OG-baa">
             <objects>
@@ -1402,7 +1483,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ezg-gU-71I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="628" y="4040"/>
+            <point key="canvasLocation" x="650" y="5246"/>
         </scene>
         <!--Authorization-->
         <scene sceneID="KQR-us-Tri">
@@ -1463,7 +1544,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FsD-Tz-Kuv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1036" y="4047"/>
+            <point key="canvasLocation" x="1058" y="5253"/>
         </scene>
         <!--Settings-->
         <scene sceneID="H6Q-br-gsP">
@@ -1536,7 +1617,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6o-SI-ixZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="959" y="4835"/>
+            <point key="canvasLocation" x="981" y="6041"/>
         </scene>
         <!--Varieties Search View Controller-->
         <scene sceneID="Rqe-19-jdf">
@@ -1840,7 +1921,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TAe-Oc-W0x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="552" y="4835"/>
+            <point key="canvasLocation" x="574" y="6041"/>
         </scene>
         <!--Plantations Search View Controller-->
         <scene sceneID="sGb-Yq-xzn">

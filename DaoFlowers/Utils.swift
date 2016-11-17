@@ -126,4 +126,18 @@ class Utils: NSObject {
         size = CGSizeMake(frame.size.width, frame.size.height + 1)
         return size.height
     }
+    
+    static func sortedDocuments(documents: [Document]) -> [NSDate: [Document]] {
+        var dictionary: [NSDate: [Document]] = [:]
+        for document in documents {
+            if var array = dictionary[document.date] {
+                array.append(document)
+                dictionary[document.date] = array
+            } else {
+                dictionary[document.date] = [document]
+            }
+        }
+        
+        return dictionary
+    }
 }
