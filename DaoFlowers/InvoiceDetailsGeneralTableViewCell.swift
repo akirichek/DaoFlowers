@@ -15,13 +15,61 @@ class InvoiceDetailsGeneralTableViewCell: UITableViewCell {
     @IBOutlet weak var sizeLabel: UILabel!
     @IBOutlet weak var stemsLabel: UILabel!
     @IBOutlet weak var stemPriceLabel: UILabel!
-    @IBOutlet weak var totalCostLabel: UILabel!
+    @IBOutlet weak var costLabel: UILabel!
     @IBOutlet weak var fbLabel: UILabel!
+    @IBOutlet weak var totalSizeLabel: UILabel!
+    @IBOutlet weak var totalCostLabel: UILabel!
+    @IBOutlet weak var totalFbLabel: UILabel!
     
-    var document: Document! {
-        didSet {
-            populateView()
-        }
+    
+    
+    @IBOutlet weak var awbLabel: UILabel!
+    @IBOutlet weak var plantationLabel: UILabel!
+    @IBOutlet weak var clientLabel: UILabel!
+    @IBOutlet weak var countryLabel: UILabel!
+    @IBOutlet weak var piecesLabel: UILabel!
+    
+    var invoiceDetails: InvoiceDetails!
+    var invoiceDetailsHead: InvoiceDetails.Head!
+    var invoiceDetailsRow: InvoiceDetails.Row!
+    
+    func populateCellView() {
+        let flower = invoiceDetails.flowerById(invoiceDetailsHead.flowerTypeId)!
+        flowerLabel.text = flower.name
+        let variety = invoiceDetails.varietyById(invoiceDetailsRow.flowerSortId)!
+        varietyLabel.text = variety.name
+        let flowerSize = invoiceDetails.flowerSizeById(invoiceDetailsRow.flowerSizeId)!
+        sizeLabel.text = flowerSize.name
+        stemsLabel.text = String(invoiceDetailsRow.stems)
+        stemPriceLabel.text =  String(format: "%.3f $", invoiceDetailsRow.stemPrice)
+        costLabel.text = String(invoiceDetailsRow.cost) + " $"
+        
+        let fb = Double(Int(round(invoiceDetailsRow.fb * 100))) / 100
+        fbLabel.text = String(fb)
     }
     
+    func populateHeaderView() {
+        awbLabel.text = invoiceDetailsHead.awb
+        let plantation = invoiceDetails.plantationById(invoiceDetailsHead.plantationId)!
+        if plantation.name == plantation.brand {
+            plantationLabel.text = plantation.name
+        } else {
+            let planNameFontAttr = [NSFontAttributeName: UIFont.systemFontOfSize(12, weight: UIFontWeightSemibold)]
+            let plantationString = "\(plantation.name) [\(plantation.brand)]"
+            let plantationAttrString = NSMutableAttributedString(string: plantationString, attributes: planNameFontAttr)
+            let range = NSRange(location: plantation.name.characters.count + 1, length: plantation.brand.characters.count + 2)
+            plantationAttrString.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(12), range: range)
+            plantationLabel.attributedText = plantationAttrString
+        }
+        clientLabel.text = invoiceDetailsHead.label
+        let country = invoiceDetails.countryById(invoiceDetailsHead.countryId)!
+        countryLabel.text = country.abr
+        piecesLabel.text = invoiceDetailsHead.pieces.stringByReplacingOccurrencesOfString(";", withString: " ")
+    }
+    
+    func populateTotalView() {
+        totalSizeLabel.text = String(invoiceDetails.totalStemsInHead(invoiceDetailsHead))
+        totalCostLabel.text = String(format: "%.2f $", invoiceDetails.totalCostInHead(invoiceDetailsHead))
+        totalFbLabel.text = String(format: "%.2f", invoiceDetails.totalFbInHead(invoiceDetailsHead))
+    }
 }

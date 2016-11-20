@@ -92,6 +92,24 @@ class Utils: NSObject {
         return array
     }
     
+    static func sortedFlowersByName(flowers: [Flower]) -> [Flower] {
+        var array = flowers
+        array.sortInPlace({ (obj1, obj2) -> Bool in
+            return obj1.name.lowercaseString < obj2.name.lowercaseString
+        })
+        
+        return array
+    }
+    
+    static func sortedFlowerSizesByName(sizes: [Flower.Size]) -> [Flower.Size] {
+        var array = sizes
+        array.sortInPlace({ (obj1, obj2) -> Bool in
+            return obj1.name.lowercaseString < obj2.name.lowercaseString
+        })
+        
+        return array
+    }
+    
     static func sortedOrderDetailsByName(orders: [OrderDetails]) -> [OrderDetails] {
         var array = orders
         array.sortInPlace({ (obj1, obj2) -> Bool in

@@ -10,18 +10,18 @@ import Foundation
 
 struct Plantation {
     var brand: String
-    var fbSum: Double
+    var fbSum: Double!
     var id: Int
     var imageUrl: String?
     var name: String
-    var posInList: Int
+    var posInList: Int!
     
     init(dictionary: [String: AnyObject]) {
         brand = dictionary["brand"] as! String
-        fbSum = dictionary["fbSum"] as! Double
+        fbSum = dictionary["fbSum"] as? Double
         id = dictionary["id"] as! Int
         imageUrl = dictionary["imgUrl"] as? String
         name = dictionary["name"] as! String
-        posInList = dictionary["posInList"] as! Int
+        posInList = dictionary["posInList"] as? Int
     }
 }

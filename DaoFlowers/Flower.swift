@@ -22,4 +22,14 @@ struct Flower {
         imageUrl = dictionary["imgUrl"] as? String
         sortsCount = dictionary["sortsCount"] as? Int
     }
+    
+    struct Size {
+        var id: Int
+        var name: String
+        
+        init(dictionary: [String: AnyObject]) {
+            id = dictionary["id"] as! Int
+            name = dictionary["name"] as! String
+        }
+    }
 }

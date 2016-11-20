@@ -15,10 +15,10 @@ class Variety: NSObject {
     var abr: String
     var imageUrl: String?
     var smallImageUrl: String?
-    var invoicesDone: Double
+    var invoicesDone: Double!
     var purchasePercent: Double?
-    var flower: Flower
-    var color: Color
+    var flower: Flower!
+    var color: Color!
     var sizeFrom: SizeFrom?
     var sizeTo: SizeTo?
     var breeder: Breeder?
@@ -54,10 +54,15 @@ class Variety: NSObject {
         abr = dictionary["abr"] as! String
         imageUrl = dictionary["imgUrl"] as? String
         smallImageUrl = dictionary["smallImgUrl"] as? String
-        invoicesDone = dictionary["invoicesDone"] as! Double
+        invoicesDone = dictionary["invoicesDone"] as? Double
         purchasePercent = dictionary["purchasePercent"] as? Double
-        flower = Flower(dictionary: dictionary["flowerType"] as! [String: AnyObject])
-        color = Color(dictionary: dictionary["color"] as! [String: AnyObject])
+        if let flowerType = dictionary["flowerType"] as? [String: AnyObject] {
+           flower = Flower(dictionary: flowerType)
+        }
+        
+        if let colorDictionary = dictionary["color"] as? [String: AnyObject] {
+            color = Color(dictionary: colorDictionary)
+        }
     }
     
     func addGeneralInfoFromDictionary(dictionary: [String: AnyObject]) {
