@@ -13,7 +13,7 @@ class Utils: NSObject {
     static func showError(error: NSError, inViewController viewController: UIViewController)  {
         self.showErrorWithMessage(error.localizedDescription, inViewController: viewController)
     }
-    
+     
     static func showErrorWithMessage(message: String, inViewController viewController: UIViewController) {
         UIAlertView(title: "Error", message: message, delegate: nil, cancelButtonTitle: "OK").show()
     }

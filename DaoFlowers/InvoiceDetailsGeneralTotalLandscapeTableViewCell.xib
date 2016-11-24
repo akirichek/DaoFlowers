@@ -7,51 +7,51 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="InvoiceDetailsGeneralTotalTableViewCellIdentifier" id="MXf-03-mCI" customClass="InvoiceDetailsGeneralTableViewCell" customModule="DaoFlowers" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="InvoiceDetailsGeneralTotalLandscapeTableViewCellIdentifier" id="lyR-bK-C3k" customClass="InvoiceDetailsGeneralTableViewCell" customModule="DaoFlowers" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="568" height="20"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MXf-03-mCI" id="Bvq-7D-uCY">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="19.5"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lyR-bK-C3k" id="A9t-zi-Pwl">
+                <rect key="frame" x="0.0" y="0.0" width="568" height="19.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0ED-aL-V1t">
-                        <rect key="frame" x="41" y="-1" width="55" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KmX-ie-bV4">
+                        <rect key="frame" x="249" y="-1" width="55" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" id="hhg-N6-ajQ" userLabel="Separator">
-                        <rect key="frame" x="100" y="0.0" width="1" height="20"/>
+                    <view contentMode="scaleToFill" id="5vI-A3-mrd" userLabel="Separator">
+                        <rect key="frame" x="308" y="0.0" width="1" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OcK-Tv-VdC">
-                        <rect key="frame" x="100" y="-1" width="50" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SoA-Wl-9eT">
+                        <rect key="frame" x="308" y="-1" width="60" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" id="t2p-om-uZE" userLabel="Separator">
-                        <rect key="frame" x="150" y="0.0" width="1" height="20"/>
+                    <view contentMode="scaleToFill" id="aPQ-bS-H1T" userLabel="Separator">
+                        <rect key="frame" x="368" y="0.0" width="1" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="170.20 $" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YAl-p4-k1B">
-                        <rect key="frame" x="210" y="0.0" width="60" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="170.20 $" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="k7o-IF-vaP">
+                        <rect key="frame" x="448" y="0.0" width="60" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" id="Xmx-o3-eCW" userLabel="Separator">
-                        <rect key="frame" x="270" y="0.0" width="1" height="20"/>
+                    <view contentMode="scaleToFill" id="C03-0R-qcj" userLabel="Separator">
+                        <rect key="frame" x="508" y="0.0" width="1" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mHf-Q8-lRa">
-                        <rect key="frame" x="270" y="0.0" width="50" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vfY-6W-3t3">
+                        <rect key="frame" x="508" y="0.0" width="60" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -60,9 +60,9 @@
                 </subviews>
             </tableViewCellContentView>
             <connections>
-                <outlet property="totalCostLabel" destination="YAl-p4-k1B" id="3Op-jx-G4J"/>
-                <outlet property="totalFbLabel" destination="mHf-Q8-lRa" id="ed2-kc-SUe"/>
-                <outlet property="totalSizeLabel" destination="OcK-Tv-VdC" id="S6V-DI-3Qs"/>
+                <outlet property="totalCostLabel" destination="k7o-IF-vaP" id="GrY-Su-wxp"/>
+                <outlet property="totalFbLabel" destination="vfY-6W-3t3" id="xD9-ZN-U63"/>
+                <outlet property="totalSizeLabel" destination="SoA-Wl-9eT" id="hNt-0h-RpR"/>
             </connections>
             <point key="canvasLocation" x="212" y="206"/>
         </tableViewCell>

@@ -20,9 +20,7 @@ class InvoiceDetailsGeneralTableViewCell: UITableViewCell {
     @IBOutlet weak var totalSizeLabel: UILabel!
     @IBOutlet weak var totalCostLabel: UILabel!
     @IBOutlet weak var totalFbLabel: UILabel!
-    
-    
-    
+
     @IBOutlet weak var awbLabel: UILabel!
     @IBOutlet weak var plantationLabel: UILabel!
     @IBOutlet weak var clientLabel: UILabel!
@@ -68,8 +66,8 @@ class InvoiceDetailsGeneralTableViewCell: UITableViewCell {
     }
     
     func populateTotalView() {
-        totalSizeLabel.text = String(invoiceDetails.totalStemsInHead(invoiceDetailsHead))
-        totalCostLabel.text = String(format: "%.2f $", invoiceDetails.totalCostInHead(invoiceDetailsHead))
-        totalFbLabel.text = String(format: "%.2f", invoiceDetails.totalFbInHead(invoiceDetailsHead))
+        totalSizeLabel.text = String(invoiceDetailsHead.totalStems)
+        totalCostLabel.text = String(format: "%.2f $", invoiceDetailsHead.totalPrice)
+        totalFbLabel.text = String(format: "%.2f", invoiceDetailsHead.totalFb)
     }
 }

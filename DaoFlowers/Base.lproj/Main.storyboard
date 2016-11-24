@@ -1422,15 +1422,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Invoice Details" id="HSF-QG-dWl">
-                        <barButtonItem key="rightBarButtonItem" image="icon_filter" id="4jp-AH-T8x">
-                            <connections>
-                                <action selector="iconFilterClicked:" destination="Fey-7d-IAl" id="iV6-T6-9dL"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Invoice Details" id="HSF-QG-dWl"/>
                     <connections>
-                        <outlet property="filterButton" destination="4jp-AH-T8x" id="9Ns-oo-G1P"/>
                         <outlet property="pageViewerContainerView" destination="4GE-gb-HLQ" id="I09-t9-wUe"/>
                     </connections>
                 </viewController>

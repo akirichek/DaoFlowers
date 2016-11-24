@@ -9,6 +9,11 @@
 import Alamofire
 
 class ApiManager: NSObject {
+    static let sharedInstance = ApiManager()
+    var downloadTask: NSURLSessionDownloadTask!
+    var backgroundSession: NSURLSession!
+    var document: Document!
+    var downloadDocumentCompletion: ((error: NSError?)->())!
     
     static func fetchFlowers(completion: (flowers: [Flower]?, error: NSError?) -> ()) {
         let parameters: [String: AnyObject] = [

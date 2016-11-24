@@ -114,9 +114,19 @@ class DocumentsPageView: UIView, UITableViewDelegate, UITableViewDataSource, Doc
     // MARK: - DocumentTableViewCellDelegate
     
     func documentTableViewCell(cell: DocumentTableViewCell, didDownloadDocument document: Document) {
-        ApiManager.downloadDocument(document, user: User.currentUser()!) { (prealerts, error) in
-            
+        let viewController = delegate as! UIViewController
+        let alertController = UIAlertController(title: "Downloading", message: "Do you want to start download document: \(document.fileName) ?", preferredStyle: .Alert)
+        let yesAlertAction = UIAlertAction(title: "YES", style: .Default) { alertAction in
+            ApiManager.sharedInstance.downloadDocument(document, user: User.currentUser()!) { (error) in
+                if let error = error {
+                    Utils.showError(error, inViewController: viewController)
+                }
+            }
         }
+        let noAlertAction = UIAlertAction(title: "NO", style: .Default, handler: nil)
+        alertController.addAction(noAlertAction)
+        alertController.addAction(yesAlertAction)
+        viewController.presentViewController(alertController, animated: true, completion: nil)
     }
 }
 

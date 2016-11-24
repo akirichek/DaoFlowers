@@ -17,6 +17,15 @@
 		825369081DDF9BA700A17537 /* InvoiceDetailsGeneralTotalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 825369071DDF9BA700A17537 /* InvoiceDetailsGeneralTotalTableViewCell.xib */; };
 		8253690B1DE0E73C00A17537 /* InvoiceDetailsGeneralFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8253690A1DE0E73C00A17537 /* InvoiceDetailsGeneralFilterView.swift */; };
 		8253690D1DE0E74900A17537 /* InvoiceDetailsGeneralFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8253690C1DE0E74900A17537 /* InvoiceDetailsGeneralFilterView.xib */; };
+		8253690F1DE229DA00A17537 /* InvoiceDetailsGeneralLandscapeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8253690E1DE229DA00A17537 /* InvoiceDetailsGeneralLandscapeTableViewCell.xib */; };
+		825369131DE33BD700A17537 /* InvoiceDetailsGeneralTotalLandscapeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 825369121DE33BD700A17537 /* InvoiceDetailsGeneralTotalLandscapeTableViewCell.xib */; };
+		825369151DE33D7200A17537 /* InvoiceDetailsGeneralHeaderLandscapeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 825369141DE33D7200A17537 /* InvoiceDetailsGeneralHeaderLandscapeTableViewCell.xib */; };
+		825369181DE390AC00A17537 /* InvoiceDetailsStatisticsViewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825369171DE390AC00A17537 /* InvoiceDetailsStatisticsViewPage.swift */; };
+		8253691A1DE390BF00A17537 /* InvoiceDetailsStatisticsViewPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 825369191DE390BF00A17537 /* InvoiceDetailsStatisticsViewPage.xib */; };
+		8253691C1DE3910B00A17537 /* InvoiceDetailsStatisticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8253691B1DE3910B00A17537 /* InvoiceDetailsStatisticsTableViewCell.swift */; };
+		8253691E1DE44F8000A17537 /* InvoiceDetailsStatisticsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8253691D1DE44F8000A17537 /* InvoiceDetailsStatisticsTableViewCell.xib */; };
+		825369241DE4B7F000A17537 /* InvoiceDetailsStatisticsSubtotalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 825369231DE4B7F000A17537 /* InvoiceDetailsStatisticsSubtotalTableViewCell.xib */; };
+		825369261DE6317E00A17537 /* InvoiceDetailsStatisticsTotalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 825369251DE6317E00A17537 /* InvoiceDetailsStatisticsTotalTableViewCell.xib */; };
 		82606B9E1DCF7F8800A9E8D8 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82606B9D1DCF7F8800A9E8D8 /* Country.swift */; };
 		82606BA11DCF824000A9E8D8 /* CountryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82606BA01DCF824000A9E8D8 /* CountryCollectionViewCell.swift */; };
 		82606BA41DCF900D00A9E8D8 /* PlantationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82606BA31DCF900D00A9E8D8 /* PlantationsViewController.swift */; };
@@ -106,7 +115,6 @@
 		82C1C1DF1DDDFA37007F223E /* InvoiceDetailsGeneralTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82C1C1DE1DDDFA37007F223E /* InvoiceDetailsGeneralTableViewCell.xib */; };
 		82C1C1E11DDDFA4B007F223E /* InvoiceDetailsGeneralTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1C1E01DDDFA4B007F223E /* InvoiceDetailsGeneralTableViewCell.swift */; };
 		82C1C1E71DDDFE0A007F223E /* InvoiceDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1C1E61DDDFE0A007F223E /* InvoiceDetails.swift */; };
-		82C1C1E91DDE0BD8007F223E /* DownloadFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1C1E81DDE0BD8007F223E /* DownloadFile.swift */; };
 		82C1C1EB1DDF968C007F223E /* InvoiceDetailsGeneralHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82C1C1EA1DDF968C007F223E /* InvoiceDetailsGeneralHeaderTableViewCell.xib */; };
 		82E5659E1DBCF775005F18F5 /* Plantation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5659D1DBCF775005F18F5 /* Plantation.swift */; };
 		82E565A01DBD072F005F18F5 /* PlantationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5659F1DBD072F005F18F5 /* PlantationTableViewCell.swift */; };
@@ -138,6 +146,15 @@
 		825369071DDF9BA700A17537 /* InvoiceDetailsGeneralTotalTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvoiceDetailsGeneralTotalTableViewCell.xib; sourceTree = "<group>"; };
 		8253690A1DE0E73C00A17537 /* InvoiceDetailsGeneralFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoiceDetailsGeneralFilterView.swift; sourceTree = "<group>"; };
 		8253690C1DE0E74900A17537 /* InvoiceDetailsGeneralFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvoiceDetailsGeneralFilterView.xib; sourceTree = "<group>"; };
+		8253690E1DE229DA00A17537 /* InvoiceDetailsGeneralLandscapeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvoiceDetailsGeneralLandscapeTableViewCell.xib; sourceTree = "<group>"; };
+		825369121DE33BD700A17537 /* InvoiceDetailsGeneralTotalLandscapeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvoiceDetailsGeneralTotalLandscapeTableViewCell.xib; sourceTree = "<group>"; };
+		825369141DE33D7200A17537 /* InvoiceDetailsGeneralHeaderLandscapeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvoiceDetailsGeneralHeaderLandscapeTableViewCell.xib; sourceTree = "<group>"; };
+		825369171DE390AC00A17537 /* InvoiceDetailsStatisticsViewPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoiceDetailsStatisticsViewPage.swift; sourceTree = "<group>"; };
+		825369191DE390BF00A17537 /* InvoiceDetailsStatisticsViewPage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvoiceDetailsStatisticsViewPage.xib; sourceTree = "<group>"; };
+		8253691B1DE3910B00A17537 /* InvoiceDetailsStatisticsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoiceDetailsStatisticsTableViewCell.swift; sourceTree = "<group>"; };
+		8253691D1DE44F8000A17537 /* InvoiceDetailsStatisticsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvoiceDetailsStatisticsTableViewCell.xib; sourceTree = "<group>"; };
+		825369231DE4B7F000A17537 /* InvoiceDetailsStatisticsSubtotalTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvoiceDetailsStatisticsSubtotalTableViewCell.xib; sourceTree = "<group>"; };
+		825369251DE6317E00A17537 /* InvoiceDetailsStatisticsTotalTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvoiceDetailsStatisticsTotalTableViewCell.xib; sourceTree = "<group>"; };
 		82606B9D1DCF7F8800A9E8D8 /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		82606BA01DCF824000A9E8D8 /* CountryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCollectionViewCell.swift; sourceTree = "<group>"; };
 		82606BA31DCF900D00A9E8D8 /* PlantationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlantationsViewController.swift; sourceTree = "<group>"; };
@@ -231,7 +248,6 @@
 		82C1C1DE1DDDFA37007F223E /* InvoiceDetailsGeneralTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvoiceDetailsGeneralTableViewCell.xib; sourceTree = "<group>"; };
 		82C1C1E01DDDFA4B007F223E /* InvoiceDetailsGeneralTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoiceDetailsGeneralTableViewCell.swift; sourceTree = "<group>"; };
 		82C1C1E61DDDFE0A007F223E /* InvoiceDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoiceDetails.swift; sourceTree = "<group>"; };
-		82C1C1E81DDE0BD8007F223E /* DownloadFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadFile.swift; sourceTree = "<group>"; };
 		82C1C1EA1DDF968C007F223E /* InvoiceDetailsGeneralHeaderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvoiceDetailsGeneralHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		82E5659D1DBCF775005F18F5 /* Plantation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plantation.swift; sourceTree = "<group>"; };
 		82E5659F1DBD072F005F18F5 /* PlantationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlantationTableViewCell.swift; sourceTree = "<group>"; };
@@ -317,12 +333,28 @@
 				82C1C1DC1DDDF98C007F223E /* InvoiceDetailsGeneralViewPage.xib */,
 				82C1C1E01DDDFA4B007F223E /* InvoiceDetailsGeneralTableViewCell.swift */,
 				82C1C1DE1DDDFA37007F223E /* InvoiceDetailsGeneralTableViewCell.xib */,
+				8253690E1DE229DA00A17537 /* InvoiceDetailsGeneralLandscapeTableViewCell.xib */,
 				82C1C1EA1DDF968C007F223E /* InvoiceDetailsGeneralHeaderTableViewCell.xib */,
+				825369141DE33D7200A17537 /* InvoiceDetailsGeneralHeaderLandscapeTableViewCell.xib */,
 				825369071DDF9BA700A17537 /* InvoiceDetailsGeneralTotalTableViewCell.xib */,
+				825369121DE33BD700A17537 /* InvoiceDetailsGeneralTotalLandscapeTableViewCell.xib */,
 				8253690A1DE0E73C00A17537 /* InvoiceDetailsGeneralFilterView.swift */,
 				8253690C1DE0E74900A17537 /* InvoiceDetailsGeneralFilterView.xib */,
 			);
 			name = General;
+			sourceTree = "<group>";
+		};
+		825369161DE3907A00A17537 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				825369171DE390AC00A17537 /* InvoiceDetailsStatisticsViewPage.swift */,
+				825369191DE390BF00A17537 /* InvoiceDetailsStatisticsViewPage.xib */,
+				8253691B1DE3910B00A17537 /* InvoiceDetailsStatisticsTableViewCell.swift */,
+				8253691D1DE44F8000A17537 /* InvoiceDetailsStatisticsTableViewCell.xib */,
+				825369231DE4B7F000A17537 /* InvoiceDetailsStatisticsSubtotalTableViewCell.xib */,
+				825369251DE6317E00A17537 /* InvoiceDetailsStatisticsTotalTableViewCell.xib */,
+			);
+			name = Statistics;
 			sourceTree = "<group>";
 		};
 		82606B9F1DCF820500A9E8D8 /* Countries */ = {
@@ -613,7 +645,6 @@
 				82606BC61DD7985800A9E8D8 /* ApiManager+Orders.swift */,
 				827E8B191DDB535E000A8EAE /* ApiManager+Documents.swift */,
 				82C059921DC68ED000F061E6 /* LanguageManager.swift */,
-				82C1C1E81DDE0BD8007F223E /* DownloadFile.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -623,6 +654,7 @@
 			children = (
 				82C1C1D81DDDF6CA007F223E /* InvoiceDetailsViewController.swift */,
 				825369091DE0E70C00A17537 /* General */,
+				825369161DE3907A00A17537 /* Statistics */,
 			);
 			name = "Invoice Details";
 			sourceTree = "<group>";
@@ -729,17 +761,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				827E8B181DDB4C50000A8EAE /* DocumentTableViewCell.xib in Resources */,
+				8253690F1DE229DA00A17537 /* InvoiceDetailsGeneralLandscapeTableViewCell.xib in Resources */,
 				82C1C1DD1DDDF98C007F223E /* InvoiceDetailsGeneralViewPage.xib in Resources */,
 				82C059841DC6874E00F061E6 /* LanguagePickerViewCell.xib in Resources */,
+				825369261DE6317E00A17537 /* InvoiceDetailsStatisticsTotalTableViewCell.xib in Resources */,
 				8299D3CA1DBBB11F0088E550 /* VarietyDetailsPlantationsGrowersView.xib in Resources */,
 				827E8B1E1DDB79D8000A8EAE /* DocumentTableViewHeader.xib in Resources */,
+				825369131DE33BD700A17537 /* InvoiceDetailsGeneralTotalLandscapeTableViewCell.xib in Resources */,
 				82606BC31DD76FAB00A9E8D8 /* VarietiesListHintView.xib in Resources */,
 				8299D3CC1DBBB1360088E550 /* VarietyDetailsSimilarVarietiesView.xib in Resources */,
+				8253691E1DE44F8000A17537 /* InvoiceDetailsStatisticsTableViewCell.xib in Resources */,
 				82E565A21DBD0737005F18F5 /* PlantationTableViewCell.xib in Resources */,
 				82457AD51DAEAA5900D87B21 /* LaunchScreen.storyboard in Resources */,
+				825369241DE4B7F000A17537 /* InvoiceDetailsStatisticsSubtotalTableViewCell.xib in Resources */,
 				82C0598A1DC68E4900F061E6 /* Localizable.strings in Resources */,
 				82457AD21DAEAA5900D87B21 /* Assets.xcassets in Resources */,
 				82C1C1DF1DDDFA37007F223E /* InvoiceDetailsGeneralTableViewCell.xib in Resources */,
+				8253691A1DE390BF00A17537 /* InvoiceDetailsStatisticsViewPage.xib in Resources */,
 				8299D3AC1DB8D2170088E550 /* VarietiesPageView.xib in Resources */,
 				8253690D1DE0E74900A17537 /* InvoiceDetailsGeneralFilterView.xib in Resources */,
 				82C0597B1DC6449C00F061E6 /* VarietyCollectionViewCell.xib in Resources */,
@@ -748,6 +786,7 @@
 				82606BA81DCFA56900A9E8D8 /* PlantationsPageView.xib in Resources */,
 				82FBA19E1DC0D007001CE265 /* VarietiesSearchAdditionalParametersView.xib in Resources */,
 				8299D3C81DBBB1150088E550 /* VarietyDetailsGeneralInfoView.xib in Resources */,
+				825369151DE33D7200A17537 /* InvoiceDetailsGeneralHeaderLandscapeTableViewCell.xib in Resources */,
 				82C059781DC623A300F061E6 /* ColorCollectionViewCell.xib in Resources */,
 				825369081DDF9BA700A17537 /* InvoiceDetailsGeneralTotalTableViewCell.xib in Resources */,
 				8299D3B01DB8E4240088E550 /* ContentPageViewerCollectionViewCell.xib in Resources */,
@@ -872,9 +911,9 @@
 				8299D37E1DB14E320088E550 /* ApiManager.swift in Sources */,
 				82FBA1A21DC0D73E001CE265 /* Breeder.swift in Sources */,
 				82606BB11DD1FF9500A9E8D8 /* ApiManager+Plantations.swift in Sources */,
-				82C1C1E91DDE0BD8007F223E /* DownloadFile.swift in Sources */,
 				8299D36D1DAF8CC50088E550 /* MainViewControllerSegue.swift in Sources */,
 				82FBA1A01DC0D017001CE265 /* VarietiesSearchAdditionalParametersView.swift in Sources */,
+				825369181DE390AC00A17537 /* InvoiceDetailsStatisticsViewPage.swift in Sources */,
 				82C1C1E11DDDFA4B007F223E /* InvoiceDetailsGeneralTableViewCell.swift in Sources */,
 				8299D3D61DBBF5C30088E550 /* ApiManager+Authorization.swift in Sources */,
 				827E8B071DD8DEC6000A8EAE /* Order.swift in Sources */,
@@ -898,6 +937,7 @@
 				8299D37A1DAF9A930088E550 /* MainViewController.swift in Sources */,
 				8299D3A61DB8C6090088E550 /* PageViewerFlowLayout.swift in Sources */,
 				8299D3861DB2752A0088E550 /* UILabel+FitFontForSize.swift in Sources */,
+				8253691C1DE3910B00A17537 /* InvoiceDetailsStatisticsTableViewCell.swift in Sources */,
 				827E8B1A1DDB535E000A8EAE /* ApiManager+Documents.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

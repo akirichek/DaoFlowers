@@ -8,7 +8,7 @@
 
 import Alamofire
 
-extension ApiManager {
+extension ApiManager: NSURLSessionDownloadDelegate {
     
     static func fetchInvoices(user: User, completion: (invoices: [Document]?, error: NSError?) -> ()) {
         let url = K.Api.BaseUrl + K.Api.Documents.Invoices
@@ -69,21 +69,6 @@ extension ApiManager {
         }
     }
     
-    static func downloadDocument(document: Document, user: User, completion: (prealerts: [Document]?, error: NSError?) -> ()) {
-        let parameters = [
-            "doc": document.zipFile
-        ]
-        let url = K.Api.BaseUrl + K.Api.Documents.Unzip
-        print(url)
-        let destination = Request.suggestedDownloadDestination()
-        Alamofire.download(.GET, url, parameters: parameters,  headers:["Authorization": user.token], destination: destination).response { request, response, data, error in
-            print(request)
-            print(response)
-            print(data)
-            print(error)
-        }
-    }
-    
     static func datesParams() -> [String: AnyObject] {
         let dateNow = NSDate()
         let dateToComponents = NSCalendar.currentCalendar().components([.Day, .Month, .Year],
@@ -101,5 +86,49 @@ extension ApiManager {
             "date_from": dateFrom,
             "date_to": dateTo
         ]
+    }
+
+    func downloadDocument(document: Document, user: User, completion: (error: NSError?) -> ()) {
+        self.downloadDocumentCompletion = completion
+        self.document = document
+        let backgroundSessionConfiguration = NSURLSessionConfiguration.backgroundSessionConfigurationWithIdentifier("backgroundSession")
+        self.backgroundSession = NSURLSession(configuration: backgroundSessionConfiguration, delegate: self, delegateQueue: NSOperationQueue.mainQueue())
+        let url = NSURL(string: K.Api.BaseUrl + K.Api.Documents.Unzip + "?doc=\(document.zipFile)")!
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "GET"
+        request.setValue(user.token, forHTTPHeaderField: "Authorization")
+        downloadTask = backgroundSession.downloadTaskWithRequest(request)
+        downloadTask.resume()
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    }
+
+    // MARK: - NSURLSessionDownloadDelegate
+
+    func URLSession(session: NSURLSession,
+                    downloadTask: NSURLSessionDownloadTask,
+                    didFinishDownloadingToURL location: NSURL){
+        let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+        let documentDirectoryPath:String = path[0]
+        let fileManager = NSFileManager()
+        let destinationURLForFile = NSURL(fileURLWithPath: documentDirectoryPath.stringByAppendingString("/\(document.fileName).xls"))
+        do {
+            try fileManager.moveItemAtURL(location, toURL: destinationURLForFile)
+        } catch{
+            print("An error occurred while moving file to destination url")
+        }
+    }
+    
+    func URLSession(session: NSURLSession,
+                    task: NSURLSessionTask,
+                    didCompleteWithError error: NSError?){
+        downloadDocumentCompletion(error: error)
+        downloadTask = nil
+        if (error != nil) {
+            print(error?.description)
+        } else {
+            print("The task finished transferring data successfully")
+        }
+        
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     }
 }
