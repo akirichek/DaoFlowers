@@ -117,7 +117,9 @@ class DocumentsViewController: BaseViewController, PageViewerDataSource, Documen
     // MARK: - DocumentsPageViewDelegate
     
     func documentsPageView(documentsPageView: DocumentsPageView, didSelectDocument document: Document) {
-        self.selectedInvoice = document
-        self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.InvoiceDetails, sender: self)
+        if documentsPageView.invoicesMode {
+            self.selectedInvoice = document
+            self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.InvoiceDetails, sender: self)
+        }
     }
 }

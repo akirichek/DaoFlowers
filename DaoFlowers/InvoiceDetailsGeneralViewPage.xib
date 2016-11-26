@@ -128,6 +128,13 @@
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24-10-2016 [mon]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="afa-u3-XJa">
+                                    <rect key="frame" x="8" y="17" width="120" height="18"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                    <color key="textColor" red="0.8901960784313725" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invoice №" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eWn-cs-Osb">
                                     <rect key="frame" x="8" y="33" width="120" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -186,13 +193,6 @@
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7988" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xWT-xo-IM9">
                                     <rect key="frame" x="240" y="50" width="70" height="18"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
-                                    <color key="textColor" red="0.8901960784313725" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24-10-2016 [mon]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="afa-u3-XJa">
-                                    <rect key="frame" x="8" y="17" width="120" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                     <color key="textColor" red="0.8901960784313725" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
@@ -378,18 +378,24 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="clientLabel" destination="XZq-HY-e8j" id="Nus-rL-Qdi"/>
-                <outlet property="fbLabel" destination="1ET-FP-qqF" id="21t-av-xM1"/>
                 <outlet property="headerLandscapeView" destination="xnx-Qj-Zp3" id="NYw-NS-c19"/>
                 <outlet property="headerPortraitView" destination="8kg-mz-cb3" id="o70-H4-TQY"/>
-                <outlet property="invoiceDateLabel" destination="afa-u3-XJa" id="MMD-fX-Yo1"/>
-                <outlet property="invoiceNumberLabel" destination="ctg-Eu-E2U" id="rTa-uS-HjK"/>
-                <outlet property="stemsLabel" destination="xWT-xo-IM9" id="qyT-hJ-8cc"/>
                 <outlet property="tableView" destination="Sm8-mm-nAn" id="XgF-8d-qBp"/>
                 <outlet property="topContainerView" destination="Ovo-I3-S6X" id="mR8-pP-NMt"/>
-                <outlet property="totalCostLabel" destination="4gp-Uw-hMr" id="CWd-Jc-qMP"/>
                 <outlet property="totalInfoLandscapeContainerView" destination="GWy-ck-uDc" id="Tiq-Cf-Lv4"/>
                 <outlet property="totalInfoPortraitContainerView" destination="3CW-ke-ZLO" id="V9T-yT-cdU"/>
+                <outletCollection property="invoiceDateLabels" destination="afa-u3-XJa" collectionClass="NSMutableArray" id="RvN-ao-PYB"/>
+                <outletCollection property="invoiceDateLabels" destination="SZb-pv-3Jx" collectionClass="NSMutableArray" id="HvD-TK-b2C"/>
+                <outletCollection property="invoiceNumberLabels" destination="ctg-Eu-E2U" collectionClass="NSMutableArray" id="WNn-G7-Bjw"/>
+                <outletCollection property="invoiceNumberLabels" destination="jAm-TC-oLo" collectionClass="NSMutableArray" id="bG6-F5-6Nz"/>
+                <outletCollection property="clientLabels" destination="XZq-HY-e8j" collectionClass="NSMutableArray" id="Hba-CC-EPi"/>
+                <outletCollection property="clientLabels" destination="LNm-np-1zr" collectionClass="NSMutableArray" id="bQo-uN-jg2"/>
+                <outletCollection property="totalCostLabels" destination="4gp-Uw-hMr" collectionClass="NSMutableArray" id="AuO-QQ-ODB"/>
+                <outletCollection property="totalCostLabels" destination="VRV-dA-I2w" collectionClass="NSMutableArray" id="WTp-zp-tcv"/>
+                <outletCollection property="fbLabels" destination="1ET-FP-qqF" collectionClass="NSMutableArray" id="PzT-MA-AuP"/>
+                <outletCollection property="fbLabels" destination="TK0-nC-k6y" collectionClass="NSMutableArray" id="MMA-eL-QSC"/>
+                <outletCollection property="stemsLabels" destination="xWT-xo-IM9" collectionClass="NSMutableArray" id="eHE-h9-5z5"/>
+                <outletCollection property="stemsLabels" destination="q5a-Iq-DWQ" collectionClass="NSMutableArray" id="BBp-sO-TBI"/>
             </connections>
             <point key="canvasLocation" x="380" y="198"/>
         </view>

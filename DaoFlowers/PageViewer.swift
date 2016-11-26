@@ -17,14 +17,19 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
     @IBOutlet weak var contentCollectionView: UICollectionView!
     
     var viewWillTransitionToSize: CGSize!
-    var dataSource: PageViewerDataSource!
+    weak var dataSource: PageViewerDataSource!
+    weak var delegate: PageViewerDelegate?
     var countOfPages: Int {
         get {
             return self.dataSource.pageViewerNumberOfPages(self)
         }
     }
     var currentContentOffsetX: CGFloat = 0.0
-    var indexOfCurrentPage: Int = 0
+    var indexOfCurrentPage: Int = 0 {
+        didSet {
+            delegate?.pageViewer(self, didSelectPageAtIndex: indexOfCurrentPage)
+        }
+    }
     
     // MARK: Public Methods
     
@@ -280,8 +285,12 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
     }
 }
 
-protocol PageViewerDataSource {
+protocol PageViewerDataSource: NSObjectProtocol {
     func pageViewerNumberOfPages(pageViewer: PageViewer) -> Int
     func pageViewer(pageViewer: PageViewer, headerForItemAtIndex index: Int) -> String
     func pageViewer(pageViewer: PageViewer, pageForItemAtIndex index: Int, reusableView: UIView?) -> UIView
+}
+
+protocol PageViewerDelegate: NSObjectProtocol {
+    func pageViewer(pageViewer: PageViewer, didSelectPageAtIndex index: Int)
 }

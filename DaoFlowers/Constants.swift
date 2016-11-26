@@ -47,6 +47,7 @@ struct K {
             static let OrderDetails = "OrderDetailsViewControllerSegueIdentifier"
             static let Documents = "DocumentsViewControllerSegueIdentifier"
             static let InvoiceDetails = "InvoiceDetailsSegueIdentifier"
+            static let Contacts = "ContactsViewControllerSegueIdentifier"
         }
         
         struct ViewControllerIdentifier {

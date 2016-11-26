@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, InvoiceDetailsGeneralFilterViewDelegate {
+class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, PageViewerDelegate, InvoiceDetailsGeneralFilterViewDelegate {
     
     @IBOutlet weak var pageViewerContainerView: UIView!
     var filterButton: UIBarButtonItem!
@@ -18,7 +18,7 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, In
     var filteredInvoiceDetails: InvoiceDetails!
     var filterView: InvoiceDetailsGeneralFilterView!
     var filterViewState: InvoiceDetailsGeneralFilterViewState = InvoiceDetailsGeneralFilterViewState()
-    
+    var selectedIndexOfPage = 0
     
     // MARK: - Override Methods
     
@@ -29,20 +29,11 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, In
         let pageViewer = NSBundle.mainBundle().loadNibNamed("PageViewer", owner: self, options: nil).first as! PageViewer
         pageViewer.frame = self.pageViewerContainerView.bounds
         pageViewer.dataSource = self
+        pageViewer.delegate = self
         pageViewer.viewWillTransitionToSize = self.contentViewFrame().size
         self.pageViewerContainerView.addSubview(pageViewer)
         self.pageViewer = pageViewer
-        
-        var buttons: [UIBarButtonItem] = []
-        if invoice.zipFile.characters.count > 0 {
-            let downloadButton = UIBarButtonItem(image: UIImage(named: "icon_download")!, style: .Plain, target: self, action: #selector(InvoiceDetailsViewController.downloadButtonClicked(_:)))
-            buttons.append(downloadButton)
-        }
-        
-        filterButton = UIBarButtonItem(image: UIImage(named: "icon_filter")!, style: .Plain, target: self, action: #selector(InvoiceDetailsViewController.filterButtonClicked(_:)))
-        buttons.append(filterButton)
-        
-        self.navigationItem.rightBarButtonItems = buttons
+        adjustBarButtonItems()
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
@@ -57,15 +48,36 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, In
     
     // MARK: - Private Methods
     
+    func adjustBarButtonItems() {
+        var buttons: [UIBarButtonItem] = []
+        if invoice.zipFile.characters.count > 0 {
+            let downloadButton = UIBarButtonItem(image: UIImage(named: "icon_download")!, style: .Plain, target: self, action: #selector(InvoiceDetailsViewController.downloadButtonClicked(_:)))
+            buttons.append(downloadButton)
+        }
+        
+        if selectedIndexOfPage == 0 {
+            filterButton = UIBarButtonItem(image: UIImage(named: "icon_filter")!, style: .Plain, target: self, action: #selector(InvoiceDetailsViewController.filterButtonClicked(_:)))
+            buttons.append(filterButton)
+        }
+        
+        self.navigationItem.rightBarButtonItems = buttons
+    }
+    
     func fetchInvoiceDetailsForPageViewAtIndex(index: Int) {
         ApiManager.fetchInvoiceDetails(invoice, user: User.currentUser()!) { (invoiceDetails, error) in
             if let invoiceDetails = invoiceDetails {
                 self.invoiceDetails = invoiceDetails
                 self.filteredInvoiceDetails = invoiceDetails
                 if let pageView = self.pageViewer.pageAtIndex(index) as? InvoiceDetailsGeneralViewPage {
+                    pageView.viewWillTransitionToSize = self.viewWillTransitionToSize
+                    pageView.invoice = self.invoice
+                    pageView.invoiceDetails = invoiceDetails
+                } else if let pageView = self.pageViewer.pageAtIndex(index) as? InvoiceDetailsAveragePricesViewPage {
+                    pageView.viewWillTransitionToSize = self.viewWillTransitionToSize
                     pageView.invoice = self.invoice
                     pageView.invoiceDetails = invoiceDetails
                 } else if let pageView = self.pageViewer.pageAtIndex(index) as? InvoiceDetailsStatisticsViewPage {
+                    pageView.viewWillTransitionToSize = self.viewWillTransitionToSize
                     pageView.invoice = self.invoice
                     pageView.invoiceDetails = invoiceDetails
                 }
@@ -173,7 +185,7 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, In
         case 0:
             nibName = "InvoiceDetailsGeneralViewPage"
         case 1:
-            nibName = "InvoiceDetailsStatisticsViewPage"
+            nibName = "InvoiceDetailsAveragePricesViewPage"
         case 2:
             nibName = "InvoiceDetailsStatisticsViewPage"
         default:
@@ -187,6 +199,10 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, In
                 generalPageView.viewWillTransitionToSize = self.viewWillTransitionToSize
                 generalPageView.invoice = invoice
                 generalPageView.invoiceDetails = invoiceDetails
+            } else if let averagePricesViewPage = pageView as? InvoiceDetailsAveragePricesViewPage {
+                averagePricesViewPage.viewWillTransitionToSize = self.viewWillTransitionToSize
+                averagePricesViewPage.invoice = invoice
+                averagePricesViewPage.invoiceDetails = invoiceDetails
             } else if let statisticsPageView = pageView as? InvoiceDetailsStatisticsViewPage {
                 statisticsPageView.viewWillTransitionToSize = self.viewWillTransitionToSize
                 statisticsPageView.invoice = invoice
@@ -197,6 +213,13 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, In
         }
         
         return pageView
+    }
+    
+    // MARK: - PageViewerDelegate
+    
+    func pageViewer(pageViewer: PageViewer, didSelectPageAtIndex index: Int) {
+        selectedIndexOfPage = index
+        adjustBarButtonItems()
     }
     
     // MARK: - InvoiceDetailsGeneralFilterViewDelegate

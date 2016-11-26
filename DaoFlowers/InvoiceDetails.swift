@@ -60,6 +60,7 @@ struct InvoiceDetails {
         orderStatistic = OrderStatistic(dictionary: dictionary["orderStatistic"] as! [String: AnyObject])
         statistic = Statistic(dictionary: dictionary["statistic"] as! [String: AnyObject])
         self.sortOrderStatistic()
+        self.sortStatistic()
     }
     
     struct Head {
@@ -300,5 +301,23 @@ struct InvoiceDetails {
         sortedOrderStatistic.rowsGroupedByFlowerTypeId = sortedRowsGroupedByFlowerTypeId
         
         self.orderStatistic = sortedOrderStatistic
+    }
+    
+    mutating func sortStatistic() {
+        var sortedStatistic = self.statistic
+        sortedStatistic.averagePrices.sortInPlace { (avrPrice1, avrPrice2) -> Bool in
+            let country1 = self.countryById(avrPrice1.countryId)!
+            let country2 = self.countryById(avrPrice2.countryId)!
+            
+            if country1.name == country2.name {
+                let flower1 = self.flowerById(avrPrice1.flowerTypeId)!
+                let flower2 = self.flowerById(avrPrice2.flowerTypeId)!
+                return flower1.name < flower2.name
+            } else {
+                return country1.name < country2.name
+            }
+        }
+        
+        self.statistic = sortedStatistic
     }
 }

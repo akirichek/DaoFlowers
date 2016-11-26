@@ -40,19 +40,7 @@ class InvoiceDetailsStatisticsViewPage: UIView, UITableViewDelegate, UITableView
         var nib = UINib(nibName:"InvoiceDetailsStatisticsTableViewCell", bundle: nil)
         self.tableView.registerNib(nib, forCellReuseIdentifier: "InvoiceDetailsStatisticsTableViewCellIdentifier")
         nib = UINib(nibName:"InvoiceDetailsStatisticsTotalTableViewCell", bundle: nil)
-        self.tableView.registerNib(nib, forCellReuseIdentifier: "InvoiceDetailsStatisticsTotalTableViewCellIdentifier")
-//
-//        nib = UINib(nibName:"InvoiceDetailsGeneralHeaderTableViewCell", bundle: nil)
-//        self.tableView.registerNib(nib, forCellReuseIdentifier: "InvoiceDetailsGeneralHeaderTableViewCellIdentifier")
-//        nib = UINib(nibName:"InvoiceDetailsGeneralHeaderLandscapeTableViewCell", bundle: nil)
-//        self.tableView.registerNib(nib, forCellReuseIdentifier: "InvoiceDetailsGeneralHeaderLandscapeTableViewCellIdentifier")
-//        
-//        nib = UINib(nibName:"InvoiceDetailsGeneralTotalTableViewCell", bundle: nil)
-//        self.tableView.registerNib(nib, forCellReuseIdentifier: "InvoiceDetailsGeneralTotalTableViewCellIdentifier")
-//        
-//        nib = UINib(nibName:"InvoiceDetailsGeneralTotalLandscapeTableViewCell", bundle: nil)
-//        self.tableView.registerNib(nib, forCellReuseIdentifier: "InvoiceDetailsGeneralTotalLandscapeTableViewCellIdentifier")
-//        
+        self.tableView.registerNib(nib, forCellReuseIdentifier: "InvoiceDetailsStatisticsTotalTableViewCellIdentifier")        
         self.totalInfoPortraitContainerView.layer.cornerRadius = 5
         self.totalInfoLandscapeContainerView.layer.cornerRadius = 5
     }
@@ -78,28 +66,33 @@ class InvoiceDetailsStatisticsViewPage: UIView, UITableViewDelegate, UITableView
     }
     
     func adjustViewSize() {
-//        var topContainerViewFrame = topContainerView.frame
-//        var tableViewFrame = tableView.frame
-//        
-//        if viewWillTransitionToSize.width < viewWillTransitionToSize.height {
-//            totalInfoPortraitContainerView.hidden = false
-//            totalInfoLandscapeContainerView.hidden = true
-//            headerPortraitView.hidden = false
-//            headerLandscapeView.hidden = true
-//            topContainerViewFrame.size.height = headerPortraitView.frame.height + headerPortraitView.frame.origin.y
-//            tableViewFrame.origin.y = topContainerViewFrame.origin.y + topContainerViewFrame.height
-//            tableViewFrame.size.height = viewWillTransitionToSize.height - tableViewFrame.origin.y - 114
-//        } else {
-//            totalInfoPortraitContainerView.hidden = true
-//            totalInfoLandscapeContainerView.hidden = false
-//            headerPortraitView.hidden = true
-//            headerLandscapeView.hidden = false
-//            topContainerViewFrame.size.height = headerLandscapeView.frame.height + headerLandscapeView.frame.origin.y
-//            tableViewFrame.origin.y = topContainerViewFrame.origin.y + topContainerViewFrame.height
-//            tableViewFrame.size.height = viewWillTransitionToSize.height - tableViewFrame.origin.y - 82
-//        }
-//        topContainerView.frame = topContainerViewFrame
-//        tableView.frame = tableViewFrame
+        var topContainerViewFrame = topContainerView.frame
+        var tableViewFrame = tableView.frame
+        var headerViewFrame = headerView.frame
+        
+        if viewWillTransitionToSize.width < viewWillTransitionToSize.height {
+            totalInfoPortraitContainerView.hidden = false
+            totalInfoLandscapeContainerView.hidden = true
+            
+            headerViewFrame.origin.y = totalInfoPortraitContainerView.frame.origin.y + totalInfoPortraitContainerView.frame.height + 8
+            headerViewFrame.size.height = 34
+            topContainerViewFrame.size.height = headerViewFrame.height + headerViewFrame.origin.y
+            tableViewFrame.origin.y = topContainerViewFrame.origin.y + topContainerViewFrame.height
+            tableViewFrame.size.height = viewWillTransitionToSize.height - tableViewFrame.origin.y - 114
+        } else {
+            totalInfoPortraitContainerView.hidden = true
+            totalInfoLandscapeContainerView.hidden = false
+
+            headerViewFrame.origin.y = totalInfoLandscapeContainerView.frame.origin.y + totalInfoLandscapeContainerView.frame.height + 8
+            headerViewFrame.size.height = 20
+            topContainerViewFrame.size.height = headerViewFrame.height + headerViewFrame.origin.y
+            tableViewFrame.origin.y = topContainerViewFrame.origin.y + topContainerViewFrame.height
+            tableViewFrame.size.height = viewWillTransitionToSize.height - tableViewFrame.origin.y - 82
+        }
+        
+        topContainerView.frame = topContainerViewFrame
+        tableView.frame = tableViewFrame
+        headerView.frame = headerViewFrame
     }
     
     // MARK: - UITableViewDataSource
@@ -164,50 +157,45 @@ class InvoiceDetailsStatisticsViewPage: UIView, UITableViewDelegate, UITableView
     
     // MARK: - UITableViewDelegate
     
-//    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        var heightForRow: CGFloat
-//        if indexPath.row == 0 {
-//            if viewWillTransitionToSize.width < viewWillTransitionToSize.height {
-//                heightForRow = 36
-//            } else {
-//                heightForRow = 20
-//            }
-//        } else if indexPath.row == self.tableView(tableView, numberOfRowsInSection: indexPath.section) - 1 {
-//            heightForRow = 20
-//        } else {
-//            let head = self.invoiceDetails!.heads[indexPath.section]
-//            let row = head.rows[indexPath.row - 1]
-//            let flower = self.invoiceDetails!.flowerById(head.flowerTypeId)!
-//            let labelHeight: CGFloat = 21
-//            var labelWidth: CGFloat
-//            if viewWillTransitionToSize.width < viewWillTransitionToSize.height {
-//                heightForRow = 50
-//                labelWidth = 90
-//            } else {
-//                heightForRow = 20
-//                labelWidth = 114
-//            }
-//            
-//            let heightForFlowerName = Utils.heightForText(flower.name,
-//                                                          havingWidth: labelWidth,
-//                                                          andFont: UIFont.systemFontOfSize(12))
-//            let variety = self.invoiceDetails!.varietyById(row.flowerSortId)!
-//            let heightForVarietyName = Utils.heightForText(variety.name,
-//                                                           havingWidth: labelWidth,
-//                                                           andFont: UIFont.systemFontOfSize(12))
-//            if viewWillTransitionToSize.width < viewWillTransitionToSize.height {
-//                if heightForVarietyName > labelHeight && heightForFlowerName > labelHeight{
-//                    heightForRow = 77
-//                } else if heightForVarietyName > labelHeight || heightForFlowerName > labelHeight {
-//                    heightForRow = 69
-//                }
-//            } else {
-//                if heightForVarietyName > labelHeight || heightForFlowerName > labelHeight {
-//                    heightForRow = 34
-//                }
-//            }
-//        }
-//        
-//        return heightForRow
-//    }
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        var heightForRow: CGFloat = 18
+        if indexPath.section == self.numberOfSectionsInTableView(tableView) - 1 {
+            heightForRow = 18
+        } else {
+            if indexPath.row == self.tableView(tableView, numberOfRowsInSection: indexPath.section) - 1 {
+                heightForRow = 18
+            } else {
+                let rowsGroupedByFlowerTypeId = self.invoiceDetails!.orderStatistic.rowsGroupedByFlowerTypeId[indexPath.section]
+                let flowerTypeId = Array(rowsGroupedByFlowerTypeId.keys)[0]
+                let rows = Array(rowsGroupedByFlowerTypeId.values)[0]
+                let row = rows[indexPath.row]
+                let flower = invoiceDetails!.flowerById(flowerTypeId)!
+                
+                let labelHeight: CGFloat = 21
+                var flowerLabelWidth: CGFloat
+                var varietyLabelWidth: CGFloat
+                if viewWillTransitionToSize.width < viewWillTransitionToSize.height {
+                    flowerLabelWidth = 70
+                    varietyLabelWidth = 110
+                } else {
+                    flowerLabelWidth = 125
+                    varietyLabelWidth = 124
+                }
+                
+                let heightForFlowerName = Utils.heightForText(flower.name,
+                                                              havingWidth: flowerLabelWidth,
+                                                              andFont: UIFont.systemFontOfSize(12))
+                let variety = self.invoiceDetails!.varietyById(row.flowerSortId)!
+                let heightForVarietyName = Utils.heightForText(variety.name,
+                                                               havingWidth: varietyLabelWidth,
+                                                               andFont: UIFont.systemFontOfSize(12))
+
+                if heightForVarietyName > labelHeight || heightForFlowerName > labelHeight {
+                    heightForRow = 32
+                }
+            }
+        }
+        
+        return heightForRow
+    }
 }

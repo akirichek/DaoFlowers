@@ -13,12 +13,12 @@ class InvoiceDetailsGeneralViewPage: UIView, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var totalInfoPortraitContainerView: UIView!
     @IBOutlet weak var totalInfoLandscapeContainerView: UIView!
-    @IBOutlet weak var invoiceDateLabel: UILabel!
-    @IBOutlet weak var invoiceNumberLabel: UILabel!
-    @IBOutlet weak var clientLabel: UILabel!
-    @IBOutlet weak var totalCostLabel: UILabel!
-    @IBOutlet weak var fbLabel: UILabel!
-    @IBOutlet weak var stemsLabel: UILabel!
+    @IBOutlet var invoiceDateLabels: [UILabel]!
+    @IBOutlet var invoiceNumberLabels: [UILabel]!
+    @IBOutlet var clientLabels: [UILabel]!
+    @IBOutlet var totalCostLabels: [UILabel]!
+    @IBOutlet var fbLabels: [UILabel]!
+    @IBOutlet var stemsLabels: [UILabel]!
     @IBOutlet weak var headerPortraitView: UIView!
     @IBOutlet weak var headerLandscapeView: UIView!
     @IBOutlet weak var topContainerView: UIView!
@@ -78,12 +78,12 @@ class InvoiceDetailsGeneralViewPage: UIView, UITableViewDelegate, UITableViewDat
         let dateString = dateFormatter.stringFromDate(invoice.date)
         dateFormatter.dateFormat = "EEE"
         let weekdayString = dateFormatter.stringFromDate(invoice.date).lowercaseString
-        invoiceDateLabel.text = "\(dateString) [\(weekdayString)]"
-        invoiceNumberLabel.text = invoice.number
-        clientLabel.text = invoice.label
-        totalCostLabel.text = String(format: "%.2f $", invoiceDetails!.totalPrice)
-        fbLabel.text = String(format: "%.2f", invoiceDetails!.totalFb)
-        stemsLabel.text = String(invoiceDetails!.totalStems)
+        invoiceDateLabels.forEach { $0.text = "\(dateString) [\(weekdayString)]" }
+        invoiceNumberLabels.forEach { $0.text = invoice.number }
+        clientLabels.forEach { $0.text = invoice.label }
+        totalCostLabels.forEach { $0.text = String(format: "%.2f $", invoiceDetails!.totalPrice) }
+        fbLabels.forEach { $0.text = String(format: "%.2f", invoiceDetails!.totalFb) }
+        stemsLabels.forEach { $0.text = String(invoiceDetails!.totalStems) }
     }
     
     func adjustViewSize() {
