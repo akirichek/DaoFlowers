@@ -22,20 +22,30 @@ class VarietyDetailsGeneralInfoView: UIView, UICollectionViewDataSource, UIColle
     @IBOutlet weak var possibleLengthLabel: UILabel!
     @IBOutlet weak var vaseLifeLabel: UILabel!
     @IBOutlet weak var breederLabel: UILabel!
-    @IBOutlet weak var collectionContainerView: UIView!
     @IBOutlet weak var linkImageView: UIImageView!
+    @IBOutlet weak var lastPurchaseDateLabel: UILabel!
+    @IBOutlet weak var availableOnFarmsLabel: UILabel!
+    @IBOutlet weak var countriesGrowsLabel: UILabel!
+    @IBOutlet weak var varietyByFarmsLabel: UILabel!
+    @IBOutlet weak var byFarmsFlowerLabel: UILabel!
+    @IBOutlet weak var fulfillmentLabel: UILabel!
+    @IBOutlet weak var boughtLastMonth: UILabel!
+    @IBOutlet weak var advancedContainerView: UIView!
+    @IBOutlet weak var varietyByFarmsHelpImageView: UIImageView!
+    @IBOutlet weak var countriesLabel: UILabel!
     
+    weak var viewController: UIViewController!
     var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
     var variety: Variety? {
         didSet {
             self.populateView()
+            self.adjustView()
         }
     }
     
     // MARK: Override Methods
     
     override func awakeFromNib() {
-        
         let nib = UINib(nibName:"VarietyDetailsGeneralInfoCollectionViewCell", bundle: nil)
         self.collectionView.registerNib(nib, forCellWithReuseIdentifier: "VarietyDetailsGeneralInfoCollectionViewCellIdentifier")
     }
@@ -44,6 +54,7 @@ class VarietyDetailsGeneralInfoView: UIView, UICollectionViewDataSource, UIColle
     
     func populateView() {
         self.generalInfoContainerView.layer.cornerRadius = 5
+        self.advancedContainerView.layer.cornerRadius = 5
         self.varietyLabel.text = self.variety?.name
         self.abbrLabel.text = self.variety?.abr
         self.flowerLabel.text = self.variety?.flower.name
@@ -64,25 +75,88 @@ class VarietyDetailsGeneralInfoView: UIView, UICollectionViewDataSource, UIColle
         } else {
             self.imageView.image = UIImage(named: "img_def_flower_rose")
         }
+        
+        if variety!.availableOnFarms != nil {
+            lastPurchaseDateLabel.text = variety!.lastPurchaseDate
+            availableOnFarmsLabel.text = String(variety!.availableOnFarms!)
+            countriesGrowsLabel.text = variety!.countries!
+            
+            let purchasePercent = Double(Int(round(variety!.purchasePercent! * 10000))) / 10000
+            varietyByFarmsLabel.text = "\(purchasePercent) %"
+            byFarmsFlowerLabel.text = "Variety by farms \(variety!.flower.name.capitalizedString):"
+            let fulfillment = Double(Int(round(variety!.fulfillment! * 100))) / 100
+            fulfillmentLabel.text = "\(fulfillment) %"
+            
+            boughtLastMonth.text = "\(variety!.invoicesDone) FB"
+        }
+    }
     
+    func adjustView() {
         self.collectionView.reloadData()
+        var collectionContainerViewFrame = self.collectionView.frame
         
-        let contentSizeHeight = self.collectionView.collectionViewLayout.collectionViewContentSize().height + self.collectionContainerView.frame.origin.y
-        var collectionContainerViewFrame = self.collectionContainerView.frame
+        if variety!.availableOnFarms == nil {
+            advancedContainerView.hidden = true
+            collectionContainerViewFrame.origin.y = generalInfoContainerView.frame.origin.y + generalInfoContainerView.frame.height + 5
+        } else {
+            advancedContainerView.hidden = false
+            collectionContainerViewFrame.origin.y = advancedContainerView.frame.origin.y + advancedContainerView.frame.height + 5
+        }
+        
         collectionContainerViewFrame.size.height = self.collectionView.collectionViewLayout.collectionViewContentSize().height
-        self.collectionContainerView.frame = collectionContainerViewFrame
+        self.collectionView.frame = collectionContainerViewFrame
+
+        self.linkImageView.center = CGPointMake(self.breederLabel.frame.origin.x + self.breederLabel.frame.size.width + 8, self.linkImageView.center.y)
         
-        self.linkImageView.center = CGPointMake(self.breederLabel.frame.origin.x + self.breederLabel.frame.size.width + 7, self.linkImageView.center.y)
-//        self.collectionContainerViewHeightConstraint.constant = self.collectionView.collectionViewLayout.collectionViewContentSize().height
+        let contentSizeHeight = self.collectionView.collectionViewLayout.collectionViewContentSize().height + self.collectionView.frame.origin.y
         self.scrollView.contentSize = CGSizeMake(0, contentSizeHeight)
+        
+        byFarmsFlowerLabel.sizeToFit()
+        var byFarmsFlowerLabelFrame = byFarmsFlowerLabel.frame
+        if byFarmsFlowerLabelFrame.width > countriesLabel.frame.width {
+            byFarmsFlowerLabelFrame.size.width = countriesLabel.frame.width
+        }
+        byFarmsFlowerLabelFrame.origin.x = countriesLabel.frame.origin.x + countriesLabel.frame.width - byFarmsFlowerLabelFrame.width
+        byFarmsFlowerLabel.frame = byFarmsFlowerLabelFrame
+        varietyByFarmsHelpImageView.center = CGPointMake(byFarmsFlowerLabelFrame.origin.x - 10, varietyByFarmsHelpImageView.center.y)
     }
     
     // MARK: - Actions
+    
+    @IBAction func flowerImageButtonClicked(sender: UIButton) {
+        if variety?.images?.count > 0 {
+            viewController.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.VarietyImageViewer, sender: nil)
+        }
+    }
     
     @IBAction func breederLinkClicked(sender: UIButton) {
         if let url = self.variety?.breeder?.url {
             UIApplication.sharedApplication().openURL(NSURL(string: url)!)
         }
+    }
+    
+    @IBAction func productivityHelpButtonCLicked(sender: UIButton) {
+        let hintView = NSBundle.mainBundle().loadNibNamed("ProductivityHintView", owner: self, options: nil).first as! AHintView
+        hintView.frame = self.viewController.view.bounds
+        self.viewController.view.addSubview(hintView)
+    }
+    
+    @IBAction func breederHelpButtonClicked(sender: UIButton) {
+        let hintView = NSBundle.mainBundle().loadNibNamed("BreederHintView", owner: self, options: nil).first as! AHintView
+        hintView.frame = self.viewController.view.bounds
+        self.viewController.view.addSubview(hintView)
+    }
+    
+    @IBAction func varietyByFarmsHelpButtonClicked(sender: UIButton) {
+        let hintView = NSBundle.mainBundle().loadNibNamed("VarietyByFarmsHintView", owner: self, options: nil).first as! AHintView
+        hintView.frame = self.viewController.view.bounds
+        self.viewController.view.addSubview(hintView)
+    }
+    
+    @IBAction func fulfillmentHelpButtonClicked(sender: UIButton) {
+        let hintView = NSBundle.mainBundle().loadNibNamed("FulfillmentHintView", owner: self, options: nil).first as! AHintView
+        hintView.frame = self.viewController.view.bounds
+        self.viewController.view.addSubview(hintView)
     }
     
     // MARK: UICollectionViewDataSource
@@ -106,6 +180,7 @@ class VarietyDetailsGeneralInfoView: UIView, UICollectionViewDataSource, UIColle
     // MARK: UICollectionViewDelegate
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        viewController.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.VarietyImageViewer, sender: indexPath.row)
     }
     
     // MARK: UICollectionViewDelegateFlowLayout

@@ -46,11 +46,22 @@ class VarietyDetailsViewController: BaseViewController, PageViewerDataSource, Va
             page.variety = self.variety
         }
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let destinationViewController = segue.destinationViewController
+        if let varietyImageViewerViewController = destinationViewController as? VarietyImageViewerViewController {
+            varietyImageViewerViewController.images = variety.images!
+            
+            if let indexOfCurrentPage = sender as? Int {
+                varietyImageViewerViewController.indexOfCurrentPage = indexOfCurrentPage
+            }
+        }
+    }
 
     // MARK: Private Methods
     
     func fetchGeneralInfo() {
-        ApiManager.fetchGeneralInfoForVariety(self.variety) { (success, error) in
+        ApiManager.fetchGeneralInfoForVariety(self.variety, user: User.currentUser()) { (success, error) in
             if success {
                 let page = self.pageViewer.pageAtIndex(0) as! VarietyDetailsGeneralInfoView
                 page.variety = self.variety
@@ -125,6 +136,7 @@ class VarietyDetailsViewController: BaseViewController, PageViewerDataSource, Va
         
         let pageView =  NSBundle.mainBundle().loadNibNamed(nibName, owner: self, options: nil).first as? UIView
         if let varietyDetailsGeneralInfoView = pageView as? VarietyDetailsGeneralInfoView {
+            varietyDetailsGeneralInfoView.viewController = self
             if varietyDetailsGeneralInfoView.variety == nil {
                 self.fetchGeneralInfo()
             }

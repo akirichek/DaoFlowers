@@ -27,6 +27,10 @@ class Variety: NSObject {
     var productiveFrom: Int?
     var productiveTo: Int?
     var images: [String]?
+    var availableOnFarms: Int?
+    var countries: String?
+    var fulfillment: Double?
+    var lastPurchaseDate: String?
     
     struct SizeFrom {
         var id: Int
@@ -83,5 +87,14 @@ class Variety: NSObject {
             }
         }
         self.images = images
+        
+        if let advanced = dictionary["advanced"] as? [String: AnyObject] {
+            availableOnFarms = advanced["availableOnFarms"] as? Int
+            countries = advanced["countries"] as? String
+            fulfillment = advanced["fulfillment"] as? Double
+            lastPurchaseDate = advanced["lastPurchaseDate"] as? String
+            purchasePercent = advanced["purchasePercent"] as? Double
+            invoicesDone = advanced["invoicesDone"] as? Double
+        }
     }
 }

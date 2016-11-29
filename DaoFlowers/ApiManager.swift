@@ -111,9 +111,13 @@ class ApiManager: NSObject {
         }
     }
     
-    static func fetchGeneralInfoForVariety(variety: Variety, completion: (success: Bool, error: NSError?) -> ()) {
+    static func fetchGeneralInfoForVariety(variety: Variety, user: User?, completion: (success: Bool, error: NSError?) -> ()) {
         let url = K.Api.BaseUrl + K.Api.GeneralInfoPath + "/\(variety.id)"
-        Alamofire.request(.GET, url).responseJSON { response in
+        var headers: [String: String] = ["DaoUserAgentFlowers":"ios"]
+        if let user = user {
+            headers["Authorization"] = user.token
+        }
+        Alamofire.request(.GET, url, headers:headers).responseJSON { response in
             if response.result.isSuccess {
                 if let json = response.result.value {
                     //print("JSON: \(json)")
