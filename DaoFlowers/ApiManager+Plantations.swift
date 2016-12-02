@@ -40,7 +40,7 @@ extension ApiManager {
             if response.result.isSuccess {
                 var plantations: [Plantation] = []
                 if let json = response.result.value {
-                   print("JSON: \(json)")
+                   //print("JSON: \(json)")
                     for dictionary in json as! [[String: AnyObject]] {
                         let plantation = Plantation(dictionary: dictionary)
                         plantations.append(plantation)
@@ -139,6 +139,39 @@ extension ApiManager {
             } else {
                 print("Error: \(response.result.error)")
                 completion(plantations: nil, error: response.result.error)
+            }
+        }
+    }
+    
+    static func fetchPlantationDetails(plantation: Plantation,
+                                       user: User?,
+                                       completion: (plantationDetails: Plantation?, error: NSError?) -> ()) {
+        let url = K.Api.BaseUrl + K.Api.PlantationsPath + "/\(plantation.id)"
+        var headers: [String: String] = [:]
+        if let user = user {
+           headers["Authorization"] = user.token
+        }
+        Alamofire.request(.GET, url, headers:headers).responseJSON { response in
+            if response.result.isSuccess {
+                var plantationDetails = plantation
+                if let json = response.result.value {
+                    print("JSON: \(json)")
+                    plantationDetails.countryName = json["countryName"] as? String
+                    var varieties: [Variety] = []
+                    if let fsorts = json["fsorts"] as? [[String: AnyObject]] {
+                        for dictionary in fsorts {
+                            let variety = Variety(dictionary: dictionary)
+                            varieties.append(variety)
+                        }
+                    }
+
+                    plantationDetails.varieties = varieties
+                }
+                
+                completion(plantationDetails: plantationDetails, error: nil)
+            } else {
+                print("Error: \(response.result.error)")
+                completion(plantationDetails: nil, error: response.result.error)
             }
         }
     }

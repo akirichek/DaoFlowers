@@ -13,7 +13,7 @@ class VarietyImageViewerViewController: BaseViewController, UICollectionViewData
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var selectedPageLabel: UILabel!
     
-    var images: [String]!
+    var images: [Variety.Image]!
     var indexOfCurrentPage = 0
     
     override func viewDidLoad() {
@@ -55,10 +55,9 @@ class VarietyImageViewerViewController: BaseViewController, UICollectionViewData
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("VarietyImageCellIdentifier", forIndexPath: indexPath)
-        let imageView = cell.contentView.subviews.first as! UIImageView
-        imageView.image = nil
-        imageView.af_setImageWithURL(NSURL(string: images[indexPath.row])!)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("VarietyImageCellIdentifier", forIndexPath: indexPath) as! VarietyImageCollectionViewCell
+        cell.image = images[indexPath.row]
+
         return cell
     }
     

@@ -72,6 +72,7 @@ class ColorsViewController: BaseViewController, PageViewerDataSource, ColorsPage
         ApiManager.fetchColorsByFlower(flower, completion: { (colors, error) in
             if let colors = colors {
                 if let page = self.pageViewer.pageAtIndex(indexOfPageView) as? ColorsPageView {
+                    page.flower = flower
                     page.colors = colors
                     self.colors[indexOfPageView] = colors
                 }
@@ -102,6 +103,7 @@ class ColorsViewController: BaseViewController, PageViewerDataSource, ColorsPage
         pageView.viewWillTransitionToSize = self.viewWillTransitionToSize
         
         if let colors = self.colors[index] {
+            pageView.flower = flowers[index]
             pageView.colors = colors
         } else {
             pageView.colors = nil

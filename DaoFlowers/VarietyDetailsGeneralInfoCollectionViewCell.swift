@@ -11,7 +11,7 @@ import UIKit
 class VarietyDetailsGeneralInfoCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var imageView: UIImageView!
-    var imageUrl: String! {
+    var image: Variety.Image! {
         didSet {
             populateView()
         }
@@ -20,6 +20,6 @@ class VarietyDetailsGeneralInfoCollectionViewCell: UICollectionViewCell {
     func populateView() {
         self.containerView.layer.cornerRadius = 5
         imageView.image = nil
-        imageView.af_setImageWithURL(NSURL(string: imageUrl)!)
+        imageView.af_setImageWithURL(NSURL(string: image.imgUrl)!)
     }
 }

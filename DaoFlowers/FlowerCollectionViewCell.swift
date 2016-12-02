@@ -24,7 +24,6 @@ class FlowerCollectionViewCell: UICollectionViewCell {
         self.containerView.layer.cornerRadius = 5
         
         nameLabel.text = flower.name
-        //nameLabel.fitFontForSize(minFontSize: 5, maxFontSize: 100, accuracy: 0.5)
         
         if let sortsCount = flower.sortsCount {
             if sortsCount == 1 {
@@ -37,8 +36,6 @@ class FlowerCollectionViewCell: UICollectionViewCell {
         imageView.image = nil
         if let imageUrl = flower.imageUrl {
             imageView.af_setImageWithURL(NSURL(string: imageUrl)!)
-        } else {
-            imageView.image = UIImage(named: "img_def_flower_rose")
         }
     }
 }

@@ -32,4 +32,45 @@ struct Flower {
             name = dictionary["name"] as! String
         }
     }
+    
+    var defaultImage: String {
+        var defaultImage = ""
+        switch name.lowercaseString {
+        case "agapanthus":
+            defaultImage = "img_def_flower_agapanthus"
+        case "alstromeria":
+            defaultImage = "img_def_flower_alstro"
+        case "":
+            defaultImage = "img_def_flower_bq_exot"
+        case "":
+            defaultImage = "img_def_flower_bq_rond"
+        case "callas":
+            defaultImage = "img_def_flower_callas"
+        case "carnations":
+            defaultImage = "img_def_flower_carn"
+        case "chrysants 1 bloom":
+            defaultImage = "img_def_flower_chrysants_1_bloom"
+        case "carnation mini-spray":
+            defaultImage = "img_def_flower_chrysants_spray"
+        case "":
+            defaultImage = "img_def_flower_combo"
+        case "":
+            defaultImage = "img_def_flower_foliage"
+        case "":
+            defaultImage = "img_def_flower_gin"
+        case "gypsophila":
+            defaultImage = "img_def_flower_gypso"
+        case "":
+            defaultImage = "img_def_flower_helico"
+        case "rose":
+            defaultImage = "img_def_flower_rose"
+        case "spray roses":
+            defaultImage = "img_def_flower_spr_rose"
+        default:
+            defaultImage = "img_def_flower"
+            break
+        }
+        
+        return defaultImage
+    }
 }

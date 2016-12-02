@@ -118,7 +118,7 @@ class PlantationsSearchViewController: BaseViewController, UICollectionViewDataS
     // MARK: - UICollectionViewDelegate
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.VarietyDetails,
+        self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.PlantationDetails,
                                         sender: collectionView.cellForItemAtIndexPath(indexPath))
     }
     
@@ -141,11 +141,11 @@ class PlantationsSearchViewController: BaseViewController, UICollectionViewDataS
     // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        let destinationViewController = segue.destinationViewController
-//        if let varietyDetailsViewController = destinationViewController as? VarietyDetailsViewController {
-//            let cell = sender as! VarietyCollectionViewCell
-//            varietyDetailsViewController.variety = cell.variety
-//        }
+        let destinationViewController = segue.destinationViewController
+        if let plantationDetailsViewController = destinationViewController as? PlantationDetailsViewController {
+            let cell = sender as! PlantationCollectionViewCell
+            plantationDetailsViewController.plantation = cell.plantation
+        }
     }
     
     // MARK: - UISearchBarDelegate

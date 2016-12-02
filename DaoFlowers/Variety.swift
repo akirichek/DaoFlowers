@@ -26,7 +26,7 @@ class Variety: NSObject {
     var liveDaysTo: Int?
     var productiveFrom: Int?
     var productiveTo: Int?
-    var images: [String]?
+    var images: [Image]?
     var availableOnFarms: Int?
     var countries: String?
     var fulfillment: Double?
@@ -40,6 +40,11 @@ class Variety: NSObject {
     struct SizeTo {
         var id: Int
         var name: String
+    }
+    
+    struct Image {
+        var imgUrl: String
+        var plantName: String?
     }
     
     init(dictionary: [String: AnyObject]) {
@@ -80,10 +85,12 @@ class Variety: NSObject {
             self.breeder = Breeder(dictionary: breeder)
         }
         
-        var images: [String] = []
+        var images: [Image] = []
         for image in dictionary["images"] as! [[String: AnyObject]] {
             if let imageUrl = image["imgUrl"] as? String {
-                images.append(imageUrl)
+                let image = Image(imgUrl: imageUrl,
+                                  plantName: image["plantName"] as? String)
+                images.append(image)
             }
         }
         self.images = images

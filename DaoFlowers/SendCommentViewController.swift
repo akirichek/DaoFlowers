@@ -11,6 +11,9 @@ import UIKit
 class SendCommentViewController: BaseViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var companyTextField: UITextField!
+    @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var workPhoneTextField: UITextField!
     @IBOutlet weak var mobilePhoneTextField: UITextField!
     @IBOutlet weak var subjectTextField: UITextField!
@@ -31,6 +34,7 @@ class SendCommentViewController: BaseViewController, UIPickerViewDataSource, UIP
         commentsTextView.layer.cornerRadius = 5
         adjustViews()
         adjustTextFields()
+        scrollView.delaysContentTouches = false
         subjects = ["", "Order", "Order status", "Personal orders", "Preference cards", "Flower purchases statistics", "My mixes", "Absolute prohibition", "Control panel", "Flower catalogue", "Plantations catalogue", "Price information request", "Principles of work", "Logistics", "Application functioning general questions"]
     }
     
@@ -48,10 +52,16 @@ class SendCommentViewController: BaseViewController, UIPickerViewDataSource, UIP
         scrollView.frame = scrollViewFrame
         
         if isPortraitOrientation() {
-            scrollView.contentSize = CGSizeMake(320, 979)
+            scrollView.contentSize = CGSizeMake(320, 1187)
         } else {
-            scrollView.contentSize = CGSizeMake(320, 925)
+            scrollView.contentSize = CGSizeMake(320, 1133)
         }
+        
+//        if isPortraitOrientation() {
+//            scrollView.contentSize = CGSizeMake(320, 979)
+//        } else {
+//            scrollView.contentSize = CGSizeMake(320, 925)
+//        }
     }
     
     func adjustTextFields() {
@@ -92,6 +102,39 @@ class SendCommentViewController: BaseViewController, UIPickerViewDataSource, UIP
         commentsTextView.inputAccessoryView = toolbar
     }
     
+    func sendComment() {
+        let name = nameTextField.text!
+        let company = companyTextField.text!
+        let city = cityTextField.text!
+        let workPhone = workPhoneTextField.text!
+        let mobilePhone = mobilePhoneTextField.text!
+        let email = emailTextField.text!
+        let comments = commentsTextView.text!
+        let subject = subjectTextField.text!
+        
+        if name.characters.count == 0 ||
+            company.characters.count == 0 ||
+            city.characters.count == 0 ||
+            workPhone.characters.count == 0 ||
+            mobilePhone.characters.count == 0 ||
+            email.characters.count == 0 ||
+            comments.characters.count == 0 ||
+            subject.characters.count == 0 {
+            
+            Utils.showErrorWithMessage("Name, Company, City, Work phone, Mobile phone, Email, Comments and Subject fields are required", inViewController: self)
+        } else {
+            RBHUD.sharedInstance.showLoader(self.view, withTitle: nil, withSubTitle: nil, withProgress: true)
+            ApiManager.sendComment(name: name, company: company, city: city, workPhone: workPhone, mobilePhone: mobilePhone, email: email, viber: viberTextField.text, whatsApp: whatsAppTextField.text, skype: skypeTextField.text, comment: comments, subject: subject, completion: { (success, error) in
+                    RBHUD.sharedInstance.hideLoader()
+                    if success {
+                        Utils.showSuccessWithMessage("Comment was successfully sent.", inViewController: self)
+                    } else {
+                        Utils.showErrorWithMessage("Comment sending error.", inViewController: self)
+                    }
+            })
+        }
+    }
+    
     // MARK: - Actions
     
     @IBAction func selectSubjectButtonClicked(sender: UIButton) {
@@ -103,6 +146,17 @@ class SendCommentViewController: BaseViewController, UIPickerViewDataSource, UIP
         subjectTextField.becomeFirstResponder()
     }
     
+    @IBAction func sendButtonClicked(sender: UIButton) {
+        let alertController = UIAlertController(title: "Sending request", message: "Send comment?", preferredStyle: .Alert)
+        let yesAlertAction = UIAlertAction(title: "YES", style: .Default) { alertAction in
+            self.sendComment()
+        }
+        let noAlertAction = UIAlertAction(title: "NO", style: .Default, handler: nil)
+        alertController.addAction(noAlertAction)
+        alertController.addAction(yesAlertAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+
     // MARK: - UITextFieldDelegate
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {

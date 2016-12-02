@@ -78,6 +78,12 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
         }
     }
     
+    @IBAction func infoButtonClicked(sender: UIBarButtonItem) {
+        let hintView = NSBundle.mainBundle().loadNibNamed("VarietiesListHintView", owner: self, options: nil).first as! AHintView
+        hintView.frame = self.view.bounds
+        self.view.addSubview(hintView)
+    }
+    
     // MARK: - Private Methods
     
     func fetchVarietiesForPageViewState(pageViewState: VarietiesPageViewState) {

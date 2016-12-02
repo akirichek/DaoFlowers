@@ -15,6 +15,7 @@ class ColorsPageView: UIView, UICollectionViewDataSource, UICollectionViewDelega
     weak var delegate: ColorsPageViewDelegate?
     var spinner = RBHUD()
     var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
+    var flower: Flower!
     var colors: [Color]? {
         didSet {
             reloadData()
@@ -55,8 +56,9 @@ class ColorsPageView: UIView, UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ColorCollectionViewCellIdentifier", forIndexPath: indexPath) as! ColorCollectionViewCell
+        cell.flower = flower
         cell.color = self.colors![indexPath.row]
-        
+    
         return cell
     }
     

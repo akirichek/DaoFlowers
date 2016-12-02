@@ -13,6 +13,7 @@ class ContactsViewController: BaseViewController, MFMailComposeViewControllerDel
 
     @IBOutlet weak var skypeContainerView: UIView!
     @IBOutlet weak var viberContainerView: UIView!
+    @IBOutlet weak var registrationButton: UIButton!
     
     // MARK: - Override Methods
     
@@ -22,6 +23,8 @@ class ContactsViewController: BaseViewController, MFMailComposeViewControllerDel
         adjustShadowForView(skypeContainerView)
         adjustShadowForView(viberContainerView)
         adjustViews()
+        
+        registrationButton.hidden = (User.currentUser() != nil)
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
@@ -121,14 +124,6 @@ class ContactsViewController: BaseViewController, MFMailComposeViewControllerDel
             mailComposeViewController.setToRecipients(["dao@daoflowers.com"])
             self.presentViewController(mailComposeViewController, animated: true, completion: nil)
         }
-    }
-    
-    @IBAction func orderCallbackButtonClicked(sender: UIButton) {
-        
-    }
-    
-    @IBAction func sendCommentButtonClicked(sender: UIButton) {
-        
     }
     
     // MARK: MFMailComposeViewControllerDelegate

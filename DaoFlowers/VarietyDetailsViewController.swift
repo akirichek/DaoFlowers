@@ -55,6 +55,9 @@ class VarietyDetailsViewController: BaseViewController, PageViewerDataSource, Va
             if let indexOfCurrentPage = sender as? Int {
                 varietyImageViewerViewController.indexOfCurrentPage = indexOfCurrentPage
             }
+        } else if let plantationDetailsViewController = destinationViewController as? PlantationDetailsViewController {
+            let index = sender as! Int
+            plantationDetailsViewController.plantation = plantationsGrowers![index]
         }
     }
 
@@ -142,6 +145,7 @@ class VarietyDetailsViewController: BaseViewController, PageViewerDataSource, Va
             }
         } else if let varietyDetailsPlantationsGrowersView = pageView as? VarietyDetailsPlantationsGrowersView {
             if User.currentUser() != nil {
+                varietyDetailsPlantationsGrowersView.viewController = self
                 if let plantations = self.plantationsGrowers {
                     varietyDetailsPlantationsGrowersView.plantations = plantations
                 } else {

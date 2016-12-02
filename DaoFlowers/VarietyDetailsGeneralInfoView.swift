@@ -70,10 +70,10 @@ class VarietyDetailsGeneralInfoView: UIView, UICollectionViewDataSource, UIColle
         }
         self.breederLabel.text = self.variety?.breeder?.name
         
+        
+        self.imageView.image = UIImage(named: self.variety!.flower.defaultImage)
         if let imageUrl = self.variety?.imageUrl {
             self.imageView.af_setImageWithURL(NSURL(string: imageUrl)!)
-        } else {
-            self.imageView.image = UIImage(named: "img_def_flower_rose")
         }
         
         if variety!.availableOnFarms != nil {
@@ -81,12 +81,16 @@ class VarietyDetailsGeneralInfoView: UIView, UICollectionViewDataSource, UIColle
             availableOnFarmsLabel.text = String(variety!.availableOnFarms!)
             countriesGrowsLabel.text = variety!.countries!
             
-            let purchasePercent = Double(Int(round(variety!.purchasePercent! * 10000))) / 10000
-            varietyByFarmsLabel.text = "\(purchasePercent) %"
-            byFarmsFlowerLabel.text = "Variety by farms \(variety!.flower.name.capitalizedString):"
-            let fulfillment = Double(Int(round(variety!.fulfillment! * 100))) / 100
-            fulfillmentLabel.text = "\(fulfillment) %"
+            if var purchasePercent = variety!.purchasePercent {
+                purchasePercent = Double(Int(round(purchasePercent * 10000))) / 10000
+                varietyByFarmsLabel.text = "\(purchasePercent) %"
+            }
             
+            byFarmsFlowerLabel.text = "Variety by farms \(variety!.flower.name.capitalizedString):"
+            if var fulfillment = variety!.fulfillment {
+                fulfillment = Double(Int(round(fulfillment * 100))) / 100
+                fulfillmentLabel.text = "\(fulfillment) %"
+            }
             boughtLastMonth.text = "\(variety!.invoicesDone) FB"
         }
     }
@@ -106,8 +110,6 @@ class VarietyDetailsGeneralInfoView: UIView, UICollectionViewDataSource, UIColle
         collectionContainerViewFrame.size.height = self.collectionView.collectionViewLayout.collectionViewContentSize().height
         self.collectionView.frame = collectionContainerViewFrame
 
-        self.linkImageView.center = CGPointMake(self.breederLabel.frame.origin.x + self.breederLabel.frame.size.width + 8, self.linkImageView.center.y)
-        
         let contentSizeHeight = self.collectionView.collectionViewLayout.collectionViewContentSize().height + self.collectionView.frame.origin.y
         self.scrollView.contentSize = CGSizeMake(0, contentSizeHeight)
         
@@ -119,6 +121,8 @@ class VarietyDetailsGeneralInfoView: UIView, UICollectionViewDataSource, UIColle
         byFarmsFlowerLabelFrame.origin.x = countriesLabel.frame.origin.x + countriesLabel.frame.width - byFarmsFlowerLabelFrame.width
         byFarmsFlowerLabel.frame = byFarmsFlowerLabelFrame
         varietyByFarmsHelpImageView.center = CGPointMake(byFarmsFlowerLabelFrame.origin.x - 10, varietyByFarmsHelpImageView.center.y)
+        
+        self.linkImageView.center = CGPointMake(self.breederLabel.frame.origin.x + self.breederLabel.frame.size.width + 8, self.linkImageView.center.y)
     }
     
     // MARK: - Actions
@@ -172,7 +176,7 @@ class VarietyDetailsGeneralInfoView: UIView, UICollectionViewDataSource, UIColle
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("VarietyDetailsGeneralInfoCollectionViewCellIdentifier", forIndexPath: indexPath) as! VarietyDetailsGeneralInfoCollectionViewCell
-        cell.imageUrl = self.variety!.images![indexPath.row]
+        cell.image = self.variety!.images![indexPath.row]
         
         return cell
     }

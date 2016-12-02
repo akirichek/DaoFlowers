@@ -114,11 +114,14 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
     // MARK: - Private Methods
     
     func doneButtonClicked(sender: UIBarButtonItem) {
+        changeColor()
+    }
+    
+    func changeColor() {
         let selectedRow = self.colorsPickerView.selectedRowInComponent(0)
         if selectedRow == 0 {
             self.colorTextField.text = "all"
             self.state.selectedColor = nil
-            
         } else {
             let selectedColor = state.colors[selectedRow - 1]
             self.colorTextField.text = selectedColor.name
@@ -146,7 +149,8 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
     // MARK: - UICollectionViewDelegate
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        //self.delegate?.varietiesPageView(self, didSelectVariety: self.filteredVarieties![indexPath.row])
+        self.delegate?.varietiesByPlantationPageView(self,
+                                                     didSelectVariety: self.filteredVarieties![indexPath.row])
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
@@ -185,6 +189,10 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
         }
         
         return titleForRow
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        changeColor()
     }
     
     // MARK: - UITextFieldDelegate

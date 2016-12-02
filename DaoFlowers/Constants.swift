@@ -10,7 +10,9 @@ import UIKit
 
 struct K {
     struct Api {
-        static let BaseUrl = "https://daoflowers.com:7443"
+        static let ProductionBaseUrl = "https://daoflowers.com:7443"
+        static let DevelopmentBaseUrl = "http://77.91.147.26:9000"
+        static let BaseUrl = ProductionBaseUrl
         static let FlowersTypesPath = "/catalog/flowers/types"
         static let FlowersColorsPath = "/catalog/flowers/colors"
         static let VarietiesPath = "/catalog/flowers"
@@ -29,6 +31,14 @@ struct K {
             static let Invoices = "/documents/invoices"
             static let Prealerts = "/documents/prealerts"
             static let Unzip = "/documents/unzip"
+        }
+        struct Support {
+            static let OrderCallback = "/support/callback"
+            static let SendComment = "/support/comment"
+            static let SignUpRequest = "/support/registration"
+        }
+        struct Profile {
+            static let Info = "/profile"
         }
     }
     

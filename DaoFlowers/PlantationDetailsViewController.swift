@@ -20,7 +20,6 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
     
     var pageViewer: PageViewer!
     var plantation: Plantation!
-    var country: Country!
     var varieties: [Int:[Variety]] = [:]
     var flowers: [Flower] = []
     var colors: [Color] = []
@@ -41,7 +40,7 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
         self.pageViewerContainerView.addSubview(pageViewer)
         self.pageViewer = pageViewer
         self.title = "\(plantation.name) (\(plantation.brand))"
-        self.fetchVarieties()
+        self.fetchPlantationDetails()
         self.infoContainerView.layer.cornerRadius = 5
         populateInfoView()
     }
@@ -60,10 +59,10 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        let destinationViewController = segue.destinationViewController
-//        if let varietyDetailsViewController = destinationViewController as? VarietyDetailsViewController {
-//            varietyDetailsViewController.variety = self.selectedVariety
-//        }
+        let destinationViewController = segue.destinationViewController
+        if let varietyDetailsViewController = destinationViewController as? VarietyDetailsViewController {
+            varietyDetailsViewController.variety = sender as! Variety
+        }
     }
     
     // MARK: - Actions
@@ -81,6 +80,7 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
     
     @IBAction func infoButtonClicked(sender: UIBarButtonItem) {
         let hintView = NSBundle.mainBundle().loadNibNamed("VarietiesListHintView", owner: self, options: nil).first as! AHintView
+        hintView.frame = self.view.bounds
         self.view.addSubview(hintView)
     }
     
@@ -89,7 +89,7 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
     func populateInfoView() {
         farmLabel.text = plantation.name
         brandLabel.text = plantation.brand
-        countryLabel.text = country.name
+        countryLabel.text = plantation.countryName
         if let imageUrl = plantation.imageUrl {
             if let url = NSURL(string: imageUrl) {
                 logoImageView.af_setImageWithURL(url)
@@ -97,12 +97,15 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
         }
     }
     
-    func fetchVarieties() {
-        if let currentUser = User.currentUser() {
-            RBHUD.sharedInstance.showLoader(self.view, withTitle: nil, withSubTitle: nil, withProgress: true)
-            ApiManager.fetchVarietiesByPlantation(self.plantation, user: currentUser) { (varieties, error) in
-                RBHUD.sharedInstance.hideLoader()
-                if let varieties = varieties {
+    func fetchPlantationDetails() {
+        RBHUD.sharedInstance.showLoader(self.view, withTitle: nil, withSubTitle: nil, withProgress: true)
+        ApiManager.fetchPlantationDetails(self.plantation, user: User.currentUser()) { (plantationDetails, error) in
+            RBHUD.sharedInstance.hideLoader()
+            if let plantationDetails = plantationDetails {
+                self.plantation = plantationDetails
+                self.populateInfoView()
+                if User.currentUser() != nil {
+                    let varieties = plantationDetails.varieties!
                     for variety in varieties {
                         if var varietiesByFlower = self.varieties[variety.flower.id] {
                             varietiesByFlower.append(variety)
@@ -122,8 +125,11 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
                     }
                     self.pageViewer.reloadData()
                 } else {
-                    Utils.showError(error!, inViewController: self)
+                    self.pageViewerContainerView.hidden = true
                 }
+
+            } else {
+                Utils.showError(error!, inViewController: self)
             }
         }
     }
@@ -186,7 +192,7 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
     // MARK: - VarietiesByPlantationPageViewDelegate
     
     func varietiesByPlantationPageView(varietiesByPlantationPageView: VarietiesByPlantationPageView, didSelectVariety variety: Variety) {
-        
+        self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.VarietyDetails, sender: variety)
     }
     
     func varietiesByPlantationPageView(varietiesByPlantationPageView: VarietiesByPlantationPageView, didChangeState state: VarietiesByPlantationPageViewState) {

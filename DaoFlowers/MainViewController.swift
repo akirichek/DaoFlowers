@@ -31,7 +31,6 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
         super.viewWillAppear(animated)
         let menuViewController = self.childViewControllers.first as! MenuViewController
         menuViewController.reloadData()
-        //self.animateMenu(false)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -39,7 +38,6 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
         if currentViewController == nil {
             self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Flowers, sender: self)
         }
-        //self.animateMenu(false)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

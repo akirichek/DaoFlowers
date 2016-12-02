@@ -8,59 +8,75 @@
 
 import UIKit
 
-class VarietyDetailsPlantationsGrowersView: UIView {
+class VarietyDetailsPlantationsGrowersView: UIView, UICollectionViewDataSource, UICollectionViewDelegate  {
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var unavailableContentContainerView: UIView!
     
+    weak var viewController: UIViewController!
+    var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
     var spinner = RBHUD()
     var plantations: [Plantation]? {
         didSet {
-            self.tableView.reloadData()
+            self.collectionView.reloadData()
         }
     }
     
     // MARK: Override Methods
     
     override func awakeFromNib() {
-        let nib = UINib(nibName:"PlantationTableViewCell", bundle: nil)
-        self.tableView.registerNib(nib, forCellReuseIdentifier: "PlantationTableViewCellIdentifier")
+        let nib = UINib(nibName:"PlantationCollectionViewCell", bundle: nil)
+        self.collectionView.registerNib(nib, forCellWithReuseIdentifier: "PlantationCollectionViewCellIdentifier")
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
         if self.plantations == nil {
-            self.tableView.hidden = true
+            self.collectionView.hidden = true
             //self.spinner.showLoader(self, withTitle: nil, withSubTitle: nil, withProgress: true)
         }
     }
     
-    // MARK: UITableViewDataSource
+    // MARK: - UICollectionViewDataSource
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var numberOfRows = 0
         if self.plantations == nil {
             self.setNeedsLayout()
         } else {
-            //self.spinner.hideLoader()
             numberOfRows = self.plantations!.count
         }
         return numberOfRows
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("PlantationTableViewCellIdentifier",
-                                                               forIndexPath: indexPath) as! PlantationTableViewCell
-        cell.plantation  = self.plantations![indexPath.row]
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PlantationCollectionViewCellIdentifier", forIndexPath: indexPath) as! PlantationCollectionViewCell
+        cell.plantation = self.plantations![indexPath.row]
         cell.numberLabel.text = String(indexPath.row + 1)
         
         return cell
     }
     
-    // MARK: UITableViewDelegate
+    // MARK: - UICollectionViewDelegate
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        viewController.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.PlantationDetails,
+                                                  sender: indexPath.row)
+    }
+    
+    // MARK: - UICollectionViewDelegateFlowLayout
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let screenSize = self.viewWillTransitionToSize
+        let columnCount: Int
+        if screenSize.width < screenSize.height {
+            columnCount = 1
+        } else {
+            columnCount = 2
+        }
+        
+        let width = screenSize.width / CGFloat(columnCount)
+        return CGSize(width: width, height: 60)
     }
 }

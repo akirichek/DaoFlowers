@@ -48,7 +48,6 @@ class PlantationsViewController: BaseViewController, PageViewerDataSource, Plant
         let destinationViewController = segue.destinationViewController
         if let plantationDetailsViewController = destinationViewController as? PlantationDetailsViewController {
             plantationDetailsViewController.plantation = self.selectedPlantation
-            plantationDetailsViewController.country = self.selectedCountry
         }
     }
     

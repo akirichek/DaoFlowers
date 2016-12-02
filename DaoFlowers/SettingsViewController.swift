@@ -53,6 +53,10 @@ class SettingsViewController: BaseViewController, UIPickerViewDataSource, UIPick
     }
     
     func doneButtonClicked(sender: UIBarButtonItem) {
+        changeLanguage()
+    }
+    
+    func changeLanguage() {
         self.languageTextField.resignFirstResponder()
         self.arrowImageView.image = UIImage(named: "down_arrow")
         let row = self.languagePickerView.selectedRowInComponent(0)
@@ -80,6 +84,11 @@ class SettingsViewController: BaseViewController, UIPickerViewDataSource, UIPick
         return pickerView
     }
     
+    override func menuButtonClicked(sender: UIBarButtonItem) {
+        super.menuButtonClicked(sender)
+        languageTextField.resignFirstResponder()
+    }
+    
     // MARK: - UIPickerViewDataSource
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -101,5 +110,9 @@ class SettingsViewController: BaseViewController, UIPickerViewDataSource, UIPick
     
     func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return 80
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        changeLanguage()
     }
 }

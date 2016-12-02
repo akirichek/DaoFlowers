@@ -113,6 +113,10 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
     // MARK: - Private Methods
     
     func doneButtonClicked(sender: UIBarButtonItem) {
+        changeAssortment()
+    }
+    
+    func changeAssortment() {
         let selectedRow = self.assortmentPickerView.selectedRowInComponent(0)
         let assortmentType = self.assortmentTypes[selectedRow]
         self.assortmentTextField.text = assortmentType.rawValue
@@ -181,6 +185,10 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         let titleForRow = assortmentTypes[row].rawValue
         return titleForRow
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        changeAssortment()
     }
     
     // MARK: - UITextFieldDelegate

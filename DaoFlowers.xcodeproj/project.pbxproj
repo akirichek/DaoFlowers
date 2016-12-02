@@ -83,7 +83,6 @@
 		8299D37E1DB14E320088E550 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D37D1DB14E320088E550 /* ApiManager.swift */; };
 		8299D3811DB151F00088E550 /* Flower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3801DB151F00088E550 /* Flower.swift */; };
 		8299D3841DB155960088E550 /* FlowerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3831DB155960088E550 /* FlowerCollectionViewCell.swift */; };
-		8299D3861DB2752A0088E550 /* UILabel+FitFontForSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3851DB2752A0088E550 /* UILabel+FitFontForSize.swift */; };
 		8299D38A1DB375AA0088E550 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3891DB375AA0088E550 /* Color.swift */; };
 		8299D38C1DB376EE0088E550 /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D38B1DB376EE0088E550 /* ColorCollectionViewCell.swift */; };
 		8299D38E1DB3BD5B0088E550 /* VarietiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D38D1DB3BD5B0088E550 /* VarietiesViewController.swift */; };
@@ -130,8 +129,6 @@
 		82C1C1E71DDDFE0A007F223E /* InvoiceDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1C1E61DDDFE0A007F223E /* InvoiceDetails.swift */; };
 		82C1C1EB1DDF968C007F223E /* InvoiceDetailsGeneralHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82C1C1EA1DDF968C007F223E /* InvoiceDetailsGeneralHeaderTableViewCell.xib */; };
 		82E5659E1DBCF775005F18F5 /* Plantation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5659D1DBCF775005F18F5 /* Plantation.swift */; };
-		82E565A01DBD072F005F18F5 /* PlantationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5659F1DBD072F005F18F5 /* PlantationTableViewCell.swift */; };
-		82E565A21DBD0737005F18F5 /* PlantationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82E565A11DBD0737005F18F5 /* PlantationTableViewCell.xib */; };
 		82FBA1991DBFD393001CE265 /* VarietiesSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FBA1981DBFD393001CE265 /* VarietiesSearchViewController.swift */; };
 		82FBA19B1DBFD437001CE265 /* VarietyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FBA19A1DBFD437001CE265 /* VarietyCollectionViewCell.swift */; };
 		82FBA19E1DC0D007001CE265 /* VarietiesSearchAdditionalParametersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82FBA19D1DC0D007001CE265 /* VarietiesSearchAdditionalParametersView.xib */; };
@@ -141,6 +138,10 @@
 		82FBA1A91DC287C1001CE265 /* UIView+ConstraintByIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FBA1A81DC287C1001CE265 /* UIView+ConstraintByIdentifier.swift */; };
 		82FBA1AB1DC28DEF001CE265 /* SearchAdditionalParametersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82FBA1AA1DC28DEF001CE265 /* SearchAdditionalParametersTableViewCell.xib */; };
 		82FBA1AD1DC3753A001CE265 /* SearchAdditionalParametersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FBA1AC1DC3753A001CE265 /* SearchAdditionalParametersTableViewCell.swift */; };
+		82FF96211DEDF1DD00A5BB70 /* VarietyImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FF96201DEDF1DD00A5BB70 /* VarietyImageCollectionViewCell.swift */; };
+		82FF96251DF0443E00A5BB70 /* ApiManager+Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FF96241DF0443E00A5BB70 /* ApiManager+Support.swift */; };
+		82FF96271DF0682E00A5BB70 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FF96261DF0682E00A5BB70 /* RegistrationViewController.swift */; };
+		82FF96291DF0A4DF00A5BB70 /* ApiManager+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FF96281DF0A4DF00A5BB70 /* ApiManager+Profile.swift */; };
 		F81CBF2D8B89C452C874F6B5 /* Pods_DaoFlowers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5BB758AC21055E3F306CB97 /* Pods_DaoFlowers.framework */; };
 /* End PBXBuildFile section */
 
@@ -225,7 +226,6 @@
 		8299D37D1DB14E320088E550 /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		8299D3801DB151F00088E550 /* Flower.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flower.swift; sourceTree = "<group>"; };
 		8299D3831DB155960088E550 /* FlowerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowerCollectionViewCell.swift; sourceTree = "<group>"; };
-		8299D3851DB2752A0088E550 /* UILabel+FitFontForSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+FitFontForSize.swift"; sourceTree = "<group>"; };
 		8299D3891DB375AA0088E550 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		8299D38B1DB376EE0088E550 /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
 		8299D38D1DB3BD5B0088E550 /* VarietiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietiesViewController.swift; sourceTree = "<group>"; };
@@ -276,8 +276,6 @@
 		82C1C1E61DDDFE0A007F223E /* InvoiceDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoiceDetails.swift; sourceTree = "<group>"; };
 		82C1C1EA1DDF968C007F223E /* InvoiceDetailsGeneralHeaderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvoiceDetailsGeneralHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		82E5659D1DBCF775005F18F5 /* Plantation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plantation.swift; sourceTree = "<group>"; };
-		82E5659F1DBD072F005F18F5 /* PlantationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlantationTableViewCell.swift; sourceTree = "<group>"; };
-		82E565A11DBD0737005F18F5 /* PlantationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlantationTableViewCell.xib; sourceTree = "<group>"; };
 		82FBA1981DBFD393001CE265 /* VarietiesSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietiesSearchViewController.swift; sourceTree = "<group>"; };
 		82FBA19A1DBFD437001CE265 /* VarietyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietyCollectionViewCell.swift; sourceTree = "<group>"; };
 		82FBA19D1DC0D007001CE265 /* VarietiesSearchAdditionalParametersView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VarietiesSearchAdditionalParametersView.xib; sourceTree = "<group>"; };
@@ -287,6 +285,10 @@
 		82FBA1A81DC287C1001CE265 /* UIView+ConstraintByIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ConstraintByIdentifier.swift"; sourceTree = "<group>"; };
 		82FBA1AA1DC28DEF001CE265 /* SearchAdditionalParametersTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchAdditionalParametersTableViewCell.xib; sourceTree = "<group>"; };
 		82FBA1AC1DC3753A001CE265 /* SearchAdditionalParametersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchAdditionalParametersTableViewCell.swift; sourceTree = "<group>"; };
+		82FF96201DEDF1DD00A5BB70 /* VarietyImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietyImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		82FF96241DF0443E00A5BB70 /* ApiManager+Support.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ApiManager+Support.swift"; sourceTree = "<group>"; };
+		82FF96261DF0682E00A5BB70 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		82FF96281DF0A4DF00A5BB70 /* ApiManager+Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ApiManager+Profile.swift"; sourceTree = "<group>"; };
 		B5BB758AC21055E3F306CB97 /* Pods_DaoFlowers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DaoFlowers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D506727F50AAD99682289838 /* Pods-DaoFlowers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DaoFlowers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DaoFlowers/Pods-DaoFlowers.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -346,7 +348,6 @@
 				82457AD61DAEAA5900D87B21 /* Info.plist */,
 				82457ACE1DAEAA5900D87B21 /* DaoFlowers.xcdatamodeld */,
 				8299D36C1DAF8CC50088E550 /* MainViewControllerSegue.swift */,
-				8299D3851DB2752A0088E550 /* UILabel+FitFontForSize.swift */,
 				82C0598C1DC68E4900F061E6 /* Localizable.strings */,
 			);
 			path = DaoFlowers;
@@ -401,6 +402,7 @@
 				825369351DE770AC00A17537 /* ContactsViewController.swift */,
 				825369371DE8BCFE00A17537 /* OrderCallbackViewController.swift */,
 				825369391DE8BD2100A17537 /* SendCommentViewController.swift */,
+				82FF96261DF0682E00A5BB70 /* RegistrationViewController.swift */,
 			);
 			name = Contacts;
 			sourceTree = "<group>";
@@ -421,8 +423,6 @@
 				82606BA31DCF900D00A9E8D8 /* PlantationsViewController.swift */,
 				82606BA51DCFA55200A9E8D8 /* PlantationsPageView.swift */,
 				82606BA71DCFA56900A9E8D8 /* PlantationsPageView.xib */,
-				82E5659F1DBD072F005F18F5 /* PlantationTableViewCell.swift */,
-				82E565A11DBD0737005F18F5 /* PlantationTableViewCell.xib */,
 				82606BAB1DCFC35C00A9E8D8 /* PlantationCollectionViewCell.swift */,
 				82606BA91DCFC34300A9E8D8 /* PlantationCollectionViewCell.xib */,
 			);
@@ -506,6 +506,7 @@
 				822C1ED21DBE375600A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.swift */,
 				822C1ED41DBE37A500A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.xib */,
 				825369431DED8C2E00A17537 /* VarietyImageViewerViewController.swift */,
+				82FF96201DEDF1DD00A5BB70 /* VarietyImageCollectionViewCell.swift */,
 			);
 			name = "General Info";
 			sourceTree = "<group>";
@@ -698,6 +699,8 @@
 				82606BB01DD1FF9500A9E8D8 /* ApiManager+Plantations.swift */,
 				82606BC61DD7985800A9E8D8 /* ApiManager+Orders.swift */,
 				827E8B191DDB535E000A8EAE /* ApiManager+Documents.swift */,
+				82FF96241DF0443E00A5BB70 /* ApiManager+Support.swift */,
+				82FF96281DF0A4DF00A5BB70 /* ApiManager+Profile.swift */,
 				82C059921DC68ED000F061E6 /* LanguageManager.swift */,
 			);
 			name = Managers;
@@ -828,7 +831,6 @@
 				82606BC31DD76FAB00A9E8D8 /* VarietiesListHintView.xib in Resources */,
 				8299D3CC1DBBB1360088E550 /* VarietyDetailsSimilarVarietiesView.xib in Resources */,
 				8253691E1DE44F8000A17537 /* InvoiceDetailsStatisticsTableViewCell.xib in Resources */,
-				82E565A21DBD0737005F18F5 /* PlantationTableViewCell.xib in Resources */,
 				82457AD51DAEAA5900D87B21 /* LaunchScreen.storyboard in Resources */,
 				82C0598A1DC68E4900F061E6 /* Localizable.strings in Resources */,
 				82457AD21DAEAA5900D87B21 /* Assets.xcassets in Resources */,
@@ -942,9 +944,11 @@
 				8299D3781DAF9A0D0088E550 /* MenuButtonHandler.swift in Sources */,
 				8253693A1DE8BD2100A17537 /* SendCommentViewController.swift in Sources */,
 				8299D3C21DBBAFBF0088E550 /* VarietyDetailsGeneralInfoView.swift in Sources */,
+				82FF96291DF0A4DF00A5BB70 /* ApiManager+Profile.swift in Sources */,
 				8299D3741DAF99940088E550 /* FlowersViewController.swift in Sources */,
 				82FBA19B1DBFD437001CE265 /* VarietyCollectionViewCell.swift in Sources */,
 				827E8B141DDB3ABF000A8EAE /* Document.swift in Sources */,
+				82FF96251DF0443E00A5BB70 /* ApiManager+Support.swift in Sources */,
 				82606BB31DD201EC00A9E8D8 /* PlantationsSearchAdditionalParametersView.swift in Sources */,
 				827E8B0E1DDB38CA000A8EAE /* DocumentsViewController.swift in Sources */,
 				8299D38A1DB375AA0088E550 /* Color.swift in Sources */,
@@ -967,6 +971,7 @@
 				82606BA11DCF824000A9E8D8 /* CountryCollectionViewCell.swift in Sources */,
 				82C059931DC68ED000F061E6 /* LanguageManager.swift in Sources */,
 				82606BA61DCFA55200A9E8D8 /* PlantationsPageView.swift in Sources */,
+				82FF96211DEDF1DD00A5BB70 /* VarietyImageCollectionViewCell.swift in Sources */,
 				8299D3D11DBBE36C0088E550 /* User.swift in Sources */,
 				827BF85F1DAEAF4000054548 /* BaseViewController.swift in Sources */,
 				82C1C1D91DDDF6CA007F223E /* InvoiceDetailsViewController.swift in Sources */,
@@ -976,6 +981,7 @@
 				8299D3A21DB622FA0088E550 /* HeaderPageViewerCollectionViewCell.swift in Sources */,
 				8299D3C41DBBAFDC0088E550 /* VarietyDetailsPlantationsGrowersView.swift in Sources */,
 				8299D37E1DB14E320088E550 /* ApiManager.swift in Sources */,
+				82FF96271DF0682E00A5BB70 /* RegistrationViewController.swift in Sources */,
 				82FBA1A21DC0D73E001CE265 /* Breeder.swift in Sources */,
 				82606BB11DD1FF9500A9E8D8 /* ApiManager+Plantations.swift in Sources */,
 				8299D36D1DAF8CC50088E550 /* MainViewControllerSegue.swift in Sources */,
@@ -1000,11 +1006,9 @@
 				82606B9E1DCF7F8800A9E8D8 /* Country.swift in Sources */,
 				82C059821DC6873F00F061E6 /* LanguagePickerViewCell.swift in Sources */,
 				8299D3961DB3C2BF0088E550 /* Utils.swift in Sources */,
-				82E565A01DBD072F005F18F5 /* PlantationTableViewCell.swift in Sources */,
 				8299D3721DAF926E0088E550 /* Constants.swift in Sources */,
 				8299D37A1DAF9A930088E550 /* MainViewController.swift in Sources */,
 				8299D3A61DB8C6090088E550 /* PageViewerFlowLayout.swift in Sources */,
-				8299D3861DB2752A0088E550 /* UILabel+FitFontForSize.swift in Sources */,
 				8253691C1DE3910B00A17537 /* InvoiceDetailsStatisticsTableViewCell.swift in Sources */,
 				827E8B1A1DDB535E000A8EAE /* ApiManager+Documents.swift in Sources */,
 			);

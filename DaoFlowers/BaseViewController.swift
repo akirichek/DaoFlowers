@@ -12,6 +12,12 @@ class BaseViewController: UIViewController {
     var menuButtonHandler: MenuButtonHandler!
     var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.navigationController?.view.removeGestureRecognizer(self.navigationController!.interactivePopGestureRecognizer!)
+    }
+    
     @IBAction func menuButtonClicked(sender: UIBarButtonItem) {
         self.menuButtonHandler.menuButtonClicked()
     }

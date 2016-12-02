@@ -15,6 +15,8 @@ struct Plantation {
     var imageUrl: String?
     var name: String
     var posInList: Int!
+    var countryName: String?
+    var varieties: [Variety]?
     
     init(dictionary: [String: AnyObject]) {
         brand = dictionary["brand"] as! String

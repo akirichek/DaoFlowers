@@ -18,6 +18,10 @@ class Utils: NSObject {
         UIAlertView(title: "Error", message: message, delegate: nil, cancelButtonTitle: "OK").show()
     }
     
+    static func showSuccessWithMessage(message: String, inViewController viewController: UIViewController) {
+        UIAlertView(title: "Success", message: message, delegate: nil, cancelButtonTitle: "OK").show()
+    }
+
     static func sortedVarietiesByName(varieties: [Variety]) -> [Variety] {
         var array = varieties
         array.sortInPlace({ (obj1, obj2) -> Bool in
