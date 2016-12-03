@@ -23,6 +23,8 @@ class ColorsViewController: BaseViewController, PageViewerDataSource, ColorsPage
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.title = CustomLocalisedString("Varieties", comment: "")
+        
         self.pageViewerContainerView.frame = self.contentViewFrame()
         let pageViewer = NSBundle.mainBundle().loadNibNamed("PageViewer", owner: self, options: nil).first as! PageViewer
         pageViewer.frame = self.pageViewerContainerView.bounds
@@ -46,12 +48,12 @@ class ColorsViewController: BaseViewController, PageViewerDataSource, ColorsPage
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         self.viewWillTransitionToSize = size
-        self.pageViewerContainerView.frame = self.contentViewFrame()
         if let page = self.pageViewer.pageAtIndex(self.pageViewer.indexOfCurrentPage) as? ColorsPageView {
             page.viewWillTransitionToSize = size
             page.reloadData()
         }
         self.pageViewer.viewWillTransitionToSize = self.contentViewFrame().size
+        self.pageViewerContainerView.frame = self.contentViewFrame()
         self.pageViewer.reloadData()
     }
     

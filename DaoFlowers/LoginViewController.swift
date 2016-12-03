@@ -32,9 +32,6 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         ApiManager.loginWithUsername(self.usernameTextField.text!, andPassword: self.passwordTextField.text!) { (user, error) in
             RBHUD.sharedInstance.hideLoader()
             if let user = user {
-                ApiManager.fetchProfileByUser(user, completion: { (invoices, error) in
-                    
-                })
                 let userDefaults = NSUserDefaults.standardUserDefaults()
                 userDefaults.setObject(Language.Russian.rawValue, forKey: K.UserDefaultsKey.Language)
                 userDefaults.synchronize()

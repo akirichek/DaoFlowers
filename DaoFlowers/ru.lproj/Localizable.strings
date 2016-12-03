@@ -18,3 +18,12 @@
 "Log in" = "Войти";
 "Log out" = "Выйти";
 "About" = "О приложении";
+"VarietiesCount" = "сортов";
+"AdditionalParameters" = "Дополнительные параметры";
+"VarietyOrAbr" = "Сорт или аббр.";
+"Assortment" = "Сортировка:";
+"TypeNameAbbrToSearch" = "Введите имя либо аббр...";
+"by name" = "по имени";
+"by % of purchase" = "по % продаж";
+"bought last month, FB" = "куплено за посл. месяц, FB";
+"Done" = "Готово";

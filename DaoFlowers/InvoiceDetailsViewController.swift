@@ -31,6 +31,7 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, Pa
         pageViewer.dataSource = self
         pageViewer.delegate = self
         pageViewer.viewWillTransitionToSize = self.contentViewFrame().size
+        pageViewer.reloadData()
         self.pageViewerContainerView.addSubview(pageViewer)
         self.pageViewer = pageViewer
         adjustBarButtonItems()
@@ -38,8 +39,8 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, Pa
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         self.viewWillTransitionToSize = size
-        self.pageViewerContainerView.frame = self.contentViewFrame()
         self.pageViewer.viewWillTransitionToSize = self.contentViewFrame().size
+        self.pageViewerContainerView.frame = self.contentViewFrame()
         self.pageViewer.reloadData()
         if let filterView = self.filterView {
             filterView.viewWillTransitionToSize = size

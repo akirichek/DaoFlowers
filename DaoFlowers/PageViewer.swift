@@ -16,7 +16,6 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
     @IBOutlet weak var headerCollectionView: UICollectionView!
     @IBOutlet weak var contentCollectionView: UICollectionView!
     
-    var viewWillTransitionToSize: CGSize!
     weak var dataSource: PageViewerDataSource!
     weak var delegate: PageViewerDelegate?
     var countOfPages: Int {
@@ -25,6 +24,12 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
         }
     }
     var currentContentOffsetX: CGFloat = 0.0
+    var scrollingLocked = false
+    var viewWillTransitionToSize: CGSize! {
+        didSet {
+            scrollingLocked = true
+        }
+    }
     var indexOfCurrentPage: Int = 0 {
         didSet {
             delegate?.pageViewer(self, didSelectPageAtIndex: indexOfCurrentPage)
@@ -47,6 +52,7 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
     }
     
     func selectPageAtIndex(index: Int) {
+        scrollingLocked = false
         let contentCollectionViewSize = self.contentCollectionViewSize()
         let currentContentOffsetX = CGFloat(index) * contentCollectionViewSize.width
         self.contentCollectionView.setContentOffset(CGPoint(x: currentContentOffsetX, y: 0), animated: false)
@@ -62,7 +68,6 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
         self.headerCollectionView.registerNib(headerCellNib, forCellWithReuseIdentifier: kHeaderPageViewerCollectionViewCellIdentifier)
         let contentCellNib = UINib(nibName:"ContentPageViewerCollectionViewCell", bundle: nil)
         self.contentCollectionView.registerNib(contentCellNib, forCellWithReuseIdentifier: kContentPageViewierCollectionViewCellIdentifier)
-        
     }
     
     // MARK: UICollectionViewDataSource
@@ -83,7 +88,7 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier,
                                                                          forIndexPath: indexPath)
         if let headerCell = cell as? HeaderPageViewerCollectionViewCell {
-            headerCell.textLabel.text = self.dataSource.pageViewer(self, headerForItemAtIndex: indexPath.row)
+            headerCell.textLabel.text = self.dataSource.pageViewer(self, headerForItemAtIndex: indexPath.row).uppercaseString
             if self.indexOfCurrentPage == indexPath.row {
                 headerCell.selectCellWithMultiplier(1.0, directionRight: true)
             } else {
@@ -107,6 +112,8 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
                 addPageView()
             }
         }
+
+        scrollingLocked = false
         
         return cell
     }
@@ -125,9 +132,9 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
         let contentCollectionViewSize = self.contentCollectionViewSize()
         var sizeForItem: CGSize
         if collectionView == self.headerCollectionView {
-            let header = self.dataSource.pageViewer(self, headerForItemAtIndex: indexPath.row)
-            let textSize = (header as NSString).sizeWithAttributes([NSFontAttributeName: UIFont.systemFontOfSize(17.0)])
-            sizeForItem = CGSizeMake(ceil(textSize.width) + round(contentCollectionViewSize.width * 0.06), 50)
+            let header = self.dataSource.pageViewer(self, headerForItemAtIndex: indexPath.row).uppercaseString
+            let textSize = (header as NSString).sizeWithAttributes([NSFontAttributeName: UIFont.systemFontOfSize(13.0)])
+            sizeForItem = CGSizeMake(ceil(textSize.width) + 20, self.headerCollectionView.bounds.height)
         } else {
             sizeForItem = contentCollectionViewSize
         }
@@ -146,6 +153,10 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
     // MARK: UIScrollViewDelegate
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        guard !scrollingLocked else {
+            return
+        }
+        
         if scrollView == self.contentCollectionView {
             let (indexOfPreviousPage, indexOfNextPage) = self.indexOfPreviousAndNextPage()
             
@@ -163,7 +174,10 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
                 let deltaContentOffsetX = (attributesOfNextPage.center.x - attributesOfPreviousPage.center.x) * selecetedMultiplierOfPage
                 let contentOffsetX = (attributesOfPreviousPage.center.x - self.bounds.size.width / 2) + deltaContentOffsetX
                 
-                let maximumContentOffset = self.headerCollectionView.collectionViewLayout.collectionViewContentSize().width - self.headerCollectionView.bounds.size.width
+                var maximumContentOffset = self.headerCollectionView.collectionViewLayout.collectionViewContentSize().width - self.headerCollectionView.bounds.size.width
+                if maximumContentOffset < 0 {
+                    maximumContentOffset = 0
+                }
                 
                 if 0 > contentOffsetX {
                     self.headerCollectionView.contentOffset = CGPointZero
@@ -172,8 +186,9 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
                 } else {
                     self.headerCollectionView.contentOffset = CGPointMake(contentOffsetX, 0)
                 }
-                
+
                 self.indexOfCurrentPage = Int(round(scrollView.contentOffset.x / self.contentCollectionViewSize().width))
+                
                 self.selectHeaderInScrollView()
             } else {
                 self.updateAllHeaderCellsExcept()

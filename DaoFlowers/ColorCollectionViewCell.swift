@@ -26,11 +26,12 @@ class ColorCollectionViewCell: UICollectionViewCell {
         nameLabel.text = color.name
         
         if let sortsCount = color.sortsCount {
-            if sortsCount == 1 {
-                sortsCountLabel.text = "\(sortsCount) sort"
-            } else {
-                sortsCountLabel.text = "\(sortsCount) sorts"
-            }
+            sortsCountLabel.text = "\(sortsCount) \(CustomLocalisedString("VarietiesCount", comment: ""))"
+//            if sortsCount == 1 {
+//                sortsCountLabel.text = "\(sortsCount) sort"
+//            } else {
+//                sortsCountLabel.text = "\(sortsCount) sorts"
+//            }
         }
         
         imageView.image = UIImage(named: flower.defaultImage)

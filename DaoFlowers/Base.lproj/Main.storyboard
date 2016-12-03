@@ -2378,7 +2378,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Additional parameters" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kSn-Cm-zOP">
-                                                <rect key="frame" x="20" y="0.0" width="174" height="30"/>
+                                                <rect key="frame" x="20" y="0.0" width="254" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -2543,6 +2543,7 @@
                     <connections>
                         <outlet property="additionalParametersArrowImageView" destination="j7D-0I-BCQ" id="JQQ-gv-LtM"/>
                         <outlet property="additionalParametersContainerView" destination="B8m-G2-Y04" id="J6m-XC-Lfd"/>
+                        <outlet property="additionalParametersLabel" destination="kSn-Cm-zOP" id="nBy-QN-Zpa"/>
                         <outlet property="additionalParametersOverlayView" destination="OpP-cO-eAK" id="ncv-gN-qRJ"/>
                         <outlet property="collectionView" destination="4cg-5O-4TC" id="bXu-rX-kB2"/>
                         <outlet property="containerView" destination="VMB-mP-LF1" id="SUx-Ve-zCb"/>
@@ -3333,8 +3334,8 @@
         <image name="viber" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="HEc-uQ-G51"/>
-        <segue reference="36q-jX-VtV"/>
-        <segue reference="EIi-4X-I8T"/>
+        <segue reference="XJa-qv-n5d"/>
+        <segue reference="vEG-G1-PwC"/>
+        <segue reference="kWG-9i-ym5"/>
     </inferredMetricsTieBreakers>
 </document>

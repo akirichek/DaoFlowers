@@ -56,9 +56,19 @@ class BaseViewController: UIViewController {
     
     func contentViewFrame() -> CGRect {
         let screenSize: CGSize = self.viewWillTransitionToSize
-        var frame = CGRectMake(0, 64, 320, 504)
-        if screenSize.width == 568 {
+        var frame: CGRect!
+        
+        switch screenSize.width {
+        case 320:
+            frame = CGRectMake(0, 64, 320, 504)
+        case 568:
             frame = CGRectMake(0, 32, 568, 288)
+        case 768:
+            frame = CGRectMake(0, 64, 768, 960)
+        case 1024:
+            frame = CGRectMake(0, 64, 1024, 704)
+        default:
+            break
         }
         
         return frame

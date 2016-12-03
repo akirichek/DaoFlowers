@@ -16,6 +16,7 @@ class VarietiesSearchViewController: BaseViewController, UICollectionViewDataSou
     @IBOutlet weak var additionalParametersContainerView: UIView!
     @IBOutlet weak var additionalParametersOverlayView: UIView!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var additionalParametersLabel: UILabel!
 
     var searchResults: [Variety] = []
     var flowersSearchParams: [Flower]?
@@ -26,6 +27,8 @@ class VarietiesSearchViewController: BaseViewController, UICollectionViewDataSou
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        additionalParametersLabel.text = CustomLocalisedString("AdditionalParameters", comment: "")
+        searchBar.placeholder = CustomLocalisedString("VarietyOrAbr", comment: "")
         self.containerView.frame = self.contentViewFrame()
     }
     

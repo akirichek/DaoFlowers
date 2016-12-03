@@ -25,6 +25,7 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
     var colors: [Color] = []
     var selectedColor: Color?
     var pageViewStates: [Int: VarietiesByPlantationPageViewState] = [:]
+    var hintView: AHintView?
     
     // MARK: - Override Methods
     
@@ -48,13 +49,12 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         self.viewWillTransitionToSize = size
         self.topContainerView.frame = self.topContainerViewFrame()
-        self.pageViewerContainerView.frame = self.pageViewerFrame()
-        
         if let page = self.pageViewer.pageAtIndex(self.pageViewer.indexOfCurrentPage) as? VarietiesByPlantationPageView {
             page.viewWillTransitionToSize = size
             page.reloadData()
         }
         self.pageViewer.viewWillTransitionToSize = self.pageViewerFrame().size
+        self.pageViewerContainerView.frame = self.pageViewerFrame()
         self.pageViewer.reloadData()
     }
     
@@ -79,9 +79,11 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
     }
     
     @IBAction func infoButtonClicked(sender: UIBarButtonItem) {
-        let hintView = NSBundle.mainBundle().loadNibNamed("VarietiesListHintView", owner: self, options: nil).first as! AHintView
-        hintView.frame = self.view.bounds
-        self.view.addSubview(hintView)
+        if self.hintView?.superview == nil {
+            self.hintView = NSBundle.mainBundle().loadNibNamed("VarietiesListHintView", owner: self, options: nil).first as? AHintView
+            self.hintView!.frame = self.view.bounds
+            self.view.addSubview(hintView!)
+        }
     }
     
     // MARK: - Private Methods

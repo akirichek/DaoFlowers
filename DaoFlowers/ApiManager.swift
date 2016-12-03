@@ -59,7 +59,7 @@ class ApiManager: NSObject {
                 var colors: [Color] = []
                 
                 if let json = response.result.value {
-                    print("JSON: \(json)")
+                    //print("JSON: \(json)")
                     for dictionary in json as! [[String: AnyObject]] {
                         let color = Color(dictionary: dictionary)
                         colors.append(color)
@@ -125,7 +125,7 @@ class ApiManager: NSObject {
         Alamofire.request(.GET, url, headers:headers).responseJSON { response in
             if response.result.isSuccess {
                 if let json = response.result.value {
-                    print("JSON: \(json)")
+                    //print("JSON: \(json)")
                     variety.addGeneralInfoFromDictionary(json as! [String: AnyObject])
                 }
                 completion(success: true, error: nil)

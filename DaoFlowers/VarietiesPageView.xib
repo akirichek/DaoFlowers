@@ -143,6 +143,7 @@
             </constraints>
             <connections>
                 <outlet property="assortmentContainerView" destination="GI9-3W-Pms" id="ijH-72-dWc"/>
+                <outlet property="assortmentLabel" destination="gGD-7C-B67" id="NFI-Ye-Xi9"/>
                 <outlet property="assortmentTextField" destination="KSh-8b-Dha" id="pgf-3N-dBT"/>
                 <outlet property="collectionView" destination="EHy-HW-nXD" id="8NA-1f-dtm"/>
                 <outlet property="collectionViewTopConstraint" destination="BD8-Hl-EqP" id="wkR-G7-K1W"/>

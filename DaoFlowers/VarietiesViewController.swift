@@ -19,6 +19,7 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
     var selectedColor: Color!
     var pageViewStates: [Int: VarietiesPageViewState] = [:]
     var needsSelectPageView: Bool = true
+    var hintView: AHintView?
     
     // MARK: - Override Methods
     
@@ -37,12 +38,12 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         self.viewWillTransitionToSize = size
-        self.pageViewerContainerView.frame = self.contentViewFrame()
         if let page = self.pageViewer.pageAtIndex(self.pageViewer.indexOfCurrentPage) as? ColorsPageView {
             page.viewWillTransitionToSize = size
             page.reloadData()
         }
         self.pageViewer.viewWillTransitionToSize = self.contentViewFrame().size
+        self.pageViewerContainerView.frame = self.contentViewFrame()
         self.pageViewer.reloadData()
     }
     
@@ -79,9 +80,11 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
     }
     
     @IBAction func infoButtonClicked(sender: UIBarButtonItem) {
-        let hintView = NSBundle.mainBundle().loadNibNamed("VarietiesListHintView", owner: self, options: nil).first as! AHintView
-        hintView.frame = self.view.bounds
-        self.view.addSubview(hintView)
+        if self.hintView?.superview == nil {
+            self.hintView = NSBundle.mainBundle().loadNibNamed("VarietiesListHintView", owner: self, options: nil).first as? AHintView
+            self.hintView!.frame = self.view.bounds
+            self.view.addSubview(self.hintView!)
+        }
     }
     
     // MARK: - Private Methods

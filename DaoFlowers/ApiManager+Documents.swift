@@ -39,7 +39,7 @@ extension ApiManager: NSURLSessionDownloadDelegate {
             if response.result.isSuccess {
                 var invoiceDetails: InvoiceDetails?
                 if let json = response.result.value {
-                    print("JSON: \(json)")
+                    //print("JSON: \(json)")
                     invoiceDetails = InvoiceDetails(dictionary: json as! [String : AnyObject])
                 }
                 completion(invoiceDetails: invoiceDetails, error: nil)

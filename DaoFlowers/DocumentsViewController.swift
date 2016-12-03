@@ -32,8 +32,8 @@ class DocumentsViewController: BaseViewController, PageViewerDataSource, Documen
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         self.viewWillTransitionToSize = size
-        self.pageViewerContainerView.frame = self.contentViewFrame()
         self.pageViewer.viewWillTransitionToSize = self.contentViewFrame().size
+        self.pageViewerContainerView.frame = self.contentViewFrame()
         self.pageViewer.reloadData()
     }
     
