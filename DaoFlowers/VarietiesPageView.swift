@@ -40,7 +40,7 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
         } else {
             hideFilterContainerView()
         }
-        self.assortmentTextField.text = CustomLocalisedString(state.assortment.rawValue, comment: "")
+        self.assortmentTextField.text = CustomLocalisedString(state.assortment.rawValue)
         self.searchTextField.text = state.searchString
         self.collectionView.contentOffset = CGPointZero
         self.filterVarieties()
@@ -49,8 +49,8 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
     // MARK: - Override Methods
     
     override func awakeFromNib() {
-        assortmentLabel.text = CustomLocalisedString("Assortment", comment: "")
-        searchTextField.placeholder = CustomLocalisedString("TypeNameAbbrToSearch", comment: "")
+        assortmentLabel.text = CustomLocalisedString("Assortment")
+        searchTextField.placeholder = CustomLocalisedString("TypeNameAbbrToSearch")
         
         let nib = UINib(nibName:"VarietyCollectionViewCell", bundle: nil)
         self.collectionView.registerNib(nib, forCellWithReuseIdentifier: "VarietyCollectionViewCellIdentifier")
@@ -84,7 +84,7 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
         
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: CustomLocalisedString("Done", comment: ""),
+        let doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
                                          style: UIBarButtonItemStyle.Done,
                                          target: self,
                                          action: #selector(VarietiesPageView.doneButtonClicked(_:)))
@@ -126,7 +126,7 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
     func changeAssortment() {
         let selectedRow = self.assortmentPickerView.selectedRowInComponent(0)
         let assortmentType = self.assortmentTypes[selectedRow]
-        self.assortmentTextField.text = assortmentType.rawValue
+        self.assortmentTextField.text = CustomLocalisedString(assortmentType.rawValue)
         self.assortmentTextField.resignFirstResponder()
         self.state.assortment = assortmentType
         if let filteredVarieties = self.filteredVarieties {
@@ -190,7 +190,7 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
     // MARK: - UIPickerViewDelegate
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let titleForRow = CustomLocalisedString(assortmentTypes[row].rawValue, comment: "")
+        let titleForRow = CustomLocalisedString(assortmentTypes[row].rawValue)
         return titleForRow
     }
     

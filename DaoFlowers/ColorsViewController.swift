@@ -23,7 +23,7 @@ class ColorsViewController: BaseViewController, PageViewerDataSource, ColorsPage
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = CustomLocalisedString("Varieties", comment: "")
+        self.title = CustomLocalisedString("Varieties")
         
         self.pageViewerContainerView.frame = self.contentViewFrame()
         let pageViewer = NSBundle.mainBundle().loadNibNamed("PageViewer", owner: self, options: nil).first as! PageViewer

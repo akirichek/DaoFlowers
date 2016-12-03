@@ -21,6 +21,7 @@ class DocumentsViewController: BaseViewController, PageViewerDataSource, Documen
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = CustomLocalisedString("Documents")
         self.pageViewerContainerView.frame = self.contentViewFrame()
         let pageViewer = NSBundle.mainBundle().loadNibNamed("PageViewer", owner: self, options: nil).first as! PageViewer
         pageViewer.frame = self.pageViewerContainerView.bounds
@@ -81,7 +82,7 @@ class DocumentsViewController: BaseViewController, PageViewerDataSource, Documen
     }
     
     func pageViewer(pageViewer: PageViewer, headerForItemAtIndex index: Int) -> String {
-        return ["INVOICES", "PREALERTS"][index]
+        return [CustomLocalisedString("INVOICES"), CustomLocalisedString("PREALERTS")][index]
     }
     
     func pageViewer(pageViewer: PageViewer, pageForItemAtIndex index: Int, reusableView: UIView?) -> UIView {

@@ -95,6 +95,7 @@
             <connections>
                 <outlet property="assortmentContainerView" destination="g1j-qK-CCn" id="cT4-tL-o5k"/>
                 <outlet property="collectionView" destination="PJA-Fx-FOM" id="5rP-hl-fx0"/>
+                <outlet property="colorLabel" destination="9MK-43-8lV" id="Cah-dO-cBG"/>
                 <outlet property="colorTextField" destination="G7F-I4-NW6" id="Pka-lG-xhE"/>
                 <outlet property="filterContainerView" destination="0jT-ah-xWL" id="8LH-gy-el7"/>
                 <outlet property="searchContainerView" destination="3uV-aI-t7D" id="8lw-Pr-Tri"/>

@@ -2644,11 +2644,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="8ac-KO-wHo"/>
+                    <navigationItem key="navigationItem" id="8ac-KO-wHo">
+                        <barButtonItem key="backBarButtonItem" title=" " id="ZeG-oY-wvt"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="pageViewerContainerView" destination="GGe-6q-8na" id="Gjj-Hc-1d9"/>
                         <segue destination="wjH-fA-s4d" kind="modal" identifier="VarietyImageViewerViewControllerSegueIdentifier" id="Q4o-1U-m89"/>
                         <segue destination="qRm-nX-Z7q" kind="push" identifier="PlantationDetailsViewControllerSegueIdentifier" id="kWG-9i-ym5"/>
+                        <segue destination="tbR-4v-6Al" kind="push" identifier="RegistrationSegueIdentifier" id="djv-qO-Pq1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ITg-uw-GbX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2784,7 +2787,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Additional parameters" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Pix-2S-Q4x">
-                                                <rect key="frame" x="20" y="0.0" width="174" height="30"/>
+                                                <rect key="frame" x="20" y="0.0" width="254" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -2953,6 +2956,7 @@
                     <connections>
                         <outlet property="additionalParametersArrowImageView" destination="pvs-lO-ndJ" id="nFt-bL-VKr"/>
                         <outlet property="additionalParametersContainerView" destination="gxH-gw-fa5" id="QH9-c7-9pg"/>
+                        <outlet property="additionalParametersLabel" destination="Pix-2S-Q4x" id="unp-Tq-3fA"/>
                         <outlet property="additionalParametersOverlayView" destination="tdk-OZ-iIM" id="ozn-TH-ZOm"/>
                         <outlet property="collectionView" destination="X8F-Lt-tzs" id="7Lw-qu-l2G"/>
                         <outlet property="containerView" destination="UpF-sr-d0I" id="b1I-38-HEg"/>
@@ -3032,7 +3036,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.49019607843137253" blue="0.76862745098039209" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content available only for customers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kxa-EG-RmQ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content available only for customers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" id="kxa-EG-RmQ">
                                 <rect key="frame" x="0.0" y="358" width="320" height="21"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -3064,8 +3068,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="brandLabel" destination="Txv-YE-6tS" id="zc7-49-AN9"/>
+                        <outlet property="brandStringLabel" destination="iFM-Yp-aYQ" id="H08-Ld-9sZ"/>
+                        <outlet property="contentAvailableForCustomers" destination="kxa-EG-RmQ" id="cAe-iJ-nAo"/>
                         <outlet property="countryLabel" destination="ODn-37-wiR" id="a8k-j0-o04"/>
+                        <outlet property="countryStringLabel" destination="ueD-zg-OgC" id="sS3-Y3-Dwc"/>
                         <outlet property="farmLabel" destination="Qw6-DB-fHG" id="iNR-bx-MHw"/>
+                        <outlet property="farmStringLabel" destination="8e9-zQ-cSS" id="1q3-k1-Jad"/>
                         <outlet property="infoContainerView" destination="g4l-TU-ScF" id="tNN-rQ-h0O"/>
                         <outlet property="logoImageView" destination="X4O-PT-Myh" id="InB-kH-V2s"/>
                         <outlet property="pageViewerContainerView" destination="GND-PM-8xZ" id="fyB-lb-dS8"/>
@@ -3335,7 +3343,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="XJa-qv-n5d"/>
-        <segue reference="vEG-G1-PwC"/>
-        <segue reference="kWG-9i-ym5"/>
+        <segue reference="36q-jX-VtV"/>
+        <segue reference="EIi-4X-I8T"/>
+        <segue reference="djv-qO-Pq1"/>
     </inferredMetricsTieBreakers>
 </document>

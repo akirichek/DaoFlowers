@@ -26,7 +26,7 @@ class FlowerCollectionViewCell: UICollectionViewCell {
         nameLabel.text = flower.name
         
         if let sortsCount = flower.sortsCount {
-            sortsCountLabel.text = "\(sortsCount) \(CustomLocalisedString("VarietiesCount", comment: ""))"
+            sortsCountLabel.text = "\(sortsCount) \(CustomLocalisedString("VarietiesCount"))"
 //            if sortsCount == 1 {
 //                sortsCountLabel.text = "\(sortsCount) variety"
 //            } else {

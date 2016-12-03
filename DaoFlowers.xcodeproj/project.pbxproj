@@ -16,7 +16,6 @@
 		82457AD51DAEAA5900D87B21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82457AD31DAEAA5900D87B21 /* LaunchScreen.storyboard */; };
 		825369081DDF9BA700A17537 /* InvoiceDetailsGeneralTotalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 825369071DDF9BA700A17537 /* InvoiceDetailsGeneralTotalTableViewCell.xib */; };
 		8253690B1DE0E73C00A17537 /* InvoiceDetailsGeneralFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8253690A1DE0E73C00A17537 /* InvoiceDetailsGeneralFilterView.swift */; };
-		8253690D1DE0E74900A17537 /* InvoiceDetailsGeneralFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8253690C1DE0E74900A17537 /* InvoiceDetailsGeneralFilterView.xib */; };
 		8253690F1DE229DA00A17537 /* InvoiceDetailsGeneralLandscapeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8253690E1DE229DA00A17537 /* InvoiceDetailsGeneralLandscapeTableViewCell.xib */; };
 		825369131DE33BD700A17537 /* InvoiceDetailsGeneralTotalLandscapeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 825369121DE33BD700A17537 /* InvoiceDetailsGeneralTotalLandscapeTableViewCell.xib */; };
 		825369151DE33D7200A17537 /* InvoiceDetailsGeneralHeaderLandscapeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 825369141DE33D7200A17537 /* InvoiceDetailsGeneralHeaderLandscapeTableViewCell.xib */; };
@@ -142,6 +141,8 @@
 		82FF96271DF0682E00A5BB70 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FF96261DF0682E00A5BB70 /* RegistrationViewController.swift */; };
 		82FF96291DF0A4DF00A5BB70 /* ApiManager+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FF96281DF0A4DF00A5BB70 /* ApiManager+Profile.swift */; };
 		82FF962C1DF2D3C400A5BB70 /* VarietiesListHintView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82FF962E1DF2D3C400A5BB70 /* VarietiesListHintView.xib */; };
+		82FF96581DF3270700A5BB70 /* InvoiceDetailsGeneralFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82FF965A1DF3270700A5BB70 /* InvoiceDetailsGeneralFilterView.xib */; };
+		82FF96651DF346C600A5BB70 /* down_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 82FF96671DF346C600A5BB70 /* down_arrow@2x.png */; };
 		F81CBF2D8B89C452C874F6B5 /* Pods_DaoFlowers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5BB758AC21055E3F306CB97 /* Pods_DaoFlowers.framework */; };
 /* End PBXBuildFile section */
 
@@ -159,7 +160,6 @@
 		82457AD61DAEAA5900D87B21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		825369071DDF9BA700A17537 /* InvoiceDetailsGeneralTotalTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvoiceDetailsGeneralTotalTableViewCell.xib; sourceTree = "<group>"; };
 		8253690A1DE0E73C00A17537 /* InvoiceDetailsGeneralFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoiceDetailsGeneralFilterView.swift; sourceTree = "<group>"; };
-		8253690C1DE0E74900A17537 /* InvoiceDetailsGeneralFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvoiceDetailsGeneralFilterView.xib; sourceTree = "<group>"; };
 		8253690E1DE229DA00A17537 /* InvoiceDetailsGeneralLandscapeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvoiceDetailsGeneralLandscapeTableViewCell.xib; sourceTree = "<group>"; };
 		825369121DE33BD700A17537 /* InvoiceDetailsGeneralTotalLandscapeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvoiceDetailsGeneralTotalLandscapeTableViewCell.xib; sourceTree = "<group>"; };
 		825369141DE33D7200A17537 /* InvoiceDetailsGeneralHeaderLandscapeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvoiceDetailsGeneralHeaderLandscapeTableViewCell.xib; sourceTree = "<group>"; };
@@ -263,7 +263,6 @@
 		82C059831DC6874E00F061E6 /* LanguagePickerViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LanguagePickerViewCell.xib; sourceTree = "<group>"; };
 		82C059881DC68E3600F061E6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		82C059891DC68E3E00F061E6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		82C0598D1DC68E5F00F061E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		82C0598F1DC68E8E00F061E6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		82C059901DC68E9000F061E6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		82C059921DC68ED000F061E6 /* LanguageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
@@ -291,6 +290,11 @@
 		82FF964A1DF2DBB400A5BB70 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/VarietiesListHintView.xib; sourceTree = "<group>"; };
 		82FF96541DF2E2DB00A5BB70 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/VarietiesListHintView.xib; sourceTree = "<group>"; };
 		82FF96571DF2E42600A5BB70 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/VarietiesListHintView.xib; sourceTree = "<group>"; };
+		82FF96591DF3270700A5BB70 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/InvoiceDetailsGeneralFilterView.xib; sourceTree = "<group>"; };
+		82FF965D1DF3271E00A5BB70 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/InvoiceDetailsGeneralFilterView.xib; sourceTree = "<group>"; };
+		82FF96661DF346C600A5BB70 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/down_arrow@2x.png"; sourceTree = "<group>"; };
+		82FF96681DF3472F00A5BB70 /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = "ru.lproj/down_arrow@2x.png"; sourceTree = "<group>"; };
+		82FF96691DF3473100A5BB70 /* es */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = es; path = "es.lproj/down_arrow@2x.png"; sourceTree = "<group>"; };
 		B5BB758AC21055E3F306CB97 /* Pods_DaoFlowers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DaoFlowers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D506727F50AAD99682289838 /* Pods-DaoFlowers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DaoFlowers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DaoFlowers/Pods-DaoFlowers.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -346,6 +350,7 @@
 				82457AC71DAEAA5900D87B21 /* AppDelegate.swift */,
 				82457ACB1DAEAA5900D87B21 /* Main.storyboard */,
 				82457AD11DAEAA5900D87B21 /* Assets.xcassets */,
+				82FF96671DF346C600A5BB70 /* down_arrow@2x.png */,
 				82457AD31DAEAA5900D87B21 /* LaunchScreen.storyboard */,
 				82457AD61DAEAA5900D87B21 /* Info.plist */,
 				82457ACE1DAEAA5900D87B21 /* DaoFlowers.xcdatamodeld */,
@@ -368,7 +373,7 @@
 				825369071DDF9BA700A17537 /* InvoiceDetailsGeneralTotalTableViewCell.xib */,
 				825369121DE33BD700A17537 /* InvoiceDetailsGeneralTotalLandscapeTableViewCell.xib */,
 				8253690A1DE0E73C00A17537 /* InvoiceDetailsGeneralFilterView.swift */,
-				8253690C1DE0E74900A17537 /* InvoiceDetailsGeneralFilterView.xib */,
+				82FF965A1DF3270700A5BB70 /* InvoiceDetailsGeneralFilterView.xib */,
 			);
 			name = General;
 			sourceTree = "<group>";
@@ -840,12 +845,13 @@
 				82C1C1DF1DDDFA37007F223E /* InvoiceDetailsGeneralTableViewCell.xib in Resources */,
 				8253691A1DE390BF00A17537 /* InvoiceDetailsStatisticsViewPage.xib in Resources */,
 				8299D3AC1DB8D2170088E550 /* VarietiesPageView.xib in Resources */,
-				8253690D1DE0E74900A17537 /* InvoiceDetailsGeneralFilterView.xib in Resources */,
+				82FF96581DF3270700A5BB70 /* InvoiceDetailsGeneralFilterView.xib in Resources */,
 				82C0597B1DC6449C00F061E6 /* VarietyCollectionViewCell.xib in Resources */,
 				8253692F1DE72E0D00A17537 /* InvoiceDetailsAveragePricesSizeTableViewCell.xib in Resources */,
 				8253692B1DE72D7400A17537 /* InvoiceDetailsAveragePricesViewPage.xib in Resources */,
 				8299D3DA1DBCC1A30088E550 /* SimilarVarietyCollectionViewCell.xib in Resources */,
 				82FBA1AB1DC28DEF001CE265 /* SearchAdditionalParametersTableViewCell.xib in Resources */,
+				82FF96651DF346C600A5BB70 /* down_arrow@2x.png in Resources */,
 				82606BA81DCFA56900A9E8D8 /* PlantationsPageView.xib in Resources */,
 				82FBA19E1DC0D007001CE265 /* VarietiesSearchAdditionalParametersView.xib in Resources */,
 				8299D3C81DBBB1150088E550 /* VarietyDetailsGeneralInfoView.xib in Resources */,
@@ -1040,7 +1046,6 @@
 		82C0598C1DC68E4900F061E6 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				82C0598D1DC68E5F00F061E6 /* Base */,
 				82C0598F1DC68E8E00F061E6 /* es */,
 				82C059901DC68E9000F061E6 /* ru */,
 				821327621DC7E46C006E5E8B /* en */,
@@ -1056,6 +1061,25 @@
 				82FF96571DF2E42600A5BB70 /* es */,
 			);
 			name = VarietiesListHintView.xib;
+			sourceTree = "<group>";
+		};
+		82FF965A1DF3270700A5BB70 /* InvoiceDetailsGeneralFilterView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				82FF96591DF3270700A5BB70 /* en */,
+				82FF965D1DF3271E00A5BB70 /* ru */,
+			);
+			name = InvoiceDetailsGeneralFilterView.xib;
+			sourceTree = "<group>";
+		};
+		82FF96671DF346C600A5BB70 /* down_arrow@2x.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				82FF96661DF346C600A5BB70 /* en */,
+				82FF96681DF3472F00A5BB70 /* ru */,
+				82FF96691DF3473100A5BB70 /* es */,
+			);
+			name = "down_arrow@2x.png";
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

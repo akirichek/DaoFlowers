@@ -20,14 +20,14 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assortment:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NNF-SI-ygL">
-                                    <rect key="frame" x="15" y="0.0" width="84" height="32"/>
+                                    <rect key="frame" x="15" y="0.0" width="95" height="32"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="by % of purchase" textAlignment="natural" minimumFontSize="17" id="ucu-qU-ozg">
-                                    <rect key="frame" x="106" y="0.0" width="177" height="32"/>
+                                    <rect key="frame" x="110" y="0.0" width="173" height="32"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -79,6 +79,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="assortmentContainerView" destination="Xrz-qU-on2" id="lLm-v4-55t"/>
+                <outlet property="assortmentLabel" destination="NNF-SI-ygL" id="7eW-GO-JnS"/>
                 <outlet property="assortmentTextField" destination="ucu-qU-ozg" id="r7l-QM-IlW"/>
                 <outlet property="collectionView" destination="Kgi-du-OaY" id="ZMs-gp-duS"/>
                 <outlet property="filterContainerView" destination="QDh-uP-L8c" id="KPh-yC-OYr"/>

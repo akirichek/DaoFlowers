@@ -27,8 +27,8 @@ class VarietiesSearchViewController: BaseViewController, UICollectionViewDataSou
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        additionalParametersLabel.text = CustomLocalisedString("AdditionalParameters", comment: "")
-        searchBar.placeholder = CustomLocalisedString("VarietyOrAbr", comment: "")
+        additionalParametersLabel.text = CustomLocalisedString("AdditionalParameters")
+        searchBar.placeholder = CustomLocalisedString("VarietyOrAbr")
         self.containerView.frame = self.contentViewFrame()
     }
     

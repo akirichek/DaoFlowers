@@ -115,15 +115,17 @@ class DocumentsPageView: UIView, UITableViewDelegate, UITableViewDataSource, Doc
     
     func documentTableViewCell(cell: DocumentTableViewCell, didDownloadDocument document: Document) {
         let viewController = delegate as! UIViewController
-        let alertController = UIAlertController(title: "Downloading", message: "Do you want to start download document: \(document.fileName) ?", preferredStyle: .Alert)
-        let yesAlertAction = UIAlertAction(title: "YES", style: .Default) { alertAction in
+        let message = CustomLocalisedString("Do you want to start download document")
+        let alertController = UIAlertController(title: CustomLocalisedString("Downloading"),
+                                                message: "\(message) \(document.fileName) ?", preferredStyle: .Alert)
+        let yesAlertAction = UIAlertAction(title: CustomLocalisedString("YES"), style: .Default) { alertAction in
             ApiManager.sharedInstance.downloadDocument(document, user: User.currentUser()!) { (error) in
                 if let error = error {
                     Utils.showError(error, inViewController: viewController)
                 }
             }
         }
-        let noAlertAction = UIAlertAction(title: "NO", style: .Default, handler: nil)
+        let noAlertAction = UIAlertAction(title: CustomLocalisedString("NO"), style: .Default, handler: nil)
         alertController.addAction(noAlertAction)
         alertController.addAction(yesAlertAction)
         viewController.presentViewController(alertController, animated: true, completion: nil)

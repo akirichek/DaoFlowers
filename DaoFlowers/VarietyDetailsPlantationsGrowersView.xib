@@ -15,7 +15,7 @@
                     <rect key="frame" x="0.0" y="215" width="320" height="120"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content available only for customers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cPF-xn-TrY">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content available only for customers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" id="cPF-xn-TrY">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="21"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -26,6 +26,9 @@
                             <rect key="frame" x="0.0" y="21" width="320" height="30"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="GO TO REGISTRATION"/>
+                            <connections>
+                                <action selector="registrationButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="HUI-BW-Z8P"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -49,6 +52,8 @@
             <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="collectionView" destination="1ru-9X-Fev" id="pgk-OH-eEp"/>
+                <outlet property="contentAvailableForCustomersLabel" destination="cPF-xn-TrY" id="62y-ad-l82"/>
+                <outlet property="registrationButton" destination="FXe-yu-naK" id="y29-Yg-gMp"/>
                 <outlet property="unavailableContentContainerView" destination="64r-fM-b9L" id="OAt-Zk-767"/>
             </connections>
             <point key="canvasLocation" x="153" y="206"/>

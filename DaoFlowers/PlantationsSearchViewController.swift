@@ -16,6 +16,7 @@ class PlantationsSearchViewController: BaseViewController, UICollectionViewDataS
     @IBOutlet weak var additionalParametersContainerView: UIView!
     @IBOutlet weak var additionalParametersOverlayView: UIView!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var additionalParametersLabel: UILabel!
     
     var searchResults: [Plantation] = []
     var countriesSearchParams: [Country]?
@@ -25,6 +26,9 @@ class PlantationsSearchViewController: BaseViewController, UICollectionViewDataS
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        additionalParametersLabel.text = CustomLocalisedString("AdditionalParameters")
+        searchBar.placeholder = CustomLocalisedString("Plantation name or brand")
         self.containerView.frame = self.contentViewFrame()
     }
     

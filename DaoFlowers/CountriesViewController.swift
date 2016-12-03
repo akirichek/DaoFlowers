@@ -17,6 +17,8 @@ class CountriesViewController: BaseViewController, UICollectionViewDataSource, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = CustomLocalisedString("Plantations")
         self.fetchCountries()
     }
     

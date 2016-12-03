@@ -59,6 +59,7 @@ struct K {
             static let InvoiceDetails = "InvoiceDetailsSegueIdentifier"
             static let Contacts = "ContactsViewControllerSegueIdentifier"
             static let VarietyImageViewer = "VarietyImageViewerViewControllerSegueIdentifier"
+            static let Registration = "RegistrationSegueIdentifier"
         }
         
         struct ViewControllerIdentifier {
@@ -138,6 +139,6 @@ enum Language: String {
     }
 }
 
-func CustomLocalisedString(key: String, comment: String) -> String {
+func CustomLocalisedString(key: String) -> String {
     return LanguageManager.getTranslationForKey(key)
 }

@@ -45,6 +45,7 @@
             </constraints>
             <connections>
                 <outlet property="collectionView" destination="HaN-ok-qP7" id="c8E-3R-Sl9"/>
+                <outlet property="emptyListLabel" destination="haa-t4-h9K" id="a7Z-XI-4Uy"/>
             </connections>
         </view>
     </objects>

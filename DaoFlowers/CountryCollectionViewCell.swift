@@ -23,11 +23,13 @@ class CountryCollectionViewCell: UICollectionViewCell {
         self.containerView.layer.cornerRadius = 5
         nameLabel.text = country.name
         
-        if country.plantCount == 1 {
-            plantCountLabel.text = "\(country.plantCount) plantation"
-        } else {
-            plantCountLabel.text = "\(country.plantCount) plantations"
-        }
+        plantCountLabel.text = "\(country.plantCount) \(CustomLocalisedString("PlantationsCount"))"
+        
+//        if country.plantCount == 1 {
+//            plantCountLabel.text = "\(country.plantCount) plantation"
+//        } else {
+//            plantCountLabel.text = "\(country.plantCount) plantations"
+//        }
         
         imageView.image = nil
         if let imageUrl = country.imageUrl {

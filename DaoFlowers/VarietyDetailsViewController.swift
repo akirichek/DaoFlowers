@@ -113,11 +113,11 @@ class VarietyDetailsViewController: BaseViewController, PageViewerDataSource, Va
         let header: String
         switch index {
             case 0:
-                header = "GENERAL INFO"
+                header = CustomLocalisedString("GENERAL INFO")
             case 1:
-                header = "PLANTATIONS - GROWERS"
+                header = CustomLocalisedString("PLANTATIONS - GROWERS")
             case 2:
-                header = "SIMILAR VARIETIES"
+                header = CustomLocalisedString("SIMILAR VARIETIES")
             default:
                 header = ""
         }
@@ -144,8 +144,8 @@ class VarietyDetailsViewController: BaseViewController, PageViewerDataSource, Va
                 self.fetchGeneralInfo()
             }
         } else if let varietyDetailsPlantationsGrowersView = pageView as? VarietyDetailsPlantationsGrowersView {
+            varietyDetailsPlantationsGrowersView.viewController = self
             if User.currentUser() != nil {
-                varietyDetailsPlantationsGrowersView.viewController = self
                 if let plantations = self.plantationsGrowers {
                     varietyDetailsPlantationsGrowersView.plantations = plantations
                 } else {

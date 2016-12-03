@@ -26,7 +26,7 @@ class ColorCollectionViewCell: UICollectionViewCell {
         nameLabel.text = color.name
         
         if let sortsCount = color.sortsCount {
-            sortsCountLabel.text = "\(sortsCount) \(CustomLocalisedString("VarietiesCount", comment: ""))"
+            sortsCountLabel.text = "\(sortsCount) \(CustomLocalisedString("VarietiesCount"))"
 //            if sortsCount == 1 {
 //                sortsCountLabel.text = "\(sortsCount) sort"
 //            } else {

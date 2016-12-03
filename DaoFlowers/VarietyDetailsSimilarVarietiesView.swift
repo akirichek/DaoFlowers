@@ -11,6 +11,7 @@ import UIKit
 class VarietyDetailsSimilarVarietiesView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var emptyListLabel: UILabel!
     
     weak var delegate: VarietyDetailsSimilarVarietiesViewDelegate?
     var spinner = RBHUD()
@@ -26,6 +27,7 @@ class VarietyDetailsSimilarVarietiesView: UIView, UICollectionViewDataSource, UI
     override func awakeFromNib() {
         let nib = UINib(nibName:"SimilarVarietyCollectionViewCell", bundle: nil)
         self.collectionView.registerNib(nib, forCellWithReuseIdentifier: "SimilarVarietyCollectionViewCellIdentifier")
+        emptyListLabel.text = CustomLocalisedString("Similar sorts list is empty")
     }
     
     override func layoutSubviews() {

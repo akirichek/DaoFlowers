@@ -5,3 +5,49 @@
   Created by Artem Kirichek on 10/30/16.
   Copyright © 2016 Dao Flowers. All rights reserved.
 */
+
+"Language" = "Language";
+"User Profile" = "User Profile";
+"Varieties" = "Varieties";
+"Plantations" = "Plantations";
+"Documents" = "Documents";
+"Claims" = "Claims";
+"Current Orders" = "Current Orders";
+"Contacts" = "Contacts";
+"Settings" = "Settings";
+"Log in" = "Log in";
+"Log out" = "Log out";
+"About" = "About";
+"VarietiesCount" = "varieties";
+"AdditionalParameters" = "Additional parameters";
+"VarietyOrAbr" = "Variety or abr";
+"Assortment" = "Assortment:";
+"TypeNameAbbrToSearch" = "Type name/abbr to search...";
+"by name" = "by name";
+"by % of purchase" = "by % of purchase";
+"bought last month, FB" = "bought last month, FB";
+"active plantations" = "active plantations";
+"Done" = "Done";
+"GENERAL INFO" = "GENERAL INFO";
+"PLANTATIONS - GROWERS" = "PLANTATIONS - GROWERS";
+"SIMILAR VARIETIES" = "SIMILAR VARIETIES";
+"Similar sorts list is empty" = "Similar sorts list is empty";
+"Content available only for customers" = "Content available only for customers";
+"GO TO REGISTRATION" = "GO TO REGISTRATION";
+"PlantationsCount" = "plantations";
+"TypeNameBrandToSearch" = "Type name/brand to search...";
+"Plantation name or brand" = "Plantation name or brand";
+"Farm name" = "Farm name:";
+"Brand" = "Brand:";
+"Country" = "Country:";
+"NameAbbrToSearch" = "Name/abbr to search";
+"Color" = "Color:";
+"INVOICES" = "INVOICES";
+"PREALERTS" = "PREALERS";
+"Downloading" = "Downloading";
+"Do you want to start download document" = "Do you want to start download document:";
+"YES" = "YES";
+"NO" = "NO";
+"GENERAL" = "GENERAL";
+"AVERAGE PRICES" = "AVERAGE PRICES";
+"STATISTICS OF FULFILMENT" = "STATISTICS OF FULFILMENT";

@@ -46,8 +46,8 @@ class SettingsViewController: BaseViewController, UIPickerViewDataSource, UIPick
     // MARK: - Private Methods
     
     func populateView() {
-        self.languageLabel.text = CustomLocalisedString("Language", comment: "")
-        self.title = CustomLocalisedString("Settings", comment: "")
+        self.languageLabel.text = CustomLocalisedString("Language")
+        self.title = CustomLocalisedString("Settings")
         self.languageValueLabel.text = self.selectedLanguage.rawValue
         self.flagImageView.image = UIImage(named: self.selectedLanguage.flagImageName())
     }

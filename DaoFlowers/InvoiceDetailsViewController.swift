@@ -144,7 +144,7 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, Pa
         
     func filterButtonClicked(sender: UIBarButtonItem) {
         if filterView == nil {
-            filterView = NSBundle.mainBundle().loadNibNamed("InvoiceDetailsGeneralFilterView", owner: self, options: nil).first as! InvoiceDetailsGeneralFilterView
+            filterView = LanguageManager.loadNibNamed("InvoiceDetailsGeneralFilterView", owner: self, options: nil).first as! InvoiceDetailsGeneralFilterView
             filterView.frame = self.view.bounds
             filterView.viewWillTransitionToSize = self.viewWillTransitionToSize
             filterView.invoiceDetails = invoiceDetails
@@ -156,15 +156,18 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, Pa
     }
     
     func downloadButtonClicked(sender: UIBarButtonItem) {
-        let alertController = UIAlertController(title: "Downloading", message: "Do you want to start download document: \(invoice.fileName) ?", preferredStyle: .Alert)
-        let yesAlertAction = UIAlertAction(title: "YES", style: .Default) { alertAction in
+        let message = CustomLocalisedString("Do you want to start download document")
+        let alertController = UIAlertController(title: CustomLocalisedString("Downloading"),
+                                                message: "\(message) \(invoice.fileName) ?",
+                                                preferredStyle: .Alert)
+        let yesAlertAction = UIAlertAction(title: CustomLocalisedString("YES"), style: .Default) { alertAction in
             ApiManager.sharedInstance.downloadDocument(self.invoice, user: User.currentUser()!) { (error) in
                 if let error = error {
                     Utils.showError(error, inViewController: self)
                 }
             }
         }
-        let noAlertAction = UIAlertAction(title: "NO", style: .Default, handler: nil)
+        let noAlertAction = UIAlertAction(title: CustomLocalisedString("NO"), style: .Default, handler: nil)
         alertController.addAction(noAlertAction)
         alertController.addAction(yesAlertAction)
         self.presentViewController(alertController, animated: true, completion: nil)
@@ -177,7 +180,7 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, Pa
     }
     
     func pageViewer(pageViewer: PageViewer, headerForItemAtIndex index: Int) -> String {
-        return ["GENERAL", "AVERAGE PRICES", "STATISTICS OF FULFILMENT"][index]
+        return [CustomLocalisedString("GENERAL"), CustomLocalisedString("AVERAGE PRICES"), CustomLocalisedString("STATISTICS OF FULFILMENT")][index]
     }
     
     func pageViewer(pageViewer: PageViewer, pageForItemAtIndex index: Int, reusableView: UIView?) -> UIView {

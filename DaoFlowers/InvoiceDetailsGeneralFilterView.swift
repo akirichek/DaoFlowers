@@ -140,8 +140,8 @@ class InvoiceDetailsGeneralFilterView: UIView, UIPickerViewDataSource, UIPickerV
             topContainerView.frame = CGRectMake(45, 77, 215, 110)
             bottomContainerView.frame = CGRectMake(45, 197, 215, 106)
         } else {
-            topContainerView.frame = CGRectMake(70, 60, 215, 110)
-            bottomContainerView.frame = CGRectMake(270, 60, 215, 106)
+            topContainerView.frame = CGRectMake(60, 60, 215, 110)
+            bottomContainerView.frame = CGRectMake(280, 60, 215, 106)
         }
     }
     

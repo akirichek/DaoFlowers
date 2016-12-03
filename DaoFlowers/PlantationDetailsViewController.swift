@@ -17,6 +17,10 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var topContainerView: UIView!
+    @IBOutlet weak var farmStringLabel: UILabel!
+    @IBOutlet weak var brandStringLabel: UILabel!
+    @IBOutlet weak var countryStringLabel: UILabel!
+    @IBOutlet weak var contentAvailableForCustomers: UILabel!
     
     var pageViewer: PageViewer!
     var plantation: Plantation!
@@ -31,6 +35,10 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        contentAvailableForCustomers.text = CustomLocalisedString("Content available only for customers")
+        farmStringLabel.text = CustomLocalisedString("Farm name")
+        brandStringLabel.text = CustomLocalisedString("Brand")
+        countryStringLabel.text = CustomLocalisedString("Country")
         
         self.topContainerView.frame = self.topContainerViewFrame()
         self.pageViewerContainerView.frame = self.pageViewerFrame()
@@ -80,7 +88,7 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
     
     @IBAction func infoButtonClicked(sender: UIBarButtonItem) {
         if self.hintView?.superview == nil {
-            self.hintView = NSBundle.mainBundle().loadNibNamed("VarietiesListHintView", owner: self, options: nil).first as? AHintView
+            self.hintView = LanguageManager.loadNibNamed("VarietiesListHintView", owner: self, options: nil).first as? AHintView
             self.hintView!.frame = self.view.bounds
             self.view.addSubview(hintView!)
         }

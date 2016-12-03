@@ -24,6 +24,7 @@ class PlantationsViewController: BaseViewController, PageViewerDataSource, Plant
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = CustomLocalisedString("Plantations")
         self.pageViewerContainerView.frame = self.contentViewFrame()
         let pageViewer = NSBundle.mainBundle().loadNibNamed("PageViewer", owner: self, options: nil).first as! PageViewer
         pageViewer.frame = self.pageViewerContainerView.bounds

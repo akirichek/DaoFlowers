@@ -16,7 +16,7 @@ class FlowersViewController: BaseViewController, UICollectionViewDataSource, UIC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = CustomLocalisedString("Varieties", comment: "")
+        self.title = CustomLocalisedString("Varieties")
         
         RBHUD.sharedInstance.showLoader(self.view, withTitle: nil, withSubTitle: nil, withProgress: true)
         ApiManager.fetchFlowers { (flowers, error) in

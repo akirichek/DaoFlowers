@@ -31,7 +31,7 @@ class LanguageManager: NSObject {
     }
 
     static func languageCode() -> String {
-        var languageCode = "Base"
+        var languageCode = "en"
         if let languageRawValue = NSUserDefaults.standardUserDefaults().stringForKey(K.UserDefaultsKey.Language) {
             let language = Language(rawValue: languageRawValue)!
             languageCode = language.code()

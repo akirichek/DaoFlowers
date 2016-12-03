@@ -72,7 +72,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         } else {
             let sectionCell = tableView.dequeueReusableCellWithIdentifier("MenuTableViewCellIdentifier", forIndexPath: indexPath) as! MenuTableViewCell
             let menuItem = self.menuItems[indexPath.row - 1]
-            sectionCell.sectionLabel.text = CustomLocalisedString(menuItem["name"]!, comment: "")
+            sectionCell.sectionLabel.text = CustomLocalisedString(menuItem["name"]!)
             sectionCell.iconImageView?.image = UIImage(named: menuItem["image"]!)
             cell = sectionCell
         }

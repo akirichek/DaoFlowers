@@ -16,6 +16,7 @@ class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewD
     @IBOutlet weak var searchContainerView: UIView!
     @IBOutlet weak var assortmentTextField: UITextField!
     @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet weak var assortmentLabel: UILabel!
     
     var spinner = RBHUD()
     weak var delegate: PlantationsPageViewDelegate?
@@ -38,7 +39,7 @@ class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewD
         } else {
             hideFilterContainerView()
         }
-        self.assortmentTextField.text = state.assortment.rawValue
+        self.assortmentTextField.text = CustomLocalisedString(state.assortment.rawValue)
         self.searchTextField.text = state.searchString
         self.collectionView.contentOffset = CGPointZero
         self.filterPlantations()
@@ -47,6 +48,9 @@ class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewD
     // MARK: - Override Methods
     
     override func awakeFromNib() {
+        assortmentLabel.text = CustomLocalisedString("Assortment")
+        searchTextField.placeholder = CustomLocalisedString("TypeNameBrandToSearch")
+        
         let nib = UINib(nibName:"PlantationCollectionViewCell", bundle: nil)
         self.collectionView.registerNib(nib, forCellWithReuseIdentifier: "PlantationCollectionViewCellIdentifier")
         assortmentContainerView.layer.cornerRadius = 5
@@ -79,7 +83,10 @@ class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewD
         
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: #selector(VarietiesPageView.doneButtonClicked(_:)))
+        let doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
+                                         style: UIBarButtonItemStyle.Done,
+                                         target: self,
+                                         action: #selector(VarietiesPageView.doneButtonClicked(_:)))
         toolbar.setItems([doneButton], animated: true)
         textField.inputAccessoryView = toolbar
         
@@ -124,7 +131,7 @@ class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewD
     func changeAssortment() {
         let selectedRow = self.assortmentPickerView.selectedRowInComponent(0)
         let assortmentType = self.assortmentTypes[selectedRow]
-        self.assortmentTextField.text = assortmentType.rawValue
+        self.assortmentTextField.text = CustomLocalisedString(assortmentType.rawValue)
         self.assortmentTextField.resignFirstResponder()
         self.state.assortment = assortmentType
         if let filteredPlantations = self.filteredPlantations {
@@ -189,7 +196,7 @@ class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewD
     // MARK: - UIPickerViewDelegate
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let titleForRow = assortmentTypes[row].rawValue
+        let titleForRow = CustomLocalisedString(assortmentTypes[row].rawValue)
         return titleForRow
     }
     

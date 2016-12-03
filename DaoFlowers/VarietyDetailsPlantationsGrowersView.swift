@@ -12,6 +12,8 @@ class VarietyDetailsPlantationsGrowersView: UIView, UICollectionViewDataSource, 
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var unavailableContentContainerView: UIView!
+    @IBOutlet weak var contentAvailableForCustomersLabel: UILabel!
+    @IBOutlet weak var registrationButton: UIButton!
     
     weak var viewController: UIViewController!
     var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
@@ -22,11 +24,13 @@ class VarietyDetailsPlantationsGrowersView: UIView, UICollectionViewDataSource, 
         }
     }
     
-    // MARK: Override Methods
+    // MARK: - Override Methods
     
     override func awakeFromNib() {
         let nib = UINib(nibName:"PlantationCollectionViewCell", bundle: nil)
         self.collectionView.registerNib(nib, forCellWithReuseIdentifier: "PlantationCollectionViewCellIdentifier")
+        contentAvailableForCustomersLabel.text = CustomLocalisedString("Content available only for customers")
+        registrationButton.setTitle(CustomLocalisedString("GO TO REGISTRATION"), forState: .Normal)
     }
     
     override func layoutSubviews() {
@@ -37,6 +41,13 @@ class VarietyDetailsPlantationsGrowersView: UIView, UICollectionViewDataSource, 
             //self.spinner.showLoader(self, withTitle: nil, withSubTitle: nil, withProgress: true)
         }
     }
+    
+    // MARK: - Action Methods
+    
+    @IBAction func registrationButtonClicked(sender: UIButton) {
+        viewController.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Registration, sender: self)
+    }
+    
     
     // MARK: - UICollectionViewDataSource
     

@@ -31,6 +31,8 @@ class DocumentTableViewCell: UITableViewCell {
         dateFormatter.dateFormat = "dd-MM-yyyy"
         dateLabel.text = dateFormatter.stringFromDate(document.date)
         
+        let locale = NSLocale(localeIdentifier: LanguageManager.languageCode())
+        dateFormatter.locale = locale
         dateFormatter.dateFormat = "EEEE"
         dayOfWeekLabel.text = "[\(dateFormatter.stringFromDate(document.date).lowercaseString)]"
         

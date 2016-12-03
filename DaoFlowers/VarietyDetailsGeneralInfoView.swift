@@ -68,8 +68,12 @@ class VarietyDetailsGeneralInfoView: UIView, UICollectionViewDataSource, UIColle
         if let liveDaysFrom = self.variety?.liveDaysFrom {
             self.vaseLifeLabel.text = "\(liveDaysFrom) - \(self.variety!.liveDaysTo!)"
         }
-        self.breederLabel.text = self.variety?.breeder?.name
         
+        if let breeder = self.variety?.breeder {
+            self.breederLabel.text = breeder.name
+        } else {
+            self.breederLabel.text = "-"
+        }
         
         self.imageView.image = UIImage(named: self.variety!.flower.defaultImage)
         if let imageUrl = self.variety?.imageUrl {

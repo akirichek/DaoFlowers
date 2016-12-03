@@ -16,6 +16,7 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
     @IBOutlet weak var searchContainerView: UIView!
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var colorTextField: UITextField!
+    @IBOutlet weak var colorLabel: UILabel!
     
     weak var delegate: VarietiesByPlantationPageViewDelegate?
     var colorsPickerView: UIPickerView!
@@ -44,6 +45,9 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
     // MARK: - Override Methods
     
     override func awakeFromNib() {
+        searchTextField.placeholder = CustomLocalisedString("NameAbbrToSearch")
+        colorLabel.text = CustomLocalisedString("Color")
+        
         let nib = UINib(nibName:"VarietyCollectionViewCell", bundle: nil)
         self.collectionView.registerNib(nib, forCellWithReuseIdentifier: "VarietyCollectionViewCellIdentifier")
         assortmentContainerView.layer.cornerRadius = 5
@@ -72,7 +76,10 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
         
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: #selector(VarietiesByPlantationPageView.doneButtonClicked(_:)))
+        let doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
+                                         style: UIBarButtonItemStyle.Done,
+                                         target: self,
+                                         action: #selector(VarietiesByPlantationPageView.doneButtonClicked(_:)))
         toolbar.setItems([doneButton], animated: true)
         textField.inputAccessoryView = toolbar
         
