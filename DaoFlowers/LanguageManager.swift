@@ -11,13 +11,7 @@ import Foundation
 class LanguageManager: NSObject {
     
     static func getTranslationForKey(key: String) -> String {
-        var languageCode = "Base"
-        if let languageRawValue = NSUserDefaults.standardUserDefaults().stringForKey(K.UserDefaultsKey.Language) {
-            let language = Language(rawValue: languageRawValue)!
-            languageCode = language.code()
-        }
-        
-        let bundlePath = NSBundle.mainBundle().pathForResource(languageCode, ofType: "lproj")!
+        let bundlePath = NSBundle.mainBundle().pathForResource(self.languageCode(), ofType: "lproj")!
         let languageBundle = NSBundle(path: bundlePath)
         
         let translatedString = languageBundle?.localizedStringForKey(key, value: "", table: nil)
@@ -27,5 +21,22 @@ class LanguageManager: NSObject {
         } else {
             return translatedString!
         }
+    }
+    
+    static func loadNibNamed(name: String!, owner: AnyObject!, options: [NSObject : AnyObject]!) -> [AnyObject]! {
+        let bundlePath = NSBundle.mainBundle().pathForResource(self.languageCode(), ofType: "lproj")!
+        let languageBundle = NSBundle(path: bundlePath)!
+    
+        return languageBundle.loadNibNamed(name, owner: owner, options: options)
+    }
+
+    static func languageCode() -> String {
+        var languageCode = "Base"
+        if let languageRawValue = NSUserDefaults.standardUserDefaults().stringForKey(K.UserDefaultsKey.Language) {
+            let language = Language(rawValue: languageRawValue)!
+            languageCode = language.code()
+        }
+        
+        return languageCode
     }
 }

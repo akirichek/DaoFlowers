@@ -53,7 +53,6 @@
 		82606BB81DD383A600A9E8D8 /* PlantationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82606BB71DD383A600A9E8D8 /* PlantationDetailsViewController.swift */; };
 		82606BBC1DD3A9DF00A9E8D8 /* VarietiesByPlantationPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82606BBB1DD3A9DF00A9E8D8 /* VarietiesByPlantationPageView.swift */; };
 		82606BBE1DD3A9EB00A9E8D8 /* VarietiesByPlantationPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82606BBD1DD3A9EB00A9E8D8 /* VarietiesByPlantationPageView.xib */; };
-		82606BC31DD76FAB00A9E8D8 /* VarietiesListHintView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82606BC21DD76FAB00A9E8D8 /* VarietiesListHintView.xib */; };
 		82606BC51DD770C800A9E8D8 /* AHintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82606BC41DD770C800A9E8D8 /* AHintView.swift */; };
 		82606BC71DD7985800A9E8D8 /* ApiManager+Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82606BC61DD7985800A9E8D8 /* ApiManager+Orders.swift */; };
 		82606BCA1DD7992C00A9E8D8 /* CurrentOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82606BC91DD7992C00A9E8D8 /* CurrentOrdersViewController.swift */; };
@@ -142,6 +141,7 @@
 		82FF96251DF0443E00A5BB70 /* ApiManager+Support.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FF96241DF0443E00A5BB70 /* ApiManager+Support.swift */; };
 		82FF96271DF0682E00A5BB70 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FF96261DF0682E00A5BB70 /* RegistrationViewController.swift */; };
 		82FF96291DF0A4DF00A5BB70 /* ApiManager+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FF96281DF0A4DF00A5BB70 /* ApiManager+Profile.swift */; };
+		82FF962C1DF2D3C400A5BB70 /* VarietiesListHintView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82FF962E1DF2D3C400A5BB70 /* VarietiesListHintView.xib */; };
 		F81CBF2D8B89C452C874F6B5 /* Pods_DaoFlowers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5BB758AC21055E3F306CB97 /* Pods_DaoFlowers.framework */; };
 /* End PBXBuildFile section */
 
@@ -196,7 +196,6 @@
 		82606BB71DD383A600A9E8D8 /* PlantationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlantationDetailsViewController.swift; sourceTree = "<group>"; };
 		82606BBB1DD3A9DF00A9E8D8 /* VarietiesByPlantationPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietiesByPlantationPageView.swift; sourceTree = "<group>"; };
 		82606BBD1DD3A9EB00A9E8D8 /* VarietiesByPlantationPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VarietiesByPlantationPageView.xib; sourceTree = "<group>"; };
-		82606BC21DD76FAB00A9E8D8 /* VarietiesListHintView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VarietiesListHintView.xib; sourceTree = "<group>"; };
 		82606BC41DD770C800A9E8D8 /* AHintView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AHintView.swift; sourceTree = "<group>"; };
 		82606BC61DD7985800A9E8D8 /* ApiManager+Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ApiManager+Orders.swift"; sourceTree = "<group>"; };
 		82606BC91DD7992C00A9E8D8 /* CurrentOrdersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentOrdersViewController.swift; sourceTree = "<group>"; };
@@ -289,6 +288,9 @@
 		82FF96241DF0443E00A5BB70 /* ApiManager+Support.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ApiManager+Support.swift"; sourceTree = "<group>"; };
 		82FF96261DF0682E00A5BB70 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		82FF96281DF0A4DF00A5BB70 /* ApiManager+Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ApiManager+Profile.swift"; sourceTree = "<group>"; };
+		82FF964A1DF2DBB400A5BB70 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/VarietiesListHintView.xib; sourceTree = "<group>"; };
+		82FF96541DF2E2DB00A5BB70 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/VarietiesListHintView.xib; sourceTree = "<group>"; };
+		82FF96571DF2E42600A5BB70 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/VarietiesListHintView.xib; sourceTree = "<group>"; };
 		B5BB758AC21055E3F306CB97 /* Pods_DaoFlowers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DaoFlowers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D506727F50AAD99682289838 /* Pods-DaoFlowers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DaoFlowers.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DaoFlowers/Pods-DaoFlowers.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -453,7 +455,7 @@
 			isa = PBXGroup;
 			children = (
 				82606BC41DD770C800A9E8D8 /* AHintView.swift */,
-				82606BC21DD76FAB00A9E8D8 /* VarietiesListHintView.xib */,
+				82FF962E1DF2D3C400A5BB70 /* VarietiesListHintView.xib */,
 				8253693B1DEB7A8900A17537 /* ProductivityHintView.xib */,
 				8253693D1DECAF4700A17537 /* BreederHintView.xib */,
 				8253693F1DECB07D00A17537 /* VarietyByFarmsHintView.xib */,
@@ -828,7 +830,7 @@
 				8299D3CA1DBBB11F0088E550 /* VarietyDetailsPlantationsGrowersView.xib in Resources */,
 				827E8B1E1DDB79D8000A8EAE /* DocumentTableViewHeader.xib in Resources */,
 				825369131DE33BD700A17537 /* InvoiceDetailsGeneralTotalLandscapeTableViewCell.xib in Resources */,
-				82606BC31DD76FAB00A9E8D8 /* VarietiesListHintView.xib in Resources */,
+				82FF962C1DF2D3C400A5BB70 /* VarietiesListHintView.xib in Resources */,
 				8299D3CC1DBBB1360088E550 /* VarietyDetailsSimilarVarietiesView.xib in Resources */,
 				8253691E1DE44F8000A17537 /* InvoiceDetailsStatisticsTableViewCell.xib in Resources */,
 				82457AD51DAEAA5900D87B21 /* LaunchScreen.storyboard in Resources */,
@@ -1044,6 +1046,16 @@
 				821327621DC7E46C006E5E8B /* en */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		82FF962E1DF2D3C400A5BB70 /* VarietiesListHintView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				82FF964A1DF2DBB400A5BB70 /* en */,
+				82FF96541DF2E2DB00A5BB70 /* ru */,
+				82FF96571DF2E42600A5BB70 /* es */,
+			);
+			name = VarietiesListHintView.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

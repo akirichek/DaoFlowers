@@ -81,7 +81,7 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
     
     @IBAction func infoButtonClicked(sender: UIBarButtonItem) {
         if self.hintView?.superview == nil {
-            self.hintView = NSBundle.mainBundle().loadNibNamed("VarietiesListHintView", owner: self, options: nil).first as? AHintView
+            self.hintView = LanguageManager.loadNibNamed("VarietiesListHintView", owner: self, options: nil).first as? AHintView
             self.hintView!.frame = self.view.bounds
             self.view.addSubview(self.hintView!)
         }
