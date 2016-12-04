@@ -16,6 +16,7 @@ class InvoiceDetailsAveragePricesTableViewCell: UITableViewCell {
     @IBOutlet weak var sizeLabel: UILabel!
     @IBOutlet weak var avgPriceLabel: UILabel!
     @IBOutlet weak var stemsLabel: UILabel!
+    @IBOutlet weak var totalLabel: UILabel!
     
     var invoiceDetails: InvoiceDetails!
     var invoiceDetailsStatisticAveragePrice: InvoiceDetails.Statistic.AveragePrice! {
@@ -48,6 +49,7 @@ class InvoiceDetailsAveragePricesTableViewCell: UITableViewCell {
     }
     
     func populateTotalStemsCellView() {
+        totalLabel.text = CustomLocalisedString("total stems")
         stemsLabel.text = String(invoiceDetails.totalStems)
     }
 }

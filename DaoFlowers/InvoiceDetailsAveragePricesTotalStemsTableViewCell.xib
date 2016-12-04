@@ -49,6 +49,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="stemsLabel" destination="OCv-HL-QUA" id="KiL-QN-hsL"/>
+                <outlet property="totalLabel" destination="yT0-H0-8je" id="SMK-cf-GSm"/>
             </connections>
             <point key="canvasLocation" x="217" y="279"/>
         </tableViewCell>

@@ -25,6 +25,7 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, Pa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = CustomLocalisedString("Invoice Details")
         self.pageViewerContainerView.frame = self.contentViewFrame()
         let pageViewer = NSBundle.mainBundle().loadNibNamed("PageViewer", owner: self, options: nil).first as! PageViewer
         pageViewer.frame = self.pageViewerContainerView.bounds
@@ -196,7 +197,7 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, Pa
             nibName = ""
         }
         
-        let pageView = NSBundle.mainBundle().loadNibNamed(nibName, owner: self, options: nil).first as! UIView
+        let pageView = LanguageManager.loadNibNamed(nibName, owner: self, options: nil).first as! UIView
         
         if let invoiceDetails = self.filteredInvoiceDetails {
             if let generalPageView = pageView as? InvoiceDetailsGeneralViewPage {

@@ -67,6 +67,8 @@ class InvoiceDetailsAveragePricesViewPage: UIView, UITableViewDelegate, UITableV
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
         let dateString = dateFormatter.stringFromDate(invoice.date)
+        let locale = NSLocale(localeIdentifier: LanguageManager.languageCode())
+        dateFormatter.locale = locale
         dateFormatter.dateFormat = "EEE"
         let weekdayString = dateFormatter.stringFromDate(invoice.date).lowercaseString
         invoiceDateLabels.forEach { $0.text = "\(dateString) [\(weekdayString)]" }
@@ -170,48 +172,4 @@ class InvoiceDetailsAveragePricesViewPage: UIView, UITableViewDelegate, UITableV
         
         return cell
     }
-    
-    // MARK: - UITableViewDelegate
-    
-//    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        var heightForRow: CGFloat = 18
-//        if indexPath.section == self.numberOfSectionsInTableView(tableView) - 1 {
-//            heightForRow = 18
-//        } else {
-//            if indexPath.row == self.tableView(tableView, numberOfRowsInSection: indexPath.section) - 1 {
-//                heightForRow = 18
-//            } else {
-//                let rowsGroupedByFlowerTypeId = self.invoiceDetails!.orderStatistic.rowsGroupedByFlowerTypeId[indexPath.section]
-//                let flowerTypeId = Array(rowsGroupedByFlowerTypeId.keys)[0]
-//                let rows = Array(rowsGroupedByFlowerTypeId.values)[0]
-//                let row = rows[indexPath.row]
-//                let flower = invoiceDetails!.flowerById(flowerTypeId)!
-//                
-//                let labelHeight: CGFloat = 21
-//                var flowerLabelWidth: CGFloat
-//                var varietyLabelWidth: CGFloat
-//                if viewWillTransitionToSize.width < viewWillTransitionToSize.height {
-//                    flowerLabelWidth = 70
-//                    varietyLabelWidth = 110
-//                } else {
-//                    flowerLabelWidth = 125
-//                    varietyLabelWidth = 124
-//                }
-//                
-//                let heightForFlowerName = Utils.heightForText(flower.name,
-//                                                              havingWidth: flowerLabelWidth,
-//                                                              andFont: UIFont.systemFontOfSize(12))
-//                let variety = self.invoiceDetails!.varietyById(row.flowerSortId)!
-//                let heightForVarietyName = Utils.heightForText(variety.name,
-//                                                               havingWidth: varietyLabelWidth,
-//                                                               andFont: UIFont.systemFontOfSize(12))
-//                
-//                if heightForVarietyName > labelHeight || heightForFlowerName > labelHeight {
-//                    heightForRow = 32
-//                }
-//            }
-//        }
-//        
-//        return heightForRow
-//}
 }

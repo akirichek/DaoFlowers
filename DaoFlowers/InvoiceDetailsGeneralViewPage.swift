@@ -76,6 +76,8 @@ class InvoiceDetailsGeneralViewPage: UIView, UITableViewDelegate, UITableViewDat
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
         let dateString = dateFormatter.stringFromDate(invoice.date)
+        let locale = NSLocale(localeIdentifier: LanguageManager.languageCode())
+        dateFormatter.locale = locale
         dateFormatter.dateFormat = "EEE"
         let weekdayString = dateFormatter.stringFromDate(invoice.date).lowercaseString
         invoiceDateLabels.forEach { $0.text = "\(dateString) [\(weekdayString)]" }
@@ -97,7 +99,7 @@ class InvoiceDetailsGeneralViewPage: UIView, UITableViewDelegate, UITableViewDat
             headerLandscapeView.hidden = true
             topContainerViewFrame.size.height = headerPortraitView.frame.height + headerPortraitView.frame.origin.y
             tableViewFrame.origin.y = topContainerViewFrame.origin.y + topContainerViewFrame.height
-            tableViewFrame.size.height = viewWillTransitionToSize.height - tableViewFrame.origin.y - 114
+            tableViewFrame.size.height = viewWillTransitionToSize.height - tableViewFrame.origin.y - 104
         } else {
             totalInfoPortraitContainerView.hidden = true
             totalInfoLandscapeContainerView.hidden = false
@@ -105,7 +107,7 @@ class InvoiceDetailsGeneralViewPage: UIView, UITableViewDelegate, UITableViewDat
             headerLandscapeView.hidden = false
             topContainerViewFrame.size.height = headerLandscapeView.frame.height + headerLandscapeView.frame.origin.y
             tableViewFrame.origin.y = topContainerViewFrame.origin.y + topContainerViewFrame.height
-            tableViewFrame.size.height = viewWillTransitionToSize.height - tableViewFrame.origin.y - 82
+            tableViewFrame.size.height = viewWillTransitionToSize.height - tableViewFrame.origin.y - 72
         }
         topContainerView.frame = topContainerViewFrame
         tableView.frame = tableViewFrame

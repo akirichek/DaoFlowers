@@ -78,7 +78,7 @@ class InvoiceDetailsStatisticsViewPage: UIView, UITableViewDelegate, UITableView
             headerViewFrame.size.height = 34
             topContainerViewFrame.size.height = headerViewFrame.height + headerViewFrame.origin.y
             tableViewFrame.origin.y = topContainerViewFrame.origin.y + topContainerViewFrame.height
-            tableViewFrame.size.height = viewWillTransitionToSize.height - tableViewFrame.origin.y - 114
+            tableViewFrame.size.height = viewWillTransitionToSize.height - tableViewFrame.origin.y - 104
         } else {
             totalInfoPortraitContainerView.hidden = true
             totalInfoLandscapeContainerView.hidden = false
@@ -87,7 +87,7 @@ class InvoiceDetailsStatisticsViewPage: UIView, UITableViewDelegate, UITableView
             headerViewFrame.size.height = 20
             topContainerViewFrame.size.height = headerViewFrame.height + headerViewFrame.origin.y
             tableViewFrame.origin.y = topContainerViewFrame.origin.y + topContainerViewFrame.height
-            tableViewFrame.size.height = viewWillTransitionToSize.height - tableViewFrame.origin.y - 82
+            tableViewFrame.size.height = viewWillTransitionToSize.height - tableViewFrame.origin.y - 72
         }
         
         topContainerView.frame = topContainerViewFrame

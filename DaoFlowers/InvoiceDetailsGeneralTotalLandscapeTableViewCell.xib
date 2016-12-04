@@ -62,6 +62,7 @@
             <connections>
                 <outlet property="totalCostLabel" destination="k7o-IF-vaP" id="GrY-Su-wxp"/>
                 <outlet property="totalFbLabel" destination="vfY-6W-3t3" id="xD9-ZN-U63"/>
+                <outlet property="totalLabel" destination="KmX-ie-bV4" id="exz-iH-Tl2"/>
                 <outlet property="totalSizeLabel" destination="SoA-Wl-9eT" id="hNt-0h-RpR"/>
             </connections>
             <point key="canvasLocation" x="212" y="206"/>

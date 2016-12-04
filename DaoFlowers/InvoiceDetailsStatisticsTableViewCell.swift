@@ -41,7 +41,7 @@ class InvoiceDetailsStatisticsTableViewCell: UITableViewCell {
     }
     
     func populateSubtotalCellView() {
-        totalLabel.text = "subtotal:"
+        totalLabel.text = CustomLocalisedString("subtotal")
         fbOrderLabel.text = String(invoiceDetailsOrderStatisticSubtotal.orderFb)
         fbInvLabel.text = String(invoiceDetailsOrderStatisticSubtotal.invoiceFb)
         fbDifLabel.text = String(format: "%.2f", invoiceDetailsOrderStatisticSubtotal.differenceFb)
@@ -56,7 +56,7 @@ class InvoiceDetailsStatisticsTableViewCell: UITableViewCell {
     }
     
     func populateGrandTotalCellView() {
-        totalLabel.text = "GRAND TOTAL:"
+        totalLabel.text = CustomLocalisedString("GRAND TOTAL")
         fbOrderLabel.text = String(invoiceDetailsOrderStatistic.totalOrderFb)
         fbInvLabel.text = String(invoiceDetailsOrderStatistic.totalInvoiceFb)
         fbDifLabel.text = String(format: "%.2f", invoiceDetailsOrderStatistic.totalDifferenceFb)

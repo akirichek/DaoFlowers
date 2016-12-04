@@ -42,7 +42,7 @@
                                         <action selector="textFieldClicked:" destination="iN0-l3-epB" eventType="editingDidBegin" id="ZJT-JW-Aix"/>
                                     </connections>
                                 </textField>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down_arrow" id="30G-Un-mq8" userLabel="Arrow Image View">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down_arrow.png" id="30G-Un-mq8" userLabel="Arrow Image View">
                                     <rect key="frame" x="202" y="11" width="9" height="6"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
@@ -62,7 +62,7 @@
                                         <action selector="textFieldClicked:" destination="iN0-l3-epB" eventType="editingDidBegin" id="ftx-fF-NY4"/>
                                     </connections>
                                 </textField>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down_arrow" id="rQZ-0p-GFj" userLabel="Arrow Image View">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down_arrow.png" id="rQZ-0p-GFj" userLabel="Arrow Image View">
                                     <rect key="frame" x="202" y="51" width="9" height="6"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
@@ -82,7 +82,7 @@
                                         <action selector="textFieldClicked:" destination="iN0-l3-epB" eventType="editingDidBegin" id="kdY-67-U5Q"/>
                                     </connections>
                                 </textField>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down_arrow" id="umx-lk-ndy" userLabel="Arrow Image View">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down_arrow.png" id="umx-lk-ndy" userLabel="Arrow Image View">
                                     <rect key="frame" x="202" y="92" width="9" height="6"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
@@ -109,7 +109,7 @@
                                         <action selector="textFieldClicked:" destination="iN0-l3-epB" eventType="editingDidBegin" id="skA-je-4tb"/>
                                     </connections>
                                 </textField>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down_arrow" id="5uu-wz-Kej" userLabel="Arrow Image View">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down_arrow.png" id="5uu-wz-Kej" userLabel="Arrow Image View">
                                     <rect key="frame" x="202" y="12" width="9" height="6"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
@@ -129,7 +129,7 @@
                                         <action selector="textFieldClicked:" destination="iN0-l3-epB" eventType="editingDidBegin" id="XGs-cj-EHH"/>
                                     </connections>
                                 </textField>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down_arrow" id="UUh-M0-0ve" userLabel="Arrow Image View">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down_arrow.png" id="UUh-M0-0ve" userLabel="Arrow Image View">
                                     <rect key="frame" x="202" y="52" width="9" height="6"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
@@ -149,7 +149,7 @@
                                         <action selector="textFieldClicked:" destination="iN0-l3-epB" eventType="editingDidBegin" id="aVu-2W-spm"/>
                                     </connections>
                                 </textField>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down_arrow" id="XXE-LB-vLy" userLabel="Arrow Image View">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down_arrow.png" id="XXE-LB-vLy" userLabel="Arrow Image View">
                                     <rect key="frame" x="202" y="93" width="9" height="6"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
@@ -213,6 +213,6 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="down_arrow" width="18" height="11"/>
+        <image name="down_arrow.png" width="18" height="11"/>
     </resources>
 </document>

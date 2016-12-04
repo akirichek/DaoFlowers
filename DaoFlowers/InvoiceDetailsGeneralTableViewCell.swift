@@ -20,6 +20,7 @@ class InvoiceDetailsGeneralTableViewCell: UITableViewCell {
     @IBOutlet weak var totalSizeLabel: UILabel!
     @IBOutlet weak var totalCostLabel: UILabel!
     @IBOutlet weak var totalFbLabel: UILabel!
+    @IBOutlet weak var totalLabel: UILabel!
 
     @IBOutlet weak var awbLabel: UILabel!
     @IBOutlet weak var plantationLabel: UILabel!
@@ -66,6 +67,7 @@ class InvoiceDetailsGeneralTableViewCell: UITableViewCell {
     }
     
     func populateTotalView() {
+        totalLabel.text = CustomLocalisedString("Total")
         totalSizeLabel.text = String(invoiceDetailsHead.totalStems)
         totalCostLabel.text = String(format: "%.2f $", invoiceDetailsHead.totalPrice)
         totalFbLabel.text = String(format: "%.2f", invoiceDetailsHead.totalFb)
