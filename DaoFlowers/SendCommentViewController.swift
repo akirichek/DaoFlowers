@@ -22,8 +22,17 @@ class SendCommentViewController: BaseViewController, UIPickerViewDataSource, UIP
     @IBOutlet weak var whatsAppTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var commentsTextView: UITextView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var companyLabel: UILabel!
+    @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var workPhoneLabel: UILabel!
+    @IBOutlet weak var mobilePhoneLabel: UILabel!
+    @IBOutlet weak var subjectLabel: UILabel!
+    @IBOutlet weak var selectButton: UIButton!
+    @IBOutlet weak var commentsLabel: UILabel!
+    @IBOutlet weak var sendButton: UIButton!
     var subjectPickerView: UIPickerView!
-    var subjects: [String]!
+    var subjects: [String] = []
     
     
     // MARK: - Override Methods
@@ -31,11 +40,26 @@ class SendCommentViewController: BaseViewController, UIPickerViewDataSource, UIP
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = CustomLocalisedString("Send comment")
+        nameLabel.text = CustomLocalisedString("Name")
+        companyLabel.text = CustomLocalisedString("Company")
+        cityLabel.text = CustomLocalisedString("City")
+        workPhoneLabel.text = CustomLocalisedString("Work phone")
+        mobilePhoneLabel.text = CustomLocalisedString("Mobile phone")
+        subjectLabel.text = CustomLocalisedString("Subject")
+        selectButton.setTitle(CustomLocalisedString("Select"), forState: .Normal)
+        commentsLabel.text = CustomLocalisedString("Your comments");
+        sendButton.setTitle(CustomLocalisedString("SEND COMMENT"), forState: .Normal)
         commentsTextView.layer.cornerRadius = 5
         adjustViews()
         adjustTextFields()
         scrollView.delaysContentTouches = false
-        subjects = ["", "Order", "Order status", "Personal orders", "Preference cards", "Flower purchases statistics", "My mixes", "Absolute prohibition", "Control panel", "Flower catalogue", "Plantations catalogue", "Price information request", "Principles of work", "Logistics", "Application functioning general questions"]
+        
+        if (LanguageManager.currentLanguage() == .English) {
+            subjects = ["", "Order", "Order status", "Personal orders", "Preference cards", "Flower purchases statistics", "My mixes", "Absolute prohibition", "Control panel", "Flower catalogue", "Plantations catalogue"]
+        }
+        
+        subjects += [CustomLocalisedString("Price information request"), CustomLocalisedString("Principles of work"), CustomLocalisedString("Logistics"), CustomLocalisedString("Application functioning general questions")]
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
@@ -56,18 +80,12 @@ class SendCommentViewController: BaseViewController, UIPickerViewDataSource, UIP
         } else {
             scrollView.contentSize = CGSizeMake(320, 1133)
         }
-        
-//        if isPortraitOrientation() {
-//            scrollView.contentSize = CGSizeMake(320, 979)
-//        } else {
-//            scrollView.contentSize = CGSizeMake(320, 925)
-//        }
     }
     
     func adjustTextFields() {
         var toolbar = UIToolbar()
         toolbar.sizeToFit()
-        var doneButton = UIBarButtonItem(title: "Done",
+        var doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
                                          style: UIBarButtonItemStyle.Done,
                                          target: workPhoneTextField,
                                          action: #selector(UIResponder.resignFirstResponder))
@@ -76,7 +94,7 @@ class SendCommentViewController: BaseViewController, UIPickerViewDataSource, UIP
         
         toolbar = UIToolbar()
         toolbar.sizeToFit()
-        doneButton = UIBarButtonItem(title: "Done",
+        doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
                                      style: UIBarButtonItemStyle.Done,
                                      target: mobilePhoneTextField,
                                      action: #selector(UIResponder.resignFirstResponder))
@@ -85,7 +103,7 @@ class SendCommentViewController: BaseViewController, UIPickerViewDataSource, UIP
         
         toolbar = UIToolbar()
         toolbar.sizeToFit()
-        doneButton = UIBarButtonItem(title: "Done",
+        doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
                                      style: UIBarButtonItemStyle.Done,
                                      target: viberTextField,
                                      action: #selector(UIResponder.resignFirstResponder))
@@ -94,7 +112,7 @@ class SendCommentViewController: BaseViewController, UIPickerViewDataSource, UIP
         
         toolbar = UIToolbar()
         toolbar.sizeToFit()
-        doneButton = UIBarButtonItem(title: "Done",
+        doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
                                      style: UIBarButtonItemStyle.Done,
                                      target: commentsTextView,
                                      action: #selector(UIResponder.resignFirstResponder))
@@ -121,15 +139,15 @@ class SendCommentViewController: BaseViewController, UIPickerViewDataSource, UIP
             comments.characters.count == 0 ||
             subject.characters.count == 0 {
             
-            Utils.showErrorWithMessage("Name, Company, City, Work phone, Mobile phone, Email, Comments and Subject fields are required", inViewController: self)
+            Utils.showErrorWithMessage(CustomLocalisedString("Send comment fields are required"), inViewController: self)
         } else {
             RBHUD.sharedInstance.showLoader(self.view, withTitle: nil, withSubTitle: nil, withProgress: true)
             ApiManager.sendComment(name: name, company: company, city: city, workPhone: workPhone, mobilePhone: mobilePhone, email: email, viber: viberTextField.text, whatsApp: whatsAppTextField.text, skype: skypeTextField.text, comment: comments, subject: subject, completion: { (success, error) in
                     RBHUD.sharedInstance.hideLoader()
                     if success {
-                        Utils.showSuccessWithMessage("Comment was successfully sent.", inViewController: self)
+                        Utils.showSuccessWithMessage(CustomLocalisedString("Comment was successfully sent"), inViewController: self)
                     } else {
-                        Utils.showErrorWithMessage("Comment sending error.", inViewController: self)
+                        Utils.showErrorWithMessage(CustomLocalisedString("Comment sending error"), inViewController: self)
                     }
             })
         }
@@ -142,16 +160,19 @@ class SendCommentViewController: BaseViewController, UIPickerViewDataSource, UIP
         let pickerView = UIPickerView()
         pickerView.dataSource = self
         pickerView.delegate = self
+        if let index = subjects.indexOf(subjectTextField.text!) {
+            pickerView.selectRow(index, inComponent: 0, animated: false)
+        }
         subjectTextField.inputView = pickerView
         subjectTextField.becomeFirstResponder()
     }
     
     @IBAction func sendButtonClicked(sender: UIButton) {
-        let alertController = UIAlertController(title: "Sending request", message: "Send comment?", preferredStyle: .Alert)
-        let yesAlertAction = UIAlertAction(title: "YES", style: .Default) { alertAction in
+        let alertController = UIAlertController(title: CustomLocalisedString("Sending request"), message: CustomLocalisedString("Send comment question"), preferredStyle: .Alert)
+        let yesAlertAction = UIAlertAction(title: CustomLocalisedString("YES"), style: .Default) { alertAction in
             self.sendComment()
         }
-        let noAlertAction = UIAlertAction(title: "NO", style: .Default, handler: nil)
+        let noAlertAction = UIAlertAction(title: CustomLocalisedString("NO"), style: .Default, handler: nil)
         alertController.addAction(noAlertAction)
         alertController.addAction(yesAlertAction)
         self.presentViewController(alertController, animated: true, completion: nil)

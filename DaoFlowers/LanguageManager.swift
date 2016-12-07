@@ -39,4 +39,53 @@ class LanguageManager: NSObject {
         
         return languageCode
     }
+    
+    static func currentLanguage() -> Language {
+        var languageCode = "en"
+        if let languageRawValue = NSUserDefaults.standardUserDefaults().stringForKey(K.UserDefaultsKey.Language) {
+            languageCode = languageRawValue
+        }
+        
+        let language = Language(rawValue: languageCode)!
+        
+        return language
+    }
+}
+
+enum Language: String {
+    case English = "English"
+    case Russian = "Русский"
+    case Spanish = "Español"
+    
+    func flagImageName() -> String {
+        var flagImageName: String!
+        switch self {
+        case .English:
+            flagImageName = "flag_uk"
+        case .Russian:
+            flagImageName = "flag_russia"
+        case .Spanish:
+            flagImageName = "flag_spain"
+        }
+        
+        return flagImageName
+    }
+    
+    func code() -> String {
+        var flagImageName: String!
+        switch self {
+        case .English:
+            flagImageName = "en"
+        case .Russian:
+            flagImageName = "ru"
+        case .Spanish:
+            flagImageName = "es"
+        }
+        
+        return flagImageName
+    }
+}
+
+func CustomLocalisedString(key: String) -> String {
+    return LanguageManager.getTranslationForKey(key)
 }

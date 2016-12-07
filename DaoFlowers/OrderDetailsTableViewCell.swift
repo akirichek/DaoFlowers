@@ -15,6 +15,7 @@ class OrderDetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var fbConfLabel: UILabel!
     @IBOutlet weak var fbDifLabel: UILabel!
     @IBOutlet weak var couLabel: UILabel!
+    @IBOutlet weak var totalLabel: UILabel!
     
     var orderDetails: OrderDetails! {
         didSet {
@@ -72,5 +73,7 @@ class OrderDetailsTableViewCell: UITableViewCell {
             fbDifLabel.text = "-\(totalFbDif)"
             fbDifLabel.textColor = UIColor(red: 202/255, green: 5/255, blue: 15/255, alpha: 1)
         }
+        
+        totalLabel.text = CustomLocalisedString("Total FB")
     }
 }

@@ -46,6 +46,8 @@ class OrderTableViewCell: UITableViewCell {
         dateFormatter.dateFormat = "dd-MM-yyyy"
         dateLabel.text = dateFormatter.stringFromDate(order.headDate)
         
+        let locale = NSLocale(localeIdentifier: LanguageManager.languageCode())
+        dateFormatter.locale = locale
         dateFormatter.dateFormat = "EEEE"
         dayOfWeekLabel.text = dateFormatter.stringFromDate(order.headDate).lowercaseString
     }

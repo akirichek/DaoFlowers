@@ -59,6 +59,8 @@ class InvoiceDetailsStatisticsViewPage: UIView, UITableViewDelegate, UITableView
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
         let dateString = dateFormatter.stringFromDate(invoice.date)
+        let locale = NSLocale(localeIdentifier: LanguageManager.languageCode())
+        dateFormatter.locale = locale
         dateFormatter.dateFormat = "EEE"
         let weekdayString = dateFormatter.stringFromDate(invoice.date).lowercaseString
         invoiceDateLabels.forEach { $0.text = "\(dateString) [\(weekdayString)]" }

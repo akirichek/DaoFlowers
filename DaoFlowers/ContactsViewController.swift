@@ -14,12 +14,19 @@ class ContactsViewController: BaseViewController, MFMailComposeViewControllerDel
     @IBOutlet weak var skypeContainerView: UIView!
     @IBOutlet weak var viberContainerView: UIView!
     @IBOutlet weak var registrationButton: UIButton!
+    @IBOutlet weak var orderCallbackLabel: UILabel!
+    @IBOutlet weak var sendCommentLabel: UILabel!
     
     // MARK: - Override Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.title = CustomLocalisedString("Contacts")
+        registrationButton.setTitle(CustomLocalisedString("REGISTRATION"), forState: .Normal)
+        orderCallbackLabel.text = CustomLocalisedString("ORDER CALLBACK")
+        sendCommentLabel.text = CustomLocalisedString("SEND COMMENT")
+        
         adjustShadowForView(skypeContainerView)
         adjustShadowForView(viberContainerView)
         adjustViews()
@@ -49,14 +56,17 @@ class ContactsViewController: BaseViewController, MFMailComposeViewControllerDel
 
         if isPortraitOrientation() {
             skypeContainerViewFrame.size.width = 310
-            viberContainerViewFrame.origin.y = 295
+            viberContainerViewFrame.origin.y = 290
             viberContainerViewFrame.origin.x = 5
             viberContainerViewFrame.size.width = 310
+            registrationButton.frame = CGRectMake(84, 472, 152, 40)
+            
         } else {
             skypeContainerViewFrame.size.width = 272
             viberContainerViewFrame.origin.y = contentViewFrame.origin.y + 11
             viberContainerViewFrame.origin.x = 291
             viberContainerViewFrame.size.width = 272
+            registrationButton.frame = CGRectMake(291.0, 224, 272, 40)
         }
         
         skypeContainerViewFrame.origin.y = contentViewFrame.origin.y + 11

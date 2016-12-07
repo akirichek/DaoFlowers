@@ -54,6 +54,9 @@
 		82606BC71DD7985800A9E8D8 /* ApiManager+Orders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82606BC61DD7985800A9E8D8 /* ApiManager+Orders.swift */; };
 		82606BCA1DD7992C00A9E8D8 /* CurrentOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82606BC91DD7992C00A9E8D8 /* CurrentOrdersViewController.swift */; };
 		82606BCE1DD7AA9700A9E8D8 /* OrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82606BCD1DD7AA9700A9E8D8 /* OrderTableViewCell.swift */; };
+		8272FBCD1DF75FB800100AAA /* VarietyDetailsGeneralInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8272FBCF1DF75FB800100AAA /* VarietyDetailsGeneralInfoView.xib */; };
+		8272FBD81DF8655500100AAA /* help.png in Resources */ = {isa = PBXBuildFile; fileRef = 8272FBDA1DF8655500100AAA /* help.png */; };
+		8272FBDF1DF8667A00100AAA /* icon_link@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8272FBE11DF8667A00100AAA /* icon_link@2x.png */; };
 		827BAC2C1DBF675200B50C2B /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827BAC2B1DBF675200B50C2B /* MenuTableViewCell.swift */; };
 		827BF85F1DAEAF4000054548 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827BF85E1DAEAF4000054548 /* BaseViewController.swift */; };
 		827E8B041DD8C10E000A8EAE /* OrderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827E8B031DD8C10E000A8EAE /* OrderDetailsViewController.swift */; };
@@ -99,7 +102,6 @@
 		8299D3C21DBBAFBF0088E550 /* VarietyDetailsGeneralInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3C11DBBAFBF0088E550 /* VarietyDetailsGeneralInfoView.swift */; };
 		8299D3C41DBBAFDC0088E550 /* VarietyDetailsPlantationsGrowersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3C31DBBAFDC0088E550 /* VarietyDetailsPlantationsGrowersView.swift */; };
 		8299D3C61DBBAFF90088E550 /* VarietyDetailsSimilarVarietiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3C51DBBAFF90088E550 /* VarietyDetailsSimilarVarietiesView.swift */; };
-		8299D3C81DBBB1150088E550 /* VarietyDetailsGeneralInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8299D3C71DBBB1150088E550 /* VarietyDetailsGeneralInfoView.xib */; };
 		8299D3CA1DBBB11F0088E550 /* VarietyDetailsPlantationsGrowersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8299D3C91DBBB11F0088E550 /* VarietyDetailsPlantationsGrowersView.xib */; };
 		8299D3CC1DBBB1360088E550 /* VarietyDetailsSimilarVarietiesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8299D3CB1DBBB1360088E550 /* VarietyDetailsSimilarVarietiesView.xib */; };
 		8299D3CF1DBBDB160088E550 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3CE1DBBDB160088E550 /* LoginViewController.swift */; };
@@ -198,6 +200,15 @@
 		82606BC61DD7985800A9E8D8 /* ApiManager+Orders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ApiManager+Orders.swift"; sourceTree = "<group>"; };
 		82606BC91DD7992C00A9E8D8 /* CurrentOrdersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentOrdersViewController.swift; sourceTree = "<group>"; };
 		82606BCD1DD7AA9700A9E8D8 /* OrderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderTableViewCell.swift; sourceTree = "<group>"; };
+		8272FBCE1DF75FB800100AAA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/VarietyDetailsGeneralInfoView.xib; sourceTree = "<group>"; };
+		8272FBD41DF75FC600100AAA /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/VarietyDetailsGeneralInfoView.xib; sourceTree = "<group>"; };
+		8272FBD51DF75FC900100AAA /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/VarietyDetailsGeneralInfoView.xib; sourceTree = "<group>"; };
+		8272FBD91DF8655500100AAA /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/help.png; sourceTree = "<group>"; };
+		8272FBDB1DF8655700100AAA /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = ru.lproj/help.png; sourceTree = "<group>"; };
+		8272FBDC1DF8655800100AAA /* es */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = es; path = es.lproj/help.png; sourceTree = "<group>"; };
+		8272FBE01DF8667A00100AAA /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/icon_link@2x.png"; sourceTree = "<group>"; };
+		8272FBE21DF8667B00100AAA /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = "ru.lproj/icon_link@2x.png"; sourceTree = "<group>"; };
+		8272FBE31DF8667C00100AAA /* es */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = es; path = "es.lproj/icon_link@2x.png"; sourceTree = "<group>"; };
 		827BAC2B1DBF675200B50C2B /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		827BF85E1DAEAF4000054548 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		827E8B031DD8C10E000A8EAE /* OrderDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailsViewController.swift; sourceTree = "<group>"; };
@@ -243,7 +254,6 @@
 		8299D3C11DBBAFBF0088E550 /* VarietyDetailsGeneralInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietyDetailsGeneralInfoView.swift; sourceTree = "<group>"; };
 		8299D3C31DBBAFDC0088E550 /* VarietyDetailsPlantationsGrowersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietyDetailsPlantationsGrowersView.swift; sourceTree = "<group>"; };
 		8299D3C51DBBAFF90088E550 /* VarietyDetailsSimilarVarietiesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietyDetailsSimilarVarietiesView.swift; sourceTree = "<group>"; };
-		8299D3C71DBBB1150088E550 /* VarietyDetailsGeneralInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VarietyDetailsGeneralInfoView.xib; sourceTree = "<group>"; };
 		8299D3C91DBBB11F0088E550 /* VarietyDetailsPlantationsGrowersView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VarietyDetailsPlantationsGrowersView.xib; sourceTree = "<group>"; };
 		8299D3CB1DBBB1360088E550 /* VarietyDetailsSimilarVarietiesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VarietyDetailsSimilarVarietiesView.xib; sourceTree = "<group>"; };
 		8299D3CE1DBBDB160088E550 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -358,6 +368,8 @@
 				82457ACB1DAEAA5900D87B21 /* Main.storyboard */,
 				82457AD11DAEAA5900D87B21 /* Assets.xcassets */,
 				82FF96671DF346C600A5BB70 /* down_arrow@2x.png */,
+				8272FBDA1DF8655500100AAA /* help.png */,
+				8272FBE11DF8667A00100AAA /* icon_link@2x.png */,
 				82457AD31DAEAA5900D87B21 /* LaunchScreen.storyboard */,
 				82457AD61DAEAA5900D87B21 /* Info.plist */,
 				82457ACE1DAEAA5900D87B21 /* DaoFlowers.xcdatamodeld */,
@@ -516,7 +528,7 @@
 			isa = PBXGroup;
 			children = (
 				8299D3C11DBBAFBF0088E550 /* VarietyDetailsGeneralInfoView.swift */,
-				8299D3C71DBBB1150088E550 /* VarietyDetailsGeneralInfoView.xib */,
+				8272FBCF1DF75FB800100AAA /* VarietyDetailsGeneralInfoView.xib */,
 				822C1ED21DBE375600A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.swift */,
 				822C1ED41DBE37A500A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.xib */,
 				825369431DED8C2E00A17537 /* VarietyImageViewerViewController.swift */,
@@ -841,6 +853,7 @@
 				8253693E1DECAF4700A17537 /* BreederHintView.xib in Resources */,
 				8299D3CA1DBBB11F0088E550 /* VarietyDetailsPlantationsGrowersView.xib in Resources */,
 				827E8B1E1DDB79D8000A8EAE /* DocumentTableViewHeader.xib in Resources */,
+				8272FBDF1DF8667A00100AAA /* icon_link@2x.png in Resources */,
 				825369131DE33BD700A17537 /* InvoiceDetailsGeneralTotalLandscapeTableViewCell.xib in Resources */,
 				82FF962C1DF2D3C400A5BB70 /* VarietiesListHintView.xib in Resources */,
 				8299D3CC1DBBB1360088E550 /* VarietyDetailsSimilarVarietiesView.xib in Resources */,
@@ -852,6 +865,7 @@
 				82C1C1DF1DDDFA37007F223E /* InvoiceDetailsGeneralTableViewCell.xib in Resources */,
 				82FF967A1DF35F2A00A5BB70 /* InvoiceDetailsStatisticsViewPage.xib in Resources */,
 				8299D3AC1DB8D2170088E550 /* VarietiesPageView.xib in Resources */,
+				8272FBD81DF8655500100AAA /* help.png in Resources */,
 				82FF96581DF3270700A5BB70 /* InvoiceDetailsGeneralFilterView.xib in Resources */,
 				82C0597B1DC6449C00F061E6 /* VarietyCollectionViewCell.xib in Resources */,
 				8253692F1DE72E0D00A17537 /* InvoiceDetailsAveragePricesSizeTableViewCell.xib in Resources */,
@@ -861,7 +875,7 @@
 				82FF96651DF346C600A5BB70 /* down_arrow@2x.png in Resources */,
 				82606BA81DCFA56900A9E8D8 /* PlantationsPageView.xib in Resources */,
 				82FBA19E1DC0D007001CE265 /* VarietiesSearchAdditionalParametersView.xib in Resources */,
-				8299D3C81DBBB1150088E550 /* VarietyDetailsGeneralInfoView.xib in Resources */,
+				8272FBCD1DF75FB800100AAA /* VarietyDetailsGeneralInfoView.xib in Resources */,
 				825369151DE33D7200A17537 /* InvoiceDetailsGeneralHeaderLandscapeTableViewCell.xib in Resources */,
 				82C059781DC623A300F061E6 /* ColorCollectionViewCell.xib in Resources */,
 				825369331DE72E3900A17537 /* InvoiceDetailsAveragePricesTotalStemsTableViewCell.xib in Resources */,
@@ -1048,6 +1062,36 @@
 				82C059891DC68E3E00F061E6 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		8272FBCF1DF75FB800100AAA /* VarietyDetailsGeneralInfoView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8272FBCE1DF75FB800100AAA /* en */,
+				8272FBD41DF75FC600100AAA /* ru */,
+				8272FBD51DF75FC900100AAA /* es */,
+			);
+			name = VarietyDetailsGeneralInfoView.xib;
+			sourceTree = "<group>";
+		};
+		8272FBDA1DF8655500100AAA /* help.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8272FBD91DF8655500100AAA /* en */,
+				8272FBDB1DF8655700100AAA /* ru */,
+				8272FBDC1DF8655800100AAA /* es */,
+			);
+			name = help.png;
+			sourceTree = "<group>";
+		};
+		8272FBE11DF8667A00100AAA /* icon_link@2x.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8272FBE01DF8667A00100AAA /* en */,
+				8272FBE21DF8667B00100AAA /* ru */,
+				8272FBE31DF8667C00100AAA /* es */,
+			);
+			name = "icon_link@2x.png";
 			sourceTree = "<group>";
 		};
 		82C0598C1DC68E4900F061E6 /* Localizable.strings */ = {

@@ -77,7 +77,10 @@ class SettingsViewController: BaseViewController, UIPickerViewDataSource, UIPick
         
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: #selector(VarietiesPageView.doneButtonClicked(_:)))
+        let doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
+                                         style: UIBarButtonItemStyle.Done,
+                                         target: self,
+                                         action: #selector(VarietiesPageView.doneButtonClicked(_:)))
         toolbar.setItems([doneButton], animated: true)
         textField.inputAccessoryView = toolbar
         

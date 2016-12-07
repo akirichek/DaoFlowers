@@ -125,19 +125,18 @@ class VarietyDetailsViewController: BaseViewController, PageViewerDataSource, Va
     }
     
     func pageViewer(pageViewer: PageViewer, pageForItemAtIndex index: Int, reusableView: UIView?) -> UIView {
-        let nibName: String
+        var pageView: UIView!
         switch index {
         case 0:
-            nibName = "VarietyDetailsGeneralInfoView"
+            pageView = LanguageManager.loadNibNamed("VarietyDetailsGeneralInfoView", owner: self, options: nil).first as? UIView
         case 1:
-            nibName = "VarietyDetailsPlantationsGrowersView"
+            pageView =   NSBundle.mainBundle().loadNibNamed("VarietyDetailsPlantationsGrowersView", owner: self, options: nil).first as? UIView
         case 2:
-            nibName = "VarietyDetailsSimilarVarietiesView"
+            pageView =   NSBundle.mainBundle().loadNibNamed("VarietyDetailsSimilarVarietiesView", owner: self, options: nil).first as? UIView
         default:
-            nibName = ""
+            break
         }
         
-        let pageView =  NSBundle.mainBundle().loadNibNamed(nibName, owner: self, options: nil).first as? UIView
         if let varietyDetailsGeneralInfoView = pageView as? VarietyDetailsGeneralInfoView {
             varietyDetailsGeneralInfoView.viewController = self
             if varietyDetailsGeneralInfoView.variety == nil {

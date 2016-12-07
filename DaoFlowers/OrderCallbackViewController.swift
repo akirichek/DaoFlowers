@@ -22,6 +22,13 @@ class OrderCallbackViewController: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var commentsTextView: UITextView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var generalInfoContainerView: UIView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var companyLabel: UILabel!
+    @IBOutlet weak var countryLabel: UILabel!
+    @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var commentsLabel: UILabel!
+    @IBOutlet weak var orderCallbackButton: UIButton!
     
     
     // MARK: - Override Methods
@@ -29,6 +36,15 @@ class OrderCallbackViewController: BaseViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.title = CustomLocalisedString("Order Callback")
+        nameLabel.text = CustomLocalisedString("Name")
+        companyLabel.text = CustomLocalisedString("Company")
+        countryLabel.text = CustomLocalisedString("Country")
+        cityLabel.text = CustomLocalisedString("City")
+        phoneLabel.text = CustomLocalisedString("Phone")
+        commentsLabel.text = CustomLocalisedString("Your comments");
+        orderCallbackButton.setTitle(CustomLocalisedString("ORDER CALLBACK"), forState: .Normal)
+        
         commentsTextView.layer.cornerRadius = 5
         adjustViews()
         adjustTextFields()
@@ -69,7 +85,7 @@ class OrderCallbackViewController: BaseViewController, UITextFieldDelegate {
     func adjustTextFields() {
         var toolbar = UIToolbar()
         toolbar.sizeToFit()
-        var doneButton = UIBarButtonItem(title: "Done",
+        var doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
                                          style: UIBarButtonItemStyle.Done,
                                          target: phoneTextField,
                                          action: #selector(UIResponder.resignFirstResponder))
@@ -78,7 +94,7 @@ class OrderCallbackViewController: BaseViewController, UITextFieldDelegate {
         
         toolbar = UIToolbar()
         toolbar.sizeToFit()
-        doneButton = UIBarButtonItem(title: "Done",
+        doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
                                      style: UIBarButtonItemStyle.Done,
                                      target: viberTextField,
                                      action: #selector(UIResponder.resignFirstResponder))
@@ -87,7 +103,7 @@ class OrderCallbackViewController: BaseViewController, UITextFieldDelegate {
         
         toolbar = UIToolbar()
         toolbar.sizeToFit()
-        doneButton = UIBarButtonItem(title: "Done",
+        doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
                                      style: UIBarButtonItemStyle.Done,
                                      target: commentsTextView,
                                      action: #selector(UIResponder.resignFirstResponder))
@@ -105,7 +121,7 @@ class OrderCallbackViewController: BaseViewController, UITextFieldDelegate {
             company.characters.count == 0 ||
             country.characters.count == 0 ||
             city.characters.count == 0 {
-            Utils.showErrorWithMessage("Name, Company, Country and City fields are required", inViewController: self)
+            Utils.showErrorWithMessage(CustomLocalisedString("Send comment fields are required"), inViewController: self)
         } else {
             RBHUD.sharedInstance.showLoader(self.view, withTitle: nil, withSubTitle: nil, withProgress: true)
             ApiManager.orderCallback(name: name,
@@ -120,9 +136,9 @@ class OrderCallbackViewController: BaseViewController, UITextFieldDelegate {
                                      comment: commentsTextView.text) { (success, error) in
                                         RBHUD.sharedInstance.hideLoader()
                                         if success {
-                                            Utils.showSuccessWithMessage("Call-back request was successfully sent.", inViewController: self)
+                                            Utils.showSuccessWithMessage(CustomLocalisedString("Call-back request was successfully sent"), inViewController: self)
                                         } else {
-                                            Utils.showErrorWithMessage("Call-back request sending error.", inViewController: self)
+                                            Utils.showErrorWithMessage(CustomLocalisedString("Call-back request sending error"), inViewController: self)
                                         }
             }
         }
@@ -131,11 +147,11 @@ class OrderCallbackViewController: BaseViewController, UITextFieldDelegate {
     // MARK: - Actions
 
     @IBAction func orderCallbackButtonClicked(sender: UIButton) {
-        let alertController = UIAlertController(title: "Sending request", message: "Send call-back request?", preferredStyle: .Alert)
-        let yesAlertAction = UIAlertAction(title: "YES", style: .Default) { alertAction in
+        let alertController = UIAlertController(title: CustomLocalisedString("Sending request"), message: CustomLocalisedString("Send call-back request"), preferredStyle: .Alert)
+        let yesAlertAction = UIAlertAction(title: CustomLocalisedString("YES"), style: .Default) { alertAction in
             self.orderCallback()
         }
-        let noAlertAction = UIAlertAction(title: "NO", style: .Default, handler: nil)
+        let noAlertAction = UIAlertAction(title: CustomLocalisedString("NO"), style: .Default, handler: nil)
         alertController.addAction(noAlertAction)
         alertController.addAction(yesAlertAction)
         self.presentViewController(alertController, animated: true, completion: nil)

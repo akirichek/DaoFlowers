@@ -17,6 +17,14 @@ class CurrentOrdersViewController: BaseViewController, UITableViewDataSource, UI
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var filterButton: UIBarButtonItem!
     @IBOutlet weak var filterView: UIView!
+    @IBOutlet var dateLabels: [UILabel]!
+    @IBOutlet var markLabels: [UILabel]!
+    @IBOutlet var truckLabels: [UILabel]!
+    @IBOutlet var pointLabels: [UILabel]!
+    @IBOutlet var fbOrdLabels: [UILabel]!
+    @IBOutlet var fbDiffLabels: [UILabel]!
+    @IBOutlet weak var filterMarkLabel: UILabel!
+    @IBOutlet weak var filterDateLabel: UILabel!
 
     var orders: [Order] = []
     var filteredOrders: [Order] = []
@@ -31,6 +39,16 @@ class CurrentOrdersViewController: BaseViewController, UITableViewDataSource, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = CustomLocalisedString("Current Orders")
+        dateLabels.forEach { $0.text = CustomLocalisedString("date") }
+        markLabels.forEach { $0.text = CustomLocalisedString("label") }
+        truckLabels.forEach { $0.text = CustomLocalisedString("truck") }
+        pointLabels.forEach { $0.text = CustomLocalisedString("point") }
+        fbOrdLabels.forEach { $0.text = CustomLocalisedString("fb ord") }
+        fbDiffLabels.forEach { $0.text = CustomLocalisedString("fb diff") }
+        filterMarkLabel.text = CustomLocalisedString("label").capitalizedString + ":"
+        filterDateLabel.text = CustomLocalisedString("date").capitalizedString + ":"
         
         labelsPickerView = createPickerViewForTextField(labelTextField)
         datesPickerView = createPickerViewForTextField(dateTextField)

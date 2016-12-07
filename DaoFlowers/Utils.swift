@@ -15,11 +15,11 @@ class Utils: NSObject {
     }
      
     static func showErrorWithMessage(message: String, inViewController viewController: UIViewController) {
-        UIAlertView(title: "Error", message: message, delegate: nil, cancelButtonTitle: "OK").show()
+        UIAlertView(title: CustomLocalisedString("Error"), message: message, delegate: nil, cancelButtonTitle: "OK").show()
     }
     
     static func showSuccessWithMessage(message: String, inViewController viewController: UIViewController) {
-        UIAlertView(title: "Success", message: message, delegate: nil, cancelButtonTitle: "OK").show()
+        UIAlertView(title: CustomLocalisedString("Success"), message: message, delegate: nil, cancelButtonTitle: "OK").show()
     }
 
     static func sortedVarietiesByName(varieties: [Variety]) -> [Variety] {

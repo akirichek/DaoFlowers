@@ -21,12 +21,32 @@ class RegistrationViewController: BaseViewController {
     @IBOutlet weak var whatsAppTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var informationAboutCompanyTextView: UITextView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var contactPersonLabel: UILabel!
+    @IBOutlet weak var countryLabel: UILabel!
+    @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var detailedInforamationLabel: UILabel!
+    @IBOutlet weak var informationAboutCompanyLabel: UILabel!
+    @IBOutlet weak var informationHintLabel: UILabel!
+    @IBOutlet weak var sendButton: UIButton!
     
     
     // MARK: - Override Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = CustomLocalisedString("User registration")
+        nameLabel.text = CustomLocalisedString("Name of firm or of the person")
+        contactPersonLabel.text = CustomLocalisedString("Contact person")
+        countryLabel.text = CustomLocalisedString("Country")
+        cityLabel.text = CustomLocalisedString("City")
+        phoneLabel.text = CustomLocalisedString("Phone")
+        informationAboutCompanyLabel.text = CustomLocalisedString("The information about your company")
+        detailedInforamationLabel.text = CustomLocalisedString("The detailed information")
+        informationHintLabel.text = CustomLocalisedString("The field is not obligatory for filling")
+        sendButton.setTitle(CustomLocalisedString("SEND SIGN UP REQUEST"), forState: .Normal)
         
         informationAboutCompanyTextView.layer.cornerRadius = 5
         adjustViews()
@@ -57,7 +77,7 @@ class RegistrationViewController: BaseViewController {
     func adjustTextFields() {
         var toolbar = UIToolbar()
         toolbar.sizeToFit()
-        var doneButton = UIBarButtonItem(title: "Done",
+        var doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
                                          style: UIBarButtonItemStyle.Done,
                                          target: phoneTextField,
                                          action: #selector(UIResponder.resignFirstResponder))
@@ -66,7 +86,7 @@ class RegistrationViewController: BaseViewController {
         
         toolbar = UIToolbar()
         toolbar.sizeToFit()
-        doneButton = UIBarButtonItem(title: "Done",
+        doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
                                      style: UIBarButtonItemStyle.Done,
                                      target: viberTextField,
                                      action: #selector(UIResponder.resignFirstResponder))
@@ -75,7 +95,7 @@ class RegistrationViewController: BaseViewController {
         
         toolbar = UIToolbar()
         toolbar.sizeToFit()
-        doneButton = UIBarButtonItem(title: "Done",
+        doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
                                      style: UIBarButtonItemStyle.Done,
                                      target: informationAboutCompanyTextView,
                                      action: #selector(UIResponder.resignFirstResponder))
@@ -94,15 +114,15 @@ class RegistrationViewController: BaseViewController {
             city.characters.count == 0 ||
             email.characters.count == 0 {
             
-            Utils.showErrorWithMessage("Name, Country, City, and Email fields are required", inViewController: self)
+            Utils.showErrorWithMessage(CustomLocalisedString("Registration fields are required"), inViewController: self)
         } else {
             RBHUD.sharedInstance.showLoader(self.view, withTitle: nil, withSubTitle: nil, withProgress: true)
             ApiManager.sendSignUpRequest(name: name, country: country, city: city, phone: phoneTextField.text, viber: viberTextField.text, whatsApp: whatsAppTextField.text, skype: skypeTextField.text, email: email, aboutCompany: informationAboutCompanyTextView.text, completion: { (success, error) in
                 RBHUD.sharedInstance.hideLoader()
                 if success {
-                    Utils.showSuccessWithMessage("Registration request was successfully sent.", inViewController: self)
+                    Utils.showSuccessWithMessage(CustomLocalisedString("Registration request was successfully sent"), inViewController: self)
                 } else {
-                    Utils.showErrorWithMessage("Registration request sending error. Try again later.", inViewController: self)
+                    Utils.showErrorWithMessage(CustomLocalisedString("Registration request sending error"), inViewController: self)
                 }
             })
         }
@@ -111,11 +131,11 @@ class RegistrationViewController: BaseViewController {
     // MARK: - Actions
     
     @IBAction func sendButtonClicked(sender: AnyObject) {
-        let alertController = UIAlertController(title: "Sending request", message: "Send the registration request of a new user?", preferredStyle: .Alert)
-        let yesAlertAction = UIAlertAction(title: "YES", style: .Default) { alertAction in
+        let alertController = UIAlertController(title: CustomLocalisedString("Sending request"), message: CustomLocalisedString("Send the registration request of a new user"), preferredStyle: .Alert)
+        let yesAlertAction = UIAlertAction(title: CustomLocalisedString("YES"), style: .Default) { alertAction in
             self.sendSignUpRequest()
         }
-        let noAlertAction = UIAlertAction(title: "NO", style: .Default, handler: nil)
+        let noAlertAction = UIAlertAction(title: CustomLocalisedString("NO"), style: .Default, handler: nil)
         alertController.addAction(noAlertAction)
         alertController.addAction(yesAlertAction)
         self.presentViewController(alertController, animated: true, completion: nil)

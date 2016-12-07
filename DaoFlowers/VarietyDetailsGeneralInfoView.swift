@@ -90,7 +90,7 @@ class VarietyDetailsGeneralInfoView: UIView, UICollectionViewDataSource, UIColle
                 varietyByFarmsLabel.text = "\(purchasePercent) %"
             }
             
-            byFarmsFlowerLabel.text = "Variety by farms \(variety!.flower.name.capitalizedString):"
+            byFarmsFlowerLabel.text = CustomLocalisedString("Variety by farms") + " " + "\(variety!.flower.name.capitalizedString):"
             if var fulfillment = variety!.fulfillment {
                 fulfillment = Double(Int(round(fulfillment * 100))) / 100
                 fulfillmentLabel.text = "\(fulfillment) %"

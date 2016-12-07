@@ -20,6 +20,12 @@ class OrderDetailsViewController: BaseViewController, UITableViewDataSource, UIT
     @IBOutlet var truckLabels: [UILabel]!
     @IBOutlet var pointLabels: [UILabel]!
     @IBOutlet var checkmarkImageViews: [UIImageView]!
+    @IBOutlet weak var flowerLabel: UILabel!
+    @IBOutlet weak var sizeLabel: UILabel!
+    @IBOutlet weak var fbOrdLabel: UILabel!
+    @IBOutlet weak var fbConfLabel: UILabel!
+    @IBOutlet weak var fbDiffLabel: UILabel!
+    @IBOutlet weak var countryLabel: UILabel!
     
     var order: Order!
     var totalOrderDetails: [OrderDetails] = []
@@ -28,6 +34,13 @@ class OrderDetailsViewController: BaseViewController, UITableViewDataSource, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = CustomLocalisedString("Order Details")
+        flowerLabel.text = CustomLocalisedString("flower")
+        sizeLabel.text = CustomLocalisedString("size")
+        fbOrdLabel.text = CustomLocalisedString("fb ord")
+        fbConfLabel.text = CustomLocalisedString("fb conf")
+        fbDiffLabel.text = CustomLocalisedString("fb diff")
+        countryLabel.text = CustomLocalisedString("cou")
         infoContainerView.layer.cornerRadius = 5
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
