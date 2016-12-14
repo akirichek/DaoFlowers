@@ -17,6 +17,7 @@ class PlantationsSearchViewController: BaseViewController, UICollectionViewDataS
     @IBOutlet weak var additionalParametersOverlayView: UIView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var additionalParametersLabel: UILabel!
+    @IBOutlet weak var hintLabel: UILabel!
     
     var searchResults: [Plantation] = []
     var countriesSearchParams: [Country]?
@@ -30,6 +31,8 @@ class PlantationsSearchViewController: BaseViewController, UICollectionViewDataS
         additionalParametersLabel.text = CustomLocalisedString("AdditionalParameters")
         searchBar.placeholder = CustomLocalisedString("Plantation name or brand")
         self.containerView.frame = self.contentViewFrame()
+        hintLabel.text = CustomLocalisedString("Here will be displayed results of the search")
+        self.collectionView.hidden = true
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -60,6 +63,12 @@ class PlantationsSearchViewController: BaseViewController, UICollectionViewDataS
             if let plantations = plantations {
                 self.searchResults = plantations
                 self.collectionView.reloadData()
+                if plantations.count == 0 {
+                    self.collectionView.hidden = true
+                    self.hintLabel.text = CustomLocalisedString("Search result is empty")
+                } else {
+                    self.collectionView.hidden = false
+                }
             } else {
                 Utils.showError(error!, inViewController: self)
             }
@@ -80,14 +89,7 @@ class PlantationsSearchViewController: BaseViewController, UICollectionViewDataS
         }
     }
     
-    // MARK: - Actions
-    
-    @IBAction func searchButtonClicked(sender: UIBarButtonItem) {
-        self.searchPlantations()
-        self.searchBar.resignFirstResponder()
-    }
-    
-    @IBAction func additionalParametersButtonClicked(sender: UIButton) {
+    func animateAdditionalParametersView(show show: Bool) {
         if self.additionalParametersContainerView.subviews.count == 0 {
             let additionalParametersView = NSBundle.mainBundle().loadNibNamed("PlantationsSearchAdditionalParametersView", owner: self, options: nil).first as! PlantationsSearchAdditionalParametersView
             additionalParametersView.countriesSearchParams = self.countriesSearchParams
@@ -96,13 +98,25 @@ class PlantationsSearchViewController: BaseViewController, UICollectionViewDataS
             self.additionalParametersContainerView.addSubview(additionalParametersView)
         }
         
-        if self.additionalParametersOverlayView.hidden {
+        if show {
             self.additionalParametersArrowImageView.image = UIImage(named: "up_arrow")
         } else {
             self.additionalParametersArrowImageView.image = UIImage(named: "down_arrow")
         }
         
-        self.additionalParametersOverlayView.hidden = !self.additionalParametersOverlayView.hidden
+        self.additionalParametersOverlayView.hidden = !show
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func searchButtonClicked(sender: UIBarButtonItem) {
+        self.searchPlantations()
+        self.searchBar.resignFirstResponder()
+        animateAdditionalParametersView(show: false)
+    }
+    
+    @IBAction func additionalParametersButtonClicked(sender: UIButton) {
+        animateAdditionalParametersView(show: self.additionalParametersOverlayView.hidden)
     }
     
     // MARK: - UICollectionViewDataSource
@@ -157,5 +171,6 @@ class PlantationsSearchViewController: BaseViewController, UICollectionViewDataS
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         self.searchPlantations()
         self.searchBar.resignFirstResponder()
+        animateAdditionalParametersView(show: false)
     }
 }

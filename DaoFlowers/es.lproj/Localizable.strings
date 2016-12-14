@@ -100,7 +100,7 @@
 "Send the registration request of a new user" = "¿Desea enviar la solicitud de apertura de una cuenta nueva?";
 "Error" = "Error";
 "Success" = "Éxito";
-"Send comment fields are required" = "Nombre, Empresa, Ciudad, Teléfono de trabajo, Teléfono móvil, Email, Comentarios y campos de Asunto son obligatorios.";
+"Send comment fields are required" = "El campo de comentarios es obligatorio.";
 "Comment was successfully sent" = "Comentario enviado.";
 "Comment sending error" = "Error en envio del comentario.";
 "Send comment question" = "¿Desea enviar su comentario?";
@@ -108,4 +108,10 @@
 "Order callback fields are required" = "Los campos Nombre, Empresa, País y Ciudad son obligatorios.";
 "Call-back request was successfully sent" = "Solicitud de devolucion de llamada enviada";
 "Call-back request sending error" = "Error en el envio de  solicitud de devolucion de llamada.";
-"Variety by farms" = "Variety by farms";
+"Variety by farms" = "Variedad por finca";
+"Authorization" = "Authorization";
+"Login" = "Login";
+"Password" = "Contraseña";
+"ENTER" = "INICIAR LA SESIÓN";
+"Here will be displayed results of the search" = "Aquí se mostrarán los resultados de la búsqueda";
+"Search result is empty" = "El resultado de la búsqueda está vacío";

@@ -144,25 +144,25 @@ class VarietyDetailsGeneralInfoView: UIView, UICollectionViewDataSource, UIColle
     }
     
     @IBAction func productivityHelpButtonCLicked(sender: UIButton) {
-        let hintView = NSBundle.mainBundle().loadNibNamed("ProductivityHintView", owner: self, options: nil).first as! AHintView
+        let hintView = LanguageManager.loadNibNamed("ProductivityHintView", owner: self, options: nil).first as! AHintView
         hintView.frame = self.viewController.view.bounds
         self.viewController.view.addSubview(hintView)
     }
     
     @IBAction func breederHelpButtonClicked(sender: UIButton) {
-        let hintView = NSBundle.mainBundle().loadNibNamed("BreederHintView", owner: self, options: nil).first as! AHintView
+        let hintView = LanguageManager.loadNibNamed("BreederHintView", owner: self, options: nil).first as! AHintView
         hintView.frame = self.viewController.view.bounds
         self.viewController.view.addSubview(hintView)
     }
     
     @IBAction func varietyByFarmsHelpButtonClicked(sender: UIButton) {
-        let hintView = NSBundle.mainBundle().loadNibNamed("VarietyByFarmsHintView", owner: self, options: nil).first as! AHintView
+        let hintView = LanguageManager.loadNibNamed("VarietyByFarmsHintView", owner: self, options: nil).first as! AHintView
         hintView.frame = self.viewController.view.bounds
         self.viewController.view.addSubview(hintView)
     }
     
     @IBAction func fulfillmentHelpButtonClicked(sender: UIButton) {
-        let hintView = NSBundle.mainBundle().loadNibNamed("FulfillmentHintView", owner: self, options: nil).first as! AHintView
+        let hintView = LanguageManager.loadNibNamed("FulfillmentHintView", owner: self, options: nil).first as! AHintView
         hintView.frame = self.viewController.view.bounds
         self.viewController.view.addSubview(hintView)
     }

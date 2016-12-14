@@ -10,7 +10,7 @@ import Alamofire
 
 extension ApiManager {
     
-    static func orderCallback(name name: String, company: String, country: String, city: String, phone: String?, viber: String?, whatsApp: String?, skype: String?, email: String?, comment: String?, completion: (success: Bool, error: NSError?) -> ()) {
+    static func orderCallback(name name: String?, company: String?, country: String?, city: String?, phone: String?, viber: String?, whatsApp: String?, skype: String?, email: String?, comment: String?, completion: (success: Bool, error: NSError?) -> ()) {
         let url = K.Api.BaseUrl + K.Api.Support.OrderCallback
         
         var parameters: [String: String] = [:]
@@ -39,7 +39,7 @@ extension ApiManager {
         }
     }
     
-    static func sendComment(name name: String, company: String, city: String, workPhone: String, mobilePhone: String, email: String, viber: String?, whatsApp: String?, skype: String?, comment: String, subject: String, completion: (success: Bool, error: NSError?) -> ()) {
+    static func sendComment(name name: String?, company: String?, city: String?, workPhone: String?, mobilePhone: String?, email: String?, viber: String?, whatsApp: String?, skype: String?, comment: String, subject: String?, completion: (success: Bool, error: NSError?) -> ()) {
         let url = K.Api.BaseUrl + K.Api.Support.SendComment
         
         var parameters: [String: String] = [:]

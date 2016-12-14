@@ -17,6 +17,7 @@ class VarietiesSearchViewController: BaseViewController, UICollectionViewDataSou
     @IBOutlet weak var additionalParametersOverlayView: UIView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var additionalParametersLabel: UILabel!
+    @IBOutlet weak var hintLabel: UILabel!
 
     var searchResults: [Variety] = []
     var flowersSearchParams: [Flower]?
@@ -30,6 +31,8 @@ class VarietiesSearchViewController: BaseViewController, UICollectionViewDataSou
         additionalParametersLabel.text = CustomLocalisedString("AdditionalParameters")
         searchBar.placeholder = CustomLocalisedString("VarietyOrAbr")
         self.containerView.frame = self.contentViewFrame()
+        hintLabel.text = CustomLocalisedString("Here will be displayed results of the search")
+        self.collectionView.hidden = true
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -64,6 +67,12 @@ class VarietiesSearchViewController: BaseViewController, UICollectionViewDataSou
             if let varieties = varieties {
                 self.searchResults = varieties
                 self.collectionView.reloadData()
+                if varieties.count == 0 {
+                    self.collectionView.hidden = true
+                    self.hintLabel.text = CustomLocalisedString("Search result is empty")
+                } else {
+                    self.collectionView.hidden = false
+                }
             } else {
                 Utils.showError(error!, inViewController: self)
             }
@@ -85,14 +94,7 @@ class VarietiesSearchViewController: BaseViewController, UICollectionViewDataSou
         }
     }
     
-    // MARK: - Actions
-    
-    @IBAction func searchButtonClicked(sender: UIBarButtonItem) {
-        self.searchVarieties()
-        self.searchBar.resignFirstResponder()
-    }
-    
-    @IBAction func additionalParametersButtonClicked(sender: UIButton) {
+    func animateAdditionalParametersView(show show: Bool) {
         if self.additionalParametersContainerView.subviews.count == 0 {
             let additionalParametersView = NSBundle.mainBundle().loadNibNamed("VarietiesSearchAdditionalParametersView", owner: self, options: nil).first as! VarietiesSearchAdditionalParametersView
             additionalParametersView.flowersSearchParams = self.flowersSearchParams
@@ -103,13 +105,25 @@ class VarietiesSearchViewController: BaseViewController, UICollectionViewDataSou
             self.additionalParametersContainerView.addSubview(additionalParametersView)
         }
         
-        if self.additionalParametersOverlayView.hidden {
+        if show {
             self.additionalParametersArrowImageView.image = UIImage(named: "up_arrow")
         } else {
             self.additionalParametersArrowImageView.image = UIImage(named: "down_arrow")
         }
         
-        self.additionalParametersOverlayView.hidden = !self.additionalParametersOverlayView.hidden
+        self.additionalParametersOverlayView.hidden = !show
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func searchButtonClicked(sender: UIBarButtonItem) {
+        self.searchVarieties()
+        self.searchBar.resignFirstResponder()
+        animateAdditionalParametersView(show: false)
+    }
+    
+    @IBAction func additionalParametersButtonClicked(sender: UIButton) {
+        animateAdditionalParametersView(show: self.additionalParametersOverlayView.hidden)
     }
     
     // MARK: - UICollectionViewDataSource
@@ -164,5 +178,6 @@ class VarietiesSearchViewController: BaseViewController, UICollectionViewDataSou
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         self.searchVarieties()
         self.searchBar.resignFirstResponder()
+        animateAdditionalParametersView(show: false)
     }
 }

@@ -31,6 +31,7 @@ class SendCommentViewController: BaseViewController, UIPickerViewDataSource, UIP
     @IBOutlet weak var selectButton: UIButton!
     @IBOutlet weak var commentsLabel: UILabel!
     @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var generalInfoContainerView: UIView!
     var subjectPickerView: UIPickerView!
     var subjects: [String] = []
     
@@ -75,10 +76,21 @@ class SendCommentViewController: BaseViewController, UIPickerViewDataSource, UIP
         scrollViewFrame.size.height = contentViewFrame().height
         scrollView.frame = scrollViewFrame
         
-        if isPortraitOrientation() {
-            scrollView.contentSize = CGSizeMake(320, 1187)
+        if User.currentUser() == nil {
+            if isPortraitOrientation() {
+                scrollView.contentSize = CGSizeMake(320, 1187)
+            } else {
+                scrollView.contentSize = CGSizeMake(320, 1133)
+            }
         } else {
-            scrollView.contentSize = CGSizeMake(320, 1133)
+            var generalInfoContainerViewFrame = generalInfoContainerView.frame
+            generalInfoContainerViewFrame.origin.y = 0
+            generalInfoContainerView.frame = generalInfoContainerViewFrame
+            if isPortraitOrientation() {
+                scrollView.contentSize = CGSizeMake(320, 900)
+            } else {
+                scrollView.contentSize = CGSizeMake(320, 718)
+            }
         }
     }
     
@@ -130,15 +142,7 @@ class SendCommentViewController: BaseViewController, UIPickerViewDataSource, UIP
         let comments = commentsTextView.text!
         let subject = subjectTextField.text!
         
-        if name.characters.count == 0 ||
-            company.characters.count == 0 ||
-            city.characters.count == 0 ||
-            workPhone.characters.count == 0 ||
-            mobilePhone.characters.count == 0 ||
-            email.characters.count == 0 ||
-            comments.characters.count == 0 ||
-            subject.characters.count == 0 {
-            
+        if comments.characters.count == 0 {
             Utils.showErrorWithMessage(CustomLocalisedString("Send comment fields are required"), inViewController: self)
         } else {
             RBHUD.sharedInstance.showLoader(self.view, withTitle: nil, withSubTitle: nil, withProgress: true)

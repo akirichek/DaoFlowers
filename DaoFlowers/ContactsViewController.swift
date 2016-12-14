@@ -16,6 +16,8 @@ class ContactsViewController: BaseViewController, MFMailComposeViewControllerDel
     @IBOutlet weak var registrationButton: UIButton!
     @IBOutlet weak var orderCallbackLabel: UILabel!
     @IBOutlet weak var sendCommentLabel: UILabel!
+    @IBOutlet weak var sendCommentContainerView: UIView!
+    @IBOutlet weak var orderCallbackContainerView: UIView!
     
     // MARK: - Override Methods
     
@@ -30,6 +32,7 @@ class ContactsViewController: BaseViewController, MFMailComposeViewControllerDel
         adjustShadowForView(skypeContainerView)
         adjustShadowForView(viberContainerView)
         adjustViews()
+        adjustButtons()
         
         registrationButton.hidden = (User.currentUser() != nil)
     }
@@ -37,6 +40,7 @@ class ContactsViewController: BaseViewController, MFMailComposeViewControllerDel
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         adjustViews()
+        adjustButtons()
     }
     
     // MARK: - Private Methods
@@ -56,22 +60,31 @@ class ContactsViewController: BaseViewController, MFMailComposeViewControllerDel
 
         if isPortraitOrientation() {
             skypeContainerViewFrame.size.width = 310
-            viberContainerViewFrame.origin.y = 290
+            viberContainerViewFrame.origin.y = 269
             viberContainerViewFrame.origin.x = 5
             viberContainerViewFrame.size.width = 310
-            registrationButton.frame = CGRectMake(84, 472, 152, 40)
-            
         } else {
             skypeContainerViewFrame.size.width = 272
-            viberContainerViewFrame.origin.y = contentViewFrame.origin.y + 11
+            viberContainerViewFrame.origin.y = contentViewFrame.origin.y + 6
             viberContainerViewFrame.origin.x = 291
             viberContainerViewFrame.size.width = 272
-            registrationButton.frame = CGRectMake(291.0, 224, 272, 40)
         }
         
-        skypeContainerViewFrame.origin.y = contentViewFrame.origin.y + 11
+        skypeContainerViewFrame.origin.y = contentViewFrame.origin.y + 6
         skypeContainerView.frame = skypeContainerViewFrame
         viberContainerView.frame = viberContainerViewFrame
+    }
+    
+    func adjustButtons() {
+        if isPortraitOrientation() {
+            orderCallbackContainerView.frame = CGRectMake(5, 518, 152, 40)
+            sendCommentContainerView.frame = CGRectMake(163, 518, 152, 40)
+            registrationButton.frame = CGRectMake(84, 472, 152, 40)
+        } else {
+            orderCallbackContainerView.frame = CGRectMake(5, 270, 182, 40)
+            sendCommentContainerView.frame = CGRectMake(192, 270, 182, 40)
+            registrationButton.frame = CGRectMake(379, 270, 182, 40)
+        }
     }
     
     func callSkypeWithUsername(username: String) {
@@ -117,9 +130,21 @@ class ContactsViewController: BaseViewController, MFMailComposeViewControllerDel
         case 0:
             callViberWithNumber("+31654268152")
         case 1:
-            callViberWithNumber("+31610249351")
+            callViberWithNumber("+31657713385")
         default:
             break
+        }
+    }
+    
+    @IBAction func whatsappButtonClicked(sender: UIButton) {
+        let urlString = "Hello DaoFlowers"
+        let urlStringEncoded = urlString.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())
+        let url  = NSURL(string: "whatsapp://send?text=\(urlStringEncoded!)")
+        
+        if UIApplication.sharedApplication().canOpenURL(url!) {
+            UIApplication.sharedApplication().openURL(url!)
+        } else {
+            Utils.showErrorWithMessage("WhatsApp is not installed.", inViewController: self)
         }
     }
     

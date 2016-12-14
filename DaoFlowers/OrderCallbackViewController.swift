@@ -117,30 +117,23 @@ class OrderCallbackViewController: BaseViewController, UITextFieldDelegate {
         let country = countryTextField.text!
         let city = cityTextField.text!
         
-        if name.characters.count == 0 ||
-            company.characters.count == 0 ||
-            country.characters.count == 0 ||
-            city.characters.count == 0 {
-            Utils.showErrorWithMessage(CustomLocalisedString("Send comment fields are required"), inViewController: self)
-        } else {
-            RBHUD.sharedInstance.showLoader(self.view, withTitle: nil, withSubTitle: nil, withProgress: true)
-            ApiManager.orderCallback(name: name,
-                                     company: company,
-                                     country: country,
-                                     city: city,
-                                     phone: phoneTextField.text,
-                                     viber: viberTextField.text,
-                                     whatsApp: whatsAppTextField.text,
-                                     skype: skypeTextField.text,
-                                     email: emailTextField.text,
-                                     comment: commentsTextView.text) { (success, error) in
-                                        RBHUD.sharedInstance.hideLoader()
-                                        if success {
-                                            Utils.showSuccessWithMessage(CustomLocalisedString("Call-back request was successfully sent"), inViewController: self)
-                                        } else {
-                                            Utils.showErrorWithMessage(CustomLocalisedString("Call-back request sending error"), inViewController: self)
-                                        }
-            }
+        RBHUD.sharedInstance.showLoader(self.view, withTitle: nil, withSubTitle: nil, withProgress: true)
+        ApiManager.orderCallback(name: name,
+                                 company: company,
+                                 country: country,
+                                 city: city,
+                                 phone: phoneTextField.text,
+                                 viber: viberTextField.text,
+                                 whatsApp: whatsAppTextField.text,
+                                 skype: skypeTextField.text,
+                                 email: emailTextField.text,
+                                 comment: commentsTextView.text) { (success, error) in
+                                    RBHUD.sharedInstance.hideLoader()
+                                    if success {
+                                        Utils.showSuccessWithMessage(CustomLocalisedString("Call-back request was successfully sent"), inViewController: self)
+                                    } else {
+                                        Utils.showErrorWithMessage(CustomLocalisedString("Call-back request sending error"), inViewController: self)
+                                    }
         }
     }
     

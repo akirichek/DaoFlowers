@@ -101,7 +101,7 @@
 "Send the registration request of a new user" = "Отправить запрос на регистрацию нового пользователя?";
 "Error" = "Ошибка";
 "Success" = "Успешно";
-"Send comment fields are required" = "Имя, Компания, Город, Рабочий телефон, Мобильный телефон, Email, Комментарий и Тема поля обязательны для заполнения.";
+"Send comment fields are required" = "Поле \"Ваши комментарии\" обязательно для заполнения.";
 "Comment was successfully sent" = "Комментарий был успешно отправлен.";
 "Comment sending error" = "Ошибка при отправке комментария.";
 "Send comment question" = "Отправить комментарий?";
@@ -110,3 +110,9 @@
 "Call-back request was successfully sent" = "Заказ на обратный звонок был успешно отправлен.";
 "Call-back request sending error" = "Ошибка при отправке заказа на обратный звонок.";
 "Variety by farms" = "% закупки сорта";
+"Authorization" = "Авторизация";
+"Login" = "Логин";
+"Password" = "Пароль";
+"ENTER" = "ВОЙТИ";
+"Here will be displayed results of the search" = "Здесь будут отображаться результаты поиска";
+"Search result is empty" = "Ничего не найдено";

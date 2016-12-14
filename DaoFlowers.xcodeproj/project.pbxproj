@@ -31,10 +31,6 @@
 		825369361DE770AC00A17537 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825369351DE770AC00A17537 /* ContactsViewController.swift */; };
 		825369381DE8BCFE00A17537 /* OrderCallbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825369371DE8BCFE00A17537 /* OrderCallbackViewController.swift */; };
 		8253693A1DE8BD2100A17537 /* SendCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825369391DE8BD2100A17537 /* SendCommentViewController.swift */; };
-		8253693C1DEB7A8900A17537 /* ProductivityHintView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8253693B1DEB7A8900A17537 /* ProductivityHintView.xib */; };
-		8253693E1DECAF4700A17537 /* BreederHintView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8253693D1DECAF4700A17537 /* BreederHintView.xib */; };
-		825369401DECB07D00A17537 /* VarietyByFarmsHintView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8253693F1DECB07D00A17537 /* VarietyByFarmsHintView.xib */; };
-		825369421DECB49E00A17537 /* FulfillmentHintView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 825369411DECB49E00A17537 /* FulfillmentHintView.xib */; };
 		825369441DED8C2E00A17537 /* VarietyImageViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825369431DED8C2E00A17537 /* VarietyImageViewerViewController.swift */; };
 		82606B9E1DCF7F8800A9E8D8 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82606B9D1DCF7F8800A9E8D8 /* Country.swift */; };
 		82606BA11DCF824000A9E8D8 /* CountryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82606BA01DCF824000A9E8D8 /* CountryCollectionViewCell.swift */; };
@@ -57,6 +53,11 @@
 		8272FBCD1DF75FB800100AAA /* VarietyDetailsGeneralInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8272FBCF1DF75FB800100AAA /* VarietyDetailsGeneralInfoView.xib */; };
 		8272FBD81DF8655500100AAA /* help.png in Resources */ = {isa = PBXBuildFile; fileRef = 8272FBDA1DF8655500100AAA /* help.png */; };
 		8272FBDF1DF8667A00100AAA /* icon_link@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8272FBE11DF8667A00100AAA /* icon_link@2x.png */; };
+		8272FBE41DF8678A00100AAA /* ProductivityHintView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8272FBE61DF8678A00100AAA /* ProductivityHintView.xib */; };
+		8272FBEF1DF8828000100AAA /* rose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8272FBF11DF8828000100AAA /* rose@2x.png */; };
+		8272FBF41DF8840E00100AAA /* BreederHintView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8272FBF61DF8840E00100AAA /* BreederHintView.xib */; };
+		8272FBFD1DF884ED00100AAA /* VarietyByFarmsHintView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8272FBFF1DF884ED00100AAA /* VarietyByFarmsHintView.xib */; };
+		8272FC061DF88DEA00100AAA /* FulfillmentHintView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8272FC081DF88DEA00100AAA /* FulfillmentHintView.xib */; };
 		827BAC2C1DBF675200B50C2B /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827BAC2B1DBF675200B50C2B /* MenuTableViewCell.swift */; };
 		827BF85F1DAEAF4000054548 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827BF85E1DAEAF4000054548 /* BaseViewController.swift */; };
 		827E8B041DD8C10E000A8EAE /* OrderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827E8B031DD8C10E000A8EAE /* OrderDetailsViewController.swift */; };
@@ -177,10 +178,6 @@
 		825369351DE770AC00A17537 /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		825369371DE8BCFE00A17537 /* OrderCallbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderCallbackViewController.swift; sourceTree = "<group>"; };
 		825369391DE8BD2100A17537 /* SendCommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendCommentViewController.swift; sourceTree = "<group>"; };
-		8253693B1DEB7A8900A17537 /* ProductivityHintView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductivityHintView.xib; sourceTree = "<group>"; };
-		8253693D1DECAF4700A17537 /* BreederHintView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BreederHintView.xib; sourceTree = "<group>"; };
-		8253693F1DECB07D00A17537 /* VarietyByFarmsHintView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VarietyByFarmsHintView.xib; sourceTree = "<group>"; };
-		825369411DECB49E00A17537 /* FulfillmentHintView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FulfillmentHintView.xib; sourceTree = "<group>"; };
 		825369431DED8C2E00A17537 /* VarietyImageViewerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietyImageViewerViewController.swift; sourceTree = "<group>"; };
 		82606B9D1DCF7F8800A9E8D8 /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		82606BA01DCF824000A9E8D8 /* CountryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -209,6 +206,21 @@
 		8272FBE01DF8667A00100AAA /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/icon_link@2x.png"; sourceTree = "<group>"; };
 		8272FBE21DF8667B00100AAA /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = "ru.lproj/icon_link@2x.png"; sourceTree = "<group>"; };
 		8272FBE31DF8667C00100AAA /* es */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = es; path = "es.lproj/icon_link@2x.png"; sourceTree = "<group>"; };
+		8272FBE51DF8678A00100AAA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ProductivityHintView.xib; sourceTree = "<group>"; };
+		8272FBEB1DF8679000100AAA /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/ProductivityHintView.xib; sourceTree = "<group>"; };
+		8272FBEC1DF8679300100AAA /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/ProductivityHintView.xib; sourceTree = "<group>"; };
+		8272FBF01DF8828000100AAA /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/rose@2x.png"; sourceTree = "<group>"; };
+		8272FBF21DF8828200100AAA /* ru */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ru; path = "ru.lproj/rose@2x.png"; sourceTree = "<group>"; };
+		8272FBF31DF8828300100AAA /* es */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = es; path = "es.lproj/rose@2x.png"; sourceTree = "<group>"; };
+		8272FBF51DF8840E00100AAA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BreederHintView.xib; sourceTree = "<group>"; };
+		8272FBFB1DF8841700100AAA /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/BreederHintView.xib; sourceTree = "<group>"; };
+		8272FBFC1DF8841B00100AAA /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/BreederHintView.xib; sourceTree = "<group>"; };
+		8272FBFE1DF884ED00100AAA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/VarietyByFarmsHintView.xib; sourceTree = "<group>"; };
+		8272FC021DF884F800100AAA /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/VarietyByFarmsHintView.xib; sourceTree = "<group>"; };
+		8272FC051DF884FC00100AAA /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/VarietyByFarmsHintView.xib; sourceTree = "<group>"; };
+		8272FC071DF88DEA00100AAA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FulfillmentHintView.xib; sourceTree = "<group>"; };
+		8272FC0D1DF88DF200100AAA /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/FulfillmentHintView.xib; sourceTree = "<group>"; };
+		8272FC0E1DF88DF600100AAA /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/FulfillmentHintView.xib; sourceTree = "<group>"; };
 		827BAC2B1DBF675200B50C2B /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		827BF85E1DAEAF4000054548 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		827E8B031DD8C10E000A8EAE /* OrderDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailsViewController.swift; sourceTree = "<group>"; };
@@ -370,6 +382,7 @@
 				82FF96671DF346C600A5BB70 /* down_arrow@2x.png */,
 				8272FBDA1DF8655500100AAA /* help.png */,
 				8272FBE11DF8667A00100AAA /* icon_link@2x.png */,
+				8272FBF11DF8828000100AAA /* rose@2x.png */,
 				82457AD31DAEAA5900D87B21 /* LaunchScreen.storyboard */,
 				82457AD61DAEAA5900D87B21 /* Info.plist */,
 				82457ACE1DAEAA5900D87B21 /* DaoFlowers.xcdatamodeld */,
@@ -480,10 +493,10 @@
 			children = (
 				82606BC41DD770C800A9E8D8 /* AHintView.swift */,
 				82FF962E1DF2D3C400A5BB70 /* VarietiesListHintView.xib */,
-				8253693B1DEB7A8900A17537 /* ProductivityHintView.xib */,
-				8253693D1DECAF4700A17537 /* BreederHintView.xib */,
-				8253693F1DECB07D00A17537 /* VarietyByFarmsHintView.xib */,
-				825369411DECB49E00A17537 /* FulfillmentHintView.xib */,
+				8272FBE61DF8678A00100AAA /* ProductivityHintView.xib */,
+				8272FBF61DF8840E00100AAA /* BreederHintView.xib */,
+				8272FBFF1DF884ED00100AAA /* VarietyByFarmsHintView.xib */,
+				8272FC081DF88DEA00100AAA /* FulfillmentHintView.xib */,
 			);
 			name = Hints;
 			sourceTree = "<group>";
@@ -849,10 +862,11 @@
 				82FF966E1DF35D4A00A5BB70 /* InvoiceDetailsGeneralViewPage.xib in Resources */,
 				82C059841DC6874E00F061E6 /* LanguagePickerViewCell.xib in Resources */,
 				825369261DE6317E00A17537 /* InvoiceDetailsStatisticsTotalTableViewCell.xib in Resources */,
-				8253693C1DEB7A8900A17537 /* ProductivityHintView.xib in Resources */,
-				8253693E1DECAF4700A17537 /* BreederHintView.xib in Resources */,
+				8272FBE41DF8678A00100AAA /* ProductivityHintView.xib in Resources */,
+				8272FBF41DF8840E00100AAA /* BreederHintView.xib in Resources */,
 				8299D3CA1DBBB11F0088E550 /* VarietyDetailsPlantationsGrowersView.xib in Resources */,
 				827E8B1E1DDB79D8000A8EAE /* DocumentTableViewHeader.xib in Resources */,
+				8272FBEF1DF8828000100AAA /* rose@2x.png in Resources */,
 				8272FBDF1DF8667A00100AAA /* icon_link@2x.png in Resources */,
 				825369131DE33BD700A17537 /* InvoiceDetailsGeneralTotalLandscapeTableViewCell.xib in Resources */,
 				82FF962C1DF2D3C400A5BB70 /* VarietiesListHintView.xib in Resources */,
@@ -861,7 +875,7 @@
 				82457AD51DAEAA5900D87B21 /* LaunchScreen.storyboard in Resources */,
 				82C0598A1DC68E4900F061E6 /* Localizable.strings in Resources */,
 				82457AD21DAEAA5900D87B21 /* Assets.xcassets in Resources */,
-				825369421DECB49E00A17537 /* FulfillmentHintView.xib in Resources */,
+				8272FC061DF88DEA00100AAA /* FulfillmentHintView.xib in Resources */,
 				82C1C1DF1DDDFA37007F223E /* InvoiceDetailsGeneralTableViewCell.xib in Resources */,
 				82FF967A1DF35F2A00A5BB70 /* InvoiceDetailsStatisticsViewPage.xib in Resources */,
 				8299D3AC1DB8D2170088E550 /* VarietiesPageView.xib in Resources */,
@@ -884,7 +898,7 @@
 				82606BAA1DCFC34300A9E8D8 /* PlantationCollectionViewCell.xib in Resources */,
 				82606BBE1DD3A9EB00A9E8D8 /* VarietiesByPlantationPageView.xib in Resources */,
 				82606BB51DD2631C00A9E8D8 /* PlantationsSearchAdditionalParametersView.xib in Resources */,
-				825369401DECB07D00A17537 /* VarietyByFarmsHintView.xib in Resources */,
+				8272FBFD1DF884ED00100AAA /* VarietyByFarmsHintView.xib in Resources */,
 				82457ACD1DAEAA5900D87B21 /* Main.storyboard in Resources */,
 				825369311DE72E1C00A17537 /* InvoiceDetailsAveragePricesStemTableViewCell.xib in Resources */,
 				82C1C1EB1DDF968C007F223E /* InvoiceDetailsGeneralHeaderTableViewCell.xib in Resources */,
@@ -1092,6 +1106,56 @@
 				8272FBE31DF8667C00100AAA /* es */,
 			);
 			name = "icon_link@2x.png";
+			sourceTree = "<group>";
+		};
+		8272FBE61DF8678A00100AAA /* ProductivityHintView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8272FBE51DF8678A00100AAA /* en */,
+				8272FBEB1DF8679000100AAA /* ru */,
+				8272FBEC1DF8679300100AAA /* es */,
+			);
+			name = ProductivityHintView.xib;
+			sourceTree = "<group>";
+		};
+		8272FBF11DF8828000100AAA /* rose@2x.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8272FBF01DF8828000100AAA /* en */,
+				8272FBF21DF8828200100AAA /* ru */,
+				8272FBF31DF8828300100AAA /* es */,
+			);
+			name = "rose@2x.png";
+			sourceTree = "<group>";
+		};
+		8272FBF61DF8840E00100AAA /* BreederHintView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8272FBF51DF8840E00100AAA /* en */,
+				8272FBFB1DF8841700100AAA /* es */,
+				8272FBFC1DF8841B00100AAA /* ru */,
+			);
+			name = BreederHintView.xib;
+			sourceTree = "<group>";
+		};
+		8272FBFF1DF884ED00100AAA /* VarietyByFarmsHintView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8272FBFE1DF884ED00100AAA /* en */,
+				8272FC021DF884F800100AAA /* ru */,
+				8272FC051DF884FC00100AAA /* es */,
+			);
+			name = VarietyByFarmsHintView.xib;
+			sourceTree = "<group>";
+		};
+		8272FC081DF88DEA00100AAA /* FulfillmentHintView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8272FC071DF88DEA00100AAA /* en */,
+				8272FC0D1DF88DF200100AAA /* es */,
+				8272FC0E1DF88DF600100AAA /* ru */,
+			);
+			name = FulfillmentHintView.xib;
 			sourceTree = "<group>";
 		};
 		82C0598C1DC68E4900F061E6 /* Localizable.strings */ = {

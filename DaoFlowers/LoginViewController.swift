@@ -12,12 +12,17 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var enterButton: UIButton!
 
     // MARK: Override Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        title = CustomLocalisedString("Authorization")
+        usernameTextField.placeholder = CustomLocalisedString("Login")
+        passwordTextField.placeholder = CustomLocalisedString("Password")
+        enterButton.setTitle(CustomLocalisedString("ENTER"), forState: .Normal)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -46,6 +51,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     // MARK: Actions
     
     @IBAction func loginButtonClicked(sender: UIButton) {
+        usernameTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
         self.login()
     }
     
