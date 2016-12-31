@@ -85,11 +85,16 @@ class OrderDetailsViewController: BaseViewController, UITableViewDataSource, UIT
         var topContainerViewFrame: CGRect
         var headerViewFrame = self.headerView.frame
         if isPortraitOrientation() {
+            topContainerPortraitView.hidden = false
+            topContainerLandscapeView.hidden = true
             topContainerViewFrame = self.topContainerPortraitView.frame
             topContainerViewFrame.origin.y = self.contentViewFrame().origin.y
             self.topContainerPortraitView.frame = topContainerViewFrame
             headerViewFrame.size.height = 40
         } else {
+            topContainerPortraitView.hidden = true
+            topContainerLandscapeView.hidden = false
+            topContainerLandscapeView.frame.size.width = self.view.frame.width
             topContainerViewFrame = self.topContainerLandscapeView.frame
             topContainerViewFrame.origin.y = self.contentViewFrame().origin.y
             self.topContainerLandscapeView.frame = topContainerViewFrame

@@ -60,6 +60,8 @@ struct K {
             static let Contacts = "ContactsViewControllerSegueIdentifier"
             static let VarietyImageViewer = "VarietyImageViewerViewControllerSegueIdentifier"
             static let Registration = "RegistrationSegueIdentifier"
+            static let OrderCallback = "OrderCallbackSegueIdentifier"
+            static let SendComment = "SendCommentSegueIdentifier"
         }
         
         struct ViewControllerIdentifier {

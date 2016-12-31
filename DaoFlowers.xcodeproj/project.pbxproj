@@ -58,6 +58,9 @@
 		8272FBF41DF8840E00100AAA /* BreederHintView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8272FBF61DF8840E00100AAA /* BreederHintView.xib */; };
 		8272FBFD1DF884ED00100AAA /* VarietyByFarmsHintView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8272FBFF1DF884ED00100AAA /* VarietyByFarmsHintView.xib */; };
 		8272FC061DF88DEA00100AAA /* FulfillmentHintView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8272FC081DF88DEA00100AAA /* FulfillmentHintView.xib */; };
+		8275DF7A1E1699180050D2D6 /* ContactsViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8275DF791E1699180050D2D6 /* ContactsViewController~iphone.xib */; };
+		8275DF7C1E16A14C0050D2D6 /* ContactsViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8275DF7B1E16A14C0050D2D6 /* ContactsViewController~ipad.xib */; };
+		8275DF7E1E16F7510050D2D6 /* OrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8275DF7D1E16F7510050D2D6 /* OrderTableViewCell.xib */; };
 		827BAC2C1DBF675200B50C2B /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827BAC2B1DBF675200B50C2B /* MenuTableViewCell.swift */; };
 		827BF85F1DAEAF4000054548 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827BF85E1DAEAF4000054548 /* BaseViewController.swift */; };
 		827E8B041DD8C10E000A8EAE /* OrderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827E8B031DD8C10E000A8EAE /* OrderDetailsViewController.swift */; };
@@ -221,6 +224,9 @@
 		8272FC071DF88DEA00100AAA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FulfillmentHintView.xib; sourceTree = "<group>"; };
 		8272FC0D1DF88DF200100AAA /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/FulfillmentHintView.xib; sourceTree = "<group>"; };
 		8272FC0E1DF88DF600100AAA /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/FulfillmentHintView.xib; sourceTree = "<group>"; };
+		8275DF791E1699180050D2D6 /* ContactsViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ContactsViewController~iphone.xib"; sourceTree = "<group>"; };
+		8275DF7B1E16A14C0050D2D6 /* ContactsViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ContactsViewController~ipad.xib"; sourceTree = "<group>"; };
+		8275DF7D1E16F7510050D2D6 /* OrderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderTableViewCell.xib; sourceTree = "<group>"; };
 		827BAC2B1DBF675200B50C2B /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		827BF85E1DAEAF4000054548 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		827E8B031DD8C10E000A8EAE /* OrderDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailsViewController.swift; sourceTree = "<group>"; };
@@ -439,9 +445,11 @@
 			isa = PBXGroup;
 			children = (
 				825369351DE770AC00A17537 /* ContactsViewController.swift */,
-				825369371DE8BCFE00A17537 /* OrderCallbackViewController.swift */,
-				825369391DE8BD2100A17537 /* SendCommentViewController.swift */,
-				82FF96261DF0682E00A5BB70 /* RegistrationViewController.swift */,
+				8275DF791E1699180050D2D6 /* ContactsViewController~iphone.xib */,
+				8275DF7B1E16A14C0050D2D6 /* ContactsViewController~ipad.xib */,
+				8275DF761E1698E30050D2D6 /* Order Callback */,
+				8275DF771E1698EC0050D2D6 /* Send Comment */,
+				8275DF781E1698F20050D2D6 /* Registration */,
 			);
 			name = Contacts;
 			sourceTree = "<group>";
@@ -505,11 +513,36 @@
 			isa = PBXGroup;
 			children = (
 				82606BC91DD7992C00A9E8D8 /* CurrentOrdersViewController.swift */,
+				8275DF7D1E16F7510050D2D6 /* OrderTableViewCell.xib */,
 				82606BCD1DD7AA9700A9E8D8 /* OrderTableViewCell.swift */,
 				827E8B031DD8C10E000A8EAE /* OrderDetailsViewController.swift */,
 				827E8B0A1DD8E0B8000A8EAE /* OrderDetailsTableViewCell.swift */,
 			);
 			name = "Current Orders";
+			sourceTree = "<group>";
+		};
+		8275DF761E1698E30050D2D6 /* Order Callback */ = {
+			isa = PBXGroup;
+			children = (
+				825369371DE8BCFE00A17537 /* OrderCallbackViewController.swift */,
+			);
+			name = "Order Callback";
+			sourceTree = "<group>";
+		};
+		8275DF771E1698EC0050D2D6 /* Send Comment */ = {
+			isa = PBXGroup;
+			children = (
+				825369391DE8BD2100A17537 /* SendCommentViewController.swift */,
+			);
+			name = "Send Comment";
+			sourceTree = "<group>";
+		};
+		8275DF781E1698F20050D2D6 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				82FF96261DF0682E00A5BB70 /* RegistrationViewController.swift */,
+			);
+			name = Registration;
 			sourceTree = "<group>";
 		};
 		827BAC2A1DBF672A00B50C2B /* Menu */ = {
@@ -875,6 +908,7 @@
 				82457AD51DAEAA5900D87B21 /* LaunchScreen.storyboard in Resources */,
 				82C0598A1DC68E4900F061E6 /* Localizable.strings in Resources */,
 				82457AD21DAEAA5900D87B21 /* Assets.xcassets in Resources */,
+				8275DF7C1E16A14C0050D2D6 /* ContactsViewController~ipad.xib in Resources */,
 				8272FC061DF88DEA00100AAA /* FulfillmentHintView.xib in Resources */,
 				82C1C1DF1DDDFA37007F223E /* InvoiceDetailsGeneralTableViewCell.xib in Resources */,
 				82FF967A1DF35F2A00A5BB70 /* InvoiceDetailsStatisticsViewPage.xib in Resources */,
@@ -888,6 +922,8 @@
 				82FBA1AB1DC28DEF001CE265 /* SearchAdditionalParametersTableViewCell.xib in Resources */,
 				82FF96651DF346C600A5BB70 /* down_arrow@2x.png in Resources */,
 				82606BA81DCFA56900A9E8D8 /* PlantationsPageView.xib in Resources */,
+				8275DF7A1E1699180050D2D6 /* ContactsViewController~iphone.xib in Resources */,
+				8275DF7E1E16F7510050D2D6 /* OrderTableViewCell.xib in Resources */,
 				82FBA19E1DC0D007001CE265 /* VarietiesSearchAdditionalParametersView.xib in Resources */,
 				8272FBCD1DF75FB800100AAA /* VarietyDetailsGeneralInfoView.xib in Resources */,
 				825369151DE33D7200A17537 /* InvoiceDetailsGeneralHeaderLandscapeTableViewCell.xib in Resources */,

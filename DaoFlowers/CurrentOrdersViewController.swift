@@ -53,6 +53,9 @@ class CurrentOrdersViewController: BaseViewController, UITableViewDataSource, UI
         labelsPickerView = createPickerViewForTextField(labelTextField)
         datesPickerView = createPickerViewForTextField(dateTextField)
         fetchCurrentOrders()
+        
+        let nib = UINib(nibName:"OrderTableViewCell", bundle: nil)
+        self.tableView.registerNib(nib, forCellReuseIdentifier: "CurrentOrderTableViewCellLandscapeIdentifier")
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -129,6 +132,7 @@ class CurrentOrdersViewController: BaseViewController, UITableViewDataSource, UI
         } else {
             self.headerPortraitView.hidden = true
             self.headerLandscapeView.hidden = false
+            self.headerLandscapeView.frame.size.width = self.view.frame.width
             headerViewFrame = self.headerLandscapeView.frame
             headerViewFrame.origin.y = filterViewFrame.origin.y
             if !filterView.hidden {

@@ -54,36 +54,40 @@ class ContactsViewController: BaseViewController, MFMailComposeViewControllerDel
     }
     
     func adjustViews() {
-        let contentViewFrame = self.contentViewFrame()
-        var skypeContainerViewFrame = skypeContainerView.frame
-        var viberContainerViewFrame = viberContainerView.frame
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+            let contentViewFrame = self.contentViewFrame()
+            var skypeContainerViewFrame = skypeContainerView.frame
+            var viberContainerViewFrame = viberContainerView.frame
 
-        if isPortraitOrientation() {
-            skypeContainerViewFrame.size.width = 310
-            viberContainerViewFrame.origin.y = 269
-            viberContainerViewFrame.origin.x = 5
-            viberContainerViewFrame.size.width = 310
-        } else {
-            skypeContainerViewFrame.size.width = 272
-            viberContainerViewFrame.origin.y = contentViewFrame.origin.y + 6
-            viberContainerViewFrame.origin.x = 291
-            viberContainerViewFrame.size.width = 272
+            if isPortraitOrientation() {
+                skypeContainerViewFrame.size.width = 310
+                viberContainerViewFrame.origin.y = 269
+                viberContainerViewFrame.origin.x = 5
+                viberContainerViewFrame.size.width = 310
+            } else {
+                skypeContainerViewFrame.size.width = 272
+                viberContainerViewFrame.origin.y = contentViewFrame.origin.y + 6
+                viberContainerViewFrame.origin.x = 291
+                viberContainerViewFrame.size.width = 272
+            }
+            
+            skypeContainerViewFrame.origin.y = contentViewFrame.origin.y + 6
+            skypeContainerView.frame = skypeContainerViewFrame
+            viberContainerView.frame = viberContainerViewFrame
         }
-        
-        skypeContainerViewFrame.origin.y = contentViewFrame.origin.y + 6
-        skypeContainerView.frame = skypeContainerViewFrame
-        viberContainerView.frame = viberContainerViewFrame
     }
     
     func adjustButtons() {
-        if isPortraitOrientation() {
-            orderCallbackContainerView.frame = CGRectMake(5, 518, 152, 40)
-            sendCommentContainerView.frame = CGRectMake(163, 518, 152, 40)
-            registrationButton.frame = CGRectMake(84, 472, 152, 40)
-        } else {
-            orderCallbackContainerView.frame = CGRectMake(5, 270, 182, 40)
-            sendCommentContainerView.frame = CGRectMake(192, 270, 182, 40)
-            registrationButton.frame = CGRectMake(379, 270, 182, 40)
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+            if isPortraitOrientation() {
+                orderCallbackContainerView.frame = CGRectMake(5, 518, 152, 40)
+                sendCommentContainerView.frame = CGRectMake(163, 518, 152, 40)
+                registrationButton.frame = CGRectMake(84, 472, 152, 40)
+            } else {
+                orderCallbackContainerView.frame = CGRectMake(5, 270, 182, 40)
+                sendCommentContainerView.frame = CGRectMake(192, 270, 182, 40)
+                registrationButton.frame = CGRectMake(379, 270, 182, 40)
+            }
         }
     }
     
@@ -159,6 +163,18 @@ class ContactsViewController: BaseViewController, MFMailComposeViewControllerDel
             mailComposeViewController.setToRecipients(["dao@daoflowers.com"])
             self.presentViewController(mailComposeViewController, animated: true, completion: nil)
         }
+    }
+    
+    @IBAction func registrationButtonClicked(sender: UIButton) {
+        performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Registration, sender: self)
+    }
+    
+    @IBAction func orderCallbackButtonClicked(sender: UIButton) {
+        performSegueWithIdentifier(K.Storyboard.SegueIdentifier.OrderCallback, sender: self)
+    }
+    
+    @IBAction func sendCommentButtonClicked(sender: UIButton) {
+        performSegueWithIdentifier(K.Storyboard.SegueIdentifier.SendComment, sender: self)
     }
     
     // MARK: MFMailComposeViewControllerDelegate
