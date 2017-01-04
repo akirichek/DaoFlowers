@@ -136,12 +136,14 @@ class InvoiceDetailsGeneralFilterView: UIView, UIPickerViewDataSource, UIPickerV
     }
     
     func adjustView() {
-        if viewWillTransitionToSize.width < viewWillTransitionToSize.height {
-            topContainerView.frame = CGRectMake(45, 77, 215, 110)
-            bottomContainerView.frame = CGRectMake(45, 197, 215, 106)
-        } else {
-            topContainerView.frame = CGRectMake(60, 60, 215, 110)
-            bottomContainerView.frame = CGRectMake(280, 60, 215, 106)
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+            if viewWillTransitionToSize.width < viewWillTransitionToSize.height {
+                topContainerView.frame = CGRectMake(45, 77, 215, 110)
+                bottomContainerView.frame = CGRectMake(45, 197, 215, 106)
+            } else {
+                topContainerView.frame = CGRectMake(60, 60, 215, 110)
+                bottomContainerView.frame = CGRectMake(280, 60, 215, 106)
+            }
         }
     }
     

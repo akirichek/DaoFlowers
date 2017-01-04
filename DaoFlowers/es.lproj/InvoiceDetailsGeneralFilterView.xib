@@ -13,7 +13,7 @@
             <subviews>
                 <view contentMode="scaleToFill" id="2RH-6H-Ahs">
                     <rect key="frame" x="15" y="92" width="290" height="420"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filtrar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nNu-7Z-zjo">
                             <rect key="frame" x="21" y="19" width="110" height="21"/>

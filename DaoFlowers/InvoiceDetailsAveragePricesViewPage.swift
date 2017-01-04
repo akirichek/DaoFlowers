@@ -98,6 +98,7 @@ class InvoiceDetailsAveragePricesViewPage: UIView, UITableViewDelegate, UITableV
         } else {
             totalInfoPortraitContainerView.hidden = true
             totalInfoLandscapeContainerView.hidden = false
+            totalInfoLandscapeContainerView.frame.size.width = self.frame.width - 10
             
             sizeHeaderViewFrame.origin.y = totalInfoLandscapeContainerView.frame.origin.y + totalInfoLandscapeContainerView.frame.height + 8
             sizeHeaderViewFrame.size.height = 20

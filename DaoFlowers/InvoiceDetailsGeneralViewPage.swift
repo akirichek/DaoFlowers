@@ -103,8 +103,10 @@ class InvoiceDetailsGeneralViewPage: UIView, UITableViewDelegate, UITableViewDat
         } else {
             totalInfoPortraitContainerView.hidden = true
             totalInfoLandscapeContainerView.hidden = false
+            totalInfoLandscapeContainerView.frame.size.width = self.frame.width - 10
             headerPortraitView.hidden = true
             headerLandscapeView.hidden = false
+            headerLandscapeView.frame.size.width = self.frame.width
             topContainerViewFrame.size.height = headerLandscapeView.frame.height + headerLandscapeView.frame.origin.y
             tableViewFrame.origin.y = topContainerViewFrame.origin.y + topContainerViewFrame.height
             tableViewFrame.size.height = viewWillTransitionToSize.height - tableViewFrame.origin.y - 72
