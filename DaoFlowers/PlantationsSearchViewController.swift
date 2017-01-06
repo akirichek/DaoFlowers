@@ -32,10 +32,10 @@ class PlantationsSearchViewController: BaseViewController, UICollectionViewDataS
         searchBar.placeholder = CustomLocalisedString("Plantation name or brand")
         self.containerView.frame = self.contentViewFrame()
         hintLabel.text = CustomLocalisedString("Here will be displayed results of the search")
-        self.collectionView.hidden = true
+        self.collectionView.isHidden = true
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.collectionView.collectionViewLayout.invalidateLayout()
         
@@ -44,7 +44,7 @@ class PlantationsSearchViewController: BaseViewController, UICollectionViewDataS
         }
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         self.viewWillTransitionToSize = size
         self.containerView.frame = self.contentViewFrame()
         self.collectionView.reloadData()
@@ -64,10 +64,10 @@ class PlantationsSearchViewController: BaseViewController, UICollectionViewDataS
                 self.searchResults = plantations
                 self.collectionView.reloadData()
                 if plantations.count == 0 {
-                    self.collectionView.hidden = true
+                    self.collectionView.isHidden = true
                     self.hintLabel.text = CustomLocalisedString("Search result is empty")
                 } else {
-                    self.collectionView.hidden = false
+                    self.collectionView.isHidden = false
                 }
             } else {
                 Utils.showError(error!, inViewController: self)
@@ -89,9 +89,9 @@ class PlantationsSearchViewController: BaseViewController, UICollectionViewDataS
         }
     }
     
-    func animateAdditionalParametersView(show show: Bool) {
+    func animateAdditionalParametersView(show: Bool) {
         if self.additionalParametersContainerView.subviews.count == 0 {
-            let additionalParametersView = NSBundle.mainBundle().loadNibNamed("PlantationsSearchAdditionalParametersView", owner: self, options: nil).first as! PlantationsSearchAdditionalParametersView
+            let additionalParametersView = Bundle.main.loadNibNamed("PlantationsSearchAdditionalParametersView", owner: self, options: nil)?.first as! PlantationsSearchAdditionalParametersView
             additionalParametersView.countriesSearchParams = self.countriesSearchParams
             additionalParametersView.flowersSearchParams = self.flowersSearchParams
             additionalParametersView.frame = self.additionalParametersContainerView.bounds
@@ -104,29 +104,29 @@ class PlantationsSearchViewController: BaseViewController, UICollectionViewDataS
             self.additionalParametersArrowImageView.image = UIImage(named: "down_arrow")
         }
         
-        self.additionalParametersOverlayView.hidden = !show
+        self.additionalParametersOverlayView.isHidden = !show
     }
     
     // MARK: - Actions
     
-    @IBAction func searchButtonClicked(sender: UIBarButtonItem) {
+    @IBAction func searchButtonClicked(_ sender: UIBarButtonItem) {
         self.searchPlantations()
         self.searchBar.resignFirstResponder()
         animateAdditionalParametersView(show: false)
     }
     
-    @IBAction func additionalParametersButtonClicked(sender: UIButton) {
-        animateAdditionalParametersView(show: self.additionalParametersOverlayView.hidden)
+    @IBAction func additionalParametersButtonClicked(_ sender: UIButton) {
+        animateAdditionalParametersView(show: self.additionalParametersOverlayView.isHidden)
     }
     
     // MARK: - UICollectionViewDataSource
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return searchResults.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PlantationCollectionViewCellIdentifier", forIndexPath: indexPath) as! PlantationCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlantationCollectionViewCellIdentifier", for: indexPath) as! PlantationCollectionViewCell
         cell.plantation = self.searchResults[indexPath.row]
         cell.numberLabel.text = String(indexPath.row + 1)
         
@@ -135,14 +135,14 @@ class PlantationsSearchViewController: BaseViewController, UICollectionViewDataS
     
     // MARK: - UICollectionViewDelegate
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.PlantationDetails,
-                                        sender: collectionView.cellForItemAtIndexPath(indexPath))
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.PlantationDetails,
+                                        sender: collectionView.cellForItem(at: indexPath))
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         let screenSize = self.viewWillTransitionToSize
         let columnCount: Int
         if screenSize.width < screenSize.height {
@@ -158,8 +158,8 @@ class PlantationsSearchViewController: BaseViewController, UICollectionViewDataS
     
     // MARK: - Navigation
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let destinationViewController = segue.destinationViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationViewController = segue.destination
         if let plantationDetailsViewController = destinationViewController as? PlantationDetailsViewController {
             let cell = sender as! PlantationCollectionViewCell
             plantationDetailsViewController.plantation = cell.plantation
@@ -168,7 +168,7 @@ class PlantationsSearchViewController: BaseViewController, UICollectionViewDataS
     
     // MARK: - UISearchBarDelegate
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.searchPlantations()
         self.searchBar.resignFirstResponder()
         animateAdditionalParametersView(show: false)

@@ -22,10 +22,10 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         title = CustomLocalisedString("Authorization")
         usernameTextField.placeholder = CustomLocalisedString("Login")
         passwordTextField.placeholder = CustomLocalisedString("Password")
-        enterButton.setTitle(CustomLocalisedString("ENTER"), forState: .Normal)
+        enterButton.setTitle(CustomLocalisedString("ENTER"), for: UIControlState())
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.usernameTextField.becomeFirstResponder()
     }
@@ -37,11 +37,11 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         ApiManager.loginWithUsername(self.usernameTextField.text!, andPassword: self.passwordTextField.text!) { (user, error) in
             RBHUD.sharedInstance.hideLoader()
             if let user = user {
-                let userDefaults = NSUserDefaults.standardUserDefaults()
-                userDefaults.setObject(Language.Russian.rawValue, forKey: K.UserDefaultsKey.Language)
+                let userDefaults = UserDefaults.standard
+                userDefaults.set(Language.Russian.rawValue, forKey: K.UserDefaultsKey.Language)
                 userDefaults.synchronize()
                 user.save()
-                self.navigationController!.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+                self.navigationController!.presentingViewController!.dismiss(animated: true, completion: nil)
             } else {
                 Utils.showError(error!, inViewController: self)
             }
@@ -50,19 +50,19 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     // MARK: Actions
     
-    @IBAction func loginButtonClicked(sender: UIButton) {
+    @IBAction func loginButtonClicked(_ sender: UIButton) {
         usernameTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
         self.login()
     }
     
-    @IBAction func backButtonClicked(sender: UIBarButtonItem) {
-        self.navigationController!.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func backButtonClicked(_ sender: UIBarButtonItem) {
+        self.navigationController!.presentingViewController!.dismiss(animated: true, completion: nil)
     }
     
     // MARK: UITextFieldDelegate
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.isEqual(self.usernameTextField) {
             self.passwordTextField.becomeFirstResponder()
         } else if textField.isEqual(self.passwordTextField) {

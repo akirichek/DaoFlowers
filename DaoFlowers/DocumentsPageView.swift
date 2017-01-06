@@ -13,10 +13,10 @@ class DocumentsPageView: UIView, UITableViewDelegate, UITableViewDataSource, Doc
     @IBOutlet weak var tableView: UITableView!
     var spinner = RBHUD()
     weak var delegate: DocumentsPageViewDelegate?
-    var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
-    var dates: [NSDate]?
+    var viewWillTransitionToSize = UIScreen.main.bounds.size
+    var dates: [Date]?
     var invoicesMode: Bool = true
-    var documents: [NSDate: [Document]]? {
+    var documents: [Date: [Document]]? {
         didSet {
             sortDates()
             self.tableView.reloadData()
@@ -28,10 +28,10 @@ class DocumentsPageView: UIView, UITableViewDelegate, UITableViewDataSource, Doc
     override func awakeFromNib() {
         super.awakeFromNib()
         var nib = UINib(nibName:"DocumentTableViewCell", bundle: nil)
-        self.tableView.registerNib(nib, forCellReuseIdentifier: "DocumentTableViewCellIdentifier")
+        self.tableView.register(nib, forCellReuseIdentifier: "DocumentTableViewCellIdentifier")
         
         nib = UINib(nibName:"DocumentTableViewHeader", bundle: nil)
-        self.tableView.registerNib(nib, forHeaderFooterViewReuseIdentifier: "DocumentTableViewHeaderIdentifier")
+        self.tableView.register(nib, forHeaderFooterViewReuseIdentifier: "DocumentTableViewHeaderIdentifier")
     }
     
     override func layoutSubviews() {
@@ -46,14 +46,14 @@ class DocumentsPageView: UIView, UITableViewDelegate, UITableViewDataSource, Doc
     
     func sortDates() {
         dates = Array(documents!.keys)
-        dates!.sortInPlace({ (obj1, obj2) -> Bool in
-            return obj1.compare(obj2) == NSComparisonResult.OrderedDescending
+        dates!.sort(by: { (obj1, obj2) -> Bool in
+            return obj1.compare(obj2) == ComparisonResult.orderedDescending
         })
     }
     
     // MARK: - UITableViewDataSource
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         var numberOfRows = 0
         if let dates = self.dates {
             self.spinner.hideLoader()
@@ -65,19 +65,19 @@ class DocumentsPageView: UIView, UITableViewDelegate, UITableViewDataSource, Doc
         return numberOfRows
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let date = dates![section]
         let documentsByDate = documents![date]!
         return documentsByDate.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("DocumentTableViewCellIdentifier", forIndexPath: indexPath) as! DocumentTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DocumentTableViewCellIdentifier", for: indexPath) as! DocumentTableViewCell
         cell.delegate = self
         let date = dates![indexPath.section]
         let documentsByDate = documents![date]!
         cell.document = documentsByDate[indexPath.row]
-        cell.fileNameLabel.hidden = !invoicesMode
+        cell.fileNameLabel.isHidden = !invoicesMode
         
         if indexPath.section == 0 {
             cell.contentView.backgroundColor = UIColor(red: 255/255, green: 250/255, blue: 205/255, alpha: 1)
@@ -90,22 +90,22 @@ class DocumentsPageView: UIView, UITableViewDelegate, UITableViewDataSource, Doc
     
     // MARK: - UITableViewDelegate
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 28
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("DocumentTableViewHeaderIdentifier")!
-        let dateLabel = headerView.subviews.first as! UILabel
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "DocumentTableViewHeaderIdentifier")!
+        let dateLabel = headerView.viewWithTag(1) as! UILabel
         let date = dates![section]
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
-        dateLabel.text = dateFormatter.stringFromDate(date)
+        dateLabel.text = dateFormatter.string(from: date)
         return headerView
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let date = dates![indexPath.section]
         let documentsByDate = documents![date]!
         delegate?.documentsPageView(self, didSelectDocument: documentsByDate[indexPath.row])
@@ -113,25 +113,25 @@ class DocumentsPageView: UIView, UITableViewDelegate, UITableViewDataSource, Doc
     
     // MARK: - DocumentTableViewCellDelegate
     
-    func documentTableViewCell(cell: DocumentTableViewCell, didDownloadDocument document: Document) {
+    func documentTableViewCell(_ cell: DocumentTableViewCell, didDownloadDocument document: Document) {
         let viewController = delegate as! UIViewController
         let message = CustomLocalisedString("Do you want to start download document")
         let alertController = UIAlertController(title: CustomLocalisedString("Downloading"),
-                                                message: "\(message) \(document.fileName) ?", preferredStyle: .Alert)
-        let yesAlertAction = UIAlertAction(title: CustomLocalisedString("YES"), style: .Default) { alertAction in
+                                                message: "\(message) \(document.fileName) ?", preferredStyle: .alert)
+        let yesAlertAction = UIAlertAction(title: CustomLocalisedString("YES"), style: .default) { alertAction in
             ApiManager.sharedInstance.downloadDocument(document, user: User.currentUser()!) { (error) in
                 if let error = error {
                     Utils.showError(error, inViewController: viewController)
                 }
             }
         }
-        let noAlertAction = UIAlertAction(title: CustomLocalisedString("NO"), style: .Default, handler: nil)
+        let noAlertAction = UIAlertAction(title: CustomLocalisedString("NO"), style: .default, handler: nil)
         alertController.addAction(noAlertAction)
         alertController.addAction(yesAlertAction)
-        viewController.presentViewController(alertController, animated: true, completion: nil)
+        viewController.present(alertController, animated: true, completion: nil)
     }
 }
 
 protocol DocumentsPageViewDelegate: NSObjectProtocol {
-    func documentsPageView(documentsPageView: DocumentsPageView, didSelectDocument document: Document)
+    func documentsPageView(_ documentsPageView: DocumentsPageView, didSelectDocument document: Document)
 }

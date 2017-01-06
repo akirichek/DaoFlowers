@@ -23,7 +23,7 @@ class SimilarVarietyCollectionViewCell: UICollectionViewCell {
         nameLabel.text = "\(variety.name) (\(variety.abr))"
         imageView.image = nil
         if let imageUrl = variety.imageUrl {
-            imageView.af_setImageWithURL(NSURL(string: imageUrl)!)
+            imageView.af_setImage(withURL: URL(string: imageUrl)!)
         } else {
             imageView.image = UIImage(named: "img_def_flower_rose")
         }

@@ -24,7 +24,7 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
     var assortmentTypes: [VarietiesAssortmentType] = [.ByName, .ByPercentsOfPurchase, .BoughtLastMonth]
     var assortmentPickerView: UIPickerView!
     var state: VarietiesPageViewState!
-    var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
+    var viewWillTransitionToSize = UIScreen.main.bounds.size
     
     var filteredVarieties: [Variety]? {
         didSet {
@@ -42,7 +42,7 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
         }
         self.assortmentTextField.text = CustomLocalisedString(state.assortment.rawValue)
         self.searchTextField.text = state.searchString
-        self.collectionView.contentOffset = CGPointZero
+        self.collectionView.contentOffset = CGPoint.zero
         self.filterVarieties()
     }
     
@@ -53,7 +53,7 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
         searchTextField.placeholder = CustomLocalisedString("TypeNameAbbrToSearch")
         
         let nib = UINib(nibName:"VarietyCollectionViewCell", bundle: nil)
-        self.collectionView.registerNib(nib, forCellWithReuseIdentifier: "VarietyCollectionViewCellIdentifier")
+        self.collectionView.register(nib, forCellWithReuseIdentifier: "VarietyCollectionViewCellIdentifier")
         assortmentContainerView.layer.cornerRadius = 5
         searchContainerView.layer.cornerRadius = 5
         self.assortmentPickerView = self.createPickerViewForTextField(self.assortmentTextField)
@@ -69,14 +69,14 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
     
     // MARK: - Actions
     
-    @IBAction func assortmentTextFieldClicked(sender: UITextField) {
-        let row = self.assortmentTypes.indexOf(state.assortment)!
+    @IBAction func assortmentTextFieldClicked(_ sender: UITextField) {
+        let row = self.assortmentTypes.index(of: state.assortment)!
         self.assortmentPickerView.selectRow(row, inComponent: 0, animated: false)
     }
     
     // MARK: - Private Methods
     
-    func createPickerViewForTextField(textField: UITextField) -> UIPickerView {
+    func createPickerViewForTextField(_ textField: UITextField) -> UIPickerView {
         let pickerView = UIPickerView()
         pickerView.dataSource = self
         pickerView.delegate = self
@@ -85,7 +85,7 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
-                                         style: UIBarButtonItemStyle.Done,
+                                         style: UIBarButtonItemStyle.done,
                                          target: self,
                                          action: #selector(VarietiesPageView.doneButtonClicked(_:)))
         toolbar.setItems([doneButton], animated: true)
@@ -95,21 +95,21 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
     }
     
     func showFilterContainerView() {
-        filterContainerView.hidden = false
+        filterContainerView.isHidden = false
         collectionViewTopConstraint.constant = 80
     }
     
     func hideFilterContainerView() {
         collectionViewTopConstraint.constant = 0
-        filterContainerView.hidden = true
+        filterContainerView.isHidden = true
     }
     
     func filterVarieties() {
-        let term = state.searchString.lowercaseString
+        let term = state.searchString.lowercased()
         var filteredVarieties = state.varieties
         if filteredVarieties != nil {
             if term.characters.count > 0 {
-                filteredVarieties = filteredVarieties!.filter({$0.name.lowercaseString.containsString(term) || $0.abr.lowercaseString.containsString(term)})
+                filteredVarieties = filteredVarieties!.filter({$0.name.lowercased().contains(term) || $0.abr.lowercased().contains(term)})
             }
             filteredVarieties = Utils.sortedVarieties(filteredVarieties!, byAssortmentType: state.assortment)
         }
@@ -119,12 +119,12 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
     
     // MARK: - Private Methods
     
-    func doneButtonClicked(sender: UIBarButtonItem) {
+    func doneButtonClicked(_ sender: UIBarButtonItem) {
         changeAssortment()
     }
     
     func changeAssortment() {
-        let selectedRow = self.assortmentPickerView.selectedRowInComponent(0)
+        let selectedRow = self.assortmentPickerView.selectedRow(inComponent: 0)
         let assortmentType = self.assortmentTypes[selectedRow]
         self.assortmentTextField.text = CustomLocalisedString(assortmentType.rawValue)
         self.assortmentTextField.resignFirstResponder()
@@ -137,7 +137,7 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
     
     // MARK: - UICollectionViewDataSource
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var numberOfRows = 0
         if let filteredVarieties = self.filteredVarieties {
             self.spinner.hideLoader()
@@ -148,8 +148,8 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
         return numberOfRows
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("VarietyCollectionViewCellIdentifier", forIndexPath: indexPath) as! VarietyCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VarietyCollectionViewCellIdentifier", for: indexPath) as! VarietyCollectionViewCell
         cell.variety  = self.filteredVarieties![indexPath.row]
         cell.numberLabel.text = String(indexPath.row + 1)
         
@@ -158,13 +158,13 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
     
     // MARK: - UICollectionViewDelegate
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.delegate?.varietiesPageView(self, didSelectVariety: self.filteredVarieties![indexPath.row])
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         let screenSize = self.viewWillTransitionToSize
         let columnCount: Int
         if screenSize.width < screenSize.height {
@@ -179,31 +179,31 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
     
     // MARK: - UIPickerViewDataSource
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return assortmentTypes.count
     }
     
     // MARK: - UIPickerViewDelegate
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         let titleForRow = CustomLocalisedString(assortmentTypes[row].rawValue)
         return titleForRow
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         changeAssortment()
     }
     
     // MARK: - UITextFieldDelegate
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == searchTextField {
             var term = NSString(string: searchTextField.text!)
-            term = term.stringByReplacingCharactersInRange(range, withString: string)
+            term = term.replacingCharacters(in: range, with: string) as NSString
             state.searchString = term as String
             self.filterVarieties()
             self.delegate?.varietiesPageView(self, didChangeState: state)
@@ -212,7 +212,7 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
         return true
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == searchTextField {
             textField.resignFirstResponder()
         }
@@ -221,8 +221,8 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
 }
 
 protocol VarietiesPageViewDelegate: NSObjectProtocol {
-    func varietiesPageView(varietiesPageView: VarietiesPageView, didSelectVariety variety: Variety)
-    func varietiesPageView(varietiesPageView: VarietiesPageView, didChangeState state: VarietiesPageViewState)
+    func varietiesPageView(_ varietiesPageView: VarietiesPageView, didSelectVariety variety: Variety)
+    func varietiesPageView(_ varietiesPageView: VarietiesPageView, didChangeState state: VarietiesPageViewState)
 }
 
 struct VarietiesPageViewState {

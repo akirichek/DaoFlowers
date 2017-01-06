@@ -14,7 +14,7 @@ class ColorsPageView: UIView, UICollectionViewDataSource, UICollectionViewDelega
     
     weak var delegate: ColorsPageViewDelegate?
     var spinner = RBHUD()
-    var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
+    var viewWillTransitionToSize = UIScreen.main.bounds.size
     var flower: Flower!
     var colors: [Color]? {
         didSet {
@@ -30,7 +30,7 @@ class ColorsPageView: UIView, UICollectionViewDataSource, UICollectionViewDelega
     
     override func awakeFromNib() {
         let nib = UINib(nibName:"ColorCollectionViewCell", bundle: nil)
-         self.collectionView.registerNib(nib, forCellWithReuseIdentifier: "ColorCollectionViewCellIdentifier")
+         self.collectionView.register(nib, forCellWithReuseIdentifier: "ColorCollectionViewCellIdentifier")
     }
     
     override func layoutSubviews() {
@@ -43,7 +43,7 @@ class ColorsPageView: UIView, UICollectionViewDataSource, UICollectionViewDelega
     
     // MARK: - UICollectionViewDataSource
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var numberOfRows = 0
         if let colors = self.colors {
             self.spinner.hideLoader()
@@ -54,8 +54,8 @@ class ColorsPageView: UIView, UICollectionViewDataSource, UICollectionViewDelega
         return numberOfRows
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ColorCollectionViewCellIdentifier", forIndexPath: indexPath) as! ColorCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ColorCollectionViewCellIdentifier", for: indexPath) as! ColorCollectionViewCell
         cell.flower = flower
         cell.color = self.colors![indexPath.row]
     
@@ -64,13 +64,13 @@ class ColorsPageView: UIView, UICollectionViewDataSource, UICollectionViewDelega
     
     // MARK: UICollectionViewDelegate
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.colorsPageView(self, didSelectColor: self.colors![indexPath.row])
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let screenSize = self.viewWillTransitionToSize
         let columnCount: Int
         if screenSize.width < screenSize.height {
@@ -85,5 +85,5 @@ class ColorsPageView: UIView, UICollectionViewDataSource, UICollectionViewDelega
 }
 
 protocol ColorsPageViewDelegate: NSObjectProtocol {
-    func colorsPageView(colorsPageView: ColorsPageView, didSelectColor color: Color)
+    func colorsPageView(_ colorsPageView: ColorsPageView, didSelectColor color: Color)
 }

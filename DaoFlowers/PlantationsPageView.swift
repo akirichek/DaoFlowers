@@ -23,7 +23,7 @@ class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewD
     var assortmentTypes: [PlantationsAssortmentType] = [.ByName, .ByActivePlantations, .ByPercentsOfPurchase,]
     var assortmentPickerView: UIPickerView!
     var state: PlantationsPageViewState!
-    var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
+    var viewWillTransitionToSize = UIScreen.main.bounds.size
     
     var filteredPlantations: [Plantation]? {
         didSet {
@@ -41,7 +41,7 @@ class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewD
         }
         self.assortmentTextField.text = CustomLocalisedString(state.assortment.rawValue)
         self.searchTextField.text = state.searchString
-        self.collectionView.contentOffset = CGPointZero
+        self.collectionView.contentOffset = CGPoint.zero
         self.filterPlantations()
     }
     
@@ -52,7 +52,7 @@ class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewD
         searchTextField.placeholder = CustomLocalisedString("TypeNameBrandToSearch")
         
         let nib = UINib(nibName:"PlantationCollectionViewCell", bundle: nil)
-        self.collectionView.registerNib(nib, forCellWithReuseIdentifier: "PlantationCollectionViewCellIdentifier")
+        self.collectionView.register(nib, forCellWithReuseIdentifier: "PlantationCollectionViewCellIdentifier")
         assortmentContainerView.layer.cornerRadius = 5
         searchContainerView.layer.cornerRadius = 5
         self.assortmentPickerView = self.createPickerViewForTextField(self.assortmentTextField)
@@ -68,14 +68,14 @@ class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewD
     
     // MARK: - Actions
     
-    @IBAction func assortmentTextFieldClicked(sender: UITextField) {
-        let row = self.assortmentTypes.indexOf(state.assortment)!
+    @IBAction func assortmentTextFieldClicked(_ sender: UITextField) {
+        let row = self.assortmentTypes.index(of: state.assortment)!
         self.assortmentPickerView.selectRow(row, inComponent: 0, animated: false)
     }
     
     // MARK: - Private Methods
     
-    func createPickerViewForTextField(textField: UITextField) -> UIPickerView {
+    func createPickerViewForTextField(_ textField: UITextField) -> UIPickerView {
         let pickerView = UIPickerView()
         pickerView.dataSource = self
         pickerView.delegate = self
@@ -84,7 +84,7 @@ class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewD
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
-                                         style: UIBarButtonItemStyle.Done,
+                                         style: UIBarButtonItemStyle.done,
                                          target: self,
                                          action: #selector(VarietiesPageView.doneButtonClicked(_:)))
         toolbar.setItems([doneButton], animated: true)
@@ -98,7 +98,7 @@ class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewD
         collectionViewFrame.origin.y = 80
         collectionViewFrame.size.height = 384
         collectionView.frame = collectionViewFrame
-        filterContainerView.hidden = false
+        filterContainerView.isHidden = false
     }
     
     func hideFilterContainerView() {
@@ -106,15 +106,15 @@ class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewD
         collectionViewFrame.origin.y = 0
         collectionViewFrame.size.height = 464
         collectionView.frame = collectionViewFrame
-        filterContainerView.hidden = true
+        filterContainerView.isHidden = true
     }
     
     func filterPlantations() {
-        let term = state.searchString.lowercaseString
+        let term = state.searchString.lowercased()
         var filteredPlantations = state.plantations
         if filteredPlantations != nil {
             if term.characters.count > 0 {
-                filteredPlantations = filteredPlantations!.filter({$0.name.lowercaseString.containsString(term)})
+                filteredPlantations = filteredPlantations!.filter({$0.name.lowercased().contains(term)})
             }
             filteredPlantations = Utils.sortedPlantations(filteredPlantations!, byAssortmentType: state.assortment)
         }
@@ -124,12 +124,12 @@ class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewD
     
     // MARK: - Private Methods
     
-    func doneButtonClicked(sender: UIBarButtonItem) {
+    func doneButtonClicked(_ sender: UIBarButtonItem) {
         changeAssortment()
     }
     
     func changeAssortment() {
-        let selectedRow = self.assortmentPickerView.selectedRowInComponent(0)
+        let selectedRow = self.assortmentPickerView.selectedRow(inComponent: 0)
         let assortmentType = self.assortmentTypes[selectedRow]
         self.assortmentTextField.text = CustomLocalisedString(assortmentType.rawValue)
         self.assortmentTextField.resignFirstResponder()
@@ -142,7 +142,7 @@ class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewD
     
     // MARK: - UICollectionViewDataSource
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var numberOfRows = 0
         if let filteredPlantations = self.filteredPlantations {
             self.spinner.hideLoader()
@@ -154,8 +154,8 @@ class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewD
         return numberOfRows
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PlantationCollectionViewCellIdentifier", forIndexPath: indexPath) as! PlantationCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlantationCollectionViewCellIdentifier", for: indexPath) as! PlantationCollectionViewCell
         cell.plantation = self.filteredPlantations![indexPath.row]
         cell.numberLabel.text = String(indexPath.row + 1)
         
@@ -164,13 +164,13 @@ class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewD
     
     // MARK: - UICollectionViewDelegate
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.delegate?.plantationsPageView(self, didSelectPlantation: self.filteredPlantations![indexPath.row])
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         let screenSize = self.viewWillTransitionToSize
         let columnCount: Int
         if screenSize.width < screenSize.height {
@@ -185,31 +185,31 @@ class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewD
     
     // MARK: - UIPickerViewDataSource
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return assortmentTypes.count
     }
     
     // MARK: - UIPickerViewDelegate
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         let titleForRow = CustomLocalisedString(assortmentTypes[row].rawValue)
         return titleForRow
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         changeAssortment()
     }
     
     // MARK: - UITextFieldDelegate
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == searchTextField {
             var term = NSString(string: searchTextField.text!)
-            term = term.stringByReplacingCharactersInRange(range, withString: string)
+            term = term.replacingCharacters(in: range, with: string) as NSString
             state.searchString = term as String
             self.filterPlantations()
             self.delegate?.plantationsPageView(self, didChangeState: state)
@@ -218,7 +218,7 @@ class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewD
         return true
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == searchTextField {
             textField.resignFirstResponder()
         }
@@ -227,8 +227,8 @@ class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewD
 }
 
 protocol PlantationsPageViewDelegate: NSObjectProtocol {
-    func plantationsPageView(plantationsPageView: PlantationsPageView, didSelectPlantation plantation: Plantation)
-    func plantationsPageView(plantationsPageView: PlantationsPageView, didChangeState state: PlantationsPageViewState)
+    func plantationsPageView(_ plantationsPageView: PlantationsPageView, didSelectPlantation plantation: Plantation)
+    func plantationsPageView(_ plantationsPageView: PlantationsPageView, didChangeState state: PlantationsPageViewState)
 }
 
 struct PlantationsPageViewState {

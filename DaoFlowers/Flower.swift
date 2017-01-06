@@ -35,7 +35,7 @@ struct Flower {
     
     var defaultImage: String {
         var defaultImage = ""
-        switch name.lowercaseString {
+        switch name.lowercased() {
         case "agapanthus":
             defaultImage = "img_def_flower_agapanthus"
         case "alstromeria":

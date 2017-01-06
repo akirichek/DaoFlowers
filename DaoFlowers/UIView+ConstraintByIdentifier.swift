@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIView {
-    func constraintByIdentifier(identifier: String) -> NSLayoutConstraint? {
+    func constraintByIdentifier(_ identifier: String) -> NSLayoutConstraint? {
         for constraint in self.constraints {
             if constraint.identifier == identifier {
                 return constraint

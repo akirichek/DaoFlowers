@@ -30,23 +30,23 @@ class FlowersViewController: BaseViewController, UICollectionViewDataSource, UIC
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.collectionView.collectionViewLayout.invalidateLayout()
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         self.viewWillTransitionToSize = size
         if self.collectionView != nil {
             self.collectionView.collectionViewLayout.invalidateLayout()
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let destinationViewController = segue.destinationViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationViewController = segue.destination
         if let colorsViewController = destinationViewController as? ColorsViewController {
             let cell = sender as! UICollectionViewCell
-            let indexPath = self.collectionView.indexPathForCell(cell)!
+            let indexPath = self.collectionView.indexPath(for: cell)!
             colorsViewController.selectedFlower = self.flowers[indexPath.row]
             colorsViewController.flowers = self.flowers
         }
@@ -54,12 +54,12 @@ class FlowersViewController: BaseViewController, UICollectionViewDataSource, UIC
     
     // MARK: UICollectionViewDataSource
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return flowers.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("FlowerCollectionViewCellIdentifier", forIndexPath: indexPath) as! FlowerCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FlowerCollectionViewCellIdentifier", for: indexPath) as! FlowerCollectionViewCell
         cell.flower = self.flowers[indexPath.row]
         
         return cell
@@ -67,14 +67,14 @@ class FlowersViewController: BaseViewController, UICollectionViewDataSource, UIC
     
     // MARK: UICollectionViewDelegate
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-         self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Colors,
-                                         sender: collectionView.cellForItemAtIndexPath(indexPath))
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+         self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.Colors,
+                                         sender: collectionView.cellForItem(at: indexPath))
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let screenSize: CGSize = self.viewWillTransitionToSize
         
         let columnCount: Int

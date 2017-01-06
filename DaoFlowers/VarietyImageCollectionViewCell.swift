@@ -21,20 +21,20 @@ class VarietyImageCollectionViewCell: UICollectionViewCell {
     
     func populateView() {
         imageView.image = nil
-        imageView.af_setImageWithURL(NSURL(string: image.imgUrl)!)
+        imageView.af_setImage(withURL: URL(string: image.imgUrl)!)
         
         if let plantName = image.plantName {
-            plantationView.hidden = false
+            plantationView.isHidden = false
             
             let string = "Photo from plantation:  " + plantName
-            let planNameFontAttr = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+            let planNameFontAttr = [NSForegroundColorAttributeName: UIColor.white]
             let plantationAttrString = NSMutableAttributedString(string: string, attributes: planNameFontAttr)
             let range = NSRange(location: 24, length: plantName.characters.count)
-            plantationAttrString.addAttributes([NSForegroundColorAttributeName: K.Colors.MainBlue, NSFontAttributeName: UIFont.systemFontOfSize(18, weight: UIFontWeightSemibold)],
+            plantationAttrString.addAttributes([NSForegroundColorAttributeName: K.Colors.MainBlue, NSFontAttributeName: UIFont.systemFont(ofSize: 18, weight: UIFontWeightSemibold)],
                                               range: range)
             plantationLabel.attributedText = plantationAttrString
         } else {
-            plantationView.hidden = true
+            plantationView.isHidden = true
         }
     }
 }

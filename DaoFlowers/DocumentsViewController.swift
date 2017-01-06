@@ -23,7 +23,7 @@ class DocumentsViewController: BaseViewController, PageViewerDataSource, Documen
         
         self.title = CustomLocalisedString("Documents")
         self.pageViewerContainerView.frame = self.contentViewFrame()
-        let pageViewer = NSBundle.mainBundle().loadNibNamed("PageViewer", owner: self, options: nil).first as! PageViewer
+        let pageViewer = Bundle.main.loadNibNamed("PageViewer", owner: self, options: nil)?.first as! PageViewer
         pageViewer.frame = self.pageViewerContainerView.bounds
         pageViewer.dataSource = self
         pageViewer.viewWillTransitionToSize = self.contentViewFrame().size
@@ -31,15 +31,15 @@ class DocumentsViewController: BaseViewController, PageViewerDataSource, Documen
         self.pageViewer = pageViewer
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         self.viewWillTransitionToSize = size
         self.pageViewer.viewWillTransitionToSize = self.contentViewFrame().size
         self.pageViewerContainerView.frame = self.contentViewFrame()
         self.pageViewer.reloadData()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let destinationViewController = segue.destinationViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationViewController = segue.destination
         if let invoiceDetailsViewController = destinationViewController as? InvoiceDetailsViewController {
             invoiceDetailsViewController.invoice = self.selectedInvoice
         }
@@ -47,7 +47,7 @@ class DocumentsViewController: BaseViewController, PageViewerDataSource, Documen
     
     // MARK: - Private Methods
     
-    func fetchInvoicesForPageViewIndex(index: Int) {
+    func fetchInvoicesForPageViewIndex(_ index: Int) {
         ApiManager.fetchInvoices(User.currentUser()!) { (invoices, error) in
             if let invoices = invoices {
                 if let pageView = self.pageViewer.pageAtIndex(index) as? DocumentsPageView {
@@ -61,7 +61,7 @@ class DocumentsViewController: BaseViewController, PageViewerDataSource, Documen
         }
     }
     
-    func fetchPrealertsForPageViewIndex(index: Int) {
+    func fetchPrealertsForPageViewIndex(_ index: Int) {
         ApiManager.fetchPrealerts(User.currentUser()!) { (prealerts, error) in
             if let prealerts = prealerts {
                 if let pageView = self.pageViewer.pageAtIndex(index) as? DocumentsPageView {
@@ -77,18 +77,18 @@ class DocumentsViewController: BaseViewController, PageViewerDataSource, Documen
     
     // MARK: - PageViewerDataSource
     
-    func pageViewerNumberOfPages(pageViewer: PageViewer) -> Int {
+    func pageViewerNumberOfPages(_ pageViewer: PageViewer) -> Int {
         return 2
     }
     
-    func pageViewer(pageViewer: PageViewer, headerForItemAtIndex index: Int) -> String {
+    func pageViewer(_ pageViewer: PageViewer, headerForItemAtIndex index: Int) -> String {
         return [CustomLocalisedString("INVOICES"), CustomLocalisedString("PREALERTS")][index]
     }
     
-    func pageViewer(pageViewer: PageViewer, pageForItemAtIndex index: Int, reusableView: UIView?) -> UIView {
+    func pageViewer(_ pageViewer: PageViewer, pageForItemAtIndex index: Int, reusableView: UIView?) -> UIView {
         var pageView: DocumentsPageView! = reusableView as? DocumentsPageView
         if pageView == nil {
-            pageView = NSBundle.mainBundle().loadNibNamed("DocumentsPageView", owner: self, options: nil).first as! DocumentsPageView
+            pageView = Bundle.main.loadNibNamed("DocumentsPageView", owner: self, options: nil)?.first as! DocumentsPageView
             pageView.delegate = self
         }
         
@@ -117,10 +117,10 @@ class DocumentsViewController: BaseViewController, PageViewerDataSource, Documen
     
     // MARK: - DocumentsPageViewDelegate
     
-    func documentsPageView(documentsPageView: DocumentsPageView, didSelectDocument document: Document) {
+    func documentsPageView(_ documentsPageView: DocumentsPageView, didSelectDocument document: Document) {
         if documentsPageView.invoicesMode {
             self.selectedInvoice = document
-            self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.InvoiceDetails, sender: self)
+            self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.InvoiceDetails, sender: self)
         }
     }
 }

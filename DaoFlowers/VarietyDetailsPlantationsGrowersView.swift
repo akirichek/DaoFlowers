@@ -16,7 +16,7 @@ class VarietyDetailsPlantationsGrowersView: UIView, UICollectionViewDataSource, 
     @IBOutlet weak var registrationButton: UIButton!
     
     weak var viewController: UIViewController!
-    var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
+    var viewWillTransitionToSize = UIScreen.main.bounds.size
     var spinner = RBHUD()
     var plantations: [Plantation]? {
         didSet {
@@ -28,30 +28,30 @@ class VarietyDetailsPlantationsGrowersView: UIView, UICollectionViewDataSource, 
     
     override func awakeFromNib() {
         let nib = UINib(nibName:"PlantationCollectionViewCell", bundle: nil)
-        self.collectionView.registerNib(nib, forCellWithReuseIdentifier: "PlantationCollectionViewCellIdentifier")
+        self.collectionView.register(nib, forCellWithReuseIdentifier: "PlantationCollectionViewCellIdentifier")
         contentAvailableForCustomersLabel.text = CustomLocalisedString("Content available only for customers")
-        registrationButton.setTitle(CustomLocalisedString("GO TO REGISTRATION"), forState: .Normal)
+        registrationButton.setTitle(CustomLocalisedString("GO TO REGISTRATION"), for: UIControlState())
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
         if self.plantations == nil {
-            self.collectionView.hidden = true
+            self.collectionView.isHidden = true
             //self.spinner.showLoader(self, withTitle: nil, withSubTitle: nil, withProgress: true)
         }
     }
     
     // MARK: - Action Methods
     
-    @IBAction func registrationButtonClicked(sender: UIButton) {
-        viewController.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Registration, sender: self)
+    @IBAction func registrationButtonClicked(_ sender: UIButton) {
+        viewController.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.Registration, sender: self)
     }
     
     
     // MARK: - UICollectionViewDataSource
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var numberOfRows = 0
         if self.plantations == nil {
             self.setNeedsLayout()
@@ -61,8 +61,8 @@ class VarietyDetailsPlantationsGrowersView: UIView, UICollectionViewDataSource, 
         return numberOfRows
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PlantationCollectionViewCellIdentifier", forIndexPath: indexPath) as! PlantationCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlantationCollectionViewCellIdentifier", for: indexPath) as! PlantationCollectionViewCell
         cell.plantation = self.plantations![indexPath.row]
         cell.numberLabel.text = String(indexPath.row + 1)
         
@@ -71,14 +71,14 @@ class VarietyDetailsPlantationsGrowersView: UIView, UICollectionViewDataSource, 
     
     // MARK: - UICollectionViewDelegate
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        viewController.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.PlantationDetails,
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewController.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.PlantationDetails,
                                                   sender: indexPath.row)
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         let screenSize = self.viewWillTransitionToSize
         let columnCount: Int
         if screenSize.width < screenSize.height {

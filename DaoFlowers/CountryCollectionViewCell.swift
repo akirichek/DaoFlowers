@@ -33,7 +33,7 @@ class CountryCollectionViewCell: UICollectionViewCell {
         
         imageView.image = nil
         if let imageUrl = country.imageUrl {
-            imageView.af_setImageWithURL(NSURL(string: imageUrl)!)
+            imageView.af_setImage(withURL: URL(string: imageUrl)!)
         }
     }
 }

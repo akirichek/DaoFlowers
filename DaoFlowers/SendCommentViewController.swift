@@ -48,9 +48,9 @@ class SendCommentViewController: BaseViewController, UIPickerViewDataSource, UIP
         workPhoneLabel.text = CustomLocalisedString("Work phone")
         mobilePhoneLabel.text = CustomLocalisedString("Mobile phone")
         subjectLabel.text = CustomLocalisedString("Subject")
-        selectButton.setTitle(CustomLocalisedString("Select"), forState: .Normal)
+        selectButton.setTitle(CustomLocalisedString("Select"), for: UIControlState())
         commentsLabel.text = CustomLocalisedString("Your comments");
-        sendButton.setTitle(CustomLocalisedString("SEND COMMENT"), forState: .Normal)
+        sendButton.setTitle(CustomLocalisedString("SEND COMMENT"), for: UIControlState())
         commentsTextView.layer.cornerRadius = 5
         adjustViews()
         adjustTextFields()
@@ -63,8 +63,8 @@ class SendCommentViewController: BaseViewController, UIPickerViewDataSource, UIP
         subjects += [CustomLocalisedString("Price information request"), CustomLocalisedString("Principles of work"), CustomLocalisedString("Logistics"), CustomLocalisedString("Application functioning general questions")]
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         adjustViews()
     }
     
@@ -78,18 +78,18 @@ class SendCommentViewController: BaseViewController, UIPickerViewDataSource, UIP
         
         if User.currentUser() == nil {
             if isPortraitOrientation() {
-                scrollView.contentSize = CGSizeMake(320, 1187)
+                scrollView.contentSize = CGSize(width: 320, height: 1187)
             } else {
-                scrollView.contentSize = CGSizeMake(320, 1133)
+                scrollView.contentSize = CGSize(width: 320, height: 1133)
             }
         } else {
             var generalInfoContainerViewFrame = generalInfoContainerView.frame
             generalInfoContainerViewFrame.origin.y = 0
             generalInfoContainerView.frame = generalInfoContainerViewFrame
             if isPortraitOrientation() {
-                scrollView.contentSize = CGSizeMake(320, 900)
+                scrollView.contentSize = CGSize(width: 320, height: 900)
             } else {
-                scrollView.contentSize = CGSizeMake(320, 718)
+                scrollView.contentSize = CGSize(width: 320, height: 718)
             }
         }
     }
@@ -98,7 +98,7 @@ class SendCommentViewController: BaseViewController, UIPickerViewDataSource, UIP
         var toolbar = UIToolbar()
         toolbar.sizeToFit()
         var doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
-                                         style: UIBarButtonItemStyle.Done,
+                                         style: UIBarButtonItemStyle.done,
                                          target: workPhoneTextField,
                                          action: #selector(UIResponder.resignFirstResponder))
         toolbar.setItems([doneButton], animated: true)
@@ -107,7 +107,7 @@ class SendCommentViewController: BaseViewController, UIPickerViewDataSource, UIP
         toolbar = UIToolbar()
         toolbar.sizeToFit()
         doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
-                                     style: UIBarButtonItemStyle.Done,
+                                     style: UIBarButtonItemStyle.done,
                                      target: mobilePhoneTextField,
                                      action: #selector(UIResponder.resignFirstResponder))
         toolbar.setItems([doneButton], animated: true)
@@ -116,7 +116,7 @@ class SendCommentViewController: BaseViewController, UIPickerViewDataSource, UIP
         toolbar = UIToolbar()
         toolbar.sizeToFit()
         doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
-                                     style: UIBarButtonItemStyle.Done,
+                                     style: UIBarButtonItemStyle.done,
                                      target: viberTextField,
                                      action: #selector(UIResponder.resignFirstResponder))
         toolbar.setItems([doneButton], animated: true)
@@ -125,7 +125,7 @@ class SendCommentViewController: BaseViewController, UIPickerViewDataSource, UIP
         toolbar = UIToolbar()
         toolbar.sizeToFit()
         doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
-                                     style: UIBarButtonItemStyle.Done,
+                                     style: UIBarButtonItemStyle.done,
                                      target: commentsTextView,
                                      action: #selector(UIResponder.resignFirstResponder))
         toolbar.setItems([doneButton], animated: true)
@@ -159,57 +159,57 @@ class SendCommentViewController: BaseViewController, UIPickerViewDataSource, UIP
     
     // MARK: - Actions
     
-    @IBAction func selectSubjectButtonClicked(sender: UIButton) {
+    @IBAction func selectSubjectButtonClicked(_ sender: UIButton) {
         subjectTextField.resignFirstResponder()
         let pickerView = UIPickerView()
         pickerView.dataSource = self
         pickerView.delegate = self
-        if let index = subjects.indexOf(subjectTextField.text!) {
+        if let index = subjects.index(of: subjectTextField.text!) {
             pickerView.selectRow(index, inComponent: 0, animated: false)
         }
         subjectTextField.inputView = pickerView
         subjectTextField.becomeFirstResponder()
     }
     
-    @IBAction func sendButtonClicked(sender: UIButton) {
-        let alertController = UIAlertController(title: CustomLocalisedString("Sending request"), message: CustomLocalisedString("Send comment question"), preferredStyle: .Alert)
-        let yesAlertAction = UIAlertAction(title: CustomLocalisedString("YES"), style: .Default) { alertAction in
+    @IBAction func sendButtonClicked(_ sender: UIButton) {
+        let alertController = UIAlertController(title: CustomLocalisedString("Sending request"), message: CustomLocalisedString("Send comment question"), preferredStyle: .alert)
+        let yesAlertAction = UIAlertAction(title: CustomLocalisedString("YES"), style: .default) { alertAction in
             self.sendComment()
         }
-        let noAlertAction = UIAlertAction(title: CustomLocalisedString("NO"), style: .Default, handler: nil)
+        let noAlertAction = UIAlertAction(title: CustomLocalisedString("NO"), style: .default, handler: nil)
         alertController.addAction(noAlertAction)
         alertController.addAction(yesAlertAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
 
     // MARK: - UITextFieldDelegate
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
     
     // MARK: - UIPickerViewDataSource
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return subjects.count
     }
     
     // MARK: - UIPickerViewDelegate
 
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
-        let label = UILabel(frame: CGRectMake(0, 0, 320, 50))
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
         label.text = subjects[row]
         label.numberOfLines = 0
-        label.textAlignment = .Center
+        label.textAlignment = .center
         return label
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         subjectTextField.text = subjects[row]
         subjectTextField.resignFirstResponder()
         subjectTextField.inputView = nil

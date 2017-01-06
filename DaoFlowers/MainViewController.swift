@@ -27,21 +27,21 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
         menuViewController.delegate = self
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let menuViewController = self.childViewControllers.first as! MenuViewController
         menuViewController.reloadData()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if currentViewController == nil {
-            self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Flowers, sender: self)
+            self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.Flowers, sender: self)
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let destinationViewController = segue.destinationViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationViewController = segue.destination
         if let navigationController = destinationViewController as? UINavigationController {
             if let rootViewController = navigationController.viewControllers[0] as? BaseViewController {
                 rootViewController.menuButtonHandler = self
@@ -51,7 +51,7 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
     
     // MARK: Private Methods
     
-    func animateMenu(drugged: Bool) {
+    func animateMenu(_ drugged: Bool) {
         self.view.layoutIfNeeded()
         var newConstant: CGFloat;
         var menuViewFrame = self.menuContainerView.frame
@@ -69,7 +69,7 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
             }
         }
         
-        self.panGestureRecognizer.enabled = !Bool(newConstant)
+        self.panGestureRecognizer.isEnabled = (newConstant == 0)
         menuViewFrame.origin.x = newConstant
         let alpha: CGFloat
         
@@ -79,14 +79,14 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
             alpha = 0
         }
         
-        UIView.animateWithDuration(0.3) {
+        UIView.animate(withDuration: 0.3, animations: {
             self.hiddenView.alpha = alpha
             self.menuContainerView.frame = menuViewFrame
-        }
+        }) 
     }
     
-    func dragMenu(sender: UIGestureRecognizer) {
-        let point: CGPoint = sender.locationInView(self.view)
+    func dragMenu(_ sender: UIGestureRecognizer) {
+        let point: CGPoint = sender.location(in: self.view)
         if self.previousTouchPoint != nil {
             let deltaX = point.x - self.previousTouchPoint.x
             if (self.menuContainerView.frame.origin.x + deltaX <= 0) {
@@ -99,8 +99,8 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
         
         self.previousTouchPoint = point
         
-        if sender.state == UIGestureRecognizerState.Ended ||
-            sender.state == UIGestureRecognizerState.Cancelled {
+        if sender.state == UIGestureRecognizerState.ended ||
+            sender.state == UIGestureRecognizerState.cancelled {
             self.previousTouchPoint = nil
             self.animateMenu(true)
         }
@@ -108,46 +108,46 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
     
     // MARK: Actions
     
-    @IBAction func hiddenViewClicked(sender: UITapGestureRecognizer) {
+    @IBAction func hiddenViewClicked(_ sender: UITapGestureRecognizer) {
         self.animateMenu(false)
     }
     
-    @IBAction func panGestureDidDragging(sender: UIPanGestureRecognizer) {
-        let point: CGPoint = sender.locationInView(self.view)
+    @IBAction func panGestureDidDragging(_ sender: UIPanGestureRecognizer) {
+        let point: CGPoint = sender.location(in: self.view)
         if (point.x - self.menuContainerView.frame.width - self.menuContainerView.frame.origin.x <= 0) ||
             self.previousTouchPoint != nil {
             self.dragMenu(sender)
         }
     }
     
-    @IBAction func screenEdgePanGestureDidDragging(sender: UIScreenEdgePanGestureRecognizer) {
+    @IBAction func screenEdgePanGestureDidDragging(_ sender: UIScreenEdgePanGestureRecognizer) {
         self.dragMenu(sender)
     }
 
     // MARK: MenuViewControllerDelegate
     
-    func menuViewController(menuViewController: MenuViewController, didSelectMenuSection menuSection: MenuSection) {
+    func menuViewController(_ menuViewController: MenuViewController, didSelectMenuSection menuSection: MenuSection) {
         switch menuSection {
         case .Varieties:
-            self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Flowers, sender: self)
+            self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.Flowers, sender: self)
             self.animateMenu(false)
         case .Plantations:
-            self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Countries, sender: self)
+            self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.Countries, sender: self)
             self.animateMenu(false)
         case .CurrentOrders:
-            self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.CurrentOrders, sender: self)
+            self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.CurrentOrders, sender: self)
             self.animateMenu(false)
         case .Documents:
-            self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Documents, sender: self)
+            self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.Documents, sender: self)
             self.animateMenu(false)
         case .Login:
-            self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Login, sender: self)
+            self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.Login, sender: self)
             //self.animateMenu(false)
         case .Contacts:
-            self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Contacts, sender: self)
+            self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.Contacts, sender: self)
             self.animateMenu(false)
         case .Settings:
-            self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Settings, sender: self)
+            self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.Settings, sender: self)
             self.animateMenu(false)
         case .Logout:
             User.currentUser()?.logOut()

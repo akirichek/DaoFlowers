@@ -42,27 +42,27 @@ class OrderDetailsViewController: BaseViewController, UITableViewDataSource, UIT
         fbDiffLabel.text = CustomLocalisedString("fb diff")
         countryLabel.text = CustomLocalisedString("cou")
         infoContainerView.layer.cornerRadius = 5
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
-        dateLabels.forEach { $0.text = dateFormatter.stringFromDate(order.headDate) }
+        dateLabels.forEach { $0.text = dateFormatter.string(from: order.headDate as Date) }
         clientLabels.forEach { $0.text = order.clientLabel }
         truckLabels.forEach { $0.text = order.truck.name }
         pointLabels.forEach { $0.text = order.outPoint.name }
-        checkmarkImageViews.forEach { $0.hidden = !(order.orderedFb - order.confirmedFb == 0) }
+        checkmarkImageViews.forEach { $0.isHidden = !(order.orderedFb - order.confirmedFb == 0) }
         fetchOrderDetails()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         adjustViewSize()
     }
     
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
         self.tableView.reloadData()
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         adjustViewSize()
     }
     
@@ -85,15 +85,15 @@ class OrderDetailsViewController: BaseViewController, UITableViewDataSource, UIT
         var topContainerViewFrame: CGRect
         var headerViewFrame = self.headerView.frame
         if isPortraitOrientation() {
-            topContainerPortraitView.hidden = false
-            topContainerLandscapeView.hidden = true
+            topContainerPortraitView.isHidden = false
+            topContainerLandscapeView.isHidden = true
             topContainerViewFrame = self.topContainerPortraitView.frame
             topContainerViewFrame.origin.y = self.contentViewFrame().origin.y
             self.topContainerPortraitView.frame = topContainerViewFrame
             headerViewFrame.size.height = 40
         } else {
-            topContainerPortraitView.hidden = true
-            topContainerLandscapeView.hidden = false
+            topContainerPortraitView.isHidden = true
+            topContainerLandscapeView.isHidden = false
             topContainerLandscapeView.frame.size.width = self.view.frame.width
             topContainerViewFrame = self.topContainerLandscapeView.frame
             topContainerViewFrame.origin.y = self.contentViewFrame().origin.y
@@ -111,11 +111,11 @@ class OrderDetailsViewController: BaseViewController, UITableViewDataSource, UIT
     
     // MARK: - UITableViewDataSource
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return totalOrderDetails.count + 1
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cellIdentifier: String
         
         if indexPath.row == totalOrderDetails.count {
@@ -124,7 +124,7 @@ class OrderDetailsViewController: BaseViewController, UITableViewDataSource, UIT
             cellIdentifier = "OrderDetailsTableViewCellPortraitIdentifier"
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! OrderDetailsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! OrderDetailsTableViewCell
         
         if indexPath.row == totalOrderDetails.count {
             cell.totalOrderDetails = totalOrderDetails
@@ -137,7 +137,7 @@ class OrderDetailsViewController: BaseViewController, UITableViewDataSource, UIT
     
     // MARK: - UITableViewDelegate
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var heightForRow = tableView.rowHeight
         
         if indexPath.row < totalOrderDetails.count {
@@ -147,7 +147,7 @@ class OrderDetailsViewController: BaseViewController, UITableViewDataSource, UIT
             let text = orderDetails.flowerType.name + ". " + orderDetails.flowerSort.name
             let heightForText = Utils.heightForText(text,
                                                     havingWidth: labelWidth,
-                                                    andFont: UIFont.boldSystemFontOfSize(12))
+                                                    andFont: UIFont.boldSystemFont(ofSize: 12))
             
             if heightForText > labelHeight {
                 heightForRow += heightForText - labelHeight

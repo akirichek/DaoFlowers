@@ -39,7 +39,7 @@ class OrderDetailsTableViewCell: UITableViewCell {
         
         if fbDif == 0 {
             fbDifLabel.text = String(fbDif)
-            fbDifLabel.textColor = UIColor.blackColor()
+            fbDifLabel.textColor = UIColor.black
         } else {
             fbDifLabel.text = "-\(fbDif)"
             fbDifLabel.textColor = UIColor(red: 202/255, green: 5/255, blue: 15/255, alpha: 1)
@@ -68,7 +68,7 @@ class OrderDetailsTableViewCell: UITableViewCell {
         
         if totalFbDif == 0 {
             fbDifLabel.text = String(totalFbDif)
-            fbDifLabel.textColor = UIColor.blackColor()
+            fbDifLabel.textColor = UIColor.black
         } else {
             fbDifLabel.text = "-\(totalFbDif)"
             fbDifLabel.textColor = UIColor(red: 202/255, green: 5/255, blue: 15/255, alpha: 1)

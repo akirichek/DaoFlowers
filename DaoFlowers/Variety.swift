@@ -74,7 +74,7 @@ class Variety: NSObject {
         }
     }
     
-    func addGeneralInfoFromDictionary(dictionary: [String: AnyObject]) {
+    func addGeneralInfoFromDictionary(_ dictionary: [String: AnyObject]) {
         let generalInfo = dictionary["general"] as! [String: AnyObject]
         liveDaysFrom = generalInfo["liveDaysFrom"] as? Int
         liveDaysTo = generalInfo["liveDaysTo"] as? Int

@@ -32,10 +32,10 @@ class VarietiesSearchViewController: BaseViewController, UICollectionViewDataSou
         searchBar.placeholder = CustomLocalisedString("VarietyOrAbr")
         self.containerView.frame = self.contentViewFrame()
         hintLabel.text = CustomLocalisedString("Here will be displayed results of the search")
-        self.collectionView.hidden = true
+        self.collectionView.isHidden = true
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.collectionView.collectionViewLayout.invalidateLayout()
         
@@ -44,7 +44,7 @@ class VarietiesSearchViewController: BaseViewController, UICollectionViewDataSou
         }
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         self.viewWillTransitionToSize = size
         self.containerView.frame = self.contentViewFrame()
         self.collectionView.reloadData()
@@ -68,10 +68,10 @@ class VarietiesSearchViewController: BaseViewController, UICollectionViewDataSou
                 self.searchResults = varieties
                 self.collectionView.reloadData()
                 if varieties.count == 0 {
-                    self.collectionView.hidden = true
+                    self.collectionView.isHidden = true
                     self.hintLabel.text = CustomLocalisedString("Search result is empty")
                 } else {
-                    self.collectionView.hidden = false
+                    self.collectionView.isHidden = false
                 }
             } else {
                 Utils.showError(error!, inViewController: self)
@@ -94,14 +94,14 @@ class VarietiesSearchViewController: BaseViewController, UICollectionViewDataSou
         }
     }
     
-    func animateAdditionalParametersView(show show: Bool) {
+    func animateAdditionalParametersView(show: Bool) {
         if self.additionalParametersContainerView.subviews.count == 0 {
-            let additionalParametersView = NSBundle.mainBundle().loadNibNamed("VarietiesSearchAdditionalParametersView", owner: self, options: nil).first as! VarietiesSearchAdditionalParametersView
+            let additionalParametersView = Bundle.main.loadNibNamed("VarietiesSearchAdditionalParametersView", owner: self, options: nil)?.first as! VarietiesSearchAdditionalParametersView
             additionalParametersView.flowersSearchParams = self.flowersSearchParams
             additionalParametersView.colorsSearchParams = self.colorsSearchParams
             additionalParametersView.breedersSearchParams = self.breedersSearchParams
             additionalParametersView.frame = self.additionalParametersContainerView.bounds
-            additionalParametersView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+            additionalParametersView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             self.additionalParametersContainerView.addSubview(additionalParametersView)
         }
         
@@ -111,29 +111,29 @@ class VarietiesSearchViewController: BaseViewController, UICollectionViewDataSou
             self.additionalParametersArrowImageView.image = UIImage(named: "down_arrow")
         }
         
-        self.additionalParametersOverlayView.hidden = !show
+        self.additionalParametersOverlayView.isHidden = !show
     }
     
     // MARK: - Actions
     
-    @IBAction func searchButtonClicked(sender: UIBarButtonItem) {
+    @IBAction func searchButtonClicked(_ sender: UIBarButtonItem) {
         self.searchVarieties()
         self.searchBar.resignFirstResponder()
         animateAdditionalParametersView(show: false)
     }
     
-    @IBAction func additionalParametersButtonClicked(sender: UIButton) {
-        animateAdditionalParametersView(show: self.additionalParametersOverlayView.hidden)
+    @IBAction func additionalParametersButtonClicked(_ sender: UIButton) {
+        animateAdditionalParametersView(show: self.additionalParametersOverlayView.isHidden)
     }
     
     // MARK: - UICollectionViewDataSource
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return searchResults.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("VarietyCollectionViewCellIdentifier", forIndexPath: indexPath) as! VarietyCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VarietyCollectionViewCellIdentifier", for: indexPath) as! VarietyCollectionViewCell
         cell.variety = self.searchResults[indexPath.row]
         cell.numberLabel.text = String(indexPath.row + 1)
         
@@ -142,14 +142,14 @@ class VarietiesSearchViewController: BaseViewController, UICollectionViewDataSou
     
     // MARK: - UICollectionViewDelegate
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.VarietyDetails,
-                                        sender: collectionView.cellForItemAtIndexPath(indexPath))
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.VarietyDetails,
+                                        sender: collectionView.cellForItem(at: indexPath))
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         let screenSize = self.viewWillTransitionToSize
         let columnCount: Int
         if screenSize.width < screenSize.height {
@@ -165,8 +165,8 @@ class VarietiesSearchViewController: BaseViewController, UICollectionViewDataSou
     
     // MARK: - Navigation
 
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-         let destinationViewController = segue.destinationViewController
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+         let destinationViewController = segue.destination
          if let varietyDetailsViewController = destinationViewController as? VarietyDetailsViewController {
             let cell = sender as! VarietyCollectionViewCell
             varietyDetailsViewController.variety = cell.variety
@@ -175,7 +175,7 @@ class VarietiesSearchViewController: BaseViewController, UICollectionViewDataSou
     
     // MARK: - UISearchBarDelegate
 
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.searchVarieties()
         self.searchBar.resignFirstResponder()
         animateAdditionalParametersView(show: false)

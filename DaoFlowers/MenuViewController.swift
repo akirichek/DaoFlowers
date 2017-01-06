@@ -20,7 +20,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.reloadData()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
     }
@@ -54,14 +54,14 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.tableView.reloadData()
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.menuItems.count + 1
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell
         if indexPath.row == 0 {
-            let headerCell = tableView.dequeueReusableCellWithIdentifier("MenuHeaderTableViewCellIdentifier", forIndexPath: indexPath) as! MenuTableViewCell
+            let headerCell = tableView.dequeueReusableCell(withIdentifier: "MenuHeaderTableViewCellIdentifier", for: indexPath) as! MenuTableViewCell
             if let currentUser = User.currentUser() {
                 headerCell.customerLabel.text = currentUser.name
             } else {
@@ -70,7 +70,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             cell = headerCell
         } else {
-            let sectionCell = tableView.dequeueReusableCellWithIdentifier("MenuTableViewCellIdentifier", forIndexPath: indexPath) as! MenuTableViewCell
+            let sectionCell = tableView.dequeueReusableCell(withIdentifier: "MenuTableViewCellIdentifier", for: indexPath) as! MenuTableViewCell
             let menuItem = self.menuItems[indexPath.row - 1]
             sectionCell.sectionLabel.text = CustomLocalisedString(menuItem["name"]!)
             sectionCell.iconImageView?.image = UIImage(named: menuItem["image"]!)
@@ -80,7 +80,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let menuItem = self.menuItems[indexPath.row - 1]
         let menuSection = MenuSection(rawValue: menuItem["name"]!)!
         self.delegate?.menuViewController(self, didSelectMenuSection: menuSection)
@@ -88,8 +88,8 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     // MARK: UITableViewDelegate
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let screenSize: CGSize = UIScreen.mainScreen().bounds.size
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let screenSize: CGSize = UIScreen.main.bounds.size
         let heightForRow: CGFloat
         
         if indexPath.row == 0 {
@@ -103,5 +103,5 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
 }
 
 protocol MenuViewControllerDelegate: NSObjectProtocol {
-    func menuViewController(menuViewController: MenuViewController, didSelectMenuSection menuSection: MenuSection)
+    func menuViewController(_ menuViewController: MenuViewController, didSelectMenuSection menuSection: MenuSection)
 }

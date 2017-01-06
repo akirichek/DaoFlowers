@@ -15,14 +15,14 @@ class AHintView: UIView {
     
     // MARK: Actions
     
-    @IBAction func okButtonClicked(sender: UIButton) {
+    @IBAction func okButtonClicked(_ sender: UIButton) {
         self.removeFromSuperview()
     }
     
-    @IBAction func overlayViewClicked(sender: UITapGestureRecognizer) {
-        print(sender.locationInView(contentView))
+    @IBAction func overlayViewClicked(_ sender: UITapGestureRecognizer) {
+        print(sender.location(in: contentView))
         
-        if !CGRectContainsPoint(contentView.bounds, sender.locationInView(contentView)) {
+        if !contentView.bounds.contains(sender.location(in: contentView)) {
             self.removeFromSuperview()
         }
     }

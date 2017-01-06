@@ -26,7 +26,7 @@ class PlantationsViewController: BaseViewController, PageViewerDataSource, Plant
         
         self.title = CustomLocalisedString("Plantations")
         self.pageViewerContainerView.frame = self.contentViewFrame()
-        let pageViewer = NSBundle.mainBundle().loadNibNamed("PageViewer", owner: self, options: nil).first as! PageViewer
+        let pageViewer = Bundle.main.loadNibNamed("PageViewer", owner: self, options: nil)?.first as! PageViewer
         pageViewer.frame = self.pageViewerContainerView.bounds
         pageViewer.dataSource = self
         pageViewer.viewWillTransitionToSize = self.contentViewFrame().size
@@ -34,7 +34,7 @@ class PlantationsViewController: BaseViewController, PageViewerDataSource, Plant
         self.pageViewer = pageViewer
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         self.viewWillTransitionToSize = size
         if let page = self.pageViewer.pageAtIndex(self.pageViewer.indexOfCurrentPage) as? PlantationsPageView {
             page.viewWillTransitionToSize = size
@@ -45,8 +45,8 @@ class PlantationsViewController: BaseViewController, PageViewerDataSource, Plant
         self.pageViewer.reloadData()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let destinationViewController = segue.destinationViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationViewController = segue.destination
         if let plantationDetailsViewController = destinationViewController as? PlantationDetailsViewController {
             plantationDetailsViewController.plantation = self.selectedPlantation
         }
@@ -55,18 +55,18 @@ class PlantationsViewController: BaseViewController, PageViewerDataSource, Plant
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if needsSelectPageView {
-            let index = countries.indexOf({$0.id == self.selectedCountry.id})!
+            let index = countries.index(where: {$0.id == self.selectedCountry.id})!
             self.pageViewer.selectPageAtIndex(index)
         }
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         needsSelectPageView = false
     }
     
     // MARK: - Actions
     
-    @IBAction func searchButtonClicked(sender: UIBarButtonItem) {
+    @IBAction func searchButtonClicked(_ sender: UIBarButtonItem) {
         if let page = self.pageViewer.pageAtIndex(pageViewer.indexOfCurrentPage) as? PlantationsPageView {
             let indexOfCurrentPage = pageViewer.indexOfCurrentPage
             var pageViewState = pageViewStates[indexOfCurrentPage]!
@@ -79,7 +79,7 @@ class PlantationsViewController: BaseViewController, PageViewerDataSource, Plant
     
     // MARK: - Private Methods
     
-    func fetchPlantationsForPageViewState(pageViewState: PlantationsPageViewState) {
+    func fetchPlantationsForPageViewState(_ pageViewState: PlantationsPageViewState) {
         ApiManager.fetchPlantationsByCountry(countries[pageViewState.index]) { (plantations, error) in
             if let plantations = plantations {
                 if let page = self.pageViewer.pageAtIndex(pageViewState.index) as? PlantationsPageView {
@@ -97,19 +97,19 @@ class PlantationsViewController: BaseViewController, PageViewerDataSource, Plant
     
     // MARK: - PageViewerDataSource
     
-    func pageViewerNumberOfPages(pageViewer: PageViewer) -> Int {
+    func pageViewerNumberOfPages(_ pageViewer: PageViewer) -> Int {
         return self.countries.count
     }
     
-    func pageViewer(pageViewer: PageViewer, headerForItemAtIndex index: Int) -> String {
+    func pageViewer(_ pageViewer: PageViewer, headerForItemAtIndex index: Int) -> String {
         return self.countries[index].name
     }
     
-    func pageViewer(pageViewer: PageViewer, pageForItemAtIndex index: Int, reusableView: UIView?) -> UIView {
+    func pageViewer(_ pageViewer: PageViewer, pageForItemAtIndex index: Int, reusableView: UIView?) -> UIView {
         var pageView: PlantationsPageView! = reusableView as? PlantationsPageView
         
         if pageView == nil {
-            pageView = NSBundle.mainBundle().loadNibNamed("PlantationsPageView", owner: self, options: nil).first as! PlantationsPageView
+            pageView = Bundle.main.loadNibNamed("PlantationsPageView", owner: self, options: nil)?.first as! PlantationsPageView
             pageView.delegate = self
         }
         
@@ -142,12 +142,12 @@ class PlantationsViewController: BaseViewController, PageViewerDataSource, Plant
     
     // MARK: - PlantationsPageViewDelegate
     
-    func plantationsPageView(plantationsPageView: PlantationsPageView, didSelectPlantation plantation: Plantation) {
+    func plantationsPageView(_ plantationsPageView: PlantationsPageView, didSelectPlantation plantation: Plantation) {
         self.selectedPlantation = plantation
-        self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.PlantationDetails, sender: self)
+        self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.PlantationDetails, sender: self)
     }
     
-    func plantationsPageView(plantationsPageView: PlantationsPageView, didChangeState state: PlantationsPageViewState) {
+    func plantationsPageView(_ plantationsPageView: PlantationsPageView, didChangeState state: PlantationsPageViewState) {
         let indexOfCurrentPage = pageViewer.indexOfCurrentPage
         self.pageViewStates[indexOfCurrentPage] = state
     }

@@ -13,13 +13,13 @@ class HeaderPageViewerHighlightView: UIView {
     var selectedMultiplier: CGFloat = 1.0
     var selectedRightPart: Bool = true
     
-    override func drawRect(rect: CGRect) {
-        UIColor.clearColor().setFill()
+    override func draw(_ rect: CGRect) {
+        UIColor.clear.setFill()
         UIRectFill(rect)
         
         let selectedWidth = round(rect.width * self.selectedMultiplier)
         let originX = self.selectedRightPart ? rect.width - selectedWidth : 0
-        let rectIntersection = CGRectIntersection(CGRectMake(originX, 0, selectedWidth, rect.height), rect);
+        let rectIntersection = CGRect(x: originX, y: 0, width: selectedWidth, height: rect.height).intersection(rect);
         
         K.Colors.MainBlue.setFill()
         UIRectFill(rectIntersection)

@@ -10,19 +10,19 @@ import Alamofire
 
 class ApiManager: NSObject {
     static let sharedInstance = ApiManager()
-    var downloadTask: NSURLSessionDownloadTask!
-    var backgroundSession: NSURLSession!
+    var downloadTask: URLSessionDownloadTask!
+    var backgroundSession: Foundation.URLSession!
     var document: Document!
-    var downloadDocumentCompletion: ((error: NSError?)->())!
+    var downloadDocumentCompletion: ((_ error: NSError?)->())!
     
-    static func fetchFlowers(completion: (flowers: [Flower]?, error: NSError?) -> ()) {
+    static func fetchFlowers(_ completion: @escaping (_ flowers: [Flower]?, _ error: NSError?) -> ()) {
         let parameters: [String: AnyObject] = [
-            "exotic": 0
+            "exotic": 0 as AnyObject
         ]
     
         let url = K.Api.BaseUrl + K.Api.FlowersTypesPath
             
-        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
             if response.result.isSuccess {
                 var flowers: [Flower] = []
                 if let json = response.result.value {
@@ -32,29 +32,29 @@ class ApiManager: NSObject {
                         flowers.append(flower)
                     }
                 }
-                completion(flowers: flowers, error: nil)
+                completion(flowers, nil)
             } else {
                 print("Error: \(response.result.error)")
-                completion(flowers: nil, error: response.result.error)
+                completion(nil, response.result.error as NSError?)
             }
         }
     }
         
-    static func fetchColorsByFlower(flower: Flower, completion: (colors: [Color]?, error: NSError?) -> ()) {
+    static func fetchColorsByFlower(_ flower: Flower, completion: @escaping (_ colors: [Color]?, _ error: NSError?) -> ()) {
         var parameters: [String: AnyObject] = [
-            "flower_type_id": flower.id
+            "flower_type_id": flower.id as AnyObject
         ]
         
         var url = K.Api.BaseUrl + K.Api.FlowersColorsPath
         
         if flower.id == -3 {
             parameters = [
-                "exotic": 1
+                "exotic": 1 as AnyObject
             ]
             url = K.Api.BaseUrl + K.Api.FlowersTypesPath
         }
         
-        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+        Alamofire.request(url, method: .get,parameters: parameters).responseJSON { response in
             if response.result.isSuccess {
                 var colors: [Color] = []
                 
@@ -66,17 +66,17 @@ class ApiManager: NSObject {
                     }
                 }
                 
-                completion(colors: colors, error: nil)
+                completion(colors, nil)
             } else {
                 print("Error: \(response.result.error)")
-                completion(colors: nil, error: response.result.error)
+                completion(nil, response.result.error as NSError?)
             }
         }
     }
     
-    static func fetchVarietiesByFlower(flower: Flower, color: Color, completion: (varieties: [Variety]?, error: NSError?) -> ()) {
+    static func fetchVarietiesByFlower(_ flower: Flower, color: Color, completion: @escaping (_ varieties: [Variety]?, _ error: NSError?) -> ()) {
         let url = K.Api.BaseUrl + K.Api.VarietiesPath + "/\(flower.id)/\(color.id)"
-        Alamofire.request(.GET, url).responseJSON { response in
+        Alamofire.request(url, method: .get).responseJSON { response in
             if response.result.isSuccess {
                 var varieties: [Variety] = []
                 if let json = response.result.value {
@@ -87,17 +87,17 @@ class ApiManager: NSObject {
                     }
                 }
                 varieties = Utils.sortedVarietiesByPercentsOfPurchase(varieties)
-                completion(varieties: varieties, error: nil)
+                completion(varieties, nil)
             } else {
                 print("Error: \(response.result.error)")
-                completion(varieties: nil, error: response.result.error)
+                completion(nil, response.result.error as NSError?)
             }
         }
     }
     
-    static func fetchSimilarVarieties(variety: Variety, completion: (varieties: [Variety]?, error: NSError?) -> ()) {
+    static func fetchSimilarVarieties(_ variety: Variety, completion: @escaping (_ varieties: [Variety]?, _ error: NSError?) -> ()) {
         let url = K.Api.BaseUrl + K.Api.SimilarVarietiesPath + "/\(variety.id)"
-        Alamofire.request(.GET, url).responseJSON { response in
+        Alamofire.request(url, method: .get).responseJSON { response in
             if response.result.isSuccess {
                 var varieties: [Variety] = []
                 if let json = response.result.value {
@@ -108,37 +108,37 @@ class ApiManager: NSObject {
                     }
                 }
                 varieties = Utils.sortedVarietiesByPercentsOfPurchase(varieties)
-                completion(varieties: varieties, error: nil)
+                completion(varieties, nil)
             } else {
                 print("Error: \(response.result.error)")
-                completion(varieties: nil, error: response.result.error)
+                completion(nil, response.result.error as NSError?)
             }
         }
     }
     
-    static func fetchGeneralInfoForVariety(variety: Variety, user: User?, completion: (success: Bool, error: NSError?) -> ()) {
+    static func fetchGeneralInfoForVariety(_ variety: Variety, user: User?, completion: @escaping (_ success: Bool, _ error: NSError?) -> ()) {
         let url = K.Api.BaseUrl + K.Api.GeneralInfoPath + "/\(variety.id)"
         var headers: [String: String] = ["DaoUserAgentFlowers":"ios"]
         if let user = user {
             headers["Authorization"] = user.token
         }
-        Alamofire.request(.GET, url, headers:headers).responseJSON { response in
+        Alamofire.request(url, method: .get, headers:headers).responseJSON { response in
             if response.result.isSuccess {
                 if let json = response.result.value {
                     //print("JSON: \(json)")
                     variety.addGeneralInfoFromDictionary(json as! [String: AnyObject])
                 }
-                completion(success: true, error: nil)
+                completion(true, nil)
             } else {
                 print("Error: \(response.result.error)")
-                completion(success: false, error: response.result.error)
+                completion(false, response.result.error as NSError?)
             }
         }
     }
     
-    static func searchVarietiesByTerm(term: String, flowers: [Flower]?, colors: [Color]?, breeders: [Breeder]?, completion: (varieties: [Variety]?, error: NSError?) -> ()) {
+    static func searchVarietiesByTerm(_ term: String, flowers: [Flower]?, colors: [Color]?, breeders: [Breeder]?, completion: @escaping (_ varieties: [Variety]?, _ error: NSError?) -> ()) {
         var parameters: [String: AnyObject] = [
-            "name_or_abr": term
+            "name_or_abr": term as AnyObject
         ]
         
         if let flowers = flowers {
@@ -147,7 +147,7 @@ class ApiManager: NSObject {
                 for flower in flowers {
                     flowerIds.append(String(flower.id))
                 }
-                parameters["flower_type_ids"] = flowerIds.joinWithSeparator(",")
+                parameters["flower_type_ids"] = flowerIds.joined(separator: ",") as AnyObject?
             }
         }
         
@@ -157,7 +157,7 @@ class ApiManager: NSObject {
                 for color in colors {
                     colorIds.append(String(color.id))
                 }
-                parameters["flower_color_ids"] = colorIds.joinWithSeparator(",")
+                parameters["flower_color_ids"] = colorIds.joined(separator: ",") as AnyObject?
             }
         }
         
@@ -167,12 +167,12 @@ class ApiManager: NSObject {
                 for breeder in breeders {
                     breederIds.append(String(breeder.id))
                 }
-                parameters["breeder_ids"] = breederIds.joinWithSeparator(",")
+                parameters["breeder_ids"] = breederIds.joined(separator: ",") as AnyObject?
             }
         }
         
         let url = K.Api.BaseUrl + K.Api.SearchFlowersPath
-        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
             if response.result.isSuccess {
                 var varieties: [Variety] = []
                 if let json = response.result.value {
@@ -183,22 +183,22 @@ class ApiManager: NSObject {
                     }
                 }
                 varieties = Utils.sortedVarietiesByPercentsOfPurchase(varieties)
-                completion(varieties: varieties, error: nil)
+                completion(varieties, nil)
             } else {
                 print("Error: \(response.result.error)")
-                completion(varieties: nil, error: response.result.error)
+                completion(nil, response.result.error as NSError?)
             }
         }
     }
     
-    static func fetchVarietiesSearchParameters(completion: (searchParams: ([Flower], [Color], [Breeder])?, error: NSError?) -> ()) {
+    static func fetchVarietiesSearchParameters(_ completion: @escaping (_ searchParams: ([Flower], [Color], [Breeder])?, _ error: NSError?) -> ()) {
         let url = K.Api.BaseUrl + K.Api.FlowersSearchParametersPath
-        Alamofire.request(.GET, url).responseJSON { response in
+        Alamofire.request(url, method: .get).responseJSON { response in
             if response.result.isSuccess {
                 var flowers: [Flower] = []
                 var colors: [Color] = []
                 var breeders: [Breeder] = []
-                if let json = response.result.value {
+                if let json = response.result.value as? [String: AnyObject] {
                     //print("JSON: \(json)")
                     for flowerDictionary in json["flowerTypes"] as! [[String: AnyObject]] {
                         flowers.append(Flower(dictionary: flowerDictionary))
@@ -212,10 +212,10 @@ class ApiManager: NSObject {
                         breeders.append(Breeder(dictionary: breederDictionary))
                     }
                 }
-                completion(searchParams: (flowers, colors, breeders), error: nil)
+                completion((flowers, colors, breeders), nil)
             } else {
                 print("Error: \(response.result.error)")
-                completion(searchParams: nil, error: response.result.error)
+                completion(nil, response.result.error as NSError?)
             }
         }
     }

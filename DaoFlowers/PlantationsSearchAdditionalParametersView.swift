@@ -16,7 +16,7 @@ class PlantationsSearchAdditionalParametersView: UIView, UITableViewDataSource, 
     @IBOutlet weak var flowersTableContainerView: UIView!
 
     
-    var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
+    var viewWillTransitionToSize = UIScreen.main.bounds.size
     
     var countriesSearchParams: [Country]!
     var flowersSearchParams: [Flower]!
@@ -30,13 +30,13 @@ class PlantationsSearchAdditionalParametersView: UIView, UITableViewDataSource, 
         self.adjustShadowForView(flowersTableContainerView)
 
         let cellNib = UINib(nibName: "SearchAdditionalParametersTableViewCell", bundle: nil)
-        countriesTableView.registerNib(cellNib, forCellReuseIdentifier: "PlantationsSearchAdditionalParametersTableViewCellIdentifier")
-        flowersTableView.registerNib(cellNib, forCellReuseIdentifier: "PlantationsSearchAdditionalParametersTableViewCellIdentifier")
+        countriesTableView.register(cellNib, forCellReuseIdentifier: "PlantationsSearchAdditionalParametersTableViewCellIdentifier")
+        flowersTableView.register(cellNib, forCellReuseIdentifier: "PlantationsSearchAdditionalParametersTableViewCellIdentifier")
     }
     
-    func adjustShadowForView(view: UIView) {
+    func adjustShadowForView(_ view: UIView) {
         view.layer.cornerRadius = 5
-        view.layer.shadowColor = UIColor.blackColor().CGColor
+        view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.5
         view.layer.shadowOffset = CGSize(width: 0, height: 10)
         view.layer.shadowRadius = 10
@@ -44,7 +44,7 @@ class PlantationsSearchAdditionalParametersView: UIView, UITableViewDataSource, 
     
     // MARK: - UITableViewDataSource
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var numberOfRows = 0
         switch tableView {
         case self.countriesTableView:
@@ -57,43 +57,43 @@ class PlantationsSearchAdditionalParametersView: UIView, UITableViewDataSource, 
         return numberOfRows + 1
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "PlantationsSearchAdditionalParametersTableViewCellIdentifier"
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! SearchAdditionalParametersTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! SearchAdditionalParametersTableViewCell
         
         switch tableView {
         case self.countriesTableView:
             if indexPath.row == 0 {
                 cell.nameLabel?.text = "All"
                 if self.selectedCountries.count == 0 {
-                    cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+                    cell.accessoryType = UITableViewCellAccessoryType.checkmark
                 } else {
-                    cell.accessoryType = UITableViewCellAccessoryType.None
+                    cell.accessoryType = UITableViewCellAccessoryType.none
                 }
             } else {
                 let country = self.countriesSearchParams[indexPath.row - 1]
                 cell.nameLabel?.text = country.name
-                if self.selectedCountries.contains({$0.id == country.id}) {
-                    cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+                if self.selectedCountries.contains(where: {$0.id == country.id}) {
+                    cell.accessoryType = UITableViewCellAccessoryType.checkmark
                 } else {
-                    cell.accessoryType = UITableViewCellAccessoryType.None
+                    cell.accessoryType = UITableViewCellAccessoryType.none
                 }
             }
         case self.flowersTableView:
             if indexPath.row == 0 {
                 cell.nameLabel?.text = "All"
                 if self.selectedFlowers.count == 0 {
-                    cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+                    cell.accessoryType = UITableViewCellAccessoryType.checkmark
                 } else {
-                    cell.accessoryType = UITableViewCellAccessoryType.None
+                    cell.accessoryType = UITableViewCellAccessoryType.none
                 }
             } else {
                 let flower = self.flowersSearchParams[indexPath.row - 1]
                 cell.nameLabel?.text = flower.name
-                if self.selectedFlowers.contains({$0.id == flower.id}) {
-                    cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+                if self.selectedFlowers.contains(where: {$0.id == flower.id}) {
+                    cell.accessoryType = UITableViewCellAccessoryType.checkmark
                 } else {
-                    cell.accessoryType = UITableViewCellAccessoryType.None
+                    cell.accessoryType = UITableViewCellAccessoryType.none
                 }
             }
         default:
@@ -103,18 +103,18 @@ class PlantationsSearchAdditionalParametersView: UIView, UITableViewDataSource, 
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let cell = tableView.cellForRowAtIndexPath(indexPath)!
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let cell = tableView.cellForRow(at: indexPath)!
         switch tableView {
         case self.countriesTableView:
             if indexPath.row == 0 {
                 self.selectedCountries.removeAll()
             } else {
                 let color = self.countriesSearchParams[indexPath.row - 1]
-                if cell.accessoryType == UITableViewCellAccessoryType.Checkmark {
-                    let index: Int = self.selectedCountries.indexOf({$0.id == color.id})!
-                    self.selectedCountries.removeAtIndex(index)
+                if cell.accessoryType == UITableViewCellAccessoryType.checkmark {
+                    let index: Int = self.selectedCountries.index(where: {$0.id == color.id})!
+                    self.selectedCountries.remove(at: index)
                 } else {
                     self.selectedCountries.append(color)
                 }
@@ -126,9 +126,9 @@ class PlantationsSearchAdditionalParametersView: UIView, UITableViewDataSource, 
                 self.selectedFlowers.removeAll()
             } else {
                 let flower = self.flowersSearchParams[indexPath.row - 1]
-                if cell.accessoryType == UITableViewCellAccessoryType.Checkmark {
-                    let index: Int = self.selectedFlowers.indexOf({$0.id == flower.id})!
-                    self.selectedFlowers.removeAtIndex(index)
+                if cell.accessoryType == UITableViewCellAccessoryType.checkmark {
+                    let index: Int = self.selectedFlowers.index(where: {$0.id == flower.id})!
+                    self.selectedFlowers.remove(at: index)
                 } else {
                     self.selectedFlowers.append(flower)
                 }

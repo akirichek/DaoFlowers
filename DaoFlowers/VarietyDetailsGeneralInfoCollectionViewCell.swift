@@ -20,6 +20,6 @@ class VarietyDetailsGeneralInfoCollectionViewCell: UICollectionViewCell {
     func populateView() {
         self.containerView.layer.cornerRadius = 5
         imageView.image = nil
-        imageView.af_setImageWithURL(NSURL(string: image.imgUrl)!)
+        imageView.af_setImage(withURL: URL(string: image.imgUrl)!)
     }
 }

@@ -46,12 +46,12 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
         self.contentCollectionView.setContentOffset(CGPoint(x: currentContentOffsetX, y: 0), animated: true)
     }
     
-    func pageAtIndex(index: Int) -> UIView? {
-        let cell = self.contentCollectionView.cellForItemAtIndexPath(NSIndexPath(forRow: index, inSection: 0))
+    func pageAtIndex(_ index: Int) -> UIView? {
+        let cell = self.contentCollectionView.cellForItem(at: IndexPath(row: index, section: 0))
         return cell?.contentView.subviews.first
     }
     
-    func selectPageAtIndex(index: Int) {
+    func selectPageAtIndex(_ index: Int) {
         scrollingLocked = false
         let contentCollectionViewSize = self.contentCollectionViewSize()
         let currentContentOffsetX = CGFloat(index) * contentCollectionViewSize.width
@@ -65,18 +65,18 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
         PageViewerFlowLayout.configureLayout(self.contentCollectionView)
         
         let headerCellNib = UINib(nibName:"HeaderPageViewerCollectionViewCell", bundle: nil)
-        self.headerCollectionView.registerNib(headerCellNib, forCellWithReuseIdentifier: kHeaderPageViewerCollectionViewCellIdentifier)
+        self.headerCollectionView.register(headerCellNib, forCellWithReuseIdentifier: kHeaderPageViewerCollectionViewCellIdentifier)
         let contentCellNib = UINib(nibName:"ContentPageViewerCollectionViewCell", bundle: nil)
-        self.contentCollectionView.registerNib(contentCellNib, forCellWithReuseIdentifier: kContentPageViewierCollectionViewCellIdentifier)
+        self.contentCollectionView.register(contentCellNib, forCellWithReuseIdentifier: kContentPageViewierCollectionViewCellIdentifier)
     }
     
     // MARK: UICollectionViewDataSource
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.dataSource.pageViewerNumberOfPages(self)
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cellIdentifier: String
         
         if collectionView == self.headerCollectionView {
@@ -85,10 +85,10 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
             cellIdentifier = kContentPageViewierCollectionViewCellIdentifier
         }
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier,
-                                                                         forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier,
+                                                                         for: indexPath)
         if let headerCell = cell as? HeaderPageViewerCollectionViewCell {
-            headerCell.textLabel.text = self.dataSource.pageViewer(self, headerForItemAtIndex: indexPath.row).uppercaseString
+            headerCell.textLabel.text = self.dataSource.pageViewer(self, headerForItemAtIndex: indexPath.row).uppercased()
             if self.indexOfCurrentPage == indexPath.row {
                 headerCell.selectCellWithMultiplier(1.0, directionRight: true)
             } else {
@@ -120,21 +120,21 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
     
     // MARK: UICollectionViewDelegate
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.headerCollectionView {
-            self.contentCollectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredHorizontally, animated: true)
+            self.contentCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         }
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let contentCollectionViewSize = self.contentCollectionViewSize()
         var sizeForItem: CGSize
         if collectionView == self.headerCollectionView {
-            let header = self.dataSource.pageViewer(self, headerForItemAtIndex: indexPath.row).uppercaseString
-            let textSize = (header as NSString).sizeWithAttributes([NSFontAttributeName: UIFont.systemFontOfSize(13.0)])
-            sizeForItem = CGSizeMake(ceil(textSize.width) + 20, self.headerCollectionView.bounds.height)
+            let header = self.dataSource.pageViewer(self, headerForItemAtIndex: indexPath.row).uppercased()
+            let textSize = (header as NSString).size(attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 13.0)])
+            sizeForItem = CGSize(width: ceil(textSize.width) + 20, height: self.headerCollectionView.bounds.height)
         } else {
             sizeForItem = contentCollectionViewSize
         }
@@ -142,17 +142,17 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
         return sizeForItem
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0.0
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0.0
     }
     
     // MARK: UIScrollViewDelegate
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard !scrollingLocked else {
             return
         }
@@ -165,26 +165,26 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
                 indexOfNextPage >= 0 &&
                 indexOfPreviousPage >= 0) {
                 
-                let indexPathOfPreviousPage = NSIndexPath(forRow: indexOfPreviousPage, inSection: 0)
-                let indexPathOfNextPage = NSIndexPath(forRow: indexOfNextPage, inSection: 0)
-                let attributesOfPreviousPage = self.headerCollectionView.layoutAttributesForItemAtIndexPath(indexPathOfPreviousPage)!
-                let attributesOfNextPage = self.headerCollectionView.layoutAttributesForItemAtIndexPath(indexPathOfNextPage)!
+                let indexPathOfPreviousPage = IndexPath(row: indexOfPreviousPage, section: 0)
+                let indexPathOfNextPage = IndexPath(row: indexOfNextPage, section: 0)
+                let attributesOfPreviousPage = self.headerCollectionView.layoutAttributesForItem(at: indexPathOfPreviousPage)!
+                let attributesOfNextPage = self.headerCollectionView.layoutAttributesForItem(at: indexPathOfNextPage)!
                 
                 let selecetedMultiplierOfPage = self.selecetedMultiplierOfPage()
                 let deltaContentOffsetX = (attributesOfNextPage.center.x - attributesOfPreviousPage.center.x) * selecetedMultiplierOfPage
                 let contentOffsetX = (attributesOfPreviousPage.center.x - self.bounds.size.width / 2) + deltaContentOffsetX
                 
-                var maximumContentOffset = self.headerCollectionView.collectionViewLayout.collectionViewContentSize().width - self.headerCollectionView.bounds.size.width
+                var maximumContentOffset = self.headerCollectionView.collectionViewLayout.collectionViewContentSize.width - self.headerCollectionView.bounds.size.width
                 if maximumContentOffset < 0 {
                     maximumContentOffset = 0
                 }
                 
                 if 0 > contentOffsetX {
-                    self.headerCollectionView.contentOffset = CGPointZero
+                    self.headerCollectionView.contentOffset = CGPoint.zero
                 } else if contentOffsetX > maximumContentOffset {
-                    self.headerCollectionView.contentOffset = CGPointMake(maximumContentOffset, 0)
+                    self.headerCollectionView.contentOffset = CGPoint(x: maximumContentOffset, y: 0)
                 } else {
-                    self.headerCollectionView.contentOffset = CGPointMake(contentOffsetX, 0)
+                    self.headerCollectionView.contentOffset = CGPoint(x: contentOffsetX, y: 0)
                 }
 
                 self.indexOfCurrentPage = Int(round(scrollView.contentOffset.x / self.contentCollectionViewSize().width))
@@ -201,39 +201,39 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
     // MARK: Private Methods
     
     func contentCollectionViewSize() -> CGSize {
-        return CGSizeMake(viewWillTransitionToSize.width, viewWillTransitionToSize.height - self.headerCollectionView.bounds.height)
+        return CGSize(width: viewWillTransitionToSize.width, height: viewWillTransitionToSize.height - self.headerCollectionView.bounds.height)
     }
     
-    func adjustConstraintsForItem(forItem: UIView, toItem: UIView) {
+    func adjustConstraintsForItem(_ forItem: UIView, toItem: UIView) {
         let leadingConstraint = NSLayoutConstraint(item: forItem,
-                                                   attribute: NSLayoutAttribute.Leading,
-                                                   relatedBy: NSLayoutRelation.Equal,
+                                                   attribute: NSLayoutAttribute.leading,
+                                                   relatedBy: NSLayoutRelation.equal,
                                                    toItem: toItem,
-                                                   attribute: NSLayoutAttribute.Leading,
+                                                   attribute: NSLayoutAttribute.leading,
                                                    multiplier: 1,
                                                    constant: 0)
         let trailingConstraint = NSLayoutConstraint(item: forItem,
-                                                    attribute: NSLayoutAttribute.Trailing,
-                                                    relatedBy: NSLayoutRelation.Equal,
+                                                    attribute: NSLayoutAttribute.trailing,
+                                                    relatedBy: NSLayoutRelation.equal,
                                                     toItem: toItem,
-                                                    attribute: NSLayoutAttribute.Trailing,
+                                                    attribute: NSLayoutAttribute.trailing,
                                                     multiplier: 1,
                                                     constant: 0)
         let topConstraint = NSLayoutConstraint(item: forItem,
-                                               attribute: NSLayoutAttribute.Top,
-                                               relatedBy: NSLayoutRelation.Equal,
+                                               attribute: NSLayoutAttribute.top,
+                                               relatedBy: NSLayoutRelation.equal,
                                                toItem: toItem,
-                                               attribute: NSLayoutAttribute.Top,
+                                               attribute: NSLayoutAttribute.top,
                                                multiplier: 1,
                                                constant: 0)
         let bottomConstraint = NSLayoutConstraint(item: forItem,
-                                                  attribute: NSLayoutAttribute.Bottom,
-                                                  relatedBy: NSLayoutRelation.Equal,
+                                                  attribute: NSLayoutAttribute.bottom,
+                                                  relatedBy: NSLayoutRelation.equal,
                                                   toItem: toItem,
-                                                  attribute: NSLayoutAttribute.Bottom,
+                                                  attribute: NSLayoutAttribute.bottom,
                                                   multiplier: 1,
                                                   constant: 0)
-        NSLayoutConstraint.activateConstraints([leadingConstraint, trailingConstraint, topConstraint, bottomConstraint])
+        NSLayoutConstraint.activate([leadingConstraint, trailingConstraint, topConstraint, bottomConstraint])
     }
     
     func indexOfPreviousAndNextPage() -> (Int, Int) {
@@ -261,11 +261,11 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
     func selectHeaderInScrollView() {
         let (indexOfPreviousPage, indexOfNextPage) = self.indexOfPreviousAndNextPage()
         
-        let previousIndexPath = NSIndexPath(forRow: indexOfPreviousPage, inSection: 0)
-        let nextIndexPath = NSIndexPath(forRow: indexOfNextPage, inSection: 0)
+        let previousIndexPath = IndexPath(row: indexOfPreviousPage, section: 0)
+        let nextIndexPath = IndexPath(row: indexOfNextPage, section: 0)
         
-        if let previousCell = self.headerCollectionView.cellForItemAtIndexPath(previousIndexPath) as?HeaderPageViewerCollectionViewCell {
-            if let nextCell = self.headerCollectionView.cellForItemAtIndexPath(nextIndexPath) as? HeaderPageViewerCollectionViewCell {
+        if let previousCell = self.headerCollectionView.cellForItem(at: previousIndexPath) as?HeaderPageViewerCollectionViewCell {
+            if let nextCell = self.headerCollectionView.cellForItem(at: nextIndexPath) as? HeaderPageViewerCollectionViewCell {
                 
                 let selecetedMultiplierOfPage = self.selecetedMultiplierOfPage()
                 if (indexOfPreviousPage == indexOfNextPage) {
@@ -280,11 +280,11 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
         }
     }
     
-    func updateAllHeaderCellsExcept(exceptIndexes: [Int] = []) {
+    func updateAllHeaderCellsExcept(_ exceptIndexes: [Int] = []) {
         for i in (0..<self.countOfPages) {
             if !exceptIndexes.contains(i) {
-                let indexPath = NSIndexPath(forRow: i, inSection: 0)
-                if let cell = self.headerCollectionView.cellForItemAtIndexPath(indexPath) as? HeaderPageViewerCollectionViewCell {
+                let indexPath = IndexPath(row: i, section: 0)
+                if let cell = self.headerCollectionView.cellForItem(at: indexPath) as? HeaderPageViewerCollectionViewCell {
                     if self.indexOfCurrentPage == indexPath.row {
                         cell.selectCellWithMultiplier(1.0, directionRight: true)
                     } else {
@@ -301,11 +301,11 @@ class PageViewer: UIView, UICollectionViewDataSource, UICollectionViewDelegate, 
 }
 
 protocol PageViewerDataSource: NSObjectProtocol {
-    func pageViewerNumberOfPages(pageViewer: PageViewer) -> Int
-    func pageViewer(pageViewer: PageViewer, headerForItemAtIndex index: Int) -> String
-    func pageViewer(pageViewer: PageViewer, pageForItemAtIndex index: Int, reusableView: UIView?) -> UIView
+    func pageViewerNumberOfPages(_ pageViewer: PageViewer) -> Int
+    func pageViewer(_ pageViewer: PageViewer, headerForItemAtIndex index: Int) -> String
+    func pageViewer(_ pageViewer: PageViewer, pageForItemAtIndex index: Int, reusableView: UIView?) -> UIView
 }
 
 protocol PageViewerDelegate: NSObjectProtocol {
-    func pageViewer(pageViewer: PageViewer, didSelectPageAtIndex index: Int)
+    func pageViewer(_ pageViewer: PageViewer, didSelectPageAtIndex index: Int)
 }

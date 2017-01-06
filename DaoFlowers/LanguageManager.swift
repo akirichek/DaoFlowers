@@ -10,29 +10,29 @@ import Foundation
 
 class LanguageManager: NSObject {
     
-    static func getTranslationForKey(key: String) -> String {
-        let bundlePath = NSBundle.mainBundle().pathForResource(self.languageCode(), ofType: "lproj")!
-        let languageBundle = NSBundle(path: bundlePath)
+    static func getTranslationForKey(_ key: String) -> String {
+        let bundlePath = Bundle.main.path(forResource: self.languageCode(), ofType: "lproj")!
+        let languageBundle = Bundle(path: bundlePath)
         
-        let translatedString = languageBundle?.localizedStringForKey(key, value: "", table: nil)
+        let translatedString = languageBundle?.localizedString(forKey: key, value: "", table: nil)
 
         if translatedString == nil {
-           return NSLocalizedString(key, tableName: nil, bundle: NSBundle.mainBundle(), value: key, comment: key)
+           return NSLocalizedString(key, tableName: nil, bundle: Bundle.main, value: key, comment: key)
         } else {
             return translatedString!
         }
     }
     
-    static func loadNibNamed(name: String!, owner: AnyObject!, options: [NSObject : AnyObject]!) -> [AnyObject]! {
-        let bundlePath = NSBundle.mainBundle().pathForResource(self.languageCode(), ofType: "lproj")!
-        let languageBundle = NSBundle(path: bundlePath)!
+    static func loadNibNamed(_ name: String!, owner: AnyObject!, options: [AnyHashable: Any]!) -> [AnyObject]! {
+        let bundlePath = Bundle.main.path(forResource: self.languageCode(), ofType: "lproj")!
+        let languageBundle = Bundle(path: bundlePath)!
     
-        return languageBundle.loadNibNamed(name, owner: owner, options: options)
+        return languageBundle.loadNibNamed(name, owner: owner, options: options) as [AnyObject]!
     }
 
     static func languageCode() -> String {
         var languageCode = "en"
-        if let languageRawValue = NSUserDefaults.standardUserDefaults().stringForKey(K.UserDefaultsKey.Language) {
+        if let languageRawValue = UserDefaults.standard.string(forKey: K.UserDefaultsKey.Language) {
             let language = Language(rawValue: languageRawValue)!
             languageCode = language.code()
         }
@@ -42,7 +42,7 @@ class LanguageManager: NSObject {
     
     static func currentLanguage() -> Language {
         var languageCode = "English"
-        if let languageRawValue = NSUserDefaults.standardUserDefaults().stringForKey(K.UserDefaultsKey.Language) {
+        if let languageRawValue = UserDefaults.standard.string(forKey: K.UserDefaultsKey.Language) {
             languageCode = languageRawValue
         }
         
@@ -86,6 +86,6 @@ enum Language: String {
     }
 }
 
-func CustomLocalisedString(key: String) -> String {
+func CustomLocalisedString(_ key: String) -> String {
     return LanguageManager.getTranslationForKey(key)
 }

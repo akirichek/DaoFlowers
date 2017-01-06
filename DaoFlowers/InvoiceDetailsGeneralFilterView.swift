@@ -19,7 +19,7 @@ class InvoiceDetailsGeneralFilterView: UIView, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var topContainerView: UIView!
     @IBOutlet weak var bottomContainerView: UIView!
 
-    var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size {
+    var viewWillTransitionToSize = UIScreen.main.bounds.size {
         didSet {
             adjustView()
         }
@@ -60,7 +60,7 @@ class InvoiceDetailsGeneralFilterView: UIView, UIPickerViewDataSource, UIPickerV
                     awbs.append(head.awb)
                 }
             }
-            awbs.sortInPlace { $0 < $1 }
+            awbs.sort { $0 < $1 }
         }
     }
     
@@ -117,7 +117,7 @@ class InvoiceDetailsGeneralFilterView: UIView, UIPickerViewDataSource, UIPickerV
         }
     }
     
-    func createPickerViewForTextField(textField: UITextField) -> UIPickerView {
+    func createPickerViewForTextField(_ textField: UITextField) -> UIPickerView {
         let pickerView = UIPickerView()
         pickerView.dataSource = self
         pickerView.delegate = self
@@ -136,20 +136,20 @@ class InvoiceDetailsGeneralFilterView: UIView, UIPickerViewDataSource, UIPickerV
     }
     
     func adjustView() {
-        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+        if UIDevice.current.userInterfaceIdiom == .phone {
             if viewWillTransitionToSize.width < viewWillTransitionToSize.height {
-                topContainerView.frame = CGRectMake(45, 77, 215, 110)
-                bottomContainerView.frame = CGRectMake(45, 197, 215, 106)
+                topContainerView.frame = CGRect(x: 45, y: 77, width: 215, height: 110)
+                bottomContainerView.frame = CGRect(x: 45, y: 197, width: 215, height: 106)
             } else {
-                topContainerView.frame = CGRectMake(60, 60, 215, 110)
-                bottomContainerView.frame = CGRectMake(280, 60, 215, 106)
+                topContainerView.frame = CGRect(x: 60, y: 60, width: 215, height: 110)
+                bottomContainerView.frame = CGRect(x: 280, y: 60, width: 215, height: 106)
             }
         }
     }
     
     // MARK: - Actions
 
-    @IBAction func clearButtonClicked(sender: UIButton) {
+    @IBAction func clearButtonClicked(_ sender: UIButton) {
         countryTextField.text = "---------"
         plantationTextField.text = "---------"
         flowerTextField.text = "---------"
@@ -168,59 +168,59 @@ class InvoiceDetailsGeneralFilterView: UIView, UIPickerViewDataSource, UIPickerV
         self.removeFromSuperview()
     }
     
-    @IBAction func cancelButtonClicked(sender: UIButton) {
+    @IBAction func cancelButtonClicked(_ sender: UIButton) {
         self.removeFromSuperview()
     }
     
-    @IBAction func okButtonClicked(sender: UIButton) {
+    @IBAction func okButtonClicked(_ sender: UIButton) {
         self.removeFromSuperview()
         delegate?.invoiceDetailsGeneralFilterViewDidFilter(self, withState: state)
     }
     
-    @IBAction func overlayViewClicked(sender: UITapGestureRecognizer) {
+    @IBAction func overlayViewClicked(_ sender: UITapGestureRecognizer) {
         resignTextFields()
     }
     
-    @IBAction func textFieldClicked(sender: UITextField) {
+    @IBAction func textFieldClicked(_ sender: UITextField) {
         switch sender {
         case countryTextField:
             if let selectedCountry = state.selectedCountry {
-                let row = countries.indexOf({ $0.id == selectedCountry.id })!
+                let row = countries.index(where: { $0.id == selectedCountry.id })!
                 countryPickerView.selectRow(row + 1, inComponent: 0, animated: false)
             } else {
                 countryPickerView.selectRow(0, inComponent: 0, animated: false)
             }
         case plantationTextField:
             if let selectedPlantation = state.selectedPlantation {
-                let row = plantations.indexOf({ $0.id == selectedPlantation.id })!
+                let row = plantations.index(where: { $0.id == selectedPlantation.id })!
                 plantationPickerView.selectRow(row + 1, inComponent: 0, animated: false)
             } else {
                 plantationPickerView.selectRow(0, inComponent: 0, animated: false)
             }
         case flowerTextField:
             if let selectedFlower = state.selectedFlower {
-                let row = flowers.indexOf({ $0.id == selectedFlower.id })!
+                let row = flowers.index(where: { $0.id == selectedFlower.id })!
                 flowerPickerView.selectRow(row + 1, inComponent: 0, animated: false)
             } else {
                 flowerPickerView.selectRow(0, inComponent: 0, animated: false)
             }
         case varietyTextField:
             if let selectedVariety = state.selectedVariety {
-                let row = varieties.indexOf({ $0.id == selectedVariety.id })!
+                let row = varieties.index(where: { $0.id == selectedVariety.id })!
                 varietyPickerView.selectRow(row + 1, inComponent: 0, animated: false)
             } else {
                 varietyPickerView.selectRow(0, inComponent: 0, animated: false)
             }
         case sizeTextField:
             if let selectedSize = state.selectedSize {
-                let row = sizes.indexOf({ $0.id == selectedSize.id })!
+                let row = sizes.index(where: { $0.id == selectedSize.id })!
                 sizePickerView.selectRow(row + 1, inComponent: 0, animated: false)
             } else {
                 sizePickerView.selectRow(0, inComponent: 0, animated: false)
             }
         case awbTextField:
             if let selectedAwb = state.selectedAwb {
-                let row = awbs.indexOf(selectedAwb)!
+                let row = awbs.index(of: selectedAwb)!
                 awbPickerView.selectRow(row + 1, inComponent: 0, animated: false)
             } else {
                 awbPickerView.selectRow(0, inComponent: 0, animated: false)
@@ -232,11 +232,11 @@ class InvoiceDetailsGeneralFilterView: UIView, UIPickerViewDataSource, UIPickerV
     
     // MARK: - UIPickerViewDataSource
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         var numberOfRows = 0
         switch pickerView {
         case countryPickerView:
@@ -259,7 +259,7 @@ class InvoiceDetailsGeneralFilterView: UIView, UIPickerViewDataSource, UIPickerV
     
     // MARK: - UIPickerViewDelegate
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         var titleForRow: String = "---------"
         if row > 0 {
             switch pickerView {
@@ -283,7 +283,7 @@ class InvoiceDetailsGeneralFilterView: UIView, UIPickerViewDataSource, UIPickerV
         return titleForRow
     }
 
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         switch pickerView {
         case countryPickerView:
             if row == 0 {
@@ -340,5 +340,5 @@ struct InvoiceDetailsGeneralFilterViewState {
 }
 
 protocol InvoiceDetailsGeneralFilterViewDelegate: NSObjectProtocol {
-    func invoiceDetailsGeneralFilterViewDidFilter(invoiceDetailsGeneralFilterView: InvoiceDetailsGeneralFilterView, withState state: InvoiceDetailsGeneralFilterViewState)
+    func invoiceDetailsGeneralFilterViewDidFilter(_ invoiceDetailsGeneralFilterView: InvoiceDetailsGeneralFilterView, withState state: InvoiceDetailsGeneralFilterViewState)
 }

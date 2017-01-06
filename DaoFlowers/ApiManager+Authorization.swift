@@ -10,21 +10,21 @@ import Alamofire
 
 extension ApiManager {
     
-    static func loginWithUsername(username: String, andPassword password: String, completion: (user: User?, error: NSError?) -> ()) {
+    static func loginWithUsername(_ username: String, andPassword password: String, completion: @escaping (_ user: User?, _ error: NSError?) -> ()) {
         let parameters: [String: AnyObject] = [
-            "login": username,
-            "password": password
+            "login": username as AnyObject,
+            "password": password as AnyObject
         ]
         
         let url = K.Api.BaseUrl + K.Api.AuthorizePath
         
-        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
             if response.result.isSuccess {
                 var user: User?
                 var error: NSError?
-                if let json = response.result.value {
+                if let json = response.result.value as? [String: AnyObject] {
                     print("JSON: \(json)")
-                    if let result = json["result"] as? [String: AnyObject]{
+                    if let result = json["result"] as? [String: AnyObject] {
                         user = User(dictionary: result)
                     } else {
                         let errorDictionary = json["error"] as! [String: AnyObject]
@@ -34,10 +34,10 @@ extension ApiManager {
                     }
                 }
                 
-                completion(user: user, error: error)
+                completion(user, error)
             } else {
                 print("Error: \(response.result.error)")
-                completion(user: nil, error: response.result.error)
+                completion(nil, response.result.error as NSError?)
             }
         }
     }

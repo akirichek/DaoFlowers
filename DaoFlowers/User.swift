@@ -23,24 +23,24 @@ class User: NSObject, NSCoding {
     }
     
     func save() {
-        let data = NSKeyedArchiver.archivedDataWithRootObject(self)
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        userDefaults.setObject(data, forKey: K.UserDefaultsKey.Login)
+        let data = NSKeyedArchiver.archivedData(withRootObject: self)
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(data, forKey: K.UserDefaultsKey.Login)
         userDefaults.synchronize()
     }
     
     func logOut() {
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        userDefaults.removeObjectForKey(K.UserDefaultsKey.Login)
+        let userDefaults = UserDefaults.standard
+        userDefaults.removeObject(forKey: K.UserDefaultsKey.Login)
         userDefaults.synchronize()
     }
     
     static func currentUser() -> User? {
         var user: User?
-        let userDefaults = NSUserDefaults.standardUserDefaults()
+        let userDefaults = UserDefaults.standard
         
-        if let data = userDefaults.objectForKey(K.UserDefaultsKey.Login) as? NSData {
-           user =  NSKeyedUnarchiver.unarchiveObjectWithData(data) as? User
+        if let data = userDefaults.object(forKey: K.UserDefaultsKey.Login) as? Data {
+           user =  NSKeyedUnarchiver.unarchiveObject(with: data) as? User
         }
         
         return user
@@ -49,16 +49,16 @@ class User: NSObject, NSCoding {
     // MARK: - NSCoding
     
     required init(coder aDecoder: NSCoder) {
-        langId = aDecoder.decodeObjectForKey("langId") as! Int
-        name = aDecoder.decodeObjectForKey("name") as! String
-        roleId = aDecoder.decodeObjectForKey("roleId") as! Int
-        token = aDecoder.decodeObjectForKey("token") as! String
+        langId = aDecoder.decodeInteger(forKey: "langId")
+        name = aDecoder.decodeObject(forKey: "name") as! String
+        roleId = aDecoder.decodeInteger(forKey: "roleId")
+        token = aDecoder.decodeObject(forKey: "token") as! String
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(langId, forKey: "langId")
-        aCoder.encodeObject(name, forKey: "name")
-        aCoder.encodeObject(roleId, forKey: "roleId")
-        aCoder.encodeObject(token, forKey: "token")
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(langId, forKey: "langId")
+        aCoder.encode(name, forKey: "name")
+        aCoder.encode(roleId, forKey: "roleId")
+        aCoder.encode(token, forKey: "token")
     }
 }

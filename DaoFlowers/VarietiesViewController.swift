@@ -27,7 +27,7 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
         super.viewDidLoad()
         
         self.pageViewerContainerView.frame = self.contentViewFrame()
-        let pageViewer = NSBundle.mainBundle().loadNibNamed("PageViewer", owner: self, options: nil).first as! PageViewer
+        let pageViewer = Bundle.main.loadNibNamed("PageViewer", owner: self, options: nil)?.first as! PageViewer
         pageViewer.frame = self.pageViewerContainerView.bounds
         pageViewer.dataSource = self
         pageViewer.viewWillTransitionToSize = self.contentViewFrame().size
@@ -36,7 +36,7 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
         self.title = flower.name
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         self.viewWillTransitionToSize = size
         if let page = self.pageViewer.pageAtIndex(self.pageViewer.indexOfCurrentPage) as? ColorsPageView {
             page.viewWillTransitionToSize = size
@@ -47,8 +47,8 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
         self.pageViewer.reloadData()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let destinationViewController = segue.destinationViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationViewController = segue.destination
         if let varietyDetailsViewController = destinationViewController as? VarietyDetailsViewController {
             varietyDetailsViewController.variety = self.selectedVariety
         }
@@ -57,18 +57,18 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if needsSelectPageView {
-            let index = colors.indexOf({$0.id == self.selectedColor.id})!
+            let index = colors.index(where: {$0.id == self.selectedColor.id})!
             self.pageViewer.selectPageAtIndex(index)
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         needsSelectPageView = false
     }
     
     // MARK: - Actions
     
-    @IBAction func searchButtonClicked(sender: UIBarButtonItem) {
+    @IBAction func searchButtonClicked(_ sender: UIBarButtonItem) {
         if let page = self.pageViewer.pageAtIndex(pageViewer.indexOfCurrentPage) as? VarietiesPageView {
             let indexOfCurrentPage = pageViewer.indexOfCurrentPage
             var pageViewState = pageViewStates[indexOfCurrentPage]!
@@ -79,7 +79,7 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
         }
     }
     
-    @IBAction func infoButtonClicked(sender: UIBarButtonItem) {
+    @IBAction func infoButtonClicked(_ sender: UIBarButtonItem) {
         if self.hintView?.superview == nil {
             self.hintView = LanguageManager.loadNibNamed("VarietiesListHintView", owner: self, options: nil).first as? AHintView
             self.hintView!.frame = self.view.bounds
@@ -89,7 +89,7 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
     
     // MARK: - Private Methods
     
-    func fetchVarietiesForPageViewState(pageViewState: VarietiesPageViewState) {
+    func fetchVarietiesForPageViewState(_ pageViewState: VarietiesPageViewState) {
         ApiManager.fetchVarietiesByFlower(self.flower, color: pageViewState.color) { (varieties, error) in
             if let varieties = varieties {
                 if let page = self.pageViewer.pageAtIndex(pageViewState.index) as? VarietiesPageView {
@@ -107,19 +107,19 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
     
     // MARK: - PageViewerDataSource
     
-    func pageViewerNumberOfPages(pageViewer: PageViewer) -> Int {
+    func pageViewerNumberOfPages(_ pageViewer: PageViewer) -> Int {
         return self.colors.count
     }
     
-    func pageViewer(pageViewer: PageViewer, headerForItemAtIndex index: Int) -> String {
+    func pageViewer(_ pageViewer: PageViewer, headerForItemAtIndex index: Int) -> String {
         return self.colors[index].name
     }
     
-    func pageViewer(pageViewer: PageViewer, pageForItemAtIndex index: Int, reusableView: UIView?) -> UIView {
+    func pageViewer(_ pageViewer: PageViewer, pageForItemAtIndex index: Int, reusableView: UIView?) -> UIView {
         var pageView: VarietiesPageView! = reusableView as? VarietiesPageView
         
         if pageView == nil {
-            pageView = NSBundle.mainBundle().loadNibNamed("VarietiesPageView", owner: self, options: nil).first as! VarietiesPageView
+            pageView = Bundle.main.loadNibNamed("VarietiesPageView", owner: self, options: nil)?.first as! VarietiesPageView
             pageView.delegate = self
         }
         
@@ -152,12 +152,12 @@ class VarietiesViewController: BaseViewController, PageViewerDataSource, Varieti
     
     // MARK: - VarietiesPageViewDelegate
     
-    func varietiesPageView(varietiesPageView: VarietiesPageView, didSelectVariety variety: Variety) {
+    func varietiesPageView(_ varietiesPageView: VarietiesPageView, didSelectVariety variety: Variety) {
         self.selectedVariety = variety
-        self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.VarietyDetails, sender: self)
+        self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.VarietyDetails, sender: self)
     }
     
-    func varietiesPageView(varietiesPageView: VarietiesPageView, didChangeState state: VarietiesPageViewState) {
+    func varietiesPageView(_ varietiesPageView: VarietiesPageView, didChangeState state: VarietiesPageViewState) {
         let indexOfCurrentPage = pageViewer.indexOfCurrentPage
         self.pageViewStates[indexOfCurrentPage] = state
     }

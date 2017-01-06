@@ -11,11 +11,11 @@ import Foundation
 struct Order {
     var clientLabel: String
     var confirmedFb: Double
-    var headDate: NSDate
+    var headDate: Date
     var headId: Int
     var isCompleted: Bool
     var orderedFb: Double
-    var ordersDate: NSDate
+    var ordersDate: Date
     var ordersId: Int
     var outPoint: OutPoint
     var truck: Truck
@@ -45,9 +45,9 @@ struct Order {
         truck = Truck(id: truckDictionary["id"] as! Int,
                             name: truckDictionary["name"] as! String)
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        headDate = dateFormatter.dateFromString(dictionary["headDate"] as! String)!
-        ordersDate = dateFormatter.dateFromString(dictionary["ordersDate"] as! String)!
+        headDate = dateFormatter.date(from: dictionary["headDate"] as! String)!
+        ordersDate = dateFormatter.date(from: dictionary["ordersDate"] as! String)!
     }
 }

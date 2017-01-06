@@ -9,7 +9,7 @@
 import UIKit
 
 extension NSLayoutConstraint {
-    func changeMultiplier(multiplier:CGFloat) -> NSLayoutConstraint {
+    func changeMultiplier(_ multiplier:CGFloat) -> NSLayoutConstraint {
         let newConstraint = NSLayoutConstraint(
             item: firstItem,
             attribute: firstAttribute,
@@ -22,10 +22,10 @@ extension NSLayoutConstraint {
         newConstraint.priority = priority
         newConstraint.shouldBeArchived = self.shouldBeArchived
         newConstraint.identifier = self.identifier
-        newConstraint.active = true
+        newConstraint.isActive = true
         
-        NSLayoutConstraint.deactivateConstraints([self])
-        NSLayoutConstraint.activateConstraints([newConstraint])
+        NSLayoutConstraint.deactivate([self])
+        NSLayoutConstraint.activate([newConstraint])
         return newConstraint
     }
 }

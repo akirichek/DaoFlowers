@@ -19,7 +19,7 @@ class InvoiceDetailsStatisticsViewPage: UIView, UITableViewDelegate, UITableView
     @IBOutlet var clientLabels: [UILabel]!
     
     var spinner = RBHUD()
-    var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size {
+    var viewWillTransitionToSize = UIScreen.main.bounds.size {
         didSet {
             self.adjustViewSize()
             self.tableView.reloadData()
@@ -38,9 +38,9 @@ class InvoiceDetailsStatisticsViewPage: UIView, UITableViewDelegate, UITableView
     override func awakeFromNib() {
         super.awakeFromNib()
         var nib = UINib(nibName:"InvoiceDetailsStatisticsTableViewCell", bundle: nil)
-        self.tableView.registerNib(nib, forCellReuseIdentifier: "InvoiceDetailsStatisticsTableViewCellIdentifier")
+        self.tableView.register(nib, forCellReuseIdentifier: "InvoiceDetailsStatisticsTableViewCellIdentifier")
         nib = UINib(nibName:"InvoiceDetailsStatisticsTotalTableViewCell", bundle: nil)
-        self.tableView.registerNib(nib, forCellReuseIdentifier: "InvoiceDetailsStatisticsTotalTableViewCellIdentifier")        
+        self.tableView.register(nib, forCellReuseIdentifier: "InvoiceDetailsStatisticsTotalTableViewCellIdentifier")        
         self.totalInfoPortraitContainerView.layer.cornerRadius = 5
         self.totalInfoLandscapeContainerView.layer.cornerRadius = 5
     }
@@ -56,13 +56,13 @@ class InvoiceDetailsStatisticsViewPage: UIView, UITableViewDelegate, UITableView
     // MARK: - Private Methods
     
     func populateInfoView() {
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
-        let dateString = dateFormatter.stringFromDate(invoice.date)
-        let locale = NSLocale(localeIdentifier: LanguageManager.languageCode())
+        let dateString = dateFormatter.string(from: invoice.date as Date)
+        let locale = Locale(identifier: LanguageManager.languageCode())
         dateFormatter.locale = locale
         dateFormatter.dateFormat = "EEE"
-        let weekdayString = dateFormatter.stringFromDate(invoice.date).lowercaseString
+        let weekdayString = dateFormatter.string(from: invoice.date as Date).lowercased()
         invoiceDateLabels.forEach { $0.text = "\(dateString) [\(weekdayString)]" }
         clientLabels.forEach { $0.text = invoice.label }
     }
@@ -73,8 +73,8 @@ class InvoiceDetailsStatisticsViewPage: UIView, UITableViewDelegate, UITableView
         var headerViewFrame = headerView.frame
         
         if viewWillTransitionToSize.width < viewWillTransitionToSize.height {
-            totalInfoPortraitContainerView.hidden = false
-            totalInfoLandscapeContainerView.hidden = true
+            totalInfoPortraitContainerView.isHidden = false
+            totalInfoLandscapeContainerView.isHidden = true
             
             headerViewFrame.origin.y = totalInfoPortraitContainerView.frame.origin.y + totalInfoPortraitContainerView.frame.height + 8
             headerViewFrame.size.height = 34
@@ -82,8 +82,8 @@ class InvoiceDetailsStatisticsViewPage: UIView, UITableViewDelegate, UITableView
             tableViewFrame.origin.y = topContainerViewFrame.origin.y + topContainerViewFrame.height
             tableViewFrame.size.height = viewWillTransitionToSize.height - tableViewFrame.origin.y - 104
         } else {
-            totalInfoPortraitContainerView.hidden = true
-            totalInfoLandscapeContainerView.hidden = false
+            totalInfoPortraitContainerView.isHidden = true
+            totalInfoLandscapeContainerView.isHidden = false
 
             headerViewFrame.origin.y = totalInfoLandscapeContainerView.frame.origin.y + totalInfoLandscapeContainerView.frame.height + 8
             headerViewFrame.size.height = 20
@@ -99,7 +99,7 @@ class InvoiceDetailsStatisticsViewPage: UIView, UITableViewDelegate, UITableView
     
     // MARK: - UITableViewDataSource
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         var numberOfRows = 0
         if let rowsGroupedByFlowerTypeId = self.invoiceDetails?.orderStatistic.rowsGroupedByFlowerTypeId {
             self.spinner.hideLoader()
@@ -111,9 +111,9 @@ class InvoiceDetailsStatisticsViewPage: UIView, UITableViewDelegate, UITableView
         return numberOfRows + 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var numberOfRowsInSection = 0
-        if section == self.numberOfSectionsInTableView(tableView) - 1 {
+        if section == self.numberOfSections(in: tableView) - 1 {
             numberOfRowsInSection = 1
         } else {
             let rowsGroupedByFlowerTypeId = self.invoiceDetails!.orderStatistic.rowsGroupedByFlowerTypeId[section]
@@ -123,7 +123,7 @@ class InvoiceDetailsStatisticsViewPage: UIView, UITableViewDelegate, UITableView
         return numberOfRowsInSection
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cellIdentifier: String
 
         if indexPath.row == self.tableView(tableView, numberOfRowsInSection: indexPath.section) - 1 {
@@ -133,11 +133,11 @@ class InvoiceDetailsStatisticsViewPage: UIView, UITableViewDelegate, UITableView
         }
 
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! InvoiceDetailsStatisticsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! InvoiceDetailsStatisticsTableViewCell
         cell.invoiceDetails = invoiceDetails
         cell.invoiceDetailsOrderStatistic = self.invoiceDetails!.orderStatistic
         
-        if indexPath.section == self.numberOfSectionsInTableView(tableView) - 1 {
+        if indexPath.section == self.numberOfSections(in: tableView) - 1 {
             cell.populateGrandTotalCellView()
         } else {
             let rowsGroupedByFlowerTypeId = self.invoiceDetails!.orderStatistic.rowsGroupedByFlowerTypeId[indexPath.section]
@@ -159,9 +159,9 @@ class InvoiceDetailsStatisticsViewPage: UIView, UITableViewDelegate, UITableView
     
     // MARK: - UITableViewDelegate
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var heightForRow: CGFloat = 18
-        if indexPath.section == self.numberOfSectionsInTableView(tableView) - 1 {
+        if indexPath.section == self.numberOfSections(in: tableView) - 1 {
             heightForRow = 18
         } else {
             if indexPath.row == self.tableView(tableView, numberOfRowsInSection: indexPath.section) - 1 {
@@ -186,11 +186,11 @@ class InvoiceDetailsStatisticsViewPage: UIView, UITableViewDelegate, UITableView
                 
                 let heightForFlowerName = Utils.heightForText(flower.name,
                                                               havingWidth: flowerLabelWidth,
-                                                              andFont: UIFont.systemFontOfSize(12))
+                                                              andFont: UIFont.systemFont(ofSize: 12))
                 let variety = self.invoiceDetails!.varietyById(row.flowerSortId)!
                 let heightForVarietyName = Utils.heightForText(variety.name,
                                                                havingWidth: varietyLabelWidth,
-                                                               andFont: UIFont.systemFontOfSize(12))
+                                                               andFont: UIFont.systemFont(ofSize: 12))
 
                 if heightForVarietyName > labelHeight || heightForFlowerName > labelHeight {
                     heightForRow = 32

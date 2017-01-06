@@ -26,7 +26,7 @@ class ColorsViewController: BaseViewController, PageViewerDataSource, ColorsPage
         self.title = CustomLocalisedString("Varieties")
         
         self.pageViewerContainerView.frame = self.contentViewFrame()
-        let pageViewer = NSBundle.mainBundle().loadNibNamed("PageViewer", owner: self, options: nil).first as! PageViewer
+        let pageViewer = Bundle.main.loadNibNamed("PageViewer", owner: self, options: nil)?.first as! PageViewer
         pageViewer.frame = self.pageViewerContainerView.bounds
         pageViewer.dataSource = self
         pageViewer.viewWillTransitionToSize = self.contentViewFrame().size
@@ -37,16 +37,16 @@ class ColorsViewController: BaseViewController, PageViewerDataSource, ColorsPage
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if needsSelectPageView {
-            let index = flowers.indexOf({$0.id == self.selectedFlower.id})!
+            let index = flowers.index(where: {$0.id == self.selectedFlower.id})!
             self.pageViewer.selectPageAtIndex(index)
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         needsSelectPageView = false
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         self.viewWillTransitionToSize = size
         if let page = self.pageViewer.pageAtIndex(self.pageViewer.indexOfCurrentPage) as? ColorsPageView {
             page.viewWillTransitionToSize = size
@@ -57,8 +57,8 @@ class ColorsViewController: BaseViewController, PageViewerDataSource, ColorsPage
         self.pageViewer.reloadData()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let destinationViewController = segue.destinationViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationViewController = segue.destination
         if let varietiesViewController = destinationViewController as? VarietiesViewController {
             let colorsPageView = sender as! ColorsPageView
             varietiesViewController.flower = self.flowers[self.pageViewer.indexOfCurrentPage]
@@ -69,7 +69,7 @@ class ColorsViewController: BaseViewController, PageViewerDataSource, ColorsPage
     
     // MARK: - Private Methods
     
-    func fetchColorsForPageViewIndex(indexOfPageView: Int) {
+    func fetchColorsForPageViewIndex(_ indexOfPageView: Int) {
         let flower = flowers[indexOfPageView]
         ApiManager.fetchColorsByFlower(flower, completion: { (colors, error) in
             if let colors = colors {
@@ -86,19 +86,19 @@ class ColorsViewController: BaseViewController, PageViewerDataSource, ColorsPage
     
     // MARK: - PageViewerDataSource
     
-    func pageViewerNumberOfPages(pageViewer: PageViewer) -> Int {
+    func pageViewerNumberOfPages(_ pageViewer: PageViewer) -> Int {
         return self.flowers.count
     }
     
-    func pageViewer(pageViewer: PageViewer, headerForItemAtIndex index: Int) -> String {
+    func pageViewer(_ pageViewer: PageViewer, headerForItemAtIndex index: Int) -> String {
         return self.flowers[index].name
     }
     
-    func pageViewer(pageViewer: PageViewer, pageForItemAtIndex index: Int, reusableView: UIView?) -> UIView {
+    func pageViewer(_ pageViewer: PageViewer, pageForItemAtIndex index: Int, reusableView: UIView?) -> UIView {
         var pageView: ColorsPageView! = reusableView as? ColorsPageView
         
         if pageView == nil {
-            pageView = NSBundle.mainBundle().loadNibNamed("ColorsPageView", owner: self, options: nil).first as! ColorsPageView
+            pageView = Bundle.main.loadNibNamed("ColorsPageView", owner: self, options: nil)?.first as! ColorsPageView
             pageView.delegate = self
         }
         
@@ -119,9 +119,9 @@ class ColorsViewController: BaseViewController, PageViewerDataSource, ColorsPage
 
     // MARK: - ColorsPageViewDelegate
     
-    func colorsPageView(colorsPageView: ColorsPageView, didSelectColor color: Color) {
+    func colorsPageView(_ colorsPageView: ColorsPageView, didSelectColor color: Color) {
         self.selectedColor = color
-        self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Varieties,
+        self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.Varieties,
                                         sender: colorsPageView)
     }
 }

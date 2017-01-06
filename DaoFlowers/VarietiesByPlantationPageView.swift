@@ -21,7 +21,7 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
     weak var delegate: VarietiesByPlantationPageViewDelegate?
     var colorsPickerView: UIPickerView!
     var state: VarietiesByPlantationPageViewState!
-    var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
+    var viewWillTransitionToSize = UIScreen.main.bounds.size
     
     var filteredVarieties: [Variety]! {
         didSet {
@@ -38,7 +38,7 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
             hideFilterContainerView()
         }
         self.searchTextField.text = state.searchString
-        self.collectionView.contentOffset = CGPointZero
+        self.collectionView.contentOffset = CGPoint.zero
         self.filterVarieties()
     }
     
@@ -49,7 +49,7 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
         colorLabel.text = CustomLocalisedString("Color")
         
         let nib = UINib(nibName:"VarietyCollectionViewCell", bundle: nil)
-        self.collectionView.registerNib(nib, forCellWithReuseIdentifier: "VarietyCollectionViewCellIdentifier")
+        self.collectionView.register(nib, forCellWithReuseIdentifier: "VarietyCollectionViewCellIdentifier")
         assortmentContainerView.layer.cornerRadius = 5
         searchContainerView.layer.cornerRadius = 5
         self.colorsPickerView = self.createPickerViewForTextField(self.colorTextField)
@@ -57,9 +57,9 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
     
     // MARK: - Actions
     
-    @IBAction func colorTextFieldClicked(sender: UITextField) {
+    @IBAction func colorTextFieldClicked(_ sender: UITextField) {
         if let selectedColor = state.selectedColor {
-            let row = self.state.colors.indexOf({$0.id == selectedColor.id})!
+            let row = self.state.colors.index(where: {$0.id == selectedColor.id})!
             self.colorsPickerView.selectRow(row + 1, inComponent: 0, animated: false)
         } else {
             self.colorsPickerView.selectRow(0, inComponent: 0, animated: false)
@@ -68,7 +68,7 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
     
     // MARK: - Private Methods
     
-    func createPickerViewForTextField(textField: UITextField) -> UIPickerView {
+    func createPickerViewForTextField(_ textField: UITextField) -> UIPickerView {
         let pickerView = UIPickerView()
         pickerView.dataSource = self
         pickerView.delegate = self
@@ -77,7 +77,7 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
-                                         style: UIBarButtonItemStyle.Done,
+                                         style: UIBarButtonItemStyle.done,
                                          target: self,
                                          action: #selector(VarietiesByPlantationPageView.doneButtonClicked(_:)))
         toolbar.setItems([doneButton], animated: true)
@@ -87,7 +87,7 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
     }
     
     func showFilterContainerView() {
-        filterContainerView.hidden = false
+        filterContainerView.isHidden = false
         var collectionViewFrame = self.collectionView.frame
         collectionViewFrame.origin.y = 50
         collectionViewFrame.size.height = self.frame.height - 50
@@ -95,7 +95,7 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
     }
     
     func hideFilterContainerView() {
-        filterContainerView.hidden = true
+        filterContainerView.isHidden = true
         var collectionViewFrame = self.collectionView.frame
         collectionViewFrame.origin.y = 0
         collectionViewFrame.size.height = self.frame.height
@@ -103,11 +103,11 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
     }
     
     func filterVarieties() {
-        let term = state.searchString.lowercaseString
+        let term = state.searchString.lowercased()
         var filteredVarieties = state.varieties
         if filteredVarieties != nil {
             if term.characters.count > 0 {
-                filteredVarieties = filteredVarieties!.filter({$0.name.lowercaseString.containsString(term) || $0.abr.lowercaseString.containsString(term)})
+                filteredVarieties = filteredVarieties!.filter({$0.name.lowercased().contains(term) || $0.abr.lowercased().contains(term)})
             }
             if let selectedColor = state.selectedColor {
                 filteredVarieties = filteredVarieties!.filter({$0.color.id == selectedColor.id})
@@ -120,12 +120,12 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
     
     // MARK: - Private Methods
     
-    func doneButtonClicked(sender: UIBarButtonItem) {
+    func doneButtonClicked(_ sender: UIBarButtonItem) {
         changeColor()
     }
     
     func changeColor() {
-        let selectedRow = self.colorsPickerView.selectedRowInComponent(0)
+        let selectedRow = self.colorsPickerView.selectedRow(inComponent: 0)
         if selectedRow == 0 {
             self.colorTextField.text = "all"
             self.state.selectedColor = nil
@@ -141,12 +141,12 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
     
     // MARK: - UICollectionViewDataSource
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return filteredVarieties.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("VarietyCollectionViewCellIdentifier", forIndexPath: indexPath) as! VarietyCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VarietyCollectionViewCellIdentifier", for: indexPath) as! VarietyCollectionViewCell
         cell.variety  = self.filteredVarieties![indexPath.row]
         cell.numberLabel.text = String(indexPath.row + 1)
         
@@ -155,14 +155,14 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
     
     // MARK: - UICollectionViewDelegate
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.delegate?.varietiesByPlantationPageView(self,
                                                      didSelectVariety: self.filteredVarieties![indexPath.row])
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         let screenSize = self.viewWillTransitionToSize
         let columnCount: Int
         if screenSize.width < screenSize.height {
@@ -177,17 +177,17 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
     
     // MARK: - UIPickerViewDataSource
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return state.colors.count + 1
     }
     
     // MARK: - UIPickerViewDelegate
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         var titleForRow: String
         if row == 0 {
             titleForRow = "all"
@@ -198,16 +198,16 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
         return titleForRow
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         changeColor()
     }
     
     // MARK: - UITextFieldDelegate
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == searchTextField {
             var term = NSString(string: searchTextField.text!)
-            term = term.stringByReplacingCharactersInRange(range, withString: string)
+            term = term.replacingCharacters(in: range, with: string) as NSString
             state.searchString = term as String
             self.filterVarieties()
             self.delegate?.varietiesByPlantationPageView(self, didChangeState: state)
@@ -216,7 +216,7 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
         return true
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == searchTextField {
             textField.resignFirstResponder()
         }
@@ -225,8 +225,8 @@ class VarietiesByPlantationPageView: UIView, UICollectionViewDataSource, UIColle
 }
 
 protocol VarietiesByPlantationPageViewDelegate: NSObjectProtocol {
-    func varietiesByPlantationPageView(varietiesByPlantationPageView: VarietiesByPlantationPageView, didSelectVariety variety: Variety)
-    func varietiesByPlantationPageView(varietiesByPlantationPageView: VarietiesByPlantationPageView, didChangeState state: VarietiesByPlantationPageViewState)
+    func varietiesByPlantationPageView(_ varietiesByPlantationPageView: VarietiesByPlantationPageView, didSelectVariety variety: Variety)
+    func varietiesByPlantationPageView(_ varietiesByPlantationPageView: VarietiesByPlantationPageView, didChangeState state: VarietiesByPlantationPageViewState)
 }
 
 struct VarietiesByPlantationPageViewState {

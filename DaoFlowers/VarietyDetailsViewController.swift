@@ -25,7 +25,7 @@ class VarietyDetailsViewController: BaseViewController, PageViewerDataSource, Va
         
         self.title = "\(variety.name) (\(variety.flower.name))"
         self.pageViewerContainerView.frame = self.contentViewFrame()
-        let pageViewer = NSBundle.mainBundle().loadNibNamed("PageViewer", owner: self, options: nil).first as! PageViewer
+        let pageViewer = Bundle.main.loadNibNamed("PageViewer", owner: self, options: nil)?.first as! PageViewer
         pageViewer.frame = self.pageViewerContainerView.bounds
         pageViewer.dataSource = self
         pageViewer.viewWillTransitionToSize = self.contentViewFrame().size
@@ -33,7 +33,7 @@ class VarietyDetailsViewController: BaseViewController, PageViewerDataSource, Va
         self.pageViewer = pageViewer
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         self.viewWillTransitionToSize = size
         self.pageViewer.viewWillTransitionToSize = self.contentViewFrame().size
         self.pageViewerContainerView.frame = self.contentViewFrame()
@@ -47,8 +47,8 @@ class VarietyDetailsViewController: BaseViewController, PageViewerDataSource, Va
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let destinationViewController = segue.destinationViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationViewController = segue.destination
         if let varietyImageViewerViewController = destinationViewController as? VarietyImageViewerViewController {
             varietyImageViewerViewController.images = variety.images!
             
@@ -105,11 +105,11 @@ class VarietyDetailsViewController: BaseViewController, PageViewerDataSource, Va
     
     // MARK: PageViewerDataSource
     
-    func pageViewerNumberOfPages(pageViewer: PageViewer) -> Int {
+    func pageViewerNumberOfPages(_ pageViewer: PageViewer) -> Int {
         return 3
     }
     
-    func pageViewer(pageViewer: PageViewer, headerForItemAtIndex index: Int) -> String {
+    func pageViewer(_ pageViewer: PageViewer, headerForItemAtIndex index: Int) -> String {
         let header: String
         switch index {
             case 0:
@@ -124,15 +124,15 @@ class VarietyDetailsViewController: BaseViewController, PageViewerDataSource, Va
         return header
     }
     
-    func pageViewer(pageViewer: PageViewer, pageForItemAtIndex index: Int, reusableView: UIView?) -> UIView {
+    func pageViewer(_ pageViewer: PageViewer, pageForItemAtIndex index: Int, reusableView: UIView?) -> UIView {
         var pageView: UIView!
         switch index {
         case 0:
             pageView = LanguageManager.loadNibNamed("VarietyDetailsGeneralInfoView", owner: self, options: nil).first as? UIView
         case 1:
-            pageView =   NSBundle.mainBundle().loadNibNamed("VarietyDetailsPlantationsGrowersView", owner: self, options: nil).first as? UIView
+            pageView =   Bundle.main.loadNibNamed("VarietyDetailsPlantationsGrowersView", owner: self, options: nil)?.first as? UIView
         case 2:
-            pageView =   NSBundle.mainBundle().loadNibNamed("VarietyDetailsSimilarVarietiesView", owner: self, options: nil).first as? UIView
+            pageView =   Bundle.main.loadNibNamed("VarietyDetailsSimilarVarietiesView", owner: self, options: nil)?.first as? UIView
         default:
             break
         }
@@ -167,10 +167,10 @@ class VarietyDetailsViewController: BaseViewController, PageViewerDataSource, Va
     
     // MARK: VarietyDetailsSimilarVarietiesView
     
-    func varietyDetailsSimilarVarietiesView(varietyDetailsSimilarVarietiesView: VarietyDetailsSimilarVarietiesView,
+    func varietyDetailsSimilarVarietiesView(_ varietyDetailsSimilarVarietiesView: VarietyDetailsSimilarVarietiesView,
                                             didSelectVariety variety: Variety) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let varietyDetailsViewController = storyboard.instantiateViewControllerWithIdentifier(K.Storyboard.ViewControllerIdentifier.VarietyDetails) as! VarietyDetailsViewController
+        let varietyDetailsViewController = storyboard.instantiateViewController(withIdentifier: K.Storyboard.ViewControllerIdentifier.VarietyDetails) as! VarietyDetailsViewController
         varietyDetailsViewController.variety = variety
         self.navigationController?.pushViewController(varietyDetailsViewController, animated: true)
     }

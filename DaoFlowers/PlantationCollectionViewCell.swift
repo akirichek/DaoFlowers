@@ -35,8 +35,8 @@ class PlantationCollectionViewCell: UICollectionViewCell {
         }
         
         if let imageUrl = plantation.imageUrl {
-            if let url = NSURL(string: imageUrl) {
-                plantationImageView.af_setImageWithURL(url)
+            if let url = URL(string: imageUrl) {
+                plantationImageView.af_setImage(withURL: url)
             }
         }
     }

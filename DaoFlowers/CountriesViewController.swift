@@ -22,23 +22,23 @@ class CountriesViewController: BaseViewController, UICollectionViewDataSource, U
         self.fetchCountries()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.collectionView.collectionViewLayout.invalidateLayout()
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         self.viewWillTransitionToSize = size
         if self.collectionView != nil {
             self.collectionView.collectionViewLayout.invalidateLayout()
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let destinationViewController = segue.destinationViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationViewController = segue.destination
         if let plantationsViewController = destinationViewController as? PlantationsViewController {
             let cell = sender as! UICollectionViewCell
-            let indexPath = self.collectionView.indexPathForCell(cell)!
+            let indexPath = self.collectionView.indexPath(for: cell)!
             plantationsViewController.selectedCountry = self.countries[indexPath.row]
             plantationsViewController.countries = self.countries
         }
@@ -61,12 +61,12 @@ class CountriesViewController: BaseViewController, UICollectionViewDataSource, U
     
     // MARK: UICollectionViewDataSource
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return countries.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("CountryCollectionViewCellIdentifier", forIndexPath: indexPath) as! CountryCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CountryCollectionViewCellIdentifier", for: indexPath) as! CountryCollectionViewCell
         cell.country = self.countries[indexPath.row]
         
         return cell
@@ -74,14 +74,14 @@ class CountriesViewController: BaseViewController, UICollectionViewDataSource, U
     
     // MARK: UICollectionViewDelegate
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.Plantations,
-                                        sender: collectionView.cellForItemAtIndexPath(indexPath))
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.Plantations,
+                                        sender: collectionView.cellForItem(at: indexPath))
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let screenSize: CGSize = self.viewWillTransitionToSize
         
         let columnCount: Int

@@ -27,7 +27,7 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, Pa
         
         self.title = CustomLocalisedString("Invoice Details")
         self.pageViewerContainerView.frame = self.contentViewFrame()
-        let pageViewer = NSBundle.mainBundle().loadNibNamed("PageViewer", owner: self, options: nil).first as! PageViewer
+        let pageViewer = Bundle.main.loadNibNamed("PageViewer", owner: self, options: nil)?.first as! PageViewer
         pageViewer.frame = self.pageViewerContainerView.bounds
         pageViewer.dataSource = self
         pageViewer.delegate = self
@@ -38,7 +38,7 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, Pa
         adjustBarButtonItems()
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         self.viewWillTransitionToSize = size
         self.pageViewer.viewWillTransitionToSize = self.contentViewFrame().size
         self.pageViewerContainerView.frame = self.contentViewFrame()
@@ -53,19 +53,19 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, Pa
     func adjustBarButtonItems() {
         var buttons: [UIBarButtonItem] = []
         if invoice.zipFile.characters.count > 0 {
-            let downloadButton = UIBarButtonItem(image: UIImage(named: "icon_download")!, style: .Plain, target: self, action: #selector(InvoiceDetailsViewController.downloadButtonClicked(_:)))
+            let downloadButton = UIBarButtonItem(image: UIImage(named: "icon_download")!, style: .plain, target: self, action: #selector(InvoiceDetailsViewController.downloadButtonClicked(_:)))
             buttons.append(downloadButton)
         }
         
         if selectedIndexOfPage == 0 {
-            filterButton = UIBarButtonItem(image: UIImage(named: "icon_filter")!, style: .Plain, target: self, action: #selector(InvoiceDetailsViewController.filterButtonClicked(_:)))
+            filterButton = UIBarButtonItem(image: UIImage(named: "icon_filter")!, style: .plain, target: self, action: #selector(InvoiceDetailsViewController.filterButtonClicked(_:)))
             buttons.append(filterButton)
         }
         
         self.navigationItem.rightBarButtonItems = buttons
     }
     
-    func fetchInvoiceDetailsForPageViewAtIndex(index: Int) {
+    func fetchInvoiceDetailsForPageViewAtIndex(_ index: Int) {
         ApiManager.fetchInvoiceDetails(invoice, user: User.currentUser()!) { (invoiceDetails, error) in
             if let invoiceDetails = invoiceDetails {
                 self.invoiceDetails = invoiceDetails
@@ -135,7 +135,7 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, Pa
             filterViewState.selectedAwb == nil &&
             filterViewState.selectedVariety == nil &&
             filterViewState.selectedSize == nil {
-            self.filterButton.tintColor = UIColor.whiteColor()
+            self.filterButton.tintColor = UIColor.white
         } else {
             self.filterButton.tintColor = UIColor(red: 237/255, green: 221/255, blue: 6/255, alpha: 1)
         }
@@ -143,7 +143,7 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, Pa
     
     // MARK: - Actions
         
-    func filterButtonClicked(sender: UIBarButtonItem) {
+    func filterButtonClicked(_ sender: UIBarButtonItem) {
         if filterView == nil {
             filterView = LanguageManager.loadNibNamed("InvoiceDetailsGeneralFilterView", owner: self, options: nil).first as! InvoiceDetailsGeneralFilterView
             filterView.frame = self.view.bounds
@@ -156,35 +156,35 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, Pa
         self.view.addSubview(filterView)
     }
     
-    func downloadButtonClicked(sender: UIBarButtonItem) {
+    func downloadButtonClicked(_ sender: UIBarButtonItem) {
         let message = CustomLocalisedString("Do you want to start download document")
         let alertController = UIAlertController(title: CustomLocalisedString("Downloading"),
                                                 message: "\(message) \(invoice.fileName) ?",
-                                                preferredStyle: .Alert)
-        let yesAlertAction = UIAlertAction(title: CustomLocalisedString("YES"), style: .Default) { alertAction in
+                                                preferredStyle: .alert)
+        let yesAlertAction = UIAlertAction(title: CustomLocalisedString("YES"), style: .default) { alertAction in
             ApiManager.sharedInstance.downloadDocument(self.invoice, user: User.currentUser()!) { (error) in
                 if let error = error {
                     Utils.showError(error, inViewController: self)
                 }
             }
         }
-        let noAlertAction = UIAlertAction(title: CustomLocalisedString("NO"), style: .Default, handler: nil)
+        let noAlertAction = UIAlertAction(title: CustomLocalisedString("NO"), style: .default, handler: nil)
         alertController.addAction(noAlertAction)
         alertController.addAction(yesAlertAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     // MARK: - PageViewerDataSource
     
-    func pageViewerNumberOfPages(pageViewer: PageViewer) -> Int {
+    func pageViewerNumberOfPages(_ pageViewer: PageViewer) -> Int {
         return 3
     }
     
-    func pageViewer(pageViewer: PageViewer, headerForItemAtIndex index: Int) -> String {
+    func pageViewer(_ pageViewer: PageViewer, headerForItemAtIndex index: Int) -> String {
         return [CustomLocalisedString("GENERAL"), CustomLocalisedString("AVERAGE PRICES"), CustomLocalisedString("STATISTICS OF FULFILMENT")][index]
     }
     
-    func pageViewer(pageViewer: PageViewer, pageForItemAtIndex index: Int, reusableView: UIView?) -> UIView {
+    func pageViewer(_ pageViewer: PageViewer, pageForItemAtIndex index: Int, reusableView: UIView?) -> UIView {
         let nibName: String
         switch index {
         case 0:
@@ -222,14 +222,14 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, Pa
     
     // MARK: - PageViewerDelegate
     
-    func pageViewer(pageViewer: PageViewer, didSelectPageAtIndex index: Int) {
+    func pageViewer(_ pageViewer: PageViewer, didSelectPageAtIndex index: Int) {
         selectedIndexOfPage = index
         adjustBarButtonItems()
     }
     
     // MARK: - InvoiceDetailsGeneralFilterViewDelegate
     
-    func invoiceDetailsGeneralFilterViewDidFilter(invoiceDetailsGeneralFilterView: InvoiceDetailsGeneralFilterView,
+    func invoiceDetailsGeneralFilterViewDidFilter(_ invoiceDetailsGeneralFilterView: InvoiceDetailsGeneralFilterView,
                                                   withState state: InvoiceDetailsGeneralFilterViewState) {
         filterViewState = state
         filterInvoiceDetails()

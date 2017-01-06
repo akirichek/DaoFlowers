@@ -15,7 +15,7 @@ class VarietyDetailsSimilarVarietiesView: UIView, UICollectionViewDataSource, UI
     
     weak var delegate: VarietyDetailsSimilarVarietiesViewDelegate?
     var spinner = RBHUD()
-    var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
+    var viewWillTransitionToSize = UIScreen.main.bounds.size
     var varieties: [Variety]? {
         didSet {
             self.collectionView.reloadData()
@@ -26,7 +26,7 @@ class VarietyDetailsSimilarVarietiesView: UIView, UICollectionViewDataSource, UI
     
     override func awakeFromNib() {
         let nib = UINib(nibName:"SimilarVarietyCollectionViewCell", bundle: nil)
-        self.collectionView.registerNib(nib, forCellWithReuseIdentifier: "SimilarVarietyCollectionViewCellIdentifier")
+        self.collectionView.register(nib, forCellWithReuseIdentifier: "SimilarVarietyCollectionViewCellIdentifier")
         emptyListLabel.text = CustomLocalisedString("Similar sorts list is empty")
     }
     
@@ -40,7 +40,7 @@ class VarietyDetailsSimilarVarietiesView: UIView, UICollectionViewDataSource, UI
     
     // MARK: UICollectionViewDataSource
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var numberOfItems = 0
         if self.varieties == nil {
             self.setNeedsLayout()
@@ -49,13 +49,13 @@ class VarietyDetailsSimilarVarietiesView: UIView, UICollectionViewDataSource, UI
             self.spinner.hideLoader()
         }
         
-        self.collectionView.hidden = (numberOfItems == 0)
+        self.collectionView.isHidden = (numberOfItems == 0)
         
         return numberOfItems
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("SimilarVarietyCollectionViewCellIdentifier", forIndexPath: indexPath) as! SimilarVarietyCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SimilarVarietyCollectionViewCellIdentifier", for: indexPath) as! SimilarVarietyCollectionViewCell
         cell.variety = varieties![indexPath.row]
         
         return cell
@@ -63,13 +63,13 @@ class VarietyDetailsSimilarVarietiesView: UIView, UICollectionViewDataSource, UI
     
     // MARK: UICollectionViewDelegate
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.delegate?.varietyDetailsSimilarVarietiesView(self, didSelectVariety: self.varieties![indexPath.row])
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let screenSize = self.viewWillTransitionToSize
         let columnCount: Int
         if screenSize.width < screenSize.height {
@@ -84,5 +84,5 @@ class VarietyDetailsSimilarVarietiesView: UIView, UICollectionViewDataSource, UI
 }
 
 protocol VarietyDetailsSimilarVarietiesViewDelegate: NSObjectProtocol {
-    func varietyDetailsSimilarVarietiesView(varietyDetailsSimilarVarietiesView: VarietyDetailsSimilarVarietiesView, didSelectVariety variety: Variety)
+    func varietyDetailsSimilarVarietiesView(_ varietyDetailsSimilarVarietiesView: VarietyDetailsSimilarVarietiesView, didSelectVariety variety: Variety)
 }

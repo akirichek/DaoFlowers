@@ -46,7 +46,7 @@ class RegistrationViewController: BaseViewController {
         informationAboutCompanyLabel.text = CustomLocalisedString("The information about your company")
         detailedInforamationLabel.text = CustomLocalisedString("The detailed information")
         informationHintLabel.text = CustomLocalisedString("The field is not obligatory for filling")
-        sendButton.setTitle(CustomLocalisedString("SEND SIGN UP REQUEST"), forState: .Normal)
+        sendButton.setTitle(CustomLocalisedString("SEND SIGN UP REQUEST"), for: UIControlState())
         
         informationAboutCompanyTextView.layer.cornerRadius = 5
         adjustViews()
@@ -54,8 +54,8 @@ class RegistrationViewController: BaseViewController {
         scrollView.delaysContentTouches = false
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         adjustViews()
     }
     
@@ -68,9 +68,9 @@ class RegistrationViewController: BaseViewController {
         scrollView.frame = scrollViewFrame
         
         if isPortraitOrientation() {
-            scrollView.contentSize = CGSizeMake(320, 1321)
+            scrollView.contentSize = CGSize(width: 320, height: 1321)
         } else {
-            scrollView.contentSize = CGSizeMake(320, 1267)
+            scrollView.contentSize = CGSize(width: 320, height: 1267)
         }
     }
     
@@ -78,7 +78,7 @@ class RegistrationViewController: BaseViewController {
         var toolbar = UIToolbar()
         toolbar.sizeToFit()
         var doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
-                                         style: UIBarButtonItemStyle.Done,
+                                         style: UIBarButtonItemStyle.done,
                                          target: phoneTextField,
                                          action: #selector(UIResponder.resignFirstResponder))
         toolbar.setItems([doneButton], animated: true)
@@ -87,7 +87,7 @@ class RegistrationViewController: BaseViewController {
         toolbar = UIToolbar()
         toolbar.sizeToFit()
         doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
-                                     style: UIBarButtonItemStyle.Done,
+                                     style: UIBarButtonItemStyle.done,
                                      target: viberTextField,
                                      action: #selector(UIResponder.resignFirstResponder))
         toolbar.setItems([doneButton], animated: true)
@@ -96,7 +96,7 @@ class RegistrationViewController: BaseViewController {
         toolbar = UIToolbar()
         toolbar.sizeToFit()
         doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
-                                     style: UIBarButtonItemStyle.Done,
+                                     style: UIBarButtonItemStyle.done,
                                      target: informationAboutCompanyTextView,
                                      action: #selector(UIResponder.resignFirstResponder))
         toolbar.setItems([doneButton], animated: true)
@@ -130,20 +130,20 @@ class RegistrationViewController: BaseViewController {
     
     // MARK: - Actions
     
-    @IBAction func sendButtonClicked(sender: AnyObject) {
-        let alertController = UIAlertController(title: CustomLocalisedString("Sending request"), message: CustomLocalisedString("Send the registration request of a new user"), preferredStyle: .Alert)
-        let yesAlertAction = UIAlertAction(title: CustomLocalisedString("YES"), style: .Default) { alertAction in
+    @IBAction func sendButtonClicked(_ sender: AnyObject) {
+        let alertController = UIAlertController(title: CustomLocalisedString("Sending request"), message: CustomLocalisedString("Send the registration request of a new user"), preferredStyle: .alert)
+        let yesAlertAction = UIAlertAction(title: CustomLocalisedString("YES"), style: .default) { alertAction in
             self.sendSignUpRequest()
         }
-        let noAlertAction = UIAlertAction(title: CustomLocalisedString("NO"), style: .Default, handler: nil)
+        let noAlertAction = UIAlertAction(title: CustomLocalisedString("NO"), style: .default, handler: nil)
         alertController.addAction(noAlertAction)
         alertController.addAction(yesAlertAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     // MARK: - UITextFieldDelegate
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }

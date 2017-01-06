@@ -11,7 +11,7 @@ import Foundation
 struct Document {
     var id: Int
     var clientId: Int
-    var date: NSDate
+    var date: Date
     var fb: Int
     var fileName: String
     var label: String
@@ -27,8 +27,8 @@ struct Document {
         number = dictionary["number"] as? String
         zipFile = dictionary["zipFile"] as! String
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        date = dateFormatter.dateFromString(dictionary["date"] as! String)!
+        date = dateFormatter.date(from: dictionary["date"] as! String)!
     }
 }

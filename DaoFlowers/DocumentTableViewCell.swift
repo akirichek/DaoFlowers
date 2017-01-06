@@ -27,23 +27,23 @@ class DocumentTableViewCell: UITableViewCell {
         clientLabel.text = document.label
         fileNameLabel.text = document.number
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
-        dateLabel.text = dateFormatter.stringFromDate(document.date)
+        dateLabel.text = dateFormatter.string(from: document.date as Date)
         
-        let locale = NSLocale(localeIdentifier: LanguageManager.languageCode())
+        let locale = Locale(identifier: LanguageManager.languageCode())
         dateFormatter.locale = locale
         dateFormatter.dateFormat = "EEEE"
-        dayOfWeekLabel.text = "[\(dateFormatter.stringFromDate(document.date).lowercaseString)]"
+        dayOfWeekLabel.text = "[\(dateFormatter.string(from: document.date as Date).lowercased())]"
         
-        downloadButton.hidden = (document.zipFile.characters.count == 0)
+        downloadButton.isHidden = (document.zipFile.characters.count == 0)
     }
     
-    @IBAction func downloadButtonClicked(sender: UIButton) {
+    @IBAction func downloadButtonClicked(_ sender: UIButton) {
         delegate?.documentTableViewCell(self, didDownloadDocument: document)
     }
 }
 
 protocol DocumentTableViewCellDelegate: NSObjectProtocol {
-    func documentTableViewCell(cell: DocumentTableViewCell, didDownloadDocument document: Document)
+    func documentTableViewCell(_ cell: DocumentTableViewCell, didDownloadDocument document: Document)
 }

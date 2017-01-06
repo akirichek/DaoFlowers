@@ -36,7 +36,7 @@ class InvoiceDetailsStatisticsTableViewCell: UITableViewCell {
         } else if invoiceDetailsOrderStatisticRow.differenceFb < 0 {
             fbDifLabel.textColor = UIColor(red: 202/255, green: 5/255, blue: 15/255, alpha: 1)
         } else {
-            fbDifLabel.textColor = UIColor.blackColor()
+            fbDifLabel.textColor = UIColor.black
         }
     }
     
@@ -51,7 +51,7 @@ class InvoiceDetailsStatisticsTableViewCell: UITableViewCell {
         } else if invoiceDetailsOrderStatisticSubtotal.differenceFb < 0 {
             fbDifLabel.textColor = UIColor(red: 202/255, green: 5/255, blue: 15/255, alpha: 1)
         } else {
-            fbDifLabel.textColor = UIColor.blackColor()
+            fbDifLabel.textColor = UIColor.black
         }
     }
     
@@ -66,7 +66,7 @@ class InvoiceDetailsStatisticsTableViewCell: UITableViewCell {
         } else if invoiceDetailsOrderStatistic.totalDifferenceFb < 0 {
             fbDifLabel.textColor = UIColor(red: 202/255, green: 5/255, blue: 15/255, alpha: 1)
         } else {
-            fbDifLabel.textColor = UIColor.blackColor()
+            fbDifLabel.textColor = UIColor.black
         }
     }
 }

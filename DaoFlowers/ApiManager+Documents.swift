@@ -8,11 +8,11 @@
 
 import Alamofire
 
-extension ApiManager: NSURLSessionDownloadDelegate {
+extension ApiManager: URLSessionDownloadDelegate {
     
-    static func fetchInvoices(user: User, completion: (invoices: [Document]?, error: NSError?) -> ()) {
+    static func fetchInvoices(_ user: User, completion: @escaping (_ invoices: [Document]?, _ error: NSError?) -> ()) {
         let url = K.Api.BaseUrl + K.Api.Documents.Invoices
-        Alamofire.request(.GET, url,  parameters: datesParams(), headers:["Authorization": user.token]).responseJSON { response in
+        Alamofire.request(url, method: .get, parameters: datesParams(), headers:["Authorization": user.token]).responseJSON { response in
             if response.result.isSuccess {
                 var invoices: [Document] = []
                 if let json = response.result.value {
@@ -21,38 +21,38 @@ extension ApiManager: NSURLSessionDownloadDelegate {
                         invoices.append(Document(dictionary: invoicesDictionary))
                     }
                 }
-                completion(invoices: invoices, error: nil)
+                completion(invoices, nil)
             } else {
                 print("Error: \(response.result.error)")
-                completion(invoices: nil, error: response.result.error)
+                completion(nil, response.result.error as NSError?)
             }
         }
     }
     
-    static func fetchInvoiceDetails(invoice: Document, user: User, completion: (invoiceDetails: InvoiceDetails?, error: NSError?) -> ()) {
+    static func fetchInvoiceDetails(_ invoice: Document, user: User, completion: @escaping (_ invoiceDetails: InvoiceDetails?, _ error: NSError?) -> ()) {
         let url = K.Api.BaseUrl + K.Api.Documents.Invoices + "/" + String(invoice.id) + "/" + String(invoice.clientId)
         let parameters = [
             "invoice_id": invoice.id,
             "client_id": invoice.clientId,
         ]
-        Alamofire.request(.GET, url,  parameters: parameters, headers:["Authorization": user.token]).responseJSON { response in
+        Alamofire.request(url, method: .get, parameters: parameters, headers:["Authorization": user.token]).responseJSON { response in
             if response.result.isSuccess {
                 var invoiceDetails: InvoiceDetails?
                 if let json = response.result.value {
                     //print("JSON: \(json)")
                     invoiceDetails = InvoiceDetails(dictionary: json as! [String : AnyObject])
                 }
-                completion(invoiceDetails: invoiceDetails, error: nil)
+                completion(invoiceDetails, nil)
             } else {
                 print("Error: \(response.result.error)")
-                completion(invoiceDetails: nil, error: response.result.error)
+                completion(nil, response.result.error as NSError?)
             }
         }
     }
     
-    static func fetchPrealerts(user: User, completion: (prealerts: [Document]?, error: NSError?) -> ()) {
+    static func fetchPrealerts(_ user: User, completion: @escaping (_ prealerts: [Document]?, _ error: NSError?) -> ()) {
         let url = K.Api.BaseUrl + K.Api.Documents.Prealerts
-        Alamofire.request(.GET, url,  parameters: datesParams(), headers:["Authorization": user.token]).responseJSON { response in
+        Alamofire.request(url, method: .get, parameters: datesParams(), headers:["Authorization": user.token]).responseJSON { response in
             if response.result.isSuccess {
                 var prealerts: [Document] = []
                 if let json = response.result.value {
@@ -61,26 +61,23 @@ extension ApiManager: NSURLSessionDownloadDelegate {
                         prealerts.append(Document(dictionary: prealertsDictionary))
                     }
                 }
-                completion(prealerts: prealerts, error: nil)
+                completion(prealerts, nil)
             } else {
                 print("Error: \(response.result.error)")
-                completion(prealerts: nil, error: response.result.error)
+                completion(nil, response.result.error as NSError?)
             }
         }
     }
     
-    static func datesParams() -> [String: AnyObject] {
-        let dateNow = NSDate()
-        let dateToComponents = NSCalendar.currentCalendar().components([.Day, .Month, .Year],
-                                                                       fromDate: dateNow)
-        dateToComponents.calendar =  NSCalendar.currentCalendar()
-        let dateTo = "\(dateToComponents.year)-\(dateToComponents.month)-\(dateToComponents.day)"
-        dateToComponents.month -= 3
-        
-        let dateFromComponents = NSCalendar.currentCalendar().components([.Day, .Month, .Year],
-                                                                         fromDate: dateToComponents.date!)
-        dateFromComponents.calendar =  NSCalendar.currentCalendar()
-        let dateFrom = "\(dateFromComponents.year)-\(dateFromComponents.month)-\(dateFromComponents.day)"
+    static func datesParams() -> [String: String] {
+        let dateNow = Date()
+        var dateToComponents = Calendar.current.dateComponents([.day, .month, .year], from: dateNow)
+        dateToComponents.calendar =  Calendar.current
+        let dateTo = "\(dateToComponents.year!)-\(dateToComponents.month!)-\(dateToComponents.day!)"
+        dateToComponents.month! -= 3
+        var dateFromComponents = Calendar.current.dateComponents([.day, .month, .year], from: dateToComponents.date!)
+        dateFromComponents.calendar =  Calendar.current
+        let dateFrom = "\(dateFromComponents.year!)-\(dateFromComponents.month!)-\(dateFromComponents.day!)"
         
         return [
             "date_from": dateFrom,
@@ -88,47 +85,47 @@ extension ApiManager: NSURLSessionDownloadDelegate {
         ]
     }
 
-    func downloadDocument(document: Document, user: User, completion: (error: NSError?) -> ()) {
+    func downloadDocument(_ document: Document, user: User, completion: @escaping (_ error: NSError?) -> ()) {
         self.downloadDocumentCompletion = completion
         self.document = document
-        let backgroundSessionConfiguration = NSURLSessionConfiguration.backgroundSessionConfigurationWithIdentifier("backgroundSession")
-        self.backgroundSession = NSURLSession(configuration: backgroundSessionConfiguration, delegate: self, delegateQueue: NSOperationQueue.mainQueue())
-        let url = NSURL(string: K.Api.BaseUrl + K.Api.Documents.Unzip + "?doc=\(document.zipFile)")!
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "GET"
+        let backgroundSessionConfiguration = URLSessionConfiguration.background(withIdentifier: "backgroundSession")
+        self.backgroundSession = Foundation.URLSession(configuration: backgroundSessionConfiguration, delegate: self, delegateQueue: OperationQueue.main)
+        let url = URL(string: K.Api.BaseUrl + K.Api.Documents.Unzip + "?doc=\(document.zipFile)")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
         request.setValue(user.token, forHTTPHeaderField: "Authorization")
-        downloadTask = backgroundSession.downloadTaskWithRequest(request)
+        downloadTask = backgroundSession.downloadTask(with: request)
         downloadTask.resume()
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
 
-    // MARK: - NSURLSessionDownloadDelegate
+    // MARK: - URLSessionDownloadDelegate
 
-    func URLSession(session: NSURLSession,
-                    downloadTask: NSURLSessionDownloadTask,
-                    didFinishDownloadingToURL location: NSURL){
-        let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+    func urlSession(_ session: URLSession,
+                    downloadTask: URLSessionDownloadTask,
+                    didFinishDownloadingTo location: URL){
+        let path = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
         let documentDirectoryPath:String = path[0]
-        let fileManager = NSFileManager()
-        let destinationURLForFile = NSURL(fileURLWithPath: documentDirectoryPath.stringByAppendingString("/\(document.fileName).xls"))
+        let fileManager = FileManager()
+        let destinationURLForFile = URL(fileURLWithPath: documentDirectoryPath + "/\(document.fileName).xls")
         do {
-            try fileManager.moveItemAtURL(location, toURL: destinationURLForFile)
+            try fileManager.moveItem(at: location, to: destinationURLForFile)
         } catch{
             print("An error occurred while moving file to destination url")
         }
     }
     
-    func URLSession(session: NSURLSession,
-                    task: NSURLSessionTask,
-                    didCompleteWithError error: NSError?){
-        downloadDocumentCompletion(error: error)
+    func urlSession(_ session: URLSession,
+                    task: URLSessionTask,
+                    didCompleteWithError error: Error?){
+        downloadDocumentCompletion(error as? NSError)
         downloadTask = nil
         if (error != nil) {
-            print(error?.description)
+            print(error?.localizedDescription)
         } else {
             print("The task finished transferring data successfully")
         }
         
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 }

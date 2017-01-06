@@ -34,21 +34,21 @@ class OrderTableViewCell: UITableViewCell {
         
         if fbDif == 0 {
             fbDifLabel.text = String(fbDif)
-            fbDifLabel.textColor = UIColor.blackColor()
-            checkmarkImageView.hidden = false
+            fbDifLabel.textColor = UIColor.black
+            checkmarkImageView.isHidden = false
         } else {
             fbDifLabel.text = "-\(fbDif)"
             fbDifLabel.textColor = UIColor(red: 202/255, green: 5/255, blue: 15/255, alpha: 1)
-            checkmarkImageView.hidden = true
+            checkmarkImageView.isHidden = true
         }
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
-        dateLabel.text = dateFormatter.stringFromDate(order.headDate)
+        dateLabel.text = dateFormatter.string(from: order.headDate as Date)
         
-        let locale = NSLocale(localeIdentifier: LanguageManager.languageCode())
+        let locale = Locale(identifier: LanguageManager.languageCode())
         dateFormatter.locale = locale
         dateFormatter.dateFormat = "EEEE"
-        dayOfWeekLabel.text = dateFormatter.stringFromDate(order.headDate).lowercaseString
+        dayOfWeekLabel.text = dateFormatter.string(from: order.headDate as Date).lowercased()
     }
 }

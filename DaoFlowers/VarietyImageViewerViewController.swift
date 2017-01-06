@@ -22,19 +22,19 @@ class VarietyImageViewerViewController: BaseViewController, UICollectionViewData
         adjustSelectedPageLabel()
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         collectionView.reloadData()
         scrollToCurrentPage()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         scrollToCurrentPage()
     }
     
-    @IBAction func backButtonClicked(sender: UIButton) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func backButtonClicked(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Private Methods
@@ -50,12 +50,12 @@ class VarietyImageViewerViewController: BaseViewController, UICollectionViewData
     
     // MARK: - UICollectionViewDataSource
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("VarietyImageCellIdentifier", forIndexPath: indexPath) as! VarietyImageCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VarietyImageCellIdentifier", for: indexPath) as! VarietyImageCollectionViewCell
         cell.image = images[indexPath.row]
 
         return cell
@@ -63,13 +63,13 @@ class VarietyImageViewerViewController: BaseViewController, UICollectionViewData
     
     // MARK: UICollectionViewDelegateFlowLayout
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         return self.viewWillTransitionToSize
     }
     
     // MARK: UIScrollViewDelegate
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.indexOfCurrentPage = Int(round(collectionView.contentOffset.x / collectionView.frame.width))
         adjustSelectedPageLabel()
     }

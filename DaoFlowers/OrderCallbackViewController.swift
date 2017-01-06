@@ -43,7 +43,7 @@ class OrderCallbackViewController: BaseViewController, UITextFieldDelegate {
         cityLabel.text = CustomLocalisedString("City")
         phoneLabel.text = CustomLocalisedString("Phone")
         commentsLabel.text = CustomLocalisedString("Your comments");
-        orderCallbackButton.setTitle(CustomLocalisedString("ORDER CALLBACK"), forState: .Normal)
+        orderCallbackButton.setTitle(CustomLocalisedString("ORDER CALLBACK"), for: UIControlState())
         
         commentsTextView.layer.cornerRadius = 5
         adjustViews()
@@ -51,8 +51,8 @@ class OrderCallbackViewController: BaseViewController, UITextFieldDelegate {
         scrollView.delaysContentTouches = false
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         adjustViews()
     }
     
@@ -66,18 +66,18 @@ class OrderCallbackViewController: BaseViewController, UITextFieldDelegate {
         
         if User.currentUser() == nil {
             if isPortraitOrientation() {
-                scrollView.contentSize = CGSizeMake(320, 1117)
+                scrollView.contentSize = CGSize(width: 320, height: 1117)
             } else {
-                scrollView.contentSize = CGSizeMake(320, 1063)
+                scrollView.contentSize = CGSize(width: 320, height: 1063)
             }
         } else {
             var generalInfoContainerViewFrame = generalInfoContainerView.frame
             generalInfoContainerViewFrame.origin.y = 0
             generalInfoContainerView.frame = generalInfoContainerViewFrame
             if isPortraitOrientation() {
-                scrollView.contentSize = CGSizeMake(320, 772)
+                scrollView.contentSize = CGSize(width: 320, height: 772)
             } else {
-                scrollView.contentSize = CGSizeMake(320, 718)
+                scrollView.contentSize = CGSize(width: 320, height: 718)
             }
         }
     }
@@ -86,7 +86,7 @@ class OrderCallbackViewController: BaseViewController, UITextFieldDelegate {
         var toolbar = UIToolbar()
         toolbar.sizeToFit()
         var doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
-                                         style: UIBarButtonItemStyle.Done,
+                                         style: UIBarButtonItemStyle.done,
                                          target: phoneTextField,
                                          action: #selector(UIResponder.resignFirstResponder))
         toolbar.setItems([doneButton], animated: true)
@@ -95,7 +95,7 @@ class OrderCallbackViewController: BaseViewController, UITextFieldDelegate {
         toolbar = UIToolbar()
         toolbar.sizeToFit()
         doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
-                                     style: UIBarButtonItemStyle.Done,
+                                     style: UIBarButtonItemStyle.done,
                                      target: viberTextField,
                                      action: #selector(UIResponder.resignFirstResponder))
         toolbar.setItems([doneButton], animated: true)
@@ -104,7 +104,7 @@ class OrderCallbackViewController: BaseViewController, UITextFieldDelegate {
         toolbar = UIToolbar()
         toolbar.sizeToFit()
         doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
-                                     style: UIBarButtonItemStyle.Done,
+                                     style: UIBarButtonItemStyle.done,
                                      target: commentsTextView,
                                      action: #selector(UIResponder.resignFirstResponder))
         toolbar.setItems([doneButton], animated: true)
@@ -139,20 +139,20 @@ class OrderCallbackViewController: BaseViewController, UITextFieldDelegate {
     
     // MARK: - Actions
 
-    @IBAction func orderCallbackButtonClicked(sender: UIButton) {
-        let alertController = UIAlertController(title: CustomLocalisedString("Sending request"), message: CustomLocalisedString("Send call-back request"), preferredStyle: .Alert)
-        let yesAlertAction = UIAlertAction(title: CustomLocalisedString("YES"), style: .Default) { alertAction in
+    @IBAction func orderCallbackButtonClicked(_ sender: UIButton) {
+        let alertController = UIAlertController(title: CustomLocalisedString("Sending request"), message: CustomLocalisedString("Send call-back request"), preferredStyle: .alert)
+        let yesAlertAction = UIAlertAction(title: CustomLocalisedString("YES"), style: .default) { alertAction in
             self.orderCallback()
         }
-        let noAlertAction = UIAlertAction(title: CustomLocalisedString("NO"), style: .Default, handler: nil)
+        let noAlertAction = UIAlertAction(title: CustomLocalisedString("NO"), style: .default, handler: nil)
         alertController.addAction(noAlertAction)
         alertController.addAction(yesAlertAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     // MARK: - UITextFieldDelegate
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }

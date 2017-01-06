@@ -3,6 +3,6 @@ platform :ios, '9.0'
 use_frameworks!
 
 target 'DaoFlowers' do
-    pod 'Alamofire', '~> 3.4'
-    pod 'AlamofireImage', '~> 2.0'
+    pod 'Alamofire', '~> 4.0'
+    pod 'AlamofireImage', '~> 3.1'
 end

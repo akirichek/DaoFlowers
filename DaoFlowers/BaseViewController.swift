@@ -10,7 +10,7 @@ import UIKit
 
 class BaseViewController: UIViewController {
     var menuButtonHandler: MenuButtonHandler!
-    var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size
+    var viewWillTransitionToSize = UIScreen.main.bounds.size
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,40 +18,40 @@ class BaseViewController: UIViewController {
         self.navigationController?.view.removeGestureRecognizer(self.navigationController!.interactivePopGestureRecognizer!)
     }
     
-    @IBAction func menuButtonClicked(sender: UIBarButtonItem) {
+    @IBAction func menuButtonClicked(_ sender: UIBarButtonItem) {
         self.menuButtonHandler.menuButtonClicked()
     }
     
-    func adjustConstraintsForItem(forItem: UIView, toItem: UIView) {
+    func adjustConstraintsForItem(_ forItem: UIView, toItem: UIView) {
         let leadingConstraint = NSLayoutConstraint(item: forItem,
-                                                   attribute: NSLayoutAttribute.Leading,
-                                                   relatedBy: NSLayoutRelation.Equal,
+                                                   attribute: NSLayoutAttribute.leading,
+                                                   relatedBy: NSLayoutRelation.equal,
                                                    toItem: toItem,
-                                                   attribute: NSLayoutAttribute.Leading,
+                                                   attribute: NSLayoutAttribute.leading,
                                                    multiplier: 1,
                                                    constant: 0)
         let trailingConstraint = NSLayoutConstraint(item: forItem,
-                                                    attribute: NSLayoutAttribute.Trailing,
-                                                    relatedBy: NSLayoutRelation.Equal,
+                                                    attribute: NSLayoutAttribute.trailing,
+                                                    relatedBy: NSLayoutRelation.equal,
                                                     toItem: toItem,
-                                                    attribute: NSLayoutAttribute.Trailing,
+                                                    attribute: NSLayoutAttribute.trailing,
                                                     multiplier: 1,
                                                     constant: 0)
         let topConstraint = NSLayoutConstraint(item: forItem,
-                                               attribute: NSLayoutAttribute.Top,
-                                               relatedBy: NSLayoutRelation.Equal,
+                                               attribute: NSLayoutAttribute.top,
+                                               relatedBy: NSLayoutRelation.equal,
                                                toItem: toItem,
-                                               attribute: NSLayoutAttribute.Top,
+                                               attribute: NSLayoutAttribute.top,
                                                multiplier: 1,
                                                constant: 0)
         let bottomConstraint = NSLayoutConstraint(item: forItem,
-                                                  attribute: NSLayoutAttribute.Bottom,
-                                                  relatedBy: NSLayoutRelation.Equal,
+                                                  attribute: NSLayoutAttribute.bottom,
+                                                  relatedBy: NSLayoutRelation.equal,
                                                   toItem: toItem,
-                                                  attribute: NSLayoutAttribute.Bottom,
+                                                  attribute: NSLayoutAttribute.bottom,
                                                   multiplier: 1,
                                                   constant: 0)
-        NSLayoutConstraint.activateConstraints([leadingConstraint, trailingConstraint, topConstraint, bottomConstraint])
+        NSLayoutConstraint.activate([leadingConstraint, trailingConstraint, topConstraint, bottomConstraint])
     }
     
     func contentViewFrame() -> CGRect {
@@ -60,13 +60,13 @@ class BaseViewController: UIViewController {
         
         switch screenSize.width {
         case 320:
-            frame = CGRectMake(0, 64, 320, 504)
+            frame = CGRect(x: 0, y: 64, width: 320, height: 504)
         case 568:
-            frame = CGRectMake(0, 32, 568, 288)
+            frame = CGRect(x: 0, y: 32, width: 568, height: 288)
         case 768:
-            frame = CGRectMake(0, 64, 768, 960)
+            frame = CGRect(x: 0, y: 64, width: 768, height: 960)
         case 1024:
-            frame = CGRectMake(0, 64, 1024, 704)
+            frame = CGRect(x: 0, y: 64, width: 1024, height: 704)
         default:
             break
         }
@@ -74,8 +74,8 @@ class BaseViewController: UIViewController {
         return frame
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         self.viewWillTransitionToSize = size
     }
     

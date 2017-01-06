@@ -24,7 +24,7 @@ class InvoiceDetailsGeneralViewPage: UIView, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var topContainerView: UIView!
 
     var spinner = RBHUD()
-    var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size {
+    var viewWillTransitionToSize = UIScreen.main.bounds.size {
         didSet {
             self.adjustViewSize()
             self.tableView.reloadData()
@@ -43,20 +43,20 @@ class InvoiceDetailsGeneralViewPage: UIView, UITableViewDelegate, UITableViewDat
     override func awakeFromNib() {
         super.awakeFromNib()
         var nib = UINib(nibName:"InvoiceDetailsGeneralTableViewCell", bundle: nil)
-        self.tableView.registerNib(nib, forCellReuseIdentifier: "InvoiceDetailsGeneralTableViewCellIdentifier")
+        self.tableView.register(nib, forCellReuseIdentifier: "InvoiceDetailsGeneralTableViewCellIdentifier")
         nib = UINib(nibName:"InvoiceDetailsGeneralLandscapeTableViewCell", bundle: nil)
-        self.tableView.registerNib(nib, forCellReuseIdentifier: "InvoiceDetailsGeneralLandscapeTableViewCellIdentifier")
+        self.tableView.register(nib, forCellReuseIdentifier: "InvoiceDetailsGeneralLandscapeTableViewCellIdentifier")
         
         nib = UINib(nibName:"InvoiceDetailsGeneralHeaderTableViewCell", bundle: nil)
-        self.tableView.registerNib(nib, forCellReuseIdentifier: "InvoiceDetailsGeneralHeaderTableViewCellIdentifier")
+        self.tableView.register(nib, forCellReuseIdentifier: "InvoiceDetailsGeneralHeaderTableViewCellIdentifier")
         nib = UINib(nibName:"InvoiceDetailsGeneralHeaderLandscapeTableViewCell", bundle: nil)
-        self.tableView.registerNib(nib, forCellReuseIdentifier: "InvoiceDetailsGeneralHeaderLandscapeTableViewCellIdentifier")
+        self.tableView.register(nib, forCellReuseIdentifier: "InvoiceDetailsGeneralHeaderLandscapeTableViewCellIdentifier")
         
         nib = UINib(nibName:"InvoiceDetailsGeneralTotalTableViewCell", bundle: nil)
-        self.tableView.registerNib(nib, forCellReuseIdentifier: "InvoiceDetailsGeneralTotalTableViewCellIdentifier")
+        self.tableView.register(nib, forCellReuseIdentifier: "InvoiceDetailsGeneralTotalTableViewCellIdentifier")
         
         nib = UINib(nibName:"InvoiceDetailsGeneralTotalLandscapeTableViewCell", bundle: nil)
-        self.tableView.registerNib(nib, forCellReuseIdentifier: "InvoiceDetailsGeneralTotalLandscapeTableViewCellIdentifier")
+        self.tableView.register(nib, forCellReuseIdentifier: "InvoiceDetailsGeneralTotalLandscapeTableViewCellIdentifier")
         
         self.totalInfoPortraitContainerView.layer.cornerRadius = 5
         self.totalInfoLandscapeContainerView.layer.cornerRadius = 5
@@ -73,13 +73,13 @@ class InvoiceDetailsGeneralViewPage: UIView, UITableViewDelegate, UITableViewDat
     // MARK: - Private Methods
     
     func populateInfoView() {
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
-        let dateString = dateFormatter.stringFromDate(invoice.date)
-        let locale = NSLocale(localeIdentifier: LanguageManager.languageCode())
+        let dateString = dateFormatter.string(from: invoice.date as Date)
+        let locale = Locale(identifier: LanguageManager.languageCode())
         dateFormatter.locale = locale
         dateFormatter.dateFormat = "EEE"
-        let weekdayString = dateFormatter.stringFromDate(invoice.date).lowercaseString
+        let weekdayString = dateFormatter.string(from: invoice.date as Date).lowercased()
         invoiceDateLabels.forEach { $0.text = "\(dateString) [\(weekdayString)]" }
         invoiceNumberLabels.forEach { $0.text = invoice.number }
         clientLabels.forEach { $0.text = invoice.label }
@@ -93,19 +93,19 @@ class InvoiceDetailsGeneralViewPage: UIView, UITableViewDelegate, UITableViewDat
         var tableViewFrame = tableView.frame
         
         if viewWillTransitionToSize.width < viewWillTransitionToSize.height {
-            totalInfoPortraitContainerView.hidden = false
-            totalInfoLandscapeContainerView.hidden = true
-            headerPortraitView.hidden = false
-            headerLandscapeView.hidden = true
+            totalInfoPortraitContainerView.isHidden = false
+            totalInfoLandscapeContainerView.isHidden = true
+            headerPortraitView.isHidden = false
+            headerLandscapeView.isHidden = true
             topContainerViewFrame.size.height = headerPortraitView.frame.height + headerPortraitView.frame.origin.y
             tableViewFrame.origin.y = topContainerViewFrame.origin.y + topContainerViewFrame.height
             tableViewFrame.size.height = viewWillTransitionToSize.height - tableViewFrame.origin.y - 104
         } else {
-            totalInfoPortraitContainerView.hidden = true
-            totalInfoLandscapeContainerView.hidden = false
+            totalInfoPortraitContainerView.isHidden = true
+            totalInfoLandscapeContainerView.isHidden = false
             totalInfoLandscapeContainerView.frame.size.width = self.frame.width - 10
-            headerPortraitView.hidden = true
-            headerLandscapeView.hidden = false
+            headerPortraitView.isHidden = true
+            headerLandscapeView.isHidden = false
             headerLandscapeView.frame.size.width = self.frame.width
             topContainerViewFrame.size.height = headerLandscapeView.frame.height + headerLandscapeView.frame.origin.y
             tableViewFrame.origin.y = topContainerViewFrame.origin.y + topContainerViewFrame.height
@@ -117,7 +117,7 @@ class InvoiceDetailsGeneralViewPage: UIView, UITableViewDelegate, UITableViewDat
     
     // MARK: - UITableViewDataSource
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         var numberOfRows = 0
         if let heads = self.invoiceDetails?.heads {
             self.spinner.hideLoader()
@@ -129,13 +129,13 @@ class InvoiceDetailsGeneralViewPage: UIView, UITableViewDelegate, UITableViewDat
         return numberOfRows
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let head = self.invoiceDetails!.heads[section]
         let rows = head.rows
         return rows.count + 2
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cellIdentifier: String
         if viewWillTransitionToSize.width < viewWillTransitionToSize.height {
             if indexPath.row == 0 {
@@ -155,7 +155,7 @@ class InvoiceDetailsGeneralViewPage: UIView, UITableViewDelegate, UITableViewDat
             }
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! InvoiceDetailsGeneralTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! InvoiceDetailsGeneralTableViewCell
                 
         let head = self.invoiceDetails!.heads[indexPath.section]
         cell.invoiceDetails = self.invoiceDetails
@@ -175,7 +175,7 @@ class InvoiceDetailsGeneralViewPage: UIView, UITableViewDelegate, UITableViewDat
     
     // MARK: - UITableViewDelegate
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var heightForRow: CGFloat
         if indexPath.row == 0 {
             if viewWillTransitionToSize.width < viewWillTransitionToSize.height {
@@ -201,11 +201,11 @@ class InvoiceDetailsGeneralViewPage: UIView, UITableViewDelegate, UITableViewDat
             
             let heightForFlowerName = Utils.heightForText(flower.name,
                                                           havingWidth: labelWidth,
-                                                          andFont: UIFont.systemFontOfSize(12))
+                                                          andFont: UIFont.systemFont(ofSize: 12))
             let variety = self.invoiceDetails!.varietyById(row.flowerSortId)!
             let heightForVarietyName = Utils.heightForText(variety.name,
                                                            havingWidth: labelWidth,
-                                                           andFont: UIFont.systemFontOfSize(12))
+                                                           andFont: UIFont.systemFont(ofSize: 12))
             if viewWillTransitionToSize.width < viewWillTransitionToSize.height {
                 if heightForVarietyName > labelHeight && heightForFlowerName > labelHeight{
                     heightForRow = 77

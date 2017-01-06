@@ -53,17 +53,17 @@ class InvoiceDetailsGeneralTableViewCell: UITableViewCell {
         if plantation.name == plantation.brand {
             plantationLabel.text = plantation.name
         } else {
-            let planNameFontAttr = [NSFontAttributeName: UIFont.systemFontOfSize(12, weight: UIFontWeightSemibold)]
+            let planNameFontAttr = [NSFontAttributeName: UIFont.systemFont(ofSize: 12, weight: UIFontWeightSemibold)]
             let plantationString = "\(plantation.name) [\(plantation.brand)]"
             let plantationAttrString = NSMutableAttributedString(string: plantationString, attributes: planNameFontAttr)
             let range = NSRange(location: plantation.name.characters.count + 1, length: plantation.brand.characters.count + 2)
-            plantationAttrString.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(12), range: range)
+            plantationAttrString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 12), range: range)
             plantationLabel.attributedText = plantationAttrString
         }
         clientLabel.text = invoiceDetailsHead.label
         let country = invoiceDetails.countryById(invoiceDetailsHead.countryId)!
         countryLabel.text = country.abr
-        piecesLabel.text = invoiceDetailsHead.pieces.stringByReplacingOccurrencesOfString(";", withString: " ")
+        piecesLabel.text = invoiceDetailsHead.pieces.replacingOccurrences(of: ";", with: " ")
     }
     
     func populateTotalView() {

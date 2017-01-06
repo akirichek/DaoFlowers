@@ -11,12 +11,12 @@ import UIKit
 class MainViewControllerSegue: UIStoryboardSegue {
     
     override func perform() {
-        let mainViewController = self.sourceViewController as! MainViewController
-        let destinationViewController = self.destinationViewController as! UINavigationController
+        let mainViewController = self.source as! MainViewController
+        let destinationViewController = self.destination as! UINavigationController
         //let destinationRootViewController = destinationViewController.viewControllers[0]
         
         if mainViewController.currentViewController != nil {
-            mainViewController.currentViewController?.willMoveToParentViewController(nil)
+            mainViewController.currentViewController?.willMove(toParentViewController: nil)
             mainViewController.currentViewController?.view.removeFromSuperview()
             mainViewController.currentViewController?.removeFromParentViewController()
         }
@@ -24,7 +24,7 @@ class MainViewControllerSegue: UIStoryboardSegue {
         //destinationViewController.view.frame = mainViewController.containerView.bounds;
         mainViewController.addChildViewController(destinationViewController)
         mainViewController.containerView.addSubview(destinationViewController.view)
-        destinationViewController.didMoveToParentViewController(mainViewController)
+        destinationViewController.didMove(toParentViewController: mainViewController)
         mainViewController.currentViewController = destinationViewController
     }
 }

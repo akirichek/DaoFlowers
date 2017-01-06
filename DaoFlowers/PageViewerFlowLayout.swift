@@ -8,18 +8,18 @@
 
 import UIKit
 
-public class PageViewerFlowLayout: UICollectionViewFlowLayout {
+open class PageViewerFlowLayout: UICollectionViewFlowLayout {
     
-    private var lastCollectionViewSize: CGSize = CGSizeZero
+    fileprivate var lastCollectionViewSize: CGSize = CGSize.zero
     
-    public var scalingOffset: CGFloat = 200
-    public var minimumScaleFactor: CGFloat = 0.9
-    public var velocity: CGFloat = 0.2
-    public var scaleItems: Bool = true
+    open var scalingOffset: CGFloat = 200
+    open var minimumScaleFactor: CGFloat = 0.9
+    open var velocity: CGFloat = 0.2
+    open var scaleItems: Bool = true
     
-    static func configureLayout(collectionView: UICollectionView) -> PageViewerFlowLayout {
+    static func configureLayout(_ collectionView: UICollectionView) -> PageViewerFlowLayout {
         let layout = PageViewerFlowLayout()
-        layout.scrollDirection = .Horizontal
+        layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         collectionView.collectionViewLayout = layout
@@ -28,16 +28,16 @@ public class PageViewerFlowLayout: UICollectionViewFlowLayout {
         return layout
     }
     
-    public override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
+    open override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
     }
     
-    public override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    open override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         if !self.scaleItems || self.collectionView == nil {
-            return super.layoutAttributesForElementsInRect(rect)
+            return super.layoutAttributesForElements(in: rect)
         }
         
-        let superAttributes = super.layoutAttributesForElementsInRect(rect)
+        let superAttributes = super.layoutAttributesForElements(in: rect)
         
         if superAttributes == nil {
             return nil
@@ -46,12 +46,12 @@ public class PageViewerFlowLayout: UICollectionViewFlowLayout {
         let contentOffset = self.collectionView!.contentOffset
         let size = self.collectionView!.bounds.size
         
-        let visibleRect = CGRectMake(contentOffset.x, contentOffset.y, size.width, size.height)
-        let visibleCenterX = CGRectGetMidX(visibleRect)
+        let visibleRect = CGRect(x: contentOffset.x, y: contentOffset.y, width: size.width, height: size.height)
+        let visibleCenterX = visibleRect.midX
         
         var newAttributesArray = Array<UICollectionViewLayoutAttributes>()
         
-        for (_, attributes) in superAttributes!.enumerate() {
+        for (_, attributes) in superAttributes!.enumerated() {
             let newAttributes = attributes.copy() as! UICollectionViewLayoutAttributes
             newAttributesArray.append(newAttributes)
             let distanceFromCenter = visibleCenterX - newAttributes.center.x

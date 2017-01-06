@@ -222,7 +222,7 @@ struct InvoiceDetails {
         }
     }
     
-    func varietyById(id: Int) -> Variety? {
+    func varietyById(_ id: Int) -> Variety? {
         for variety in varieties {
             if variety.id == id {
                 return variety
@@ -232,7 +232,7 @@ struct InvoiceDetails {
         return nil
     }
     
-    func flowerById(id: Int) -> Flower? {
+    func flowerById(_ id: Int) -> Flower? {
         for flower in flowers {
             if flower.id == id {
                 return flower
@@ -242,7 +242,7 @@ struct InvoiceDetails {
         return nil
     }
     
-    func flowerSizeById(id: Int) -> Flower.Size? {
+    func flowerSizeById(_ id: Int) -> Flower.Size? {
         for flowerSize in flowerSizes {
             if flowerSize.id == id {
                 return flowerSize
@@ -252,7 +252,7 @@ struct InvoiceDetails {
         return nil
     }
     
-    func plantationById(id: Int) -> Plantation? {
+    func plantationById(_ id: Int) -> Plantation? {
         for plantation in plantations {
             if plantation.id == id {
                 return plantation
@@ -262,7 +262,7 @@ struct InvoiceDetails {
         return nil
     }
     
-    func countryById(id: Int) -> Country? {
+    func countryById(_ id: Int) -> Country? {
         for country in countries {
             if country.id == id {
                 return country
@@ -276,7 +276,7 @@ struct InvoiceDetails {
     
     mutating func sortOrderStatistic() {
         var sortedOrderStatistic = self.orderStatistic
-        sortedOrderStatistic.rowsGroupedByFlowerTypeId.sortInPlace { (row1, row2) -> Bool in
+        sortedOrderStatistic.rowsGroupedByFlowerTypeId.sort { (row1, row2) -> Bool in
             let flowerTypeId1 = Int(Array(row1.keys)[0])
             let flowerTypeId2 = Int(Array(row2.keys)[0])
             return flowerTypeId1 < flowerTypeId2
@@ -286,7 +286,7 @@ struct InvoiceDetails {
         for dictionary in sortedOrderStatistic.rowsGroupedByFlowerTypeId {
             for (flowerTypeId, rows) in dictionary {
                 var sortedRows = rows
-                sortedRows.sortInPlace({ (row1, row2) -> Bool in
+                sortedRows.sort(by: { (row1, row2) -> Bool in
                     let variety1 = varietyById(row1.flowerSortId)!
                     let variety2 = varietyById(row2.flowerSortId)!
                     return variety1.name < variety2.name
@@ -305,7 +305,7 @@ struct InvoiceDetails {
     
     mutating func sortStatistic() {
         var sortedStatistic = self.statistic
-        sortedStatistic.averagePrices.sortInPlace { (avrPrice1, avrPrice2) -> Bool in
+        sortedStatistic.averagePrices.sort { (avrPrice1, avrPrice2) -> Bool in
             let country1 = self.countryById(avrPrice1.countryId)!
             let country2 = self.countryById(avrPrice2.countryId)!
             

@@ -47,7 +47,7 @@ class VarietyCollectionViewCell: UICollectionViewCell {
         }
         
         if let imageUrl = variety.smallImageUrl {
-            varietyImageView.af_setImageWithURL(NSURL(string: imageUrl)!)
+            varietyImageView.af_setImage(withURL: URL(string: imageUrl)!)
         } else {
             varietyImageView.image = UIImage(named: variety.flower.defaultImage)
         }

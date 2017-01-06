@@ -27,17 +27,17 @@ class SettingsViewController: BaseViewController, UIPickerViewDataSource, UIPick
         super.viewDidLoad()
         self.languagePickerView = createPickerViewForTextField(self.languageTextField)
         
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        if let selectedLanguage = userDefaults.stringForKey(K.UserDefaultsKey.Language) {
+        let userDefaults = UserDefaults.standard
+        if let selectedLanguage = userDefaults.string(forKey: K.UserDefaultsKey.Language) {
             self.selectedLanguage = Language(rawValue:selectedLanguage)!
         } else {
             self.selectedLanguage = Language.English
         }
     }
 
-    @IBAction func languageButtonClicked(sender: UIButton) {
+    @IBAction func languageButtonClicked(_ sender: UIButton) {
         languageTextField.becomeFirstResponder()
-        let row = self.languages.indexOf(self.selectedLanguage)!
+        let row = self.languages.index(of: self.selectedLanguage)!
         self.languagePickerView.selectRow(row, inComponent: 0, animated: false)
         self.arrowImageView.image = UIImage(named: "up_arrow")
         
@@ -52,25 +52,25 @@ class SettingsViewController: BaseViewController, UIPickerViewDataSource, UIPick
         self.flagImageView.image = UIImage(named: self.selectedLanguage.flagImageName())
     }
     
-    func doneButtonClicked(sender: UIBarButtonItem) {
+    func doneButtonClicked(_ sender: UIBarButtonItem) {
         changeLanguage()
     }
     
     func changeLanguage() {
         self.languageTextField.resignFirstResponder()
         self.arrowImageView.image = UIImage(named: "down_arrow")
-        let row = self.languagePickerView.selectedRowInComponent(0)
+        let row = self.languagePickerView.selectedRow(inComponent: 0)
         let selectedLanguage = languages[row]
-        let userDefaults = NSUserDefaults.standardUserDefaults()
-        userDefaults.setObject(selectedLanguage.rawValue, forKey: K.UserDefaultsKey.Language)
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(selectedLanguage.rawValue, forKey: K.UserDefaultsKey.Language)
         userDefaults.synchronize()
         self.selectedLanguage = selectedLanguage
     }
     
-    func createPickerViewForTextField(textField: UITextField) -> UIPickerView {
+    func createPickerViewForTextField(_ textField: UITextField) -> UIPickerView {
         let pickerView = UIPickerView()
-        pickerView.tintColor = UIColor.redColor()
-        pickerView.backgroundColor = UIColor.clearColor()
+        pickerView.tintColor = UIColor.red
+        pickerView.backgroundColor = UIColor.clear
         pickerView.dataSource = self
         pickerView.delegate = self
         textField.inputView = pickerView
@@ -78,7 +78,7 @@ class SettingsViewController: BaseViewController, UIPickerViewDataSource, UIPick
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
-                                         style: UIBarButtonItemStyle.Done,
+                                         style: UIBarButtonItemStyle.done,
                                          target: self,
                                          action: #selector(VarietiesPageView.doneButtonClicked(_:)))
         toolbar.setItems([doneButton], animated: true)
@@ -87,35 +87,35 @@ class SettingsViewController: BaseViewController, UIPickerViewDataSource, UIPick
         return pickerView
     }
     
-    override func menuButtonClicked(sender: UIBarButtonItem) {
+    override func menuButtonClicked(_ sender: UIBarButtonItem) {
         super.menuButtonClicked(sender)
         languageTextField.resignFirstResponder()
     }
     
     // MARK: - UIPickerViewDataSource
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return languages.count
     }
     
     // MARK: - UIPickerViewDelegate
     
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let lang = languages[row]
-        let cell = NSBundle.mainBundle().loadNibNamed("LanguagePickerViewCell", owner: self, options: nil).first as! LanguagePickerViewCell
+        let cell = Bundle.main.loadNibNamed("LanguagePickerViewCell", owner: self, options: nil)?.first as! LanguagePickerViewCell
         cell.language = lang
         return cell
     }
     
-    func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return 80
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         changeLanguage()
     }
 }

@@ -10,9 +10,9 @@ import Alamofire
 
 extension ApiManager {
     
-    static func fetchCountries(completion: (countries: [Country]?, error: NSError?) -> ()) {
+    static func fetchCountries(_ completion: @escaping (_ countries: [Country]?, _ error: NSError?) -> ()) {
         let url = K.Api.BaseUrl + K.Api.CountriesPath
-        Alamofire.request(.GET, url).responseJSON { response in
+        Alamofire.request(url, method: .get).responseJSON { response in
             if response.result.isSuccess {
                 var countries: [Country] = []
                 if let json = response.result.value {
@@ -23,20 +23,20 @@ extension ApiManager {
                     }
                 }
                 
-                completion(countries: countries, error: nil)
+                completion(countries, nil)
             } else {
                 print("Error: \(response.result.error)")
-                completion(countries: nil, error: response.result.error)
+                completion(nil, response.result.error as NSError?)
             }
         }
     }
     
-    static func fetchPlantationsByCountry(country: Country, completion: (plantations: [Plantation]?, error: NSError?) -> ()) {
+    static func fetchPlantationsByCountry(_ country: Country, completion: @escaping (_ plantations: [Plantation]?, _ error: NSError?) -> ()) {
         let parameters: [String: AnyObject] = [
-            "country_id": country.id
+            "country_id": country.id as AnyObject
         ]
         let url = K.Api.BaseUrl + K.Api.PlantationsPath
-        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
             if response.result.isSuccess {
                 var plantations: [Plantation] = []
                 if let json = response.result.value {
@@ -47,17 +47,17 @@ extension ApiManager {
                     }
                 }
                 
-                completion(plantations: plantations, error: nil)
+                completion(plantations, nil)
             } else {
                 print("Error: \(response.result.error)")
-                completion(plantations: nil, error: response.result.error)
+                completion(nil, response.result.error as NSError?)
             }
         }
     }
     
-    static func fetchPlantationsGrowersByVariety(variety: Variety, user: User, completion: (plantations: [Plantation]?, error: NSError?) -> ()) {
+    static func fetchPlantationsGrowersByVariety(_ variety: Variety, user: User, completion: @escaping (_ plantations: [Plantation]?, _ error: NSError?) -> ()) {
         let url = K.Api.BaseUrl + K.Api.PlantationsGrowersPath + "/\(variety.id)"
-        Alamofire.request(.GET, url, headers:["Authorization": user.token]).responseJSON { response in
+        Alamofire.request(url, method: .get, headers:["Authorization": user.token]).responseJSON { response in
             if response.result.isSuccess {
                 var plantations: [Plantation] = []
                 if let json = response.result.value {
@@ -67,21 +67,21 @@ extension ApiManager {
                         plantations.append(plantation)
                     }
                 }
-                completion(plantations: plantations, error: nil)
+                completion(plantations, nil)
             } else {
                 print("Error: \(response.result.error)")
-                completion(plantations: nil, error: response.result.error)
+                completion(nil, response.result.error as NSError?)
             }
         }
     }
     
-    static func fetchPlantationsSearchParameters(completion: (searchParams: ([Country], [Flower])?, error: NSError?) -> ()) {
+    static func fetchPlantationsSearchParameters(_ completion: @escaping (_ searchParams: ([Country], [Flower])?, _ error: NSError?) -> ()) {
         let url = K.Api.BaseUrl + K.Api.PlantationsSearchParametersPath
-        Alamofire.request(.GET, url).responseJSON { response in
+        Alamofire.request(url, method: .get).responseJSON { response in
             if response.result.isSuccess {
                 var contries: [Country] = []
                 var flowers: [Flower] = []
-                if let json = response.result.value {
+                if let json = response.result.value as? [String: AnyObject] {
                     //print("JSON: \(json)")
                     for countryDictionary in json["countries"] as! [[String: AnyObject]] {
                         contries.append(Country(dictionary: countryDictionary))
@@ -90,17 +90,17 @@ extension ApiManager {
                         flowers.append(Flower(dictionary: flowerDictionary))
                     }
                 }
-                completion(searchParams: (contries, flowers), error: nil)
+                completion((contries, flowers), nil)
             } else {
                 print("Error: \(response.result.error)")
-                completion(searchParams: nil, error: response.result.error)
+                completion(nil, response.result.error as NSError?)
             }
         }
     }
     
-    static func searchPlantationsByTerm(term: String, countries: [Country]?, flowers: [Flower]?, completion: (plantations: [Plantation]?, error: NSError?) -> ()) {
+    static func searchPlantationsByTerm(_ term: String, countries: [Country]?, flowers: [Flower]?, completion: @escaping (_ plantations: [Plantation]?, _ error: NSError?) -> ()) {
         var parameters: [String: AnyObject] = [
-            "name": term
+            "name": term as AnyObject
         ]
         
         if let countries = countries {
@@ -109,7 +109,7 @@ extension ApiManager {
                 for country in countries {
                     countryIds.append(String(country.id))
                 }
-                parameters["country_ids"] = countryIds.joinWithSeparator(",")
+                parameters["country_ids"] = countryIds.joined(separator: ",") as AnyObject?
             }
         }
         
@@ -119,12 +119,12 @@ extension ApiManager {
                 for flower in flowers {
                     flowerIds.append(String(flower.id))
                 }
-                parameters["flower_type_ids"] = flowerIds.joinWithSeparator(",")
+                parameters["flower_type_ids"] = flowerIds.joined(separator: ",") as AnyObject?
             }
         }
               
         let url = K.Api.BaseUrl + K.Api.SearchPlantationsPath
-        Alamofire.request(.GET, url, parameters: parameters).responseJSON { response in
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
             if response.result.isSuccess {
                 var plantations: [Plantation] = []
                 if let json = response.result.value {
@@ -135,26 +135,26 @@ extension ApiManager {
                     }
                 }
                 plantations = Utils.sortedPlantationsByActivePlantations(plantations)
-                completion(plantations: plantations, error: nil)
+                completion(plantations, nil)
             } else {
                 print("Error: \(response.result.error)")
-                completion(plantations: nil, error: response.result.error)
+                completion(nil, response.result.error as NSError?)
             }
         }
     }
     
-    static func fetchPlantationDetails(plantation: Plantation,
+    static func fetchPlantationDetails(_ plantation: Plantation,
                                        user: User?,
-                                       completion: (plantationDetails: Plantation?, error: NSError?) -> ()) {
+                                       completion: @escaping (_ plantationDetails: Plantation?, _ error: NSError?) -> ()) {
         let url = K.Api.BaseUrl + K.Api.PlantationsPath + "/\(plantation.id)"
         var headers: [String: String] = [:]
         if let user = user {
            headers["Authorization"] = user.token
         }
-        Alamofire.request(.GET, url, headers:headers).responseJSON { response in
+        Alamofire.request(url, method: .get, headers:headers).responseJSON { response in
             if response.result.isSuccess {
                 var plantationDetails = plantation
-                if let json = response.result.value {
+                if let json = response.result.value as? [String: AnyObject] {
                     print("JSON: \(json)")
                     plantationDetails.countryName = json["countryName"] as? String
                     var varieties: [Variety] = []
@@ -168,10 +168,10 @@ extension ApiManager {
                     plantationDetails.varieties = varieties
                 }
                 
-                completion(plantationDetails: plantationDetails, error: nil)
+                completion(plantationDetails, nil)
             } else {
                 print("Error: \(response.result.error)")
-                completion(plantationDetails: nil, error: response.result.error)
+                completion(nil, response.result.error as NSError?)
             }
         }
     }

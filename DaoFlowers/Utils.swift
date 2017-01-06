@@ -10,30 +10,30 @@ import UIKit
 
 class Utils: NSObject {
     
-    static func showError(error: NSError, inViewController viewController: UIViewController)  {
+    static func showError(_ error: NSError, inViewController viewController: UIViewController)  {
         self.showErrorWithMessage(error.localizedDescription, inViewController: viewController)
     }
      
-    static func showErrorWithMessage(message: String, inViewController viewController: UIViewController) {
+    static func showErrorWithMessage(_ message: String, inViewController viewController: UIViewController) {
         UIAlertView(title: CustomLocalisedString("Error"), message: message, delegate: nil, cancelButtonTitle: "OK").show()
     }
     
-    static func showSuccessWithMessage(message: String, inViewController viewController: UIViewController) {
+    static func showSuccessWithMessage(_ message: String, inViewController viewController: UIViewController) {
         UIAlertView(title: CustomLocalisedString("Success"), message: message, delegate: nil, cancelButtonTitle: "OK").show()
     }
 
-    static func sortedVarietiesByName(varieties: [Variety]) -> [Variety] {
+    static func sortedVarietiesByName(_ varieties: [Variety]) -> [Variety] {
         var array = varieties
-        array.sortInPlace({ (obj1, obj2) -> Bool in
+        array.sort(by: { (obj1, obj2) -> Bool in
             return obj1.name < obj2.name
         })
         
         return array
     }
     
-    static func sortedVarietiesByPercentsOfPurchase(varieties: [Variety]) -> [Variety] {
+    static func sortedVarietiesByPercentsOfPurchase(_ varieties: [Variety]) -> [Variety] {
         var array = varieties
-        array.sortInPlace({ (obj1, obj2) -> Bool in
+        array.sort(by: { (obj1, obj2) -> Bool in
             if let purchasePercent1 = obj1.purchasePercent {
                 if let purchasePercent2 = obj2.purchasePercent {
                     return purchasePercent1 > purchasePercent2
@@ -49,9 +49,9 @@ class Utils: NSObject {
     }
     
     
-    static func sortedVarietiesByBoughtLastMonth(varieties: [Variety]) -> [Variety] {
+    static func sortedVarietiesByBoughtLastMonth(_ varieties: [Variety]) -> [Variety] {
         var array = varieties
-        array.sortInPlace({ (obj1, obj2) -> Bool in
+        array.sort(by: { (obj1, obj2) -> Bool in
             return obj1.invoicesDone > obj2.invoicesDone
         })
         
@@ -59,7 +59,7 @@ class Utils: NSObject {
     }
     
     
-    static func sortedVarieties(varieties: [Variety], byAssortmentType assortmentType: VarietiesAssortmentType) -> [Variety] {
+    static func sortedVarieties(_ varieties: [Variety], byAssortmentType assortmentType: VarietiesAssortmentType) -> [Variety] {
         var array: [Variety]!
         switch assortmentType {
         case .ByName:
@@ -73,7 +73,7 @@ class Utils: NSObject {
         return array
     }
     
-    static func sortedPlantations(plantations: [Plantation], byAssortmentType assortmentType: PlantationsAssortmentType) -> [Plantation] {
+    static func sortedPlantations(_ plantations: [Plantation], byAssortmentType assortmentType: PlantationsAssortmentType) -> [Plantation] {
         var array: [Plantation]!
         switch assortmentType {
         case .ByName:
@@ -87,76 +87,76 @@ class Utils: NSObject {
         return array
     }
     
-    static func sortedPlantationsByName(plantations: [Plantation]) -> [Plantation] {
+    static func sortedPlantationsByName(_ plantations: [Plantation]) -> [Plantation] {
         var array = plantations
-        array.sortInPlace({ (obj1, obj2) -> Bool in
-            return obj1.name.lowercaseString < obj2.name.lowercaseString
+        array.sort(by: { (obj1, obj2) -> Bool in
+            return obj1.name.lowercased() < obj2.name.lowercased()
         })
         
         return array
     }
     
-    static func sortedFlowersByName(flowers: [Flower]) -> [Flower] {
+    static func sortedFlowersByName(_ flowers: [Flower]) -> [Flower] {
         var array = flowers
-        array.sortInPlace({ (obj1, obj2) -> Bool in
-            return obj1.name.lowercaseString < obj2.name.lowercaseString
+        array.sort(by: { (obj1, obj2) -> Bool in
+            return obj1.name.lowercased() < obj2.name.lowercased()
         })
         
         return array
     }
     
-    static func sortedFlowerSizesByName(sizes: [Flower.Size]) -> [Flower.Size] {
+    static func sortedFlowerSizesByName(_ sizes: [Flower.Size]) -> [Flower.Size] {
         var array = sizes
-        array.sortInPlace({ (obj1, obj2) -> Bool in
-            return obj1.name.lowercaseString < obj2.name.lowercaseString
+        array.sort(by: { (obj1, obj2) -> Bool in
+            return obj1.name.lowercased() < obj2.name.lowercased()
         })
         
         return array
     }
     
-    static func sortedOrderDetailsByName(orders: [OrderDetails]) -> [OrderDetails] {
+    static func sortedOrderDetailsByName(_ orders: [OrderDetails]) -> [OrderDetails] {
         var array = orders
-        array.sortInPlace({ (obj1, obj2) -> Bool in
+        array.sort(by: { (obj1, obj2) -> Bool in
             let str1 = obj1.flowerType.name + ". " + obj1.flowerSort.name
             let str2 = obj2.flowerType.name + ". " + obj2.flowerSort.name
-            return str1.lowercaseString < str2.lowercaseString
+            return str1.lowercased() < str2.lowercased()
         })
         
         return array
     }
     
-    static func sortedPlantationsByActivePlantations(plantations: [Plantation]) -> [Plantation] {
+    static func sortedPlantationsByActivePlantations(_ plantations: [Plantation]) -> [Plantation] {
         var activePlantations = sortedPlantationsByName(plantations.filter({$0.fbSum > 0}))
         let deactivePlantations = sortedPlantationsByName(plantations.filter({$0.fbSum == 0}))
         activePlantations += deactivePlantations
         return activePlantations
     }
     
-    static func sortedPlantationsByPercentsOfPurchase(plantations: [Plantation]) -> [Plantation] {
+    static func sortedPlantationsByPercentsOfPurchase(_ plantations: [Plantation]) -> [Plantation] {
         var array = plantations
-        array.sortInPlace({ (obj1, obj2) -> Bool in
+        array.sort(by: { (obj1, obj2) -> Bool in
             return obj1.fbSum > obj2.fbSum
         })
         
         return array
     }
     
-    static func heightForText(text: String, havingWidth widthValue: CGFloat, andFont font: UIFont) -> CGFloat{
-        var size = CGSizeZero;
+    static func heightForText(_ text: String, havingWidth widthValue: CGFloat, andFont font: UIFont) -> CGFloat{
+        var size = CGSize.zero;
         let nsstring = NSString(string: text)
-        let frame = nsstring.boundingRectWithSize(CGSizeMake(widthValue, CGFloat.max), options: .UsesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
-        size = CGSizeMake(frame.size.width, frame.size.height + 1)
+        let frame = nsstring.boundingRect(with: CGSize(width: widthValue, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        size = CGSize(width: frame.size.width, height: frame.size.height + 1)
         return size.height
     }
     
-    static func sortedDocuments(documents: [Document]) -> [NSDate: [Document]] {
-        var dictionary: [NSDate: [Document]] = [:]
+    static func sortedDocuments(_ documents: [Document]) -> [Date: [Document]] {
+        var dictionary: [Date: [Document]] = [:]
         for document in documents {
-            if var array = dictionary[document.date] {
+            if var array = dictionary[document.date as Date] {
                 array.append(document)
-                dictionary[document.date] = array
+                dictionary[document.date as Date] = array
             } else {
-                dictionary[document.date] = [document]
+                dictionary[document.date as Date] = [document]
             }
         }
         

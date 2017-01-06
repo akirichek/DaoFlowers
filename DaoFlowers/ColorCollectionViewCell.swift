@@ -37,7 +37,7 @@ class ColorCollectionViewCell: UICollectionViewCell {
         imageView.image = UIImage(named: flower.defaultImage)
         
         if let imageUrl = color.imageUrl {
-            imageView.af_setImageWithURL(NSURL(string: imageUrl)!)
+            imageView.af_setImage(withURL: URL(string: imageUrl)!)
         }
     }
 }

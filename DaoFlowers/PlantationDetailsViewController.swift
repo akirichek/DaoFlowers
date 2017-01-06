@@ -42,7 +42,7 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
         
         self.topContainerView.frame = self.topContainerViewFrame()
         self.pageViewerContainerView.frame = self.pageViewerFrame()
-        let pageViewer = NSBundle.mainBundle().loadNibNamed("PageViewer", owner: self, options: nil).first as! PageViewer
+        let pageViewer = Bundle.main.loadNibNamed("PageViewer", owner: self, options: nil)?.first as! PageViewer
         pageViewer.frame = self.pageViewerContainerView.bounds
         pageViewer.dataSource = self
         pageViewer.viewWillTransitionToSize = self.pageViewerFrame().size
@@ -54,7 +54,7 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
         populateInfoView()
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         self.viewWillTransitionToSize = size
         self.topContainerView.frame = self.topContainerViewFrame()
         if let page = self.pageViewer.pageAtIndex(self.pageViewer.indexOfCurrentPage) as? VarietiesByPlantationPageView {
@@ -66,8 +66,8 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
         self.pageViewer.reloadData()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let destinationViewController = segue.destinationViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationViewController = segue.destination
         if let varietyDetailsViewController = destinationViewController as? VarietyDetailsViewController {
             varietyDetailsViewController.variety = sender as! Variety
         }
@@ -75,7 +75,7 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
     
     // MARK: - Actions
     
-    @IBAction func searchButtonClicked(sender: UIBarButtonItem) {
+    @IBAction func searchButtonClicked(_ sender: UIBarButtonItem) {
         if let page = self.pageViewer.pageAtIndex(pageViewer.indexOfCurrentPage) as? VarietiesByPlantationPageView {
             let indexOfCurrentPage = pageViewer.indexOfCurrentPage
             var pageViewState = pageViewStates[indexOfCurrentPage]!
@@ -86,7 +86,7 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
         }
     }
     
-    @IBAction func infoButtonClicked(sender: UIBarButtonItem) {
+    @IBAction func infoButtonClicked(_ sender: UIBarButtonItem) {
         if self.hintView?.superview == nil {
             self.hintView = LanguageManager.loadNibNamed("VarietiesListHintView", owner: self, options: nil).first as? AHintView
             self.hintView!.frame = self.view.bounds
@@ -101,8 +101,8 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
         brandLabel.text = plantation.brand
         countryLabel.text = plantation.countryName
         if let imageUrl = plantation.imageUrl {
-            if let url = NSURL(string: imageUrl) {
-                logoImageView.af_setImageWithURL(url)
+            if let url = URL(string: imageUrl) {
+                logoImageView.af_setImage(withURL: url)
             }
         }
     }
@@ -125,9 +125,9 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
                             self.flowers.append(variety.flower)
                         }
                         
-                        if self.colors.indexOf({$0.id == variety.color.id}) == nil {
+                        if self.colors.index(where: {$0.id == variety.color.id}) == nil {
                             if variety.color.id == -1 {
-                                self.colors.insert(variety.color, atIndex: 0)
+                                self.colors.insert(variety.color, at: 0)
                             } else {
                                 self.colors.append(variety.color)
                             }
@@ -135,7 +135,7 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
                     }
                     self.pageViewer.reloadData()
                 } else {
-                    self.pageViewerContainerView.hidden = true
+                    self.pageViewerContainerView.isHidden = true
                 }
 
             } else {
@@ -147,7 +147,7 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
     func pageViewerFrame() -> CGRect {
         let contentViewFrame = self.contentViewFrame()
         let topContainerViewFrame = self.topContainerView.frame
-        let pageViewerFrame = CGRectMake(contentViewFrame.origin.x, contentViewFrame.origin.y + topContainerViewFrame.height, contentViewFrame.width, contentViewFrame.height - topContainerViewFrame.height)
+        let pageViewerFrame = CGRect(x: contentViewFrame.origin.x, y: contentViewFrame.origin.y + topContainerViewFrame.height, width: contentViewFrame.width, height: contentViewFrame.height - topContainerViewFrame.height)
         return pageViewerFrame
     }
     
@@ -159,19 +159,19 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
     
     // MARK: - PageViewerDataSource
     
-    func pageViewerNumberOfPages(pageViewer: PageViewer) -> Int {
+    func pageViewerNumberOfPages(_ pageViewer: PageViewer) -> Int {
         return self.flowers.count
     }
     
-    func pageViewer(pageViewer: PageViewer, headerForItemAtIndex index: Int) -> String {
+    func pageViewer(_ pageViewer: PageViewer, headerForItemAtIndex index: Int) -> String {
         return self.flowers[index].name
     }
     
-    func pageViewer(pageViewer: PageViewer, pageForItemAtIndex index: Int, reusableView: UIView?) -> UIView {
+    func pageViewer(_ pageViewer: PageViewer, pageForItemAtIndex index: Int, reusableView: UIView?) -> UIView {
         var pageView: VarietiesByPlantationPageView! = reusableView as? VarietiesByPlantationPageView
         
         if pageView == nil {
-            pageView = NSBundle.mainBundle().loadNibNamed("VarietiesByPlantationPageView", owner: self, options: nil).first as! VarietiesByPlantationPageView
+            pageView = Bundle.main.loadNibNamed("VarietiesByPlantationPageView", owner: self, options: nil)?.first as! VarietiesByPlantationPageView
             pageView.delegate = self
         }
         
@@ -201,11 +201,11 @@ class PlantationDetailsViewController: BaseViewController, PageViewerDataSource,
     
     // MARK: - VarietiesByPlantationPageViewDelegate
     
-    func varietiesByPlantationPageView(varietiesByPlantationPageView: VarietiesByPlantationPageView, didSelectVariety variety: Variety) {
-        self.performSegueWithIdentifier(K.Storyboard.SegueIdentifier.VarietyDetails, sender: variety)
+    func varietiesByPlantationPageView(_ varietiesByPlantationPageView: VarietiesByPlantationPageView, didSelectVariety variety: Variety) {
+        self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.VarietyDetails, sender: variety)
     }
     
-    func varietiesByPlantationPageView(varietiesByPlantationPageView: VarietiesByPlantationPageView, didChangeState state: VarietiesByPlantationPageViewState) {
+    func varietiesByPlantationPageView(_ varietiesByPlantationPageView: VarietiesByPlantationPageView, didChangeState state: VarietiesByPlantationPageViewState) {
         let indexOfCurrentPage = pageViewer.indexOfCurrentPage
         self.pageViewStates[indexOfCurrentPage] = state
     }

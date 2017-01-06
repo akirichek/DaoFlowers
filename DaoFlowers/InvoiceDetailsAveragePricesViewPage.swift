@@ -22,7 +22,7 @@ class InvoiceDetailsAveragePricesViewPage: UIView, UITableViewDelegate, UITableV
     @IBOutlet weak var scrollView: UIScrollView!
     
     var spinner = RBHUD()
-    var viewWillTransitionToSize = UIScreen.mainScreen().bounds.size {
+    var viewWillTransitionToSize = UIScreen.main.bounds.size {
         didSet {
             self.sizeTableView.reloadData()
             self.stemsTableView.reloadData()
@@ -44,11 +44,11 @@ class InvoiceDetailsAveragePricesViewPage: UIView, UITableViewDelegate, UITableV
     override func awakeFromNib() {
         super.awakeFromNib()
         var nib = UINib(nibName:"InvoiceDetailsAveragePricesSizeTableViewCell", bundle: nil)
-        self.sizeTableView.registerNib(nib, forCellReuseIdentifier: "InvoiceDetailsAveragePricesSizeTableViewCellIdentifier")
+        self.sizeTableView.register(nib, forCellReuseIdentifier: "InvoiceDetailsAveragePricesSizeTableViewCellIdentifier")
         nib = UINib(nibName:"InvoiceDetailsAveragePricesStemTableViewCell", bundle: nil)
-        self.stemsTableView.registerNib(nib, forCellReuseIdentifier: "InvoiceDetailsAveragePricesStemTableViewCellIdentifier")
+        self.stemsTableView.register(nib, forCellReuseIdentifier: "InvoiceDetailsAveragePricesStemTableViewCellIdentifier")
         nib = UINib(nibName:"InvoiceDetailsAveragePricesTotalStemsTableViewCell", bundle: nil)
-        self.stemsTableView.registerNib(nib, forCellReuseIdentifier: "InvoiceDetailsAveragePricesTotalStemsTableViewCellIdentifier")
+        self.stemsTableView.register(nib, forCellReuseIdentifier: "InvoiceDetailsAveragePricesTotalStemsTableViewCellIdentifier")
         self.totalInfoPortraitContainerView.layer.cornerRadius = 5
         self.totalInfoLandscapeContainerView.layer.cornerRadius = 5
     }
@@ -64,13 +64,13 @@ class InvoiceDetailsAveragePricesViewPage: UIView, UITableViewDelegate, UITableV
     // MARK: - Private Methods
     
     func populateInfoView() {
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
-        let dateString = dateFormatter.stringFromDate(invoice.date)
-        let locale = NSLocale(localeIdentifier: LanguageManager.languageCode())
+        let dateString = dateFormatter.string(from: invoice.date as Date)
+        let locale = Locale(identifier: LanguageManager.languageCode())
         dateFormatter.locale = locale
         dateFormatter.dateFormat = "EEE"
-        let weekdayString = dateFormatter.stringFromDate(invoice.date).lowercaseString
+        let weekdayString = dateFormatter.string(from: invoice.date as Date).lowercased()
         invoiceDateLabels.forEach { $0.text = "\(dateString) [\(weekdayString)]" }
         clientLabels.forEach { $0.text = invoice.label }
     }
@@ -83,8 +83,8 @@ class InvoiceDetailsAveragePricesViewPage: UIView, UITableViewDelegate, UITableV
         var stemsHeaderViewFrame = stemsHeaderView.frame
         
         if viewWillTransitionToSize.width < viewWillTransitionToSize.height {
-            totalInfoPortraitContainerView.hidden = false
-            totalInfoLandscapeContainerView.hidden = true
+            totalInfoPortraitContainerView.isHidden = false
+            totalInfoLandscapeContainerView.isHidden = true
             
             sizeHeaderViewFrame.origin.y = totalInfoPortraitContainerView.frame.origin.y + totalInfoPortraitContainerView.frame.height + 8
             sizeHeaderViewFrame.size.height = 34
@@ -96,8 +96,8 @@ class InvoiceDetailsAveragePricesViewPage: UIView, UITableViewDelegate, UITableV
             stemsTableViewFrame.origin.y = stemsHeaderViewFrame.origin.y + stemsHeaderViewFrame.height
             stemsTableViewFrame.size.height = stemsTableView.contentSize.height
         } else {
-            totalInfoPortraitContainerView.hidden = true
-            totalInfoLandscapeContainerView.hidden = false
+            totalInfoPortraitContainerView.isHidden = true
+            totalInfoLandscapeContainerView.isHidden = false
             totalInfoLandscapeContainerView.frame.size.width = self.frame.width - 10
             
             sizeHeaderViewFrame.origin.y = totalInfoLandscapeContainerView.frame.origin.y + totalInfoLandscapeContainerView.frame.height + 8
@@ -117,12 +117,12 @@ class InvoiceDetailsAveragePricesViewPage: UIView, UITableViewDelegate, UITableV
         sizeHeaderView.frame = sizeHeaderViewFrame
         stemsHeaderView.frame = stemsHeaderViewFrame
         
-        self.scrollView.contentSize = CGSizeMake(320, stemsTableViewFrame.origin.y + stemsTableViewFrame.height)
+        self.scrollView.contentSize = CGSize(width: 320, height: stemsTableViewFrame.origin.y + stemsTableViewFrame.height)
     }
     
     // MARK: - UITableViewDataSource
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var numberOfRowsInSection = 0
         
         if invoiceDetails != nil {
@@ -139,7 +139,7 @@ class InvoiceDetailsAveragePricesViewPage: UIView, UITableViewDelegate, UITableV
         return numberOfRowsInSection
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cellIdentifier: String = ""
         
         switch tableView {
@@ -155,7 +155,7 @@ class InvoiceDetailsAveragePricesViewPage: UIView, UITableViewDelegate, UITableV
             break
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! InvoiceDetailsAveragePricesTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! InvoiceDetailsAveragePricesTableViewCell
         cell.invoiceDetails = invoiceDetails
         
         switch tableView {
