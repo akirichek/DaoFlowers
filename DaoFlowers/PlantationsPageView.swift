@@ -96,7 +96,7 @@ class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewD
     func showFilterContainerView() {
         var collectionViewFrame = collectionView.frame
         collectionViewFrame.origin.y = 80
-        collectionViewFrame.size.height = 384
+        collectionViewFrame.size.height = self.frame.height - 80
         collectionView.frame = collectionViewFrame
         filterContainerView.isHidden = false
     }
@@ -104,7 +104,7 @@ class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewD
     func hideFilterContainerView() {
         var collectionViewFrame = collectionView.frame
         collectionViewFrame.origin.y = 0
-        collectionViewFrame.size.height = 464
+        collectionViewFrame.size.height = self.frame.height
         collectionView.frame = collectionViewFrame
         filterContainerView.isHidden = true
     }

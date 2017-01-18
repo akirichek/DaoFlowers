@@ -30,12 +30,16 @@ class PlantationsViewController: BaseViewController, PageViewerDataSource, Plant
         pageViewer.frame = self.pageViewerContainerView.bounds
         pageViewer.dataSource = self
         pageViewer.viewWillTransitionToSize = self.contentViewFrame().size
+        
+        print("PlantationsViewController \(self.contentViewFrame())")
+        
         self.pageViewerContainerView.addSubview(pageViewer)
         self.pageViewer = pageViewer
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         self.viewWillTransitionToSize = size
+        print("PlantationsViewController \(self.contentViewFrame())")
         if let page = self.pageViewer.pageAtIndex(self.pageViewer.indexOfCurrentPage) as? PlantationsPageView {
             page.viewWillTransitionToSize = size
             page.reloadData()
