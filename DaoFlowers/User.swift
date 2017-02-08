@@ -9,16 +9,20 @@
 import Foundation
 
 class User: NSObject, NSCoding {
-    var langId: Int
+    var langId: Int?
     var name: String
-    var roleId: Int
-    var token: String
+    var roleId: Int?
+    var token: String!
+    var id: Int?
+    var slaves: [User]?
+    var marking: String?
     
     init(dictionary: [String: AnyObject]) {
-        langId = dictionary["langId"] as! Int
+        langId = dictionary["langId"] as? Int
         name = dictionary["name"] as! String
-        roleId = dictionary["roleId"] as! Int
-        token = dictionary["token"] as! String
+        roleId = dictionary["roleId"] as? Int
+        token = dictionary["token"] as? String
+        id = dictionary["id"] as? Int
         super.init()
     }
     
@@ -46,13 +50,23 @@ class User: NSObject, NSCoding {
         return user
     }
     
+    func addSlave(slave: User) {
+        if slaves == nil {
+            slaves = []
+        }
+        slave.token = self.token
+        slaves!.append(slave)
+    }
+    
     // MARK: - NSCoding
     
     required init(coder aDecoder: NSCoder) {
-        langId = aDecoder.decodeInteger(forKey: "langId")
+        langId = aDecoder.decodeObject(forKey: "langId") as? Int
         name = aDecoder.decodeObject(forKey: "name") as! String
-        roleId = aDecoder.decodeInteger(forKey: "roleId")
-        token = aDecoder.decodeObject(forKey: "token") as! String
+        roleId = aDecoder.decodeObject(forKey: "roleId") as? Int
+        token = aDecoder.decodeObject(forKey: "token") as? String
+        id = aDecoder.decodeObject(forKey: "id") as? Int
+        slaves = aDecoder.decodeObject(forKey: "slaves") as? [User]
     }
     
     func encode(with aCoder: NSCoder) {
@@ -60,5 +74,18 @@ class User: NSObject, NSCoding {
         aCoder.encode(name, forKey: "name")
         aCoder.encode(roleId, forKey: "roleId")
         aCoder.encode(token, forKey: "token")
+        aCoder.encode(id, forKey: "id")
+        aCoder.encode(slaves, forKey: "slaves")
+    }
+
+    override var description: String {
+        var description = ""
+        description += "langId: \(langId),\n"
+        description += "name: \(name),\n"
+        description += "roleId: \(roleId),\n"
+        description += "token: \(token),\n"
+        description += "id: \(id),\n"
+        description += "slaves: \(slaves)\n"
+        return description
     }
 }

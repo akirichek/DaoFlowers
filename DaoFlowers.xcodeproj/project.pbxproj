@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		820984621E365A3500C8D112 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820984611E365A3500C8D112 /* UserProfileViewController.swift */; };
+		820984641E365AF500C8D112 /* UserProfileMainParametersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820984631E365AF500C8D112 /* UserProfileMainParametersView.swift */; };
+		820984661E365B5100C8D112 /* UserProfileStaffView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820984651E365B5100C8D112 /* UserProfileStaffView.swift */; };
+		820984681E365B6500C8D112 /* UserProfileMainParametersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 820984671E365B6500C8D112 /* UserProfileMainParametersView.xib */; };
+		8209846A1E365B7000C8D112 /* UserProfileStaffView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 820984691E365B7000C8D112 /* UserProfileStaffView.xib */; };
 		822C1ED31DBE375600A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822C1ED21DBE375600A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.swift */; };
 		822C1ED51DBE37A500A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 822C1ED41DBE37A500A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.xib */; };
 		82457AC81DAEAA5900D87B21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82457AC71DAEAA5900D87B21 /* AppDelegate.swift */; };
@@ -14,6 +19,15 @@
 		82457AD01DAEAA5900D87B21 /* DaoFlowers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 82457ACE1DAEAA5900D87B21 /* DaoFlowers.xcdatamodeld */; };
 		82457AD21DAEAA5900D87B21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82457AD11DAEAA5900D87B21 /* Assets.xcassets */; };
 		82457AD51DAEAA5900D87B21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82457AD31DAEAA5900D87B21 /* LaunchScreen.storyboard */; };
+		824FF3171E410A9900BBC723 /* UserProfileEmployeeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824FF3151E410A9900BBC723 /* UserProfileEmployeeTableViewCell.swift */; };
+		824FF3181E410A9900BBC723 /* UserProfileEmployeeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 824FF3161E410A9900BBC723 /* UserProfileEmployeeTableViewCell.xib */; };
+		824FF31D1E41166800BBC723 /* UserProfileEmployeeContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 824FF31B1E41166800BBC723 /* UserProfileEmployeeContactTableViewCell.xib */; };
+		824FF31F1E4229F800BBC723 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824FF31E1E4229F800BBC723 /* Report.swift */; };
+		824FF3211E424D8700BBC723 /* UserProfileEmployeeContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824FF3201E424D8700BBC723 /* UserProfileEmployeeContactTableViewCell.swift */; };
+		824FF3231E424FD000BBC723 /* UserProfileEmployeePostsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 824FF3221E424FD000BBC723 /* UserProfileEmployeePostsTableViewCell.xib */; };
+		824FF3251E42623B00BBC723 /* UserProfileEmployeeTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 824FF3241E42623B00BBC723 /* UserProfileEmployeeTableViewHeader.xib */; };
+		824FF3271E42635D00BBC723 /* UserProfileEmployeeTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824FF3261E42635D00BBC723 /* UserProfileEmployeeTableViewHeader.swift */; };
+		824FF32C1E477BA000BBC723 /* stylo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 824FF32B1E477BA000BBC723 /* stylo.ttf */; };
 		825369081DDF9BA700A17537 /* InvoiceDetailsGeneralTotalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 825369071DDF9BA700A17537 /* InvoiceDetailsGeneralTotalTableViewCell.xib */; };
 		8253690B1DE0E73C00A17537 /* InvoiceDetailsGeneralFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8253690A1DE0E73C00A17537 /* InvoiceDetailsGeneralFilterView.swift */; };
 		8253690F1DE229DA00A17537 /* InvoiceDetailsGeneralLandscapeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8253690E1DE229DA00A17537 /* InvoiceDetailsGeneralLandscapeTableViewCell.xib */; };
@@ -113,6 +127,13 @@
 		8299D3D61DBBF5C30088E550 /* ApiManager+Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3D51DBBF5C30088E550 /* ApiManager+Authorization.swift */; };
 		8299D3D81DBCC17E0088E550 /* SimilarVarietyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3D71DBCC17E0088E550 /* SimilarVarietyCollectionViewCell.swift */; };
 		8299D3DA1DBCC1A30088E550 /* SimilarVarietyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8299D3D91DBCC1A30088E550 /* SimilarVarietyCollectionViewCell.xib */; };
+		829AF0481E37A3A10002CF15 /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829AF0471E37A3A10002CF15 /* Employee.swift */; };
+		829AF04A1E37A4E20002CF15 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829AF0491E37A4E20002CF15 /* Customer.swift */; };
+		829AF04C1E37AC680002CF15 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829AF04B1E37AC680002CF15 /* Post.swift */; };
+		829AF04F1E38E6CC0002CF15 /* AddStaffPostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 829AF04E1E38E6CC0002CF15 /* AddStaffPostTableViewCell.xib */; };
+		829AF0511E38E6DF0002CF15 /* AddStaffPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829AF0501E38E6DF0002CF15 /* AddStaffPostTableViewCell.swift */; };
+		829AF0541E3901340002CF15 /* AddStaffReportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829AF0521E3901340002CF15 /* AddStaffReportTableViewCell.swift */; };
+		829AF0551E3901340002CF15 /* AddStaffReportTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 829AF0531E3901340002CF15 /* AddStaffReportTableViewCell.xib */; };
 		82C059721DC60DDE00F061E6 /* ColorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C059711DC60DDE00F061E6 /* ColorsViewController.swift */; };
 		82C059741DC617D100F061E6 /* ColorsPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C059731DC617D100F061E6 /* ColorsPageView.swift */; };
 		82C059761DC619AD00F061E6 /* ColorsPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82C059751DC619AD00F061E6 /* ColorsPageView.xib */; };
@@ -129,6 +150,8 @@
 		82C1C1E11DDDFA4B007F223E /* InvoiceDetailsGeneralTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1C1E01DDDFA4B007F223E /* InvoiceDetailsGeneralTableViewCell.swift */; };
 		82C1C1E71DDDFE0A007F223E /* InvoiceDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C1C1E61DDDFE0A007F223E /* InvoiceDetails.swift */; };
 		82C1C1EB1DDF968C007F223E /* InvoiceDetailsGeneralHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82C1C1EA1DDF968C007F223E /* InvoiceDetailsGeneralHeaderTableViewCell.xib */; };
+		82C7EF921E36881E001188A5 /* AddStaffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C7EF901E36881E001188A5 /* AddStaffViewController.swift */; };
+		82C7EF931E36881E001188A5 /* AddStaffViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82C7EF911E36881E001188A5 /* AddStaffViewController.xib */; };
 		82E5659E1DBCF775005F18F5 /* Plantation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E5659D1DBCF775005F18F5 /* Plantation.swift */; };
 		82FBA1991DBFD393001CE265 /* VarietiesSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FBA1981DBFD393001CE265 /* VarietiesSearchViewController.swift */; };
 		82FBA19B1DBFD437001CE265 /* VarietyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FBA19A1DBFD437001CE265 /* VarietyCollectionViewCell.swift */; };
@@ -154,6 +177,11 @@
 
 /* Begin PBXFileReference section */
 		41BF2CE2A460955924CE8330 /* Pods-DaoFlowers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DaoFlowers.release.xcconfig"; path = "Pods/Target Support Files/Pods-DaoFlowers/Pods-DaoFlowers.release.xcconfig"; sourceTree = "<group>"; };
+		820984611E365A3500C8D112 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		820984631E365AF500C8D112 /* UserProfileMainParametersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileMainParametersView.swift; sourceTree = "<group>"; };
+		820984651E365B5100C8D112 /* UserProfileStaffView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileStaffView.swift; sourceTree = "<group>"; };
+		820984671E365B6500C8D112 /* UserProfileMainParametersView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileMainParametersView.xib; sourceTree = "<group>"; };
+		820984691E365B7000C8D112 /* UserProfileStaffView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileStaffView.xib; sourceTree = "<group>"; };
 		821327621DC7E46C006E5E8B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		822C1ED21DBE375600A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietyDetailsGeneralInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		822C1ED41DBE37A500A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VarietyDetailsGeneralInfoCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -164,6 +192,15 @@
 		82457AD11DAEAA5900D87B21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		82457AD41DAEAA5900D87B21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		82457AD61DAEAA5900D87B21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		824FF3151E410A9900BBC723 /* UserProfileEmployeeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileEmployeeTableViewCell.swift; sourceTree = "<group>"; };
+		824FF3161E410A9900BBC723 /* UserProfileEmployeeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileEmployeeTableViewCell.xib; sourceTree = "<group>"; };
+		824FF31B1E41166800BBC723 /* UserProfileEmployeeContactTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileEmployeeContactTableViewCell.xib; sourceTree = "<group>"; };
+		824FF31E1E4229F800BBC723 /* Report.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
+		824FF3201E424D8700BBC723 /* UserProfileEmployeeContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileEmployeeContactTableViewCell.swift; sourceTree = "<group>"; };
+		824FF3221E424FD000BBC723 /* UserProfileEmployeePostsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileEmployeePostsTableViewCell.xib; sourceTree = "<group>"; };
+		824FF3241E42623B00BBC723 /* UserProfileEmployeeTableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileEmployeeTableViewHeader.xib; sourceTree = "<group>"; };
+		824FF3261E42635D00BBC723 /* UserProfileEmployeeTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileEmployeeTableViewHeader.swift; sourceTree = "<group>"; };
+		824FF32B1E477BA000BBC723 /* stylo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = stylo.ttf; sourceTree = "<group>"; };
 		825369071DDF9BA700A17537 /* InvoiceDetailsGeneralTotalTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvoiceDetailsGeneralTotalTableViewCell.xib; sourceTree = "<group>"; };
 		8253690A1DE0E73C00A17537 /* InvoiceDetailsGeneralFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoiceDetailsGeneralFilterView.swift; sourceTree = "<group>"; };
 		8253690E1DE229DA00A17537 /* InvoiceDetailsGeneralLandscapeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvoiceDetailsGeneralLandscapeTableViewCell.xib; sourceTree = "<group>"; };
@@ -279,6 +316,13 @@
 		8299D3D51DBBF5C30088E550 /* ApiManager+Authorization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ApiManager+Authorization.swift"; sourceTree = "<group>"; };
 		8299D3D71DBCC17E0088E550 /* SimilarVarietyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimilarVarietyCollectionViewCell.swift; sourceTree = "<group>"; };
 		8299D3D91DBCC1A30088E550 /* SimilarVarietyCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimilarVarietyCollectionViewCell.xib; sourceTree = "<group>"; };
+		829AF0471E37A3A10002CF15 /* Employee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
+		829AF0491E37A4E20002CF15 /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		829AF04B1E37AC680002CF15 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		829AF04E1E38E6CC0002CF15 /* AddStaffPostTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddStaffPostTableViewCell.xib; sourceTree = "<group>"; };
+		829AF0501E38E6DF0002CF15 /* AddStaffPostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStaffPostTableViewCell.swift; sourceTree = "<group>"; };
+		829AF0521E3901340002CF15 /* AddStaffReportTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStaffReportTableViewCell.swift; sourceTree = "<group>"; };
+		829AF0531E3901340002CF15 /* AddStaffReportTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddStaffReportTableViewCell.xib; sourceTree = "<group>"; };
 		82C059711DC60DDE00F061E6 /* ColorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsViewController.swift; sourceTree = "<group>"; };
 		82C059731DC617D100F061E6 /* ColorsPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsPageView.swift; sourceTree = "<group>"; };
 		82C059751DC619AD00F061E6 /* ColorsPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ColorsPageView.xib; sourceTree = "<group>"; };
@@ -298,6 +342,8 @@
 		82C1C1E01DDDFA4B007F223E /* InvoiceDetailsGeneralTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoiceDetailsGeneralTableViewCell.swift; sourceTree = "<group>"; };
 		82C1C1E61DDDFE0A007F223E /* InvoiceDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoiceDetails.swift; sourceTree = "<group>"; };
 		82C1C1EA1DDF968C007F223E /* InvoiceDetailsGeneralHeaderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvoiceDetailsGeneralHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		82C7EF901E36881E001188A5 /* AddStaffViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStaffViewController.swift; sourceTree = "<group>"; };
+		82C7EF911E36881E001188A5 /* AddStaffViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddStaffViewController.xib; sourceTree = "<group>"; };
 		82E5659D1DBCF775005F18F5 /* Plantation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plantation.swift; sourceTree = "<group>"; };
 		82FBA1981DBFD393001CE265 /* VarietiesSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietiesSearchViewController.swift; sourceTree = "<group>"; };
 		82FBA19A1DBFD437001CE265 /* VarietyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietyCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -355,6 +401,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		820984601E365A1200C8D112 /* User Profile */ = {
+			isa = PBXGroup;
+			children = (
+				820984611E365A3500C8D112 /* UserProfileViewController.swift */,
+				824FF3281E45089A00BBC723 /* Main Parameters */,
+				824FF3191E41132100BBC723 /* Staff List */,
+			);
+			name = "User Profile";
+			sourceTree = "<group>";
+		};
 		82457ABB1DAEAA5800D87B21 = {
 			isa = PBXGroup;
 			children = (
@@ -381,21 +437,64 @@
 				82E5659C1DBCF637005F18F5 /* Core */,
 				82C059911DC68EB200F061E6 /* Managers */,
 				8299D37F1DB151E20088E550 /* Models */,
-				8299D36E1DAF8EF30088E550 /* Views */,
+				8299D36E1DAF8EF30088E550 /* User Interface */,
+				824FF3291E477B1600BBC723 /* Segues */,
+				824FF32A1E477B4300BBC723 /* Supporting Files */,
+			);
+			path = DaoFlowers;
+			sourceTree = "<group>";
+		};
+		824FF3191E41132100BBC723 /* Staff List */ = {
+			isa = PBXGroup;
+			children = (
+				820984651E365B5100C8D112 /* UserProfileStaffView.swift */,
+				820984691E365B7000C8D112 /* UserProfileStaffView.xib */,
+				824FF3261E42635D00BBC723 /* UserProfileEmployeeTableViewHeader.swift */,
+				824FF3241E42623B00BBC723 /* UserProfileEmployeeTableViewHeader.xib */,
+				824FF3151E410A9900BBC723 /* UserProfileEmployeeTableViewCell.swift */,
+				824FF3161E410A9900BBC723 /* UserProfileEmployeeTableViewCell.xib */,
+				824FF3201E424D8700BBC723 /* UserProfileEmployeeContactTableViewCell.swift */,
+				824FF31B1E41166800BBC723 /* UserProfileEmployeeContactTableViewCell.xib */,
+				824FF3221E424FD000BBC723 /* UserProfileEmployeePostsTableViewCell.xib */,
+				829AF04D1E37EE990002CF15 /* Add Staff */,
+			);
+			name = "Staff List";
+			sourceTree = "<group>";
+		};
+		824FF3281E45089A00BBC723 /* Main Parameters */ = {
+			isa = PBXGroup;
+			children = (
+				820984631E365AF500C8D112 /* UserProfileMainParametersView.swift */,
+				820984671E365B6500C8D112 /* UserProfileMainParametersView.xib */,
+			);
+			name = "Main Parameters";
+			sourceTree = "<group>";
+		};
+		824FF3291E477B1600BBC723 /* Segues */ = {
+			isa = PBXGroup;
+			children = (
+				8299D36C1DAF8CC50088E550 /* MainViewControllerSegue.swift */,
+			);
+			name = Segues;
+			sourceTree = "<group>";
+		};
+		824FF32A1E477B4300BBC723 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
 				82457AC71DAEAA5900D87B21 /* AppDelegate.swift */,
 				82457ACB1DAEAA5900D87B21 /* Main.storyboard */,
+				82457AD31DAEAA5900D87B21 /* LaunchScreen.storyboard */,
 				82457AD11DAEAA5900D87B21 /* Assets.xcassets */,
 				82FF96671DF346C600A5BB70 /* down_arrow@2x.png */,
 				8272FBDA1DF8655500100AAA /* help.png */,
 				8272FBE11DF8667A00100AAA /* icon_link@2x.png */,
 				8272FBF11DF8828000100AAA /* rose@2x.png */,
-				82457AD31DAEAA5900D87B21 /* LaunchScreen.storyboard */,
 				82457AD61DAEAA5900D87B21 /* Info.plist */,
 				82457ACE1DAEAA5900D87B21 /* DaoFlowers.xcdatamodeld */,
-				8299D36C1DAF8CC50088E550 /* MainViewControllerSegue.swift */,
 				82C0598C1DC68E4900F061E6 /* Localizable.strings */,
+				824FF32B1E477BA000BBC723 /* stylo.ttf */,
 			);
-			path = DaoFlowers;
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		825369091DE0E70C00A17537 /* General */ = {
@@ -583,9 +682,10 @@
 			name = "General Info";
 			sourceTree = "<group>";
 		};
-		8299D36E1DAF8EF30088E550 /* Views */ = {
+		8299D36E1DAF8EF30088E550 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				820984601E365A1200C8D112 /* User Profile */,
 				82606BC11DD76F7900A9E8D8 /* Hints */,
 				82C0597E1DC675BC00F061E6 /* Main */,
 				827BAC2A1DBF672A00B50C2B /* Menu */,
@@ -598,7 +698,7 @@
 				825369341DE7707D00A17537 /* Contacts */,
 				82C0597C1DC675A000F061E6 /* Settings */,
 			);
-			name = Views;
+			name = "User Interface";
 			sourceTree = "<group>";
 		};
 		8299D37F1DB151E20088E550 /* Models */ = {
@@ -615,6 +715,10 @@
 				827E8B081DD8DEFB000A8EAE /* OrderDetails.swift */,
 				827E8B131DDB3ABF000A8EAE /* Document.swift */,
 				82C1C1E61DDDFE0A007F223E /* InvoiceDetails.swift */,
+				829AF0471E37A3A10002CF15 /* Employee.swift */,
+				829AF0491E37A4E20002CF15 /* Customer.swift */,
+				829AF04B1E37AC680002CF15 /* Post.swift */,
+				824FF31E1E4229F800BBC723 /* Report.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -711,6 +815,19 @@
 				8299D3C91DBBB11F0088E550 /* VarietyDetailsPlantationsGrowersView.xib */,
 			);
 			name = "Plantations Growers";
+			sourceTree = "<group>";
+		};
+		829AF04D1E37EE990002CF15 /* Add Staff */ = {
+			isa = PBXGroup;
+			children = (
+				82C7EF901E36881E001188A5 /* AddStaffViewController.swift */,
+				82C7EF911E36881E001188A5 /* AddStaffViewController.xib */,
+				829AF0501E38E6DF0002CF15 /* AddStaffPostTableViewCell.swift */,
+				829AF04E1E38E6CC0002CF15 /* AddStaffPostTableViewCell.xib */,
+				829AF0521E3901340002CF15 /* AddStaffReportTableViewCell.swift */,
+				829AF0531E3901340002CF15 /* AddStaffReportTableViewCell.xib */,
+			);
+			name = "Add Staff";
 			sourceTree = "<group>";
 		};
 		82C059701DC60D9C00F061E6 /* Colors */ = {
@@ -894,7 +1011,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				827E8B181DDB4C50000A8EAE /* DocumentTableViewCell.xib in Resources */,
+				824FF32C1E477BA000BBC723 /* stylo.ttf in Resources */,
 				8253690F1DE229DA00A17537 /* InvoiceDetailsGeneralLandscapeTableViewCell.xib in Resources */,
+				824FF3181E410A9900BBC723 /* UserProfileEmployeeTableViewCell.xib in Resources */,
 				82FF966E1DF35D4A00A5BB70 /* InvoiceDetailsGeneralViewPage.xib in Resources */,
 				82C059841DC6874E00F061E6 /* LanguagePickerViewCell.xib in Resources */,
 				825369261DE6317E00A17537 /* InvoiceDetailsStatisticsTotalTableViewCell.xib in Resources */,
@@ -913,24 +1032,32 @@
 				82457AD21DAEAA5900D87B21 /* Assets.xcassets in Resources */,
 				8275DF7C1E16A14C0050D2D6 /* ContactsViewController~ipad.xib in Resources */,
 				8272FC061DF88DEA00100AAA /* FulfillmentHintView.xib in Resources */,
+				820984681E365B6500C8D112 /* UserProfileMainParametersView.xib in Resources */,
 				82C1C1DF1DDDFA37007F223E /* InvoiceDetailsGeneralTableViewCell.xib in Resources */,
 				82FF967A1DF35F2A00A5BB70 /* InvoiceDetailsStatisticsViewPage.xib in Resources */,
+				82C7EF931E36881E001188A5 /* AddStaffViewController.xib in Resources */,
 				8299D3AC1DB8D2170088E550 /* VarietiesPageView.xib in Resources */,
 				8272FBD81DF8655500100AAA /* help.png in Resources */,
 				82FF96581DF3270700A5BB70 /* InvoiceDetailsGeneralFilterView.xib in Resources */,
+				8209846A1E365B7000C8D112 /* UserProfileStaffView.xib in Resources */,
+				824FF3251E42623B00BBC723 /* UserProfileEmployeeTableViewHeader.xib in Resources */,
 				82C0597B1DC6449C00F061E6 /* VarietyCollectionViewCell.xib in Resources */,
+				829AF0551E3901340002CF15 /* AddStaffReportTableViewCell.xib in Resources */,
 				8253692F1DE72E0D00A17537 /* InvoiceDetailsAveragePricesSizeTableViewCell.xib in Resources */,
 				82FF96741DF35F0A00A5BB70 /* InvoiceDetailsAveragePricesViewPage.xib in Resources */,
 				8299D3DA1DBCC1A30088E550 /* SimilarVarietyCollectionViewCell.xib in Resources */,
+				829AF04F1E38E6CC0002CF15 /* AddStaffPostTableViewCell.xib in Resources */,
 				82FBA1AB1DC28DEF001CE265 /* SearchAdditionalParametersTableViewCell.xib in Resources */,
 				82FF96651DF346C600A5BB70 /* down_arrow@2x.png in Resources */,
 				82606BA81DCFA56900A9E8D8 /* PlantationsPageView.xib in Resources */,
 				8275DF7A1E1699180050D2D6 /* ContactsViewController~iphone.xib in Resources */,
 				8275DF7E1E16F7510050D2D6 /* OrderTableViewCell.xib in Resources */,
 				82FBA19E1DC0D007001CE265 /* VarietiesSearchAdditionalParametersView.xib in Resources */,
+				824FF31D1E41166800BBC723 /* UserProfileEmployeeContactTableViewCell.xib in Resources */,
 				8272FBCD1DF75FB800100AAA /* VarietyDetailsGeneralInfoView.xib in Resources */,
 				825369151DE33D7200A17537 /* InvoiceDetailsGeneralHeaderLandscapeTableViewCell.xib in Resources */,
 				82C059781DC623A300F061E6 /* ColorCollectionViewCell.xib in Resources */,
+				824FF3231E424FD000BBC723 /* UserProfileEmployeePostsTableViewCell.xib in Resources */,
 				825369331DE72E3900A17537 /* InvoiceDetailsAveragePricesTotalStemsTableViewCell.xib in Resources */,
 				825369081DDF9BA700A17537 /* InvoiceDetailsGeneralTotalTableViewCell.xib in Resources */,
 				8299D3B01DB8E4240088E550 /* ContentPageViewerCollectionViewCell.xib in Resources */,
@@ -1035,11 +1162,13 @@
 				827E8B0E1DDB38CA000A8EAE /* DocumentsViewController.swift in Sources */,
 				8299D38A1DB375AA0088E550 /* Color.swift in Sources */,
 				82FBA1AD1DC3753A001CE265 /* SearchAdditionalParametersTableViewCell.swift in Sources */,
+				829AF04A1E37A4E20002CF15 /* Customer.swift in Sources */,
 				82606BCA1DD7992C00A9E8D8 /* CurrentOrdersViewController.swift in Sources */,
 				825369361DE770AC00A17537 /* ContactsViewController.swift in Sources */,
 				825369381DE8BCFE00A17537 /* OrderCallbackViewController.swift in Sources */,
 				827E8B1C1DDB79CB000A8EAE /* DocumentTableViewHeader.swift in Sources */,
 				8299D38E1DB3BD5B0088E550 /* VarietiesViewController.swift in Sources */,
+				82C7EF921E36881E001188A5 /* AddStaffViewController.swift in Sources */,
 				8299D3BC1DBBADD80088E550 /* VarietyDetailsViewController.swift in Sources */,
 				82606BB81DD383A600A9E8D8 /* PlantationDetailsViewController.swift in Sources */,
 				82C059801DC675E100F061E6 /* SettingsViewController.swift in Sources */,
@@ -1048,8 +1177,12 @@
 				82C059741DC617D100F061E6 /* ColorsPageView.swift in Sources */,
 				8299D3841DB155960088E550 /* FlowerCollectionViewCell.swift in Sources */,
 				82FBA1A91DC287C1001CE265 /* UIView+ConstraintByIdentifier.swift in Sources */,
+				829AF0481E37A3A10002CF15 /* Employee.swift in Sources */,
+				824FF3171E410A9900BBC723 /* UserProfileEmployeeTableViewCell.swift in Sources */,
+				820984661E365B5100C8D112 /* UserProfileStaffView.swift in Sources */,
 				8253692D1DE72DF100A17537 /* InvoiceDetailsAveragePricesTableViewCell.swift in Sources */,
 				82606BBC1DD3A9DF00A9E8D8 /* VarietiesByPlantationPageView.swift in Sources */,
+				824FF3211E424D8700BBC723 /* UserProfileEmployeeContactTableViewCell.swift in Sources */,
 				82606BA11DCF824000A9E8D8 /* CountryCollectionViewCell.swift in Sources */,
 				82C059931DC68ED000F061E6 /* LanguageManager.swift in Sources */,
 				82606BA61DCFA55200A9E8D8 /* PlantationsPageView.swift in Sources */,
@@ -1065,6 +1198,7 @@
 				8299D37E1DB14E320088E550 /* ApiManager.swift in Sources */,
 				82FF96271DF0682E00A5BB70 /* RegistrationViewController.swift in Sources */,
 				82FBA1A21DC0D73E001CE265 /* Breeder.swift in Sources */,
+				820984621E365A3500C8D112 /* UserProfileViewController.swift in Sources */,
 				82606BB11DD1FF9500A9E8D8 /* ApiManager+Plantations.swift in Sources */,
 				8299D36D1DAF8CC50088E550 /* MainViewControllerSegue.swift in Sources */,
 				82FBA1A01DC0D017001CE265 /* VarietiesSearchAdditionalParametersView.swift in Sources */,
@@ -1072,22 +1206,28 @@
 				82C1C1E11DDDFA4B007F223E /* InvoiceDetailsGeneralTableViewCell.swift in Sources */,
 				8299D3D61DBBF5C30088E550 /* ApiManager+Authorization.swift in Sources */,
 				827E8B071DD8DEC6000A8EAE /* Order.swift in Sources */,
+				829AF0541E3901340002CF15 /* AddStaffReportTableViewCell.swift in Sources */,
 				82606BAC1DCFC35C00A9E8D8 /* PlantationCollectionViewCell.swift in Sources */,
 				827E8B041DD8C10E000A8EAE /* OrderDetailsViewController.swift in Sources */,
+				829AF04C1E37AC680002CF15 /* Post.swift in Sources */,
 				82C059721DC60DDE00F061E6 /* ColorsViewController.swift in Sources */,
 				82606BCE1DD7AA9700A9E8D8 /* OrderTableViewCell.swift in Sources */,
 				82606BA41DCF900D00A9E8D8 /* PlantationsViewController.swift in Sources */,
 				8299D3761DAF99B30088E550 /* CountriesViewController.swift in Sources */,
 				82606BC71DD7985800A9E8D8 /* ApiManager+Orders.swift in Sources */,
 				8253690B1DE0E73C00A17537 /* InvoiceDetailsGeneralFilterView.swift in Sources */,
+				820984641E365AF500C8D112 /* UserProfileMainParametersView.swift in Sources */,
 				827E8B101DDB3A27000A8EAE /* DocumentsPageView.swift in Sources */,
 				825369441DED8C2E00A17537 /* VarietyImageViewerViewController.swift in Sources */,
 				827E8B091DD8DEFB000A8EAE /* OrderDetails.swift in Sources */,
 				8299D3921DB3BDFA0088E550 /* Variety.swift in Sources */,
+				824FF31F1E4229F800BBC723 /* Report.swift in Sources */,
 				827BAC2C1DBF675200B50C2B /* MenuTableViewCell.swift in Sources */,
 				82606B9E1DCF7F8800A9E8D8 /* Country.swift in Sources */,
+				824FF3271E42635D00BBC723 /* UserProfileEmployeeTableViewHeader.swift in Sources */,
 				82C059821DC6873F00F061E6 /* LanguagePickerViewCell.swift in Sources */,
 				8299D3961DB3C2BF0088E550 /* Utils.swift in Sources */,
+				829AF0511E38E6DF0002CF15 /* AddStaffPostTableViewCell.swift in Sources */,
 				8299D3721DAF926E0088E550 /* Constants.swift in Sources */,
 				8299D37A1DAF9A930088E550 /* MainViewController.swift in Sources */,
 				8299D3A61DB8C6090088E550 /* PageViewerFlowLayout.swift in Sources */,

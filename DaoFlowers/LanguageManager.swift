@@ -84,6 +84,36 @@ enum Language: String {
         
         return flagImageName
     }
+    
+    func id() -> Int {
+        var id: Int!
+        switch self {
+        case .Russian:
+            id = 1
+        case .English:
+            id = 2
+        case .Spanish:
+            id = 3
+        }
+        
+        return id
+    }
+    
+    static func languageById(id: Int) -> Language {
+        var lang: Language!
+        switch id {
+        case 1:
+            lang = .Russian
+        case 2:
+            lang = .English
+        case 3:
+            lang = .Spanish
+        default:
+            break;
+        }
+        
+        return lang
+    }
 }
 
 func CustomLocalisedString(_ key: String) -> String {

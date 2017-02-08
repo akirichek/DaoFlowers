@@ -128,6 +128,9 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
     
     func menuViewController(_ menuViewController: MenuViewController, didSelectMenuSection menuSection: MenuSection) {
         switch menuSection {
+        case .UserProfile:
+            self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.UserProfile, sender: self)
+            self.animateMenu(false)
         case .Varieties:
             self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.Flowers, sender: self)
             self.animateMenu(false)

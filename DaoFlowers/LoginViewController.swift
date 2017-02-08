@@ -37,11 +37,21 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         ApiManager.loginWithUsername(self.usernameTextField.text!, andPassword: self.passwordTextField.text!) { (user, error) in
             RBHUD.sharedInstance.hideLoader()
             if let user = user {
-                let userDefaults = UserDefaults.standard
-                userDefaults.set(Language.Russian.rawValue, forKey: K.UserDefaultsKey.Language)
-                userDefaults.synchronize()
-                user.save()
-                self.navigationController!.presentingViewController!.dismiss(animated: true, completion: nil)
+                ApiManager.fetchUserAndChildrenWithUser(user, completion: { (user, error) in
+                    if let user = user {
+                        var language = Language.English
+                        if let langId = user.langId {
+                            language = Language.languageById(id: langId)
+                        }
+                        let userDefaults = UserDefaults.standard
+                        userDefaults.set(language.rawValue, forKey: K.UserDefaultsKey.Language)
+                        userDefaults.synchronize()
+                        user.save()
+                        self.navigationController!.presentingViewController!.dismiss(animated: true, completion: nil)
+                    } else {
+                        Utils.showError(error!, inViewController: self)
+                    }
+                })
             } else {
                 Utils.showError(error!, inViewController: self)
             }

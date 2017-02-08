@@ -162,4 +162,15 @@ class Utils: NSObject {
         
         return dictionary
     }
+
+    static func view(view: UIView,  byRoundingCorners corners: UIRectCorner) {
+        let maskPath = UIBezierPath(roundedRect: view.bounds,
+                                    byRoundingCorners: corners,
+                                    cornerRadii: CGSize(width: 5.0, height: 5.0))
+        
+        let maskLayer = CAShapeLayer()
+        maskLayer.frame = view.bounds
+        maskLayer.path = maskPath.cgPath
+        view.layer.mask = maskLayer
+    }
 }

@@ -38,12 +38,17 @@ struct K {
             static let SignUpRequest = "/support/registration"
         }
         struct Profile {
-            static let Info = "/profile"
+            static let Customer = "/profile"
+            static let EmployeesParams = "/profile/employees/params"
+            static let UserAndChildren = "/profile/userAndChildren"
+            static let RemoveChanges = "/profile/%d/removeChanges"
         }
     }
     
     struct Storyboard {
         struct SegueIdentifier {
+            static let UserProfile = "UserProfileViewControllerSegueIdentifier"
+            static let AddStaff = "AddStaffSegueIdentifier"
             static let Flowers = "FlowersViewControllerSegueIdentifier"
             static let Plantations = "PlantationsViewControllerSegueIdentifier"
             static let Countries = "CountriesViewControllerSegueIdentifier"
