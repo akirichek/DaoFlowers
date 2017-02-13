@@ -124,19 +124,6 @@ class UserProfileViewController: BaseViewController, PageViewerDataSource, UserP
         selectedUserTextField.becomeFirstResponder()
     }
     
-    @IBAction func saveButtonClicked(_ sender: UIButton) {
-        let alertController = UIAlertController(title: CustomLocalisedString("Saving changes"),
-                                                message: CustomLocalisedString("Save changes in user's profile?"),
-                                                preferredStyle: .alert)
-        let okAction = UIAlertAction(title: CustomLocalisedString("YES"), style: .default) { (action) in
-            self.saveCustomer()
-        }
-        alertController.addAction(okAction)
-        let cancelAction = UIAlertAction(title: CustomLocalisedString("NO"), style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
-        present(alertController, animated: true, completion: nil)
-    }
-    
     @IBAction func deleteButtonClicked(_ sender: UIButton) {
         let alertController = UIAlertController(title: CustomLocalisedString("Cancel changes"),
                                                 message: CustomLocalisedString("Cancel changes in user's profile?"),
@@ -176,8 +163,8 @@ class UserProfileViewController: BaseViewController, PageViewerDataSource, UserP
         }
         
         if let userProfileMainParametersView = pageView as? UserProfileMainParametersView {
+            userProfileMainParametersView.delegate = self
             if customer != nil && userProfileMainParametersView.customer == nil {
-                userProfileMainParametersView.delegate = self
                 userProfileMainParametersView.customer = customer
                 userProfileMainParametersView.reloadData()
             }
@@ -267,6 +254,7 @@ class UserProfileViewController: BaseViewController, PageViewerDataSource, UserP
         if let page = self.pageViewer.pageAtIndex(1) as? UserProfileStaffView {
             page.employees = customer!.employees
             page.reloadData()
+            self.saveCustomer()
         }
     }
     
@@ -286,6 +274,7 @@ class UserProfileViewController: BaseViewController, PageViewerDataSource, UserP
             if let page = self.pageViewer.pageAtIndex(1) as? UserProfileStaffView {
                 page.employees = self.customer!.employees
                 page.reloadData()
+                self.saveCustomer()
             }
         }
         alertController.addAction(okAction)
@@ -296,12 +285,22 @@ class UserProfileViewController: BaseViewController, PageViewerDataSource, UserP
     
     // MARK: - UserProfileMainParametersViewDelegate
     
-    func userProfileMainParametersView(userProfileMainParametersView: UserProfileMainParametersView, didChangedCustomer customer: Customer) {
+    func userProfileMainParametersView(userProfileMainParametersView: UserProfileMainParametersView, saveButtonClickedWithCustomer customer: Customer) {
         self.customer?.recoveryEmail = customer.recoveryEmail
         self.customer?.recoveryPhone = customer.recoveryPhone
         self.customer?.organization = customer.organization
         self.customer?.address = customer.address
         self.customer?.detailedAddress = customer.detailedAddress
         self.customer?.url = customer.url
+        let alertController = UIAlertController(title: CustomLocalisedString("Saving changes"),
+                                                message: CustomLocalisedString("Save changes in user's profile?"),
+                                                preferredStyle: .alert)
+        let okAction = UIAlertAction(title: CustomLocalisedString("YES"), style: .default) { (action) in
+            self.saveCustomer()
+        }
+        alertController.addAction(okAction)
+        let cancelAction = UIAlertAction(title: CustomLocalisedString("NO"), style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
     }
 }

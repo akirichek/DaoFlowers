@@ -24,6 +24,7 @@ class UserProfileMainParametersView: UIView, UITextFieldDelegate {
     @IBOutlet weak var countryCityLabel: UILabel!
     @IBOutlet weak var detailedAddressLabel: UILabel!
     @IBOutlet weak var websiteLabel: UILabel!
+    @IBOutlet weak var saveButton: UIButton!
     
     weak var delegate: UserProfileMainParametersViewDelegate?
     
@@ -49,7 +50,7 @@ class UserProfileMainParametersView: UIView, UITextFieldDelegate {
         detailedAddressLabel.text = CustomLocalisedString("Detailed address")
         websiteLabel.text = CustomLocalisedString("Website")
         
-        scrollView.contentSize = CGSize(width: 320, height: 700)
+        scrollView.contentSize = CGSize(width: 320, height: 723)
         
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
@@ -59,35 +60,19 @@ class UserProfileMainParametersView: UIView, UITextFieldDelegate {
                                          action: #selector(UIResponder.resignFirstResponder))
         toolbar.setItems([doneButton], animated: true)
         recoveryPhoneNumberTextField.inputAccessoryView = toolbar
+        
+        saveButton.setTitle(CustomLocalisedString("Save"), for: UIControlState())
     }
     
-    // MARK: - UITextFieldDelegate
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        var nsString = NSString(string: textField.text!)
-        nsString = nsString.replacingCharacters(in: range, with: string) as NSString
-        let text = nsString as String
-        
-        switch textField {
-        case recoveryEmailTextField:
-            customer.recoveryEmail = text
-        case recoveryPhoneNumberTextField:
-            customer.recoveryPhone = text
-        case organizationTextField:
-            customer.organization = text
-        case countryCityTextField:
-            customer.address = text
-        case detailedAddressTextField:
-            customer.detailedAddress = text
-        case websiteTextField:
-            customer.url = text
-        default:
-            break
-        }
-        
-        delegate?.userProfileMainParametersView(userProfileMainParametersView: self, didChangedCustomer: customer)
-        
-        return true
+    @IBAction func saveButtonClicked(_ sender: UIButton) {
+        endEditing(true)
+        customer.recoveryEmail = recoveryEmailTextField.text
+        customer.recoveryPhone = recoveryPhoneNumberTextField.text
+        customer.organization = organizationTextField.text
+        customer.address = countryCityTextField.text
+        customer.detailedAddress = detailedAddressTextField.text
+        customer.url = websiteTextField.text
+        delegate?.userProfileMainParametersView(userProfileMainParametersView: self, saveButtonClickedWithCustomer: customer)
     }
     
     // MARK: - UITextFieldDelegate
@@ -99,5 +84,5 @@ class UserProfileMainParametersView: UIView, UITextFieldDelegate {
 }
 
 protocol UserProfileMainParametersViewDelegate: NSObjectProtocol {
-    func userProfileMainParametersView(userProfileMainParametersView: UserProfileMainParametersView, didChangedCustomer customer: Customer)
+    func userProfileMainParametersView(userProfileMainParametersView: UserProfileMainParametersView, saveButtonClickedWithCustomer customer: Customer)
 }

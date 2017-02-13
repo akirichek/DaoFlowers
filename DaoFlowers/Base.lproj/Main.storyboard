@@ -725,7 +725,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="36"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="laO-lV-Z1i" id="5Lh-Xg-eIZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="35.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="35"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20-11-2016" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="e6q-Cc-gdL">
@@ -1072,7 +1072,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="20"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="77Y-Qt-YLi" id="Kiy-bO-fQX">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="19.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="19"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="rose. explorer" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uHM-T1-hGL">
@@ -1178,7 +1178,7 @@
                                         <rect key="frame" x="0.0" y="48" width="320" height="20"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qy8-pM-j5W" id="dYI-NA-g5A">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="19.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="19"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total FB:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gan-g7-64i">
@@ -2032,7 +2032,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6o-SI-ixZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1049" y="6481"/>
+            <point key="canvasLocation" x="1124" y="6481"/>
         </scene>
         <!--Varieties Search View Controller-->
         <scene sceneID="Rqe-19-jdf">
@@ -3087,14 +3087,6 @@
                                         <action selector="deleteButtonClicked:" destination="mpv-ah-NXp" eventType="touchUpInside" id="D0N-SB-Gig"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="E1b-Vt-g1w">
-                                    <rect key="frame" x="161" y="5" width="24" height="24"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" image="save_button"/>
-                                    <connections>
-                                        <action selector="saveButtonClicked:" destination="mpv-ah-NXp" eventType="touchUpInside" id="naQ-dl-eZb"/>
-                                    </connections>
-                                </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
@@ -3131,7 +3123,6 @@
         <image name="icon_menu" width="44" height="44"/>
         <image name="left_arrow" width="24" height="24"/>
         <image name="logo" width="188" height="135"/>
-        <image name="save_button" width="23" height="23"/>
         <image name="white_arrow" width="12" height="6"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
