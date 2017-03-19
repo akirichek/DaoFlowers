@@ -11,20 +11,20 @@ import Foundation
 struct Employee {
     let kIdNewUser = 0;
     
-    var id: Int
-    var name: String
-    var posts: [Post] = []
-    var contacts: [Contact] = []
-    var reports: [Report] = []
-    var reportsMode: ReportsMode
-    var action: Action
+    var id: Int!
+    var name: String!
+    var postIds: [Int]!
+    var contacts: [Contact]!
+    var reportIds: [Int]!
+    var reportsMode: ReportsMode!
+    var action: Action = Action.add
     
     init(dictionary: [String: AnyObject]) {
         id = dictionary["id"] as! Int
         name = dictionary["name"] as! String
-        reportsMode = ReportsMode(rawValue: dictionary["reportsMode"] as! Int)!
         action = Action.change
-        
+    
+        contacts = []
         if let contactsDictionaries = dictionary["contacts"] as? [[String: AnyObject]] {
             for contactDictionary in contactsDictionaries {
                 let contact = Contact(dictionary: contactDictionary)
@@ -32,63 +32,54 @@ struct Employee {
             }
         }
         
-        if let postsDictionaries = dictionary["posts"] as? [[String: AnyObject]] {
-            for postDictionary in postsDictionaries {
-                let post = Post(dictionary: postDictionary)
-                posts.append(post)
-            }
-        }
+        postIds = dictionary["postIds"] as! [Int]
         
-        if let reportsDictionaries = dictionary["reports"] as? [[String: AnyObject]] {
-            for reportsDictionary in reportsDictionaries {
-                let report = Report(dictionary: reportsDictionary)
-                reports.append(report)
-            }
+        if let reportsDictionary = dictionary["reports"] as? [String: AnyObject] {
+            reportsMode = ReportsMode(rawValue: reportsDictionary["mode"] as! Int)!
+            reportIds = reportsDictionary["reportIds"] as! [Int]
         }
     }
     
-    init(name: String, posts: [Post], contacts: [Contact], reports: [Report]) {
-        self.name = name
-        self.posts = posts
-        self.contacts = contacts
-        self.reports = reports
-        self.reportsMode = ReportsMode.defaultMode
-        self.action = Action.add
-        self.id = kIdNewUser
+    init() {
+
     }
     
     func toDictionary() -> [String: AnyObject] {
         var dictionary: [String: AnyObject] = [:]
-        dictionary["id"] = id as AnyObject?
-        dictionary["fio"] = name as AnyObject?
         dictionary["action"] = action.rawValue as AnyObject?
-        var contactsDictionary: [String: String] = [:]
         
-        for contact in contacts {
-            contactsDictionary[String(contact.type.rawValue)] = contact.value
+        if id != nil {
+            dictionary["id"] = id as AnyObject?
         }
         
-        dictionary["contacts"] = contactsDictionary as AnyObject?
-        
-        var postIds: [Int] = []
-        
-        for post in posts {
-            postIds.append(post.id)
+        if name != nil {
+            dictionary["fio"] = name as AnyObject?
         }
         
-        dictionary["postIds"] = postIds as AnyObject?
-        
-        var reportIds: [Int] = []
-        
-        for report in reports {
-            reportIds.append(report.id)
+        if contacts != nil {
+            var contactsDictionary: [String: String] = [:]
+            
+            for contact in contacts {
+                contactsDictionary[String(contact.type.rawValue)] = contact.value
+            }
+            
+            dictionary["contacts"] = contactsDictionary as AnyObject?
         }
         
-        var reportsDictionary: [String: AnyObject] = [:]
-        reportsDictionary["mode"] = reportsMode.rawValue as AnyObject?
-        reportsDictionary["reportIds"] = reportIds as AnyObject?
+        if postIds != nil {
+            dictionary["postIds"] = postIds as AnyObject?
+        }
         
-        dictionary["reports"] = reportsDictionary as AnyObject?
+        if reportIds != nil {
+            var reportsDictionary: [String: AnyObject] = [:]
+            if reportsMode != nil {
+                reportsDictionary["mode"] = reportsMode.rawValue as AnyObject?
+            }
+            
+            reportsDictionary["reportIds"] = reportIds as AnyObject?
+            
+            dictionary["reports"] = reportsDictionary as AnyObject?
+        }
         
         return dictionary
     }
@@ -137,6 +128,31 @@ struct Employee {
         return emails
     }
     
+    func phonesMessengers() -> [Employee.Contact] {
+        var phonesMessengers: [Employee.Contact] = []
+        
+        if let index = contacts.index(where: { $0.type == .mobile}) {
+            phonesMessengers.append(contacts[index])
+        }
+        if let index = contacts.index(where: { $0.type == .office}) {
+            phonesMessengers.append(contacts[index])
+        }
+        if let index = contacts.index(where: { $0.type == .fax}) {
+            phonesMessengers.append(contacts[index])
+        }
+        if let index = contacts.index(where: { $0.type == .viber}) {
+            phonesMessengers.append(contacts[index])
+        }
+        if let index = contacts.index(where: { $0.type == .skype}) {
+            phonesMessengers.append(contacts[index])
+        }
+        if let index = contacts.index(where: { $0.type == .isq}) {
+            phonesMessengers.append(contacts[index])
+        }
+        
+        return phonesMessengers
+    }
+    
     enum Action: String {
         case delete = "delete"
         case add = "add"
@@ -147,5 +163,38 @@ struct Employee {
         case allowAll = 1
         case blockAll = -1
         case defaultMode = 0
+    }
+    
+    static func differcenceBetweenEmployees(_ lhs: Employee, rhs: Employee) -> Employee {
+        var result = Employee()
+
+        result.id = rhs.id
+        result.postIds = rhs.postIds
+        result.reportIds = rhs.reportIds
+        result.reportsMode = rhs.reportsMode
+        result.action = rhs.action
+        
+        if lhs.name != rhs.name {
+            result.name = rhs.name
+        }
+        
+        var contacts: [Contact] = []
+        
+        for rhsContact in rhs.contacts {
+            if let index = lhs.contacts.index(where: { $0.type == rhsContact.type }) {
+                let lhsContact = lhs.contacts[index]
+                if lhsContact.value != rhsContact.value {
+                    contacts.append(rhsContact)
+                }
+            } else {
+                contacts.append(rhsContact)
+            }
+        }
+        
+        if contacts.count > 0 {
+            result.contacts = contacts
+        }
+        
+        return result
     }
 }

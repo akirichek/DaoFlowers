@@ -173,4 +173,29 @@ class Utils: NSObject {
         maskLayer.path = maskPath.cgPath
         view.layer.mask = maskLayer
     }
+    
+    static func postsString(_ posts: [Post]) -> String{
+        var postsString: String = ""
+        for i in 0..<posts.count {
+            postsString += "\(i + 1). " + posts[i].name
+            
+            if i != posts.count - 1 {
+                postsString += "\n"
+            }
+        }
+        return postsString
+    }
+    
+    static func reportsString(_ reports: [Report]) -> String {
+        var reportsString = ""
+        for i in 0..<reports.count {
+            reportsString += "\(i + 1). " + reports[i].name
+            
+            if i != reports.count - 1 {
+                reportsString += "\n"
+            }
+        }
+        
+        return reportsString
+    }
 }

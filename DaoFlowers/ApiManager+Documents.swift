@@ -15,10 +15,17 @@ extension ApiManager: URLSessionDownloadDelegate {
         Alamofire.request(url, method: .get, parameters: datesParams(), headers:["Authorization": user.token]).responseJSON { response in
             if response.result.isSuccess {
                 var invoices: [Document] = []
-                if let json = response.result.value {
-                    //print("JSON: \(json)")
-                    for invoicesDictionary in json as! [[String: AnyObject]] {
-                        invoices.append(Document(dictionary: invoicesDictionary))
+                if let json = response.result.value as? [String: AnyObject]{
+                    print("JSON: \(json)")
+                    let invoicesDictionaries = json["invoices"] as! [[String: AnyObject]]
+                    let users = json["users"] as! [[String: AnyObject]]
+                    
+                    for invoiceDictionary in invoicesDictionaries {
+                        var dictionary = invoiceDictionary
+                        let user = users.first(where: { ($0["id"] as! Int) == (dictionary["userId"] as! Int) })!
+                        dictionary["label"] = user["name"]
+                        let invoice = Document(dictionary: dictionary)
+                        invoices.append(invoice)
                     }
                 }
                 completion(invoices, nil)
@@ -35,11 +42,14 @@ extension ApiManager: URLSessionDownloadDelegate {
             "invoice_id": invoice.id,
             "client_id": invoice.clientId,
         ]
+        print(url)
+        print(parameters)
         Alamofire.request(url, method: .get, parameters: parameters, headers:["Authorization": user.token]).responseJSON { response in
+            print("Code: \(response.response?.statusCode)")
             if response.result.isSuccess {
                 var invoiceDetails: InvoiceDetails?
                 if let json = response.result.value {
-                    //print("JSON: \(json)")
+                    print("JSON: \(json)")
                     invoiceDetails = InvoiceDetails(dictionary: json as! [String : AnyObject])
                 }
                 completion(invoiceDetails, nil)
@@ -52,11 +62,12 @@ extension ApiManager: URLSessionDownloadDelegate {
     
     static func fetchPrealerts(_ user: User, completion: @escaping (_ prealerts: [Document]?, _ error: NSError?) -> ()) {
         let url = K.Api.BaseUrl + K.Api.Documents.Prealerts
+        print(url)
         Alamofire.request(url, method: .get, parameters: datesParams(), headers:["Authorization": user.token]).responseJSON { response in
             if response.result.isSuccess {
                 var prealerts: [Document] = []
                 if let json = response.result.value {
-                    //print("JSON: \(json)")
+                    print("JSON: \(json)")
                     for prealertsDictionary in json as! [[String: AnyObject]] {
                         prealerts.append(Document(dictionary: prealertsDictionary))
                     }
@@ -74,7 +85,7 @@ extension ApiManager: URLSessionDownloadDelegate {
         var dateToComponents = Calendar.current.dateComponents([.day, .month, .year], from: dateNow)
         dateToComponents.calendar =  Calendar.current
         let dateTo = "\(dateToComponents.year!)-\(dateToComponents.month!)-\(dateToComponents.day!)"
-        dateToComponents.month! -= 3
+        dateToComponents.month! -= 5
         var dateFromComponents = Calendar.current.dateComponents([.day, .month, .year], from: dateToComponents.date!)
         dateFromComponents.calendar =  Calendar.current
         let dateFrom = "\(dateFromComponents.year!)-\(dateFromComponents.month!)-\(dateFromComponents.day!)"

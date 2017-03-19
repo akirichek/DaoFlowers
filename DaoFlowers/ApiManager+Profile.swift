@@ -22,7 +22,7 @@ extension ApiManager {
             if response.result.isSuccess {
                 var customer: Customer? = nil
                 if let json = response.result.value {
-                    //print("JSON: \(json)")
+                    print("JSON: \(json)")
                     if let customerDictionary = json as? [String: AnyObject] {
                         customer = Customer(dictionary: customerDictionary)
                     }
@@ -50,11 +50,13 @@ extension ApiManager {
             parameters[key] = customerDictionary[key]
         }
         
+        print(url)
         print(parameters)
         
         let headers: [String: String] = ["DaoUserAgentFlowers": "ios", "Authorization": user.token]
         
         Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers:headers).responseJSON { response in
+            print("Code: \(response.response?.statusCode)")
             if response.result.isSuccess {
                 if let json = response.result.value {
                     print("JSON: \(json)")

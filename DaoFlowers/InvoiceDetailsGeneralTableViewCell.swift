@@ -60,7 +60,8 @@ class InvoiceDetailsGeneralTableViewCell: UITableViewCell {
             plantationAttrString.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 12), range: range)
             plantationLabel.attributedText = plantationAttrString
         }
-        clientLabel.text = invoiceDetailsHead.label
+        
+        clientLabel.text = invoiceDetails.userById(invoiceDetailsHead.clientId)?.name
         let country = invoiceDetails.countryById(invoiceDetailsHead.countryId)!
         countryLabel.text = country.abr
         piecesLabel.text = invoiceDetailsHead.pieces.replacingOccurrences(of: ";", with: " ")

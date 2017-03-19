@@ -11,6 +11,7 @@ import UIKit
 class UserProfileEmployeeTableViewCell: UITableViewCell, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    var customer: Customer!
     var employee: Employee!
     var emails: [String] = []
     var phonesMessengers: [Employee.Contact] = []
@@ -26,63 +27,16 @@ class UserProfileEmployeeTableViewCell: UITableViewCell, UITableViewDataSource, 
         tableView.register(nib, forCellReuseIdentifier: "UserProfileEmployeePostsTableViewCellIdentifier")
     }
     
-    func contentSizeBySettingEmployee(employee: Employee) -> CGSize {
+    func contentSizeBySettingEmployee(employee: Employee, customer: Customer) -> CGSize {
         self.employee = employee
+        self.customer = customer
         emails = employee.emails()
-        posts = employee.posts
-        reports = employee.reports
-        sortContacts()
+        
+        posts = customer.postsByIds(employee.postIds)
+        reports = customer.reportsByIds(employee.reportIds)
+        phonesMessengers = employee.phonesMessengers()
         tableView.reloadData()
         return tableView.contentSize
-    }
-
-    func postsString() -> String{
-        var postsString: String = ""
-        for i in 0..<posts.count {
-            postsString += "\(i + 1). " + posts[i].name
-            
-            if i != posts.count - 1 {
-                postsString += "\n"
-            }
-        }
-        return postsString
-    }
-    
-    func reportsString() -> String {
-        var reportsString = ""
-        for i in 0..<reports.count {
-            reportsString += "\(i + 1). " + reports[i].name
-            
-            if i != reports.count - 1 {
-                reportsString += "\n"
-            }
-        }
-        
-        return reportsString
-    }
-    
-    func sortContacts() {
-        phonesMessengers = []
-        var contacts = employee.contacts
-
-        if let index = contacts.index(where: { $0.type == .mobile}) {
-            phonesMessengers.append(contacts[index])
-        }
-        if let index = contacts.index(where: { $0.type == .office}) {
-            phonesMessengers.append(contacts[index])
-        }
-        if let index = contacts.index(where: { $0.type == .fax}) {
-            phonesMessengers.append(contacts[index])
-        }
-        if let index = contacts.index(where: { $0.type == .viber}) {
-            phonesMessengers.append(contacts[index])
-        }
-        if let index = contacts.index(where: { $0.type == .skype}) {
-            phonesMessengers.append(contacts[index])
-        }
-        if let index = contacts.index(where: { $0.type == .isq}) {
-            phonesMessengers.append(contacts[index])
-        }
     }
     
     // MARK: - UITableViewDataSource
@@ -163,9 +117,9 @@ class UserProfileEmployeeTableViewCell: UITableViewCell, UITableViewDataSource, 
         let label = cell.contentView.subviews.first as! UILabel
         switch indexPath.section {
         case 2:
-            label.text = postsString()
+            label.text = Utils.postsString(posts)
         case 3:
-            label.text = reportsString()
+            label.text = Utils.reportsString(reports)
         default:
             break
         }
@@ -180,9 +134,9 @@ class UserProfileEmployeeTableViewCell: UITableViewCell, UITableViewDataSource, 
         if indexPath.section == 2 || indexPath.section == 3 {
             var text = ""
             if indexPath.section == 2 {
-                text = postsString()
+                text = Utils.postsString(posts)
             } else if indexPath.section == 3 {
-                text = reportsString()
+                text = Utils.reportsString(reports)
             }
             
             let heightForText = Utils.heightForText(text,

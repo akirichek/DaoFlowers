@@ -20,6 +20,7 @@ struct InvoiceDetails {
     var countries: [Country]
     var orderStatistic: OrderStatistic
     var statistic: Statistic
+    var users: [User]
     
     init(dictionary: [String: AnyObject]) {
         let totalDictionary = dictionary["total"] as! [String: AnyObject]
@@ -57,6 +58,11 @@ struct InvoiceDetails {
             countries.append(Country(dictionary: country))
         }
         
+        users = []
+        for user in dictionary["users"] as! [[String: AnyObject]]   {
+            users.append(User(dictionary: user))
+        }
+        
         orderStatistic = OrderStatistic(dictionary: dictionary["orderStatistic"] as! [String: AnyObject])
         statistic = Statistic(dictionary: dictionary["statistic"] as! [String: AnyObject])
         self.sortOrderStatistic()
@@ -71,7 +77,6 @@ struct InvoiceDetails {
         var flowerTypeId: Int
         var id: Int
         var invoiceId: Int
-        var label: String
         var pieces: String
         var plantationId: Int
         var rows: [Row]
@@ -81,13 +86,12 @@ struct InvoiceDetails {
         
         init(dictionary: [String: AnyObject]) {
             awb = dictionary["awb"] as! String
-            clientId = dictionary["clientId"] as! Int
+            clientId = dictionary["userId"] as! Int
             countryId = dictionary["countryId"] as! Int
             fb = dictionary["fb"] as! Int
             flowerTypeId = dictionary["flowerTypeId"] as! Int
             id = dictionary["id"] as! Int
             invoiceId = dictionary["invoiceId"] as! Int
-            label = dictionary["label"] as! String
             pieces = dictionary["pieces"] as! String
             plantationId = dictionary["plantationId"] as! Int
             
@@ -272,7 +276,9 @@ struct InvoiceDetails {
         return nil
     }
     
-    
+    func userById(_ id: Int) -> User? {
+        return users.first(where: { $0.id == id })
+    }
     
     mutating func sortOrderStatistic() {
         var sortedOrderStatistic = self.orderStatistic

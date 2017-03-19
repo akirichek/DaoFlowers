@@ -88,7 +88,13 @@ class AddStaffViewController: UIViewController, UITableViewDataSource, UITableVi
         adjustTextFields()
         
         if employee == nil {
-            employee = Employee(name: "", posts: [], contacts: [], reports: [])
+            employee = Employee()
+            employee!.id = 0
+            employee!.name = ""
+            employee!.postIds = []
+            employee!.contacts = []
+            employee!.reportIds = []
+            employee!.reportsMode = Employee.ReportsMode.defaultMode
         } else {
             isEditingMode = true
             populateView()
@@ -126,8 +132,10 @@ class AddStaffViewController: UIViewController, UITableViewDataSource, UITableVi
             }
         }
         
-        selectedPosts = employee!.posts
-        selectedReports = employee!.reports
+        if let customer = customer {
+            selectedPosts = customer.postsByIds(employee!.postIds)
+            selectedReports = customer.reportsByIds(employee!.reportIds)
+        }
     }
     
     func reloadViews() {
@@ -237,14 +245,14 @@ class AddStaffViewController: UIViewController, UITableViewDataSource, UITableVi
             Utils.showErrorWithMessage(CustomLocalisedString("Cannot save changes. Select at least one position and try again"), inViewController: self)
         } else {
             employee!.name = nameTextField.text!
-            employee!.posts = selectedPosts
+            employee!.postIds = customer?.idsFromPosts(selectedPosts)
             
             if doNotSendReports {
-                employee!.reports = []
+                employee!.reportIds = []
             } else if sendAllReports {
-                employee!.reports = reports
+                employee!.reportIds = customer?.idsFromReports(reports)
             } else {
-                employee!.reports = selectedReports
+                employee!.reportIds = customer?.idsFromReports(selectedReports)
             }
             
             employee!.contacts = buildContacts()

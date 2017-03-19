@@ -20,7 +20,12 @@ struct Document {
     
     init(dictionary: [String: AnyObject]) {
         id = dictionary["id"] as! Int
-        clientId = dictionary["clientId"] as! Int
+        if let userId = dictionary["userId"] as? Int {
+            clientId = userId
+        } else {
+            clientId = dictionary["clientId"] as! Int
+        }
+        
         fb = dictionary["fb"] as! Int
         fileName = dictionary["fileName"] as! String
         label = dictionary["label"] as! String

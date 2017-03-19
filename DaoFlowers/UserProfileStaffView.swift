@@ -19,6 +19,7 @@ class UserProfileStaffView: UIView, UITableViewDataSource, UITableViewDelegate, 
             existingEmployees = employees.filter { $0.action != .delete }
         }
     }
+    var customer: Customer!
     var existingEmployees: [Employee] = []
     var lastContentOffset: CGFloat = 0
     var heightsForRow: [CGFloat] = []
@@ -55,13 +56,14 @@ class UserProfileStaffView: UIView, UITableViewDataSource, UITableViewDelegate, 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserProfileEmployeeTableViewCellIdentifier", for: indexPath) as! UserProfileEmployeeTableViewCell
         
-        if heightsForRow.count < existingEmployees.count {
-            let employeeTableViewContentSize = cell.contentSizeBySettingEmployee(employee: existingEmployees[indexPath.section])
-            heightsForRow.append(employeeTableViewContentSize.height)
-            if indexPath.section == existingEmployees.count - 1 {
-                tableView.reloadData()
-            }
-        }
+        let employeeTableViewContentSize = cell.contentSizeBySettingEmployee(employee: existingEmployees[indexPath.section],
+                                                                             customer: customer)
+//        if heightsForRow.count < existingEmployees.count {
+//            heightsForRow.append(employeeTableViewContentSize.height)
+//            if indexPath.section == existingEmployees.count - 1 {
+//                tableView.reloadData()
+//            }
+//        }
 
         return cell
     }
@@ -74,7 +76,24 @@ class UserProfileStaffView: UIView, UITableViewDataSource, UITableViewDelegate, 
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return heightsForRow.count == existingEmployees.count ? (heightsForRow[indexPath.section] + 5) : 40
+        let employee = existingEmployees[indexPath.section]
+        var heightForRow: CGFloat = 0
+        heightForRow += CGFloat((employee.emails().count * 44) + 40)
+        heightForRow += CGFloat((employee.phonesMessengers().count * 44) + 40)
+        
+        let posts = customer.postsByIds(employee.postIds)
+        let heightForPosts = Utils.heightForText(Utils.postsString(posts),
+                                                havingWidth: 280,
+                                                andFont: UIFont.systemFont(ofSize: 15))
+        heightForRow += heightForPosts + 73
+
+        let reports = customer.reportsByIds(employee.reportIds)
+        let heightForReports = Utils.heightForText(Utils.reportsString(reports),
+                                                   havingWidth: 280,
+                                                   andFont: UIFont.systemFont(ofSize: 15))
+        heightForRow += heightForReports + 73
+        
+        return heightForRow
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

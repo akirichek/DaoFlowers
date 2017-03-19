@@ -72,6 +72,7 @@ class UserProfileViewController: BaseViewController, PageViewerDataSource, UserP
                     page.reloadData()
                 }
                 if let page = self.pageViewer.pageAtIndex(1) as? UserProfileStaffView {
+                    page.customer = self.customer
                     page.employees = self.customer!.employees
                     page.reloadData()
                 }
@@ -79,11 +80,12 @@ class UserProfileViewController: BaseViewController, PageViewerDataSource, UserP
         })
     }
     
-    func saveCustomer() {
+    func saveCustomer(_ customer: Customer?) {
         if customer != nil {
             RBHUD.sharedInstance.showLoader(self.view, withTitle: nil, withSubTitle: nil, withProgress: true)
             ApiManager.saveCustomer(customer: customer!, byUser: selectedUser, completion: { (customer, error) in
                 RBHUD.sharedInstance.hideLoader()
+                self.fetchCustomerWithLoader(false)
             })
         }
     }
@@ -171,6 +173,7 @@ class UserProfileViewController: BaseViewController, PageViewerDataSource, UserP
         } else if let userProfileStaffView = pageView as? UserProfileStaffView {
             userProfileStaffView.delegate = self
             if let employees = customer?.employees {
+                userProfileStaffView.customer = customer
                 userProfileStaffView.employees = employees
             }
         }
@@ -242,20 +245,16 @@ class UserProfileViewController: BaseViewController, PageViewerDataSource, UserP
     // MARK: - AddStaffViewControllerDelegate
     
     func addStaffViewController(addStaffViewController: AddStaffViewController, didAddNewEmployee employee: Employee) {
-        customer?.employees.append(employee)
-        if let page = self.pageViewer.pageAtIndex(1) as? UserProfileStaffView {
-            page.employees = customer!.employees
-            page.reloadData()
-        }
+        var editingCustomer = Customer()
+        editingCustomer.employees = [employee]
+        saveCustomer(editingCustomer)
     }
     
     func addStaffViewController(addStaffViewController: AddStaffViewController, didEditEmployee employee: Employee) {
-        customer?.employees[selectedEmployeeIndex!] = employee
-        if let page = self.pageViewer.pageAtIndex(1) as? UserProfileStaffView {
-            page.employees = customer!.employees
-            page.reloadData()
-            self.saveCustomer()
-        }
+        var editingCustomer = Customer()
+        let editingEmployee = Employee.differcenceBetweenEmployees((customer?.employees[selectedEmployeeIndex!])!, rhs: employee)
+        editingCustomer.employees = [editingEmployee]
+        saveCustomer(editingCustomer)
     }
     
     func userProfileStaffView(userProfileStaffView: UserProfileStaffView, editButtonClickedAtSection section: Int) {
@@ -264,18 +263,16 @@ class UserProfileViewController: BaseViewController, PageViewerDataSource, UserP
     }
     
     func userProfileStaffView(userProfileStaffView: UserProfileStaffView, deleteButtonClickedAtSection section: Int) {
-        let employee = self.customer!.employees[section]
+        var employee = self.customer!.employees[section]
         let message = String(format: CustomLocalisedString("Are you sure deleting employee"), employee.name)
         let alertController = UIAlertController(title: CustomLocalisedString("Deletion of employee"),
                                                 message: message,
                                                 preferredStyle: .alert)
         let okAction = UIAlertAction(title: CustomLocalisedString("YES"), style: .default) { (action) in
-            self.customer?.employees[section].action = .delete
-            if let page = self.pageViewer.pageAtIndex(1) as? UserProfileStaffView {
-                page.employees = self.customer!.employees
-                page.reloadData()
-                self.saveCustomer()
-            }
+            employee.action = .delete
+            var editingCustomer = Customer()
+            editingCustomer.employees = [employee]
+            self.saveCustomer(editingCustomer)
         }
         alertController.addAction(okAction)
         let cancelAction = UIAlertAction(title: CustomLocalisedString("NO"), style: .cancel, handler: nil)
@@ -286,21 +283,19 @@ class UserProfileViewController: BaseViewController, PageViewerDataSource, UserP
     // MARK: - UserProfileMainParametersViewDelegate
     
     func userProfileMainParametersView(userProfileMainParametersView: UserProfileMainParametersView, saveButtonClickedWithCustomer customer: Customer) {
-        self.customer?.recoveryEmail = customer.recoveryEmail
-        self.customer?.recoveryPhone = customer.recoveryPhone
-        self.customer?.organization = customer.organization
-        self.customer?.address = customer.address
-        self.customer?.detailedAddress = customer.detailedAddress
-        self.customer?.url = customer.url
-        let alertController = UIAlertController(title: CustomLocalisedString("Saving changes"),
-                                                message: CustomLocalisedString("Save changes in user's profile?"),
-                                                preferredStyle: .alert)
-        let okAction = UIAlertAction(title: CustomLocalisedString("YES"), style: .default) { (action) in
-            self.saveCustomer()
+        
+        if self.customer != nil {
+            let editingCustomer = Customer.differcenceBetweenCustomers(self.customer!, rhs: customer)
+            let alertController = UIAlertController(title: CustomLocalisedString("Saving changes"),
+                                                    message: CustomLocalisedString("Save changes in user's profile?"),
+                                                    preferredStyle: .alert)
+            let okAction = UIAlertAction(title: CustomLocalisedString("YES"), style: .default) { (action) in
+                self.saveCustomer(editingCustomer)
+            }
+            alertController.addAction(okAction)
+            let cancelAction = UIAlertAction(title: CustomLocalisedString("NO"), style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            present(alertController, animated: true, completion: nil)
         }
-        alertController.addAction(okAction)
-        let cancelAction = UIAlertAction(title: CustomLocalisedString("NO"), style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
-        present(alertController, animated: true, completion: nil)
     }
 }
