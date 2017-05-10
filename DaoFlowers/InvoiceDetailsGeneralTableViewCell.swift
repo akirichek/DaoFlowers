@@ -40,7 +40,7 @@ class InvoiceDetailsGeneralTableViewCell: UITableViewCell {
         let flowerSize = invoiceDetails.flowerSizeById(invoiceDetailsRow.flowerSizeId)!
         sizeLabel.text = flowerSize.name
         stemsLabel.text = String(invoiceDetailsRow.stems)
-        stemPriceLabel.text =  String(format: "%.3f $", invoiceDetailsRow.stemPrice)
+        stemPriceLabel.text = String(format: "%.3f $", invoiceDetailsRow.stemPrice)
         costLabel.text = String(invoiceDetailsRow.cost) + " $"
         
         let fb = Double(Int(round(invoiceDetailsRow.fb * 100))) / 100

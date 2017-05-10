@@ -14,6 +14,7 @@ class VarietyImageViewerViewController: BaseViewController, UICollectionViewData
     @IBOutlet weak var selectedPageLabel: UILabel!
     
     var images: [Variety.Image]!
+    var photos: [UIImage]!
     var indexOfCurrentPage = 0
     
     override func viewDidLoad() {

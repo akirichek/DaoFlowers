@@ -38,11 +38,7 @@ extension ApiManager {
     static func saveCustomer(customer: Customer, byUser user: User, completion: @escaping (_ customer: Customer?, _ error: NSError?) -> ()) {
         
         let url = K.Api.BaseUrl + K.Api.Profile.Customer + "/\(user.id!)"
-        var parameters: [String: AnyObject] = [
-            "user_id": user.id as AnyObject,
-            "lang_id": LanguageManager.currentLanguage().id() as AnyObject
-            
-        ]
+        var parameters: [String: AnyObject] = [:]
         
         let customerDictionary = customer.toDictionary()
         
@@ -55,7 +51,7 @@ extension ApiManager {
         
         let headers: [String: String] = ["DaoUserAgentFlowers": "ios", "Authorization": user.token]
         
-        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers:headers).responseJSON { response in
+        print(String(data: Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers:headers).responseJSON { response in
             print("Code: \(response.response?.statusCode)")
             if response.result.isSuccess {
                 if let json = response.result.value {
@@ -66,7 +62,7 @@ extension ApiManager {
                 print("Error: \(response.result.error)")
                 completion(nil, response.result.error as NSError?)
             }
-        }
+        }.request!.httpBody!, encoding: String.Encoding.utf8)!)
     }
     
     static func fetchEmployeesParamsWithUser(_ user: User, completion: @escaping (_ posts: [Post]?, _ reports: [Report]?, _ error: NSError?) -> ()) {

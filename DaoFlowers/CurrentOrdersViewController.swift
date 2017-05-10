@@ -211,7 +211,6 @@ class CurrentOrdersViewController: BaseViewController, UITableViewDataSource, UI
             let heightForText = Utils.heightForText(order.truck.name,
                                                     havingWidth: truckLabelWidth,
                                                     andFont: UIFont.systemFont(ofSize: 12))
-            
             if heightForText > truckLabelHeight {
                 heightForRow += heightForText - truckLabelHeight
             }

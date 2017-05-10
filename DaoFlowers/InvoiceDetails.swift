@@ -9,28 +9,30 @@
 import Foundation
 
 struct InvoiceDetails {
-    var totalFb: Double
-    var totalPrice: Double
-    var totalStems: Int
-    var heads: [Head]
+    var totalFb: Double = 0
+    var totalPrice: Double = 0
+    var totalStems: Int = 0
+    var heads: [Head] = []
     var varieties: [Variety]
     var flowers: [Flower]
     var flowerSizes: [Flower.Size]
     var plantations: [Plantation]
     var countries: [Country]
-    var orderStatistic: OrderStatistic
-    var statistic: Statistic
+    var orderStatistic: OrderStatistic!
+    var statistic: Statistic!
     var users: [User]
     
     init(dictionary: [String: AnyObject]) {
-        let totalDictionary = dictionary["total"] as! [String: AnyObject]
-        totalFb = totalDictionary["fb"] as! Double
-        totalPrice = totalDictionary["price"] as! Double
-        totalStems = totalDictionary["stems"] as! Int
+        if let totalDictionary = dictionary["total"] as? [String: AnyObject] {
+            totalFb = totalDictionary["fb"] as! Double
+            totalPrice = totalDictionary["price"] as! Double
+            totalStems = totalDictionary["stems"] as! Int
+        }
         
-        heads = []
-        for headDictionary in dictionary["heads"] as! [[String: AnyObject]] {
-            heads.append(Head(dictionary: headDictionary))
+        if let headsDictionaries = dictionary["heads"] as? [[String: AnyObject]] {
+            for headDictionary in headsDictionaries {
+                heads.append(Head(dictionary: headDictionary))
+            }
         }
         
         varieties = []
@@ -63,8 +65,13 @@ struct InvoiceDetails {
             users.append(User(dictionary: user))
         }
         
-        orderStatistic = OrderStatistic(dictionary: dictionary["orderStatistic"] as! [String: AnyObject])
-        statistic = Statistic(dictionary: dictionary["statistic"] as! [String: AnyObject])
+        if let orderStatisticDictionary = dictionary["orderStatistic"] as? [String: AnyObject] {
+            orderStatistic = OrderStatistic(dictionary: orderStatisticDictionary)
+        }
+        
+        if let statisticDictionary = dictionary["statistic"] as? [String: AnyObject] {
+            statistic = Statistic(dictionary: statisticDictionary)
+        }
         self.sortOrderStatistic()
         self.sortStatistic()
     }
@@ -79,7 +86,7 @@ struct InvoiceDetails {
         var invoiceId: Int
         var pieces: String
         var plantationId: Int
-        var rows: [Row]
+        var rows: [Row] = []
         var totalFb: Double
         var totalPrice: Double
         var totalStems: Int
@@ -95,7 +102,6 @@ struct InvoiceDetails {
             pieces = dictionary["pieces"] as! String
             plantationId = dictionary["plantationId"] as! Int
             
-            rows = []
             for rowDictionary in dictionary["rows"] as! [[String: AnyObject]] {
                 rows.append(Row(dictionary: rowDictionary))
             }
@@ -104,6 +110,22 @@ struct InvoiceDetails {
             totalFb = totalDictionary["fb"] as! Double
             totalPrice = totalDictionary["price"] as! Double
             totalStems = totalDictionary["stems"] as! Int
+        }
+        
+        init(id: Int, invoiceId: Int) {
+            self.id = id
+            self.invoiceId = invoiceId
+            
+            awb = ""
+            clientId = 0
+            countryId = 0
+            fb = 0
+            flowerTypeId = 0
+            pieces = ""
+            plantationId = 0
+            totalFb = 0
+            totalPrice = 0
+            totalStems = 0
         }
     }
     
@@ -281,37 +303,38 @@ struct InvoiceDetails {
     }
     
     mutating func sortOrderStatistic() {
-        var sortedOrderStatistic = self.orderStatistic
-        sortedOrderStatistic.rowsGroupedByFlowerTypeId.sort { (row1, row2) -> Bool in
-            let flowerTypeId1 = Int(Array(row1.keys)[0])
-            let flowerTypeId2 = Int(Array(row2.keys)[0])
-            return flowerTypeId1 < flowerTypeId2
-        }
-        
-        var sortedRowsGroupedByFlowerTypeId: [[Int: [InvoiceDetails.OrderStatistic.Row]]] = []
-        for dictionary in sortedOrderStatistic.rowsGroupedByFlowerTypeId {
-            for (flowerTypeId, rows) in dictionary {
-                var sortedRows = rows
-                sortedRows.sort(by: { (row1, row2) -> Bool in
-                    let variety1 = varietyById(row1.flowerSortId)!
-                    let variety2 = varietyById(row2.flowerSortId)!
-                    return variety1.name < variety2.name
-                })
-                
-                var rowsGroupedByFlowerTypeId: [Int: [InvoiceDetails.OrderStatistic.Row]] = [:]
-                rowsGroupedByFlowerTypeId[flowerTypeId] = sortedRows
-                sortedRowsGroupedByFlowerTypeId.append(rowsGroupedByFlowerTypeId)
+        if var sortedOrderStatistic = self.orderStatistic {
+            sortedOrderStatistic.rowsGroupedByFlowerTypeId.sort { (row1, row2) -> Bool in
+                let flowerTypeId1 = Int(Array(row1.keys)[0])
+                let flowerTypeId2 = Int(Array(row2.keys)[0])
+                return flowerTypeId1 < flowerTypeId2
             }
+            
+            var sortedRowsGroupedByFlowerTypeId: [[Int: [InvoiceDetails.OrderStatistic.Row]]] = []
+            for dictionary in sortedOrderStatistic.rowsGroupedByFlowerTypeId {
+                for (flowerTypeId, rows) in dictionary {
+                    var sortedRows = rows
+                    sortedRows.sort(by: { (row1, row2) -> Bool in
+                        let variety1 = varietyById(row1.flowerSortId)!
+                        let variety2 = varietyById(row2.flowerSortId)!
+                        return variety1.name < variety2.name
+                    })
+                    
+                    var rowsGroupedByFlowerTypeId: [Int: [InvoiceDetails.OrderStatistic.Row]] = [:]
+                    rowsGroupedByFlowerTypeId[flowerTypeId] = sortedRows
+                    sortedRowsGroupedByFlowerTypeId.append(rowsGroupedByFlowerTypeId)
+                }
+            }
+            
+            sortedOrderStatistic.rowsGroupedByFlowerTypeId = sortedRowsGroupedByFlowerTypeId
+            
+            self.orderStatistic = sortedOrderStatistic
         }
-        
-        sortedOrderStatistic.rowsGroupedByFlowerTypeId = sortedRowsGroupedByFlowerTypeId
-        
-        self.orderStatistic = sortedOrderStatistic
     }
     
     mutating func sortStatistic() {
         var sortedStatistic = self.statistic
-        sortedStatistic.averagePrices.sort { (avrPrice1, avrPrice2) -> Bool in
+        sortedStatistic?.averagePrices.sort { (avrPrice1, avrPrice2) -> Bool in
             let country1 = self.countryById(avrPrice1.countryId)!
             let country2 = self.countryById(avrPrice2.countryId)!
             

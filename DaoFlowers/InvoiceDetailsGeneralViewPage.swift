@@ -23,6 +23,7 @@ class InvoiceDetailsGeneralViewPage: UIView, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var headerLandscapeView: UIView!
     @IBOutlet weak var topContainerView: UIView!
 
+    weak var delegate: InvoiceDetailsGeneralViewPageDelegate?
     var spinner = RBHUD()
     var viewWillTransitionToSize = UIScreen.main.bounds.size {
         didSet {
@@ -221,4 +222,15 @@ class InvoiceDetailsGeneralViewPage: UIView, UITableViewDelegate, UITableViewDat
         
         return heightForRow
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let head = self.invoiceDetails!.heads[indexPath.section]
+        delegate?.invoiceDetailsGeneralViewPage(self, didSelectInvoiceDetailsHead: head)
+        print("\(indexPath.section) \(indexPath.row)")
+    }
+}
+
+protocol InvoiceDetailsGeneralViewPageDelegate: NSObjectProtocol {
+    func invoiceDetailsGeneralViewPage(_ invoiceDetailsGeneralViewPage: InvoiceDetailsGeneralViewPage, didSelectInvoiceDetailsHead invoceDetailsHead: InvoiceDetails.Head)
 }

@@ -21,6 +21,10 @@ class DocumentsViewController: BaseViewController, PageViewerDataSource, Documen
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if navigationController?.viewControllers[0] != self {
+            navigationItem.leftBarButtonItem = nil
+        }
+        
         self.title = CustomLocalisedString("Documents")
         self.pageViewerContainerView.frame = self.contentViewFrame()
         let pageViewer = Bundle.main.loadNibNamed("PageViewer", owner: self, options: nil)?.first as! PageViewer

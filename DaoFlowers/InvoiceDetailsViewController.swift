@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, PageViewerDelegate, InvoiceDetailsGeneralFilterViewDelegate {
+class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, PageViewerDelegate, InvoiceDetailsGeneralFilterViewDelegate, InvoiceDetailsGeneralViewPageDelegate {
     
     @IBOutlet weak var pageViewerContainerView: UIView!
     var filterButton: UIBarButtonItem!
@@ -48,6 +48,15 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, Pa
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationViewController = segue.destination
+        if let claimDetailsViewController =  destinationViewController as? ClaimDetailsViewController {
+            claimDetailsViewController.invoice = invoice
+            claimDetailsViewController.invoiceDetails = invoiceDetails
+            claimDetailsViewController.invoiceDetailsHead = sender as! InvoiceDetails.Head
+        }
+    }
+    
     // MARK: - Private Methods
     
     func adjustBarButtonItems() {
@@ -74,6 +83,7 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, Pa
                     pageView.viewWillTransitionToSize = self.viewWillTransitionToSize
                     pageView.invoice = self.invoice
                     pageView.invoiceDetails = invoiceDetails
+                    pageView.delegate = self
                 } else if let pageView = self.pageViewer.pageAtIndex(index) as? InvoiceDetailsAveragePricesViewPage {
                     pageView.viewWillTransitionToSize = self.viewWillTransitionToSize
                     pageView.invoice = self.invoice
@@ -204,6 +214,7 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, Pa
                 generalPageView.viewWillTransitionToSize = self.viewWillTransitionToSize
                 generalPageView.invoice = invoice
                 generalPageView.invoiceDetails = invoiceDetails
+                generalPageView.delegate = self
             } else if let averagePricesViewPage = pageView as? InvoiceDetailsAveragePricesViewPage {
                 averagePricesViewPage.viewWillTransitionToSize = self.viewWillTransitionToSize
                 averagePricesViewPage.invoice = invoice
@@ -233,5 +244,11 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, Pa
                                                   withState state: InvoiceDetailsGeneralFilterViewState) {
         filterViewState = state
         filterInvoiceDetails()
+    }
+    
+    // MARK: - InvoiceDetailsGeneralViewPageDelegate
+    
+    func invoiceDetailsGeneralViewPage(_ invoiceDetailsGeneralViewPage: InvoiceDetailsGeneralViewPage, didSelectInvoiceDetailsHead invoceDetailsHead: InvoiceDetails.Head) {
+        performSegue(withIdentifier: K.Storyboard.SegueIdentifier.ClaimDetails, sender: invoceDetailsHead)
     }
 }

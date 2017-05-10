@@ -18,6 +18,12 @@ struct Plantation {
     var countryName: String?
     var varieties: [Variety]?
     
+    init(id: Int, brand: String, name: String) {
+        self.id = id
+        self.brand = brand
+        self.name = name
+    }
+    
     init(dictionary: [String: AnyObject]) {
         brand = dictionary["brand"] as! String
         fbSum = dictionary["fbSum"] as? Double

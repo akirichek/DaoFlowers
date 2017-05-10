@@ -143,6 +143,9 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
         case .Documents:
             self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.Documents, sender: self)
             self.animateMenu(false)
+        case .Claims:
+            self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.Claims, sender: self)
+            self.animateMenu(false)
         case .Login:
             self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.Login, sender: self)
             //self.animateMenu(false)
@@ -156,6 +159,9 @@ class MainViewController: UIViewController, MenuViewControllerDelegate, MenuButt
             User.currentUser()?.logOut()
             let menuViewController = self.childViewControllers.first as! MenuViewController
             menuViewController.reloadData()
+        case .About:
+            self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.About, sender: self)
+            self.animateMenu(false)
         default:
             break
         }

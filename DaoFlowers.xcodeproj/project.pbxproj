@@ -12,8 +12,17 @@
 		820984661E365B5100C8D112 /* UserProfileStaffView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820984651E365B5100C8D112 /* UserProfileStaffView.swift */; };
 		820984681E365B6500C8D112 /* UserProfileMainParametersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 820984671E365B6500C8D112 /* UserProfileMainParametersView.xib */; };
 		8209846A1E365B7000C8D112 /* UserProfileStaffView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 820984691E365B7000C8D112 /* UserProfileStaffView.xib */; };
+		820EFB5A1EAA6FA700AA58D0 /* ClaimDetailsPhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820EFB591EAA6FA700AA58D0 /* ClaimDetailsPhotoCollectionViewCell.swift */; };
+		820EFB5C1EAB5EDD00AA58D0 /* AddClaimViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820EFB5B1EAB5EDD00AA58D0 /* AddClaimViewController.swift */; };
+		820EFB601EACAFCC00AA58D0 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 820EFB5F1EACAFCC00AA58D0 /* Photo.swift */; };
+		820EFB641EACC19200AA58D0 /* ClaimDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 820EFB621EACC19200AA58D0 /* ClaimDetailsTableViewCell.xib */; };
 		822C1ED31DBE375600A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822C1ED21DBE375600A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.swift */; };
 		822C1ED51DBE37A500A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 822C1ED41DBE37A500A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.xib */; };
+		82403E481E9E5F77005263C6 /* ApiManager+Claims.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82403E471E9E5F77005263C6 /* ApiManager+Claims.swift */; };
+		82403E4A1E9E6259005263C6 /* ClaimsPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82403E491E9E6259005263C6 /* ClaimsPageView.swift */; };
+		82403E4C1E9E626A005263C6 /* ClaimsPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82403E4B1E9E626A005263C6 /* ClaimsPageView.xib */; };
+		82413A201EA642C800C09505 /* DateTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82413A1F1EA642C800C09505 /* DateTableViewHeader.xib */; };
+		82413A231EA8BCB600C09505 /* ClaimDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82413A221EA8BCB600C09505 /* ClaimDetailsViewController.swift */; };
 		82457AC81DAEAA5900D87B21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82457AC71DAEAA5900D87B21 /* AppDelegate.swift */; };
 		82457ACD1DAEAA5900D87B21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82457ACB1DAEAA5900D87B21 /* Main.storyboard */; };
 		82457AD01DAEAA5900D87B21 /* DaoFlowers.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 82457ACE1DAEAA5900D87B21 /* DaoFlowers.xcdatamodeld */; };
@@ -28,6 +37,8 @@
 		824FF3251E42623B00BBC723 /* UserProfileEmployeeTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 824FF3241E42623B00BBC723 /* UserProfileEmployeeTableViewHeader.xib */; };
 		824FF3271E42635D00BBC723 /* UserProfileEmployeeTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824FF3261E42635D00BBC723 /* UserProfileEmployeeTableViewHeader.swift */; };
 		824FF32C1E477BA000BBC723 /* stylo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 824FF32B1E477BA000BBC723 /* stylo.ttf */; };
+		8251C4591E8956890039CBD5 /* ClaimsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8251C4581E8956890039CBD5 /* ClaimsViewController.swift */; };
+		8251C45C1E896D410039CBD5 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8251C45B1E896D410039CBD5 /* AboutViewController.swift */; };
 		825369081DDF9BA700A17537 /* InvoiceDetailsGeneralTotalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 825369071DDF9BA700A17537 /* InvoiceDetailsGeneralTotalTableViewCell.xib */; };
 		8253690B1DE0E73C00A17537 /* InvoiceDetailsGeneralFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8253690A1DE0E73C00A17537 /* InvoiceDetailsGeneralFilterView.swift */; };
 		8253690F1DE229DA00A17537 /* InvoiceDetailsGeneralLandscapeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8253690E1DE229DA00A17537 /* InvoiceDetailsGeneralLandscapeTableViewCell.xib */; };
@@ -90,6 +101,10 @@
 		827E8B1A1DDB535E000A8EAE /* ApiManager+Documents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827E8B191DDB535E000A8EAE /* ApiManager+Documents.swift */; };
 		827E8B1C1DDB79CB000A8EAE /* DocumentTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827E8B1B1DDB79CB000A8EAE /* DocumentTableViewHeader.swift */; };
 		827E8B1E1DDB79D8000A8EAE /* DocumentTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 827E8B1D1DDB79D8000A8EAE /* DocumentTableViewHeader.xib */; };
+		8285BC861EB7AB9400F4633B /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8285BC851EB7AB9400F4633B /* DataManager.swift */; };
+		829419CE1EA51E0400E82E20 /* ClaimTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829419CC1EA51E0400E82E20 /* ClaimTableViewCell.swift */; };
+		829419CF1EA51E0400E82E20 /* ClaimTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 829419CD1EA51E0400E82E20 /* ClaimTableViewCell.xib */; };
+		829419D11EA51FEC00E82E20 /* Claim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829419D01EA51FEC00E82E20 /* Claim.swift */; };
 		8299D36D1DAF8CC50088E550 /* MainViewControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D36C1DAF8CC50088E550 /* MainViewControllerSegue.swift */; };
 		8299D3701DAF8F110088E550 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D36F1DAF8F110088E550 /* MenuViewController.swift */; };
 		8299D3721DAF926E0088E550 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8299D3711DAF926E0088E550 /* Constants.swift */; };
@@ -134,6 +149,10 @@
 		829AF0511E38E6DF0002CF15 /* AddStaffPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829AF0501E38E6DF0002CF15 /* AddStaffPostTableViewCell.swift */; };
 		829AF0541E3901340002CF15 /* AddStaffReportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829AF0521E3901340002CF15 /* AddStaffReportTableViewCell.swift */; };
 		829AF0551E3901340002CF15 /* AddStaffReportTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 829AF0531E3901340002CF15 /* AddStaffReportTableViewCell.xib */; };
+		829BC8A01EAF900600F05083 /* ClaimDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829BC89F1EAF900600F05083 /* ClaimDetailsTableViewCell.swift */; };
+		829BC8A41EAFB15D00F05083 /* ClaimDetailsTotalTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 829BC8A31EAFB15D00F05083 /* ClaimDetailsTotalTableViewCell.xib */; };
+		829BC8A61EAFB39A00F05083 /* ClaimDetailsInvoiceRowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 829BC8A51EAFB39A00F05083 /* ClaimDetailsInvoiceRowTableViewCell.xib */; };
+		829BC8A81EAFBE5600F05083 /* ClaimDetailsTotalInvoiceRowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 829BC8A71EAFBE5600F05083 /* ClaimDetailsTotalInvoiceRowTableViewCell.xib */; };
 		82C059721DC60DDE00F061E6 /* ColorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C059711DC60DDE00F061E6 /* ColorsViewController.swift */; };
 		82C059741DC617D100F061E6 /* ColorsPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C059731DC617D100F061E6 /* ColorsPageView.swift */; };
 		82C059761DC619AD00F061E6 /* ColorsPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82C059751DC619AD00F061E6 /* ColorsPageView.xib */; };
@@ -182,9 +201,18 @@
 		820984651E365B5100C8D112 /* UserProfileStaffView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileStaffView.swift; sourceTree = "<group>"; };
 		820984671E365B6500C8D112 /* UserProfileMainParametersView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileMainParametersView.xib; sourceTree = "<group>"; };
 		820984691E365B7000C8D112 /* UserProfileStaffView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileStaffView.xib; sourceTree = "<group>"; };
+		820EFB591EAA6FA700AA58D0 /* ClaimDetailsPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClaimDetailsPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		820EFB5B1EAB5EDD00AA58D0 /* AddClaimViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddClaimViewController.swift; sourceTree = "<group>"; };
+		820EFB5F1EACAFCC00AA58D0 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		820EFB621EACC19200AA58D0 /* ClaimDetailsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClaimDetailsTableViewCell.xib; sourceTree = "<group>"; };
 		821327621DC7E46C006E5E8B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		822C1ED21DBE375600A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VarietyDetailsGeneralInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		822C1ED41DBE37A500A8A761 /* VarietyDetailsGeneralInfoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VarietyDetailsGeneralInfoCollectionViewCell.xib; sourceTree = "<group>"; };
+		82403E471E9E5F77005263C6 /* ApiManager+Claims.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ApiManager+Claims.swift"; sourceTree = "<group>"; };
+		82403E491E9E6259005263C6 /* ClaimsPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClaimsPageView.swift; sourceTree = "<group>"; };
+		82403E4B1E9E626A005263C6 /* ClaimsPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClaimsPageView.xib; sourceTree = "<group>"; };
+		82413A1F1EA642C800C09505 /* DateTableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DateTableViewHeader.xib; sourceTree = "<group>"; };
+		82413A221EA8BCB600C09505 /* ClaimDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClaimDetailsViewController.swift; sourceTree = "<group>"; };
 		82457AC41DAEAA5900D87B21 /* DaoFlowers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DaoFlowers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82457AC71DAEAA5900D87B21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82457ACC1DAEAA5900D87B21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -201,6 +229,8 @@
 		824FF3241E42623B00BBC723 /* UserProfileEmployeeTableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileEmployeeTableViewHeader.xib; sourceTree = "<group>"; };
 		824FF3261E42635D00BBC723 /* UserProfileEmployeeTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileEmployeeTableViewHeader.swift; sourceTree = "<group>"; };
 		824FF32B1E477BA000BBC723 /* stylo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = stylo.ttf; sourceTree = "<group>"; };
+		8251C4581E8956890039CBD5 /* ClaimsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClaimsViewController.swift; sourceTree = "<group>"; };
+		8251C45B1E896D410039CBD5 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		825369071DDF9BA700A17537 /* InvoiceDetailsGeneralTotalTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvoiceDetailsGeneralTotalTableViewCell.xib; sourceTree = "<group>"; };
 		8253690A1DE0E73C00A17537 /* InvoiceDetailsGeneralFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoiceDetailsGeneralFilterView.swift; sourceTree = "<group>"; };
 		8253690E1DE229DA00A17537 /* InvoiceDetailsGeneralLandscapeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvoiceDetailsGeneralLandscapeTableViewCell.xib; sourceTree = "<group>"; };
@@ -279,6 +309,10 @@
 		827E8B191DDB535E000A8EAE /* ApiManager+Documents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ApiManager+Documents.swift"; sourceTree = "<group>"; };
 		827E8B1B1DDB79CB000A8EAE /* DocumentTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentTableViewHeader.swift; sourceTree = "<group>"; };
 		827E8B1D1DDB79D8000A8EAE /* DocumentTableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DocumentTableViewHeader.xib; sourceTree = "<group>"; };
+		8285BC851EB7AB9400F4633B /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		829419CC1EA51E0400E82E20 /* ClaimTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClaimTableViewCell.swift; sourceTree = "<group>"; };
+		829419CD1EA51E0400E82E20 /* ClaimTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClaimTableViewCell.xib; sourceTree = "<group>"; };
+		829419D01EA51FEC00E82E20 /* Claim.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Claim.swift; sourceTree = "<group>"; };
 		8299D36C1DAF8CC50088E550 /* MainViewControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewControllerSegue.swift; sourceTree = "<group>"; };
 		8299D36F1DAF8F110088E550 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		8299D3711DAF926E0088E550 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -323,6 +357,10 @@
 		829AF0501E38E6DF0002CF15 /* AddStaffPostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStaffPostTableViewCell.swift; sourceTree = "<group>"; };
 		829AF0521E3901340002CF15 /* AddStaffReportTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStaffReportTableViewCell.swift; sourceTree = "<group>"; };
 		829AF0531E3901340002CF15 /* AddStaffReportTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddStaffReportTableViewCell.xib; sourceTree = "<group>"; };
+		829BC89F1EAF900600F05083 /* ClaimDetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClaimDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		829BC8A31EAFB15D00F05083 /* ClaimDetailsTotalTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClaimDetailsTotalTableViewCell.xib; sourceTree = "<group>"; };
+		829BC8A51EAFB39A00F05083 /* ClaimDetailsInvoiceRowTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClaimDetailsInvoiceRowTableViewCell.xib; sourceTree = "<group>"; };
+		829BC8A71EAFBE5600F05083 /* ClaimDetailsTotalInvoiceRowTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClaimDetailsTotalInvoiceRowTableViewCell.xib; sourceTree = "<group>"; };
 		82C059711DC60DDE00F061E6 /* ColorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsViewController.swift; sourceTree = "<group>"; };
 		82C059731DC617D100F061E6 /* ColorsPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsPageView.swift; sourceTree = "<group>"; };
 		82C059751DC619AD00F061E6 /* ColorsPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ColorsPageView.xib; sourceTree = "<group>"; };
@@ -411,6 +449,21 @@
 			name = "User Profile";
 			sourceTree = "<group>";
 		};
+		82413A211EA8BC9200C09505 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				82413A221EA8BCB600C09505 /* ClaimDetailsViewController.swift */,
+				829BC89F1EAF900600F05083 /* ClaimDetailsTableViewCell.swift */,
+				820EFB621EACC19200AA58D0 /* ClaimDetailsTableViewCell.xib */,
+				829BC8A51EAFB39A00F05083 /* ClaimDetailsInvoiceRowTableViewCell.xib */,
+				829BC8A31EAFB15D00F05083 /* ClaimDetailsTotalTableViewCell.xib */,
+				829BC8A71EAFBE5600F05083 /* ClaimDetailsTotalInvoiceRowTableViewCell.xib */,
+				820EFB591EAA6FA700AA58D0 /* ClaimDetailsPhotoCollectionViewCell.swift */,
+				820EFB5B1EAB5EDD00AA58D0 /* AddClaimViewController.swift */,
+			);
+			name = Details;
+			sourceTree = "<group>";
+		};
 		82457ABB1DAEAA5800D87B21 = {
 			isa = PBXGroup;
 			children = (
@@ -495,6 +548,28 @@
 				824FF32B1E477BA000BBC723 /* stylo.ttf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8251C4571E89566F0039CBD5 /* Claims */ = {
+			isa = PBXGroup;
+			children = (
+				8251C4581E8956890039CBD5 /* ClaimsViewController.swift */,
+				82403E491E9E6259005263C6 /* ClaimsPageView.swift */,
+				82403E4B1E9E626A005263C6 /* ClaimsPageView.xib */,
+				829419CC1EA51E0400E82E20 /* ClaimTableViewCell.swift */,
+				829419CD1EA51E0400E82E20 /* ClaimTableViewCell.xib */,
+				82413A1F1EA642C800C09505 /* DateTableViewHeader.xib */,
+				82413A211EA8BC9200C09505 /* Details */,
+			);
+			name = Claims;
+			sourceTree = "<group>";
+		};
+		8251C45A1E896D290039CBD5 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				8251C45B1E896D410039CBD5 /* AboutViewController.swift */,
+			);
+			name = About;
 			sourceTree = "<group>";
 		};
 		825369091DE0E70C00A17537 /* General */ = {
@@ -685,6 +760,8 @@
 		8299D36E1DAF8EF30088E550 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				8251C45A1E896D290039CBD5 /* About */,
+				8251C4571E89566F0039CBD5 /* Claims */,
 				820984601E365A1200C8D112 /* User Profile */,
 				82606BC11DD76F7900A9E8D8 /* Hints */,
 				82C0597E1DC675BC00F061E6 /* Main */,
@@ -711,6 +788,7 @@
 				82E5659D1DBCF775005F18F5 /* Plantation.swift */,
 				82FBA1A11DC0D73E001CE265 /* Breeder.swift */,
 				82606B9D1DCF7F8800A9E8D8 /* Country.swift */,
+				820EFB5F1EACAFCC00AA58D0 /* Photo.swift */,
 				827E8B061DD8DEC6000A8EAE /* Order.swift */,
 				827E8B081DD8DEFB000A8EAE /* OrderDetails.swift */,
 				827E8B131DDB3ABF000A8EAE /* Document.swift */,
@@ -719,6 +797,7 @@
 				829AF0491E37A4E20002CF15 /* Customer.swift */,
 				829AF04B1E37AC680002CF15 /* Post.swift */,
 				824FF31E1E4229F800BBC723 /* Report.swift */,
+				829419D01EA51FEC00E82E20 /* Claim.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -890,7 +969,9 @@
 				827E8B191DDB535E000A8EAE /* ApiManager+Documents.swift */,
 				82FF96241DF0443E00A5BB70 /* ApiManager+Support.swift */,
 				82FF96281DF0A4DF00A5BB70 /* ApiManager+Profile.swift */,
+				82403E471E9E5F77005263C6 /* ApiManager+Claims.swift */,
 				82C059921DC68ED000F061E6 /* LanguageManager.swift */,
+				8285BC851EB7AB9400F4633B /* DataManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -1019,6 +1100,8 @@
 				825369261DE6317E00A17537 /* InvoiceDetailsStatisticsTotalTableViewCell.xib in Resources */,
 				8272FBE41DF8678A00100AAA /* ProductivityHintView.xib in Resources */,
 				8272FBF41DF8840E00100AAA /* BreederHintView.xib in Resources */,
+				829BC8A81EAFBE5600F05083 /* ClaimDetailsTotalInvoiceRowTableViewCell.xib in Resources */,
+				820EFB641EACC19200AA58D0 /* ClaimDetailsTableViewCell.xib in Resources */,
 				8299D3CA1DBBB11F0088E550 /* VarietyDetailsPlantationsGrowersView.xib in Resources */,
 				827E8B1E1DDB79D8000A8EAE /* DocumentTableViewHeader.xib in Resources */,
 				8272FBEF1DF8828000100AAA /* rose@2x.png in Resources */,
@@ -1062,11 +1145,16 @@
 				825369081DDF9BA700A17537 /* InvoiceDetailsGeneralTotalTableViewCell.xib in Resources */,
 				8299D3B01DB8E4240088E550 /* ContentPageViewerCollectionViewCell.xib in Resources */,
 				82606BAA1DCFC34300A9E8D8 /* PlantationCollectionViewCell.xib in Resources */,
+				82403E4C1E9E626A005263C6 /* ClaimsPageView.xib in Resources */,
+				829BC8A41EAFB15D00F05083 /* ClaimDetailsTotalTableViewCell.xib in Resources */,
 				82606BBE1DD3A9EB00A9E8D8 /* VarietiesByPlantationPageView.xib in Resources */,
+				82413A201EA642C800C09505 /* DateTableViewHeader.xib in Resources */,
 				82606BB51DD2631C00A9E8D8 /* PlantationsSearchAdditionalParametersView.xib in Resources */,
 				8272FBFD1DF884ED00100AAA /* VarietyByFarmsHintView.xib in Resources */,
+				829419CF1EA51E0400E82E20 /* ClaimTableViewCell.xib in Resources */,
 				82457ACD1DAEAA5900D87B21 /* Main.storyboard in Resources */,
 				825369311DE72E1C00A17537 /* InvoiceDetailsAveragePricesStemTableViewCell.xib in Resources */,
+				829BC8A61EAFB39A00F05083 /* ClaimDetailsInvoiceRowTableViewCell.xib in Resources */,
 				82C1C1EB1DDF968C007F223E /* InvoiceDetailsGeneralHeaderTableViewCell.xib in Resources */,
 				8299D3AE1DB8DFA90088E550 /* HeaderPageViewerCollectionViewCell.xib in Resources */,
 				827E8B121DDB3A31000A8EAE /* DocumentsPageView.xib in Resources */,
@@ -1131,6 +1219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				820EFB601EACAFCC00AA58D0 /* Photo.swift in Sources */,
 				8299D3CF1DBBDB160088E550 /* LoginViewController.swift in Sources */,
 				8299D38C1DB376EE0088E550 /* ColorCollectionViewCell.swift in Sources */,
 				82457AD01DAEAA5900D87B21 /* DaoFlowers.xcdatamodeld in Sources */,
@@ -1149,10 +1238,12 @@
 				82FBA1A71DC2797E001CE265 /* NSLayoutConstraint+ChangeMultiplier.swift in Sources */,
 				8299D3D81DBCC17E0088E550 /* SimilarVarietyCollectionViewCell.swift in Sources */,
 				82606BC51DD770C800A9E8D8 /* AHintView.swift in Sources */,
+				82413A231EA8BCB600C09505 /* ClaimDetailsViewController.swift in Sources */,
 				827E8B161DDB4C47000A8EAE /* DocumentTableViewCell.swift in Sources */,
 				8299D3781DAF9A0D0088E550 /* MenuButtonHandler.swift in Sources */,
 				8253693A1DE8BD2100A17537 /* SendCommentViewController.swift in Sources */,
 				8299D3C21DBBAFBF0088E550 /* VarietyDetailsGeneralInfoView.swift in Sources */,
+				820EFB5A1EAA6FA700AA58D0 /* ClaimDetailsPhotoCollectionViewCell.swift in Sources */,
 				82FF96291DF0A4DF00A5BB70 /* ApiManager+Profile.swift in Sources */,
 				8299D3741DAF99940088E550 /* FlowersViewController.swift in Sources */,
 				82FBA19B1DBFD437001CE265 /* VarietyCollectionViewCell.swift in Sources */,
@@ -1166,6 +1257,7 @@
 				82606BCA1DD7992C00A9E8D8 /* CurrentOrdersViewController.swift in Sources */,
 				825369361DE770AC00A17537 /* ContactsViewController.swift in Sources */,
 				825369381DE8BCFE00A17537 /* OrderCallbackViewController.swift in Sources */,
+				820EFB5C1EAB5EDD00AA58D0 /* AddClaimViewController.swift in Sources */,
 				827E8B1C1DDB79CB000A8EAE /* DocumentTableViewHeader.swift in Sources */,
 				8299D38E1DB3BD5B0088E550 /* VarietiesViewController.swift in Sources */,
 				82C7EF921E36881E001188A5 /* AddStaffViewController.swift in Sources */,
@@ -1175,6 +1267,8 @@
 				8299D3A41DB7BD000088E550 /* HeaderPageViewerHighlightView.swift in Sources */,
 				82457AC81DAEAA5900D87B21 /* AppDelegate.swift in Sources */,
 				82C059741DC617D100F061E6 /* ColorsPageView.swift in Sources */,
+				82403E4A1E9E6259005263C6 /* ClaimsPageView.swift in Sources */,
+				829BC8A01EAF900600F05083 /* ClaimDetailsTableViewCell.swift in Sources */,
 				8299D3841DB155960088E550 /* FlowerCollectionViewCell.swift in Sources */,
 				82FBA1A91DC287C1001CE265 /* UIView+ConstraintByIdentifier.swift in Sources */,
 				829AF0481E37A3A10002CF15 /* Employee.swift in Sources */,
@@ -1191,8 +1285,10 @@
 				827BF85F1DAEAF4000054548 /* BaseViewController.swift in Sources */,
 				82C1C1D91DDDF6CA007F223E /* InvoiceDetailsViewController.swift in Sources */,
 				827E8B0B1DD8E0B8000A8EAE /* OrderDetailsTableViewCell.swift in Sources */,
+				829419CE1EA51E0400E82E20 /* ClaimTableViewCell.swift in Sources */,
 				82606BAF1DD1F48C00A9E8D8 /* PlantationsSearchViewController.swift in Sources */,
 				82C1C1E71DDDFE0A007F223E /* InvoiceDetails.swift in Sources */,
+				829419D11EA51FEC00E82E20 /* Claim.swift in Sources */,
 				8299D3A21DB622FA0088E550 /* HeaderPageViewerCollectionViewCell.swift in Sources */,
 				8299D3C41DBBAFDC0088E550 /* VarietyDetailsPlantationsGrowersView.swift in Sources */,
 				8299D37E1DB14E320088E550 /* ApiManager.swift in Sources */,
@@ -1212,6 +1308,7 @@
 				829AF04C1E37AC680002CF15 /* Post.swift in Sources */,
 				82C059721DC60DDE00F061E6 /* ColorsViewController.swift in Sources */,
 				82606BCE1DD7AA9700A9E8D8 /* OrderTableViewCell.swift in Sources */,
+				8251C4591E8956890039CBD5 /* ClaimsViewController.swift in Sources */,
 				82606BA41DCF900D00A9E8D8 /* PlantationsViewController.swift in Sources */,
 				8299D3761DAF99B30088E550 /* CountriesViewController.swift in Sources */,
 				82606BC71DD7985800A9E8D8 /* ApiManager+Orders.swift in Sources */,
@@ -1224,14 +1321,17 @@
 				824FF31F1E4229F800BBC723 /* Report.swift in Sources */,
 				827BAC2C1DBF675200B50C2B /* MenuTableViewCell.swift in Sources */,
 				82606B9E1DCF7F8800A9E8D8 /* Country.swift in Sources */,
+				82403E481E9E5F77005263C6 /* ApiManager+Claims.swift in Sources */,
 				824FF3271E42635D00BBC723 /* UserProfileEmployeeTableViewHeader.swift in Sources */,
 				82C059821DC6873F00F061E6 /* LanguagePickerViewCell.swift in Sources */,
 				8299D3961DB3C2BF0088E550 /* Utils.swift in Sources */,
 				829AF0511E38E6DF0002CF15 /* AddStaffPostTableViewCell.swift in Sources */,
 				8299D3721DAF926E0088E550 /* Constants.swift in Sources */,
 				8299D37A1DAF9A930088E550 /* MainViewController.swift in Sources */,
+				8285BC861EB7AB9400F4633B /* DataManager.swift in Sources */,
 				8299D3A61DB8C6090088E550 /* PageViewerFlowLayout.swift in Sources */,
 				8253691C1DE3910B00A17537 /* InvoiceDetailsStatisticsTableViewCell.swift in Sources */,
+				8251C45C1E896D410039CBD5 /* AboutViewController.swift in Sources */,
 				827E8B1A1DDB535E000A8EAE /* ApiManager+Documents.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

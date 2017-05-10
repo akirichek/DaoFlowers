@@ -19,7 +19,7 @@
                 <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2xp-dO-bme" userLabel="Filter Container View">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="zE2-lD-Wma">
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="zE2-lD-Wma">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ex0-9H-f4h" userLabel="Assortment Container View">
