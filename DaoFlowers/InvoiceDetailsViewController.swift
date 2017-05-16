@@ -75,7 +75,7 @@ class InvoiceDetailsViewController: BaseViewController, PageViewerDataSource, Pa
     }
     
     func fetchInvoiceDetailsForPageViewAtIndex(_ index: Int) {
-        ApiManager.fetchInvoiceDetails(invoice, user: User.currentUser()!) { (invoiceDetails, error) in
+        ApiManager.fetchInvoiceDetails(invoice.id, clientId: invoice.clientId, user: User.currentUser()!) { (invoiceDetails, error) in
             if let invoiceDetails = invoiceDetails {
                 self.invoiceDetails = invoiceDetails
                 self.filteredInvoiceDetails = invoiceDetails

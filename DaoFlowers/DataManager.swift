@@ -23,14 +23,14 @@ class DataManager: NSObject {
         }
         object.setValue(claim.comment, forKey: "comment")
         object.setValue(claim.userId, forKey: "userId")
-        object.setValue(claim.invoiceDetailsHead!.invoiceId, forKey: "invoiceId")
-        object.setValue(claim.invoiceDetailsHead!.id, forKey: "invoiceDetailsHeadId")
+        object.setValue(claim.invoiceId, forKey: "invoiceId")
+        object.setValue(claim.invoiceHeadId, forKey: "invoiceHeadId")
         object.setValue(claim.subjectId!, forKey: "subjectId")
         object.setValue(claim.date, forKey: "date")
         object.setValue(photosDataFromClaim(claim), forKey: "photos")
         
         var claimInvoceRowEntities = Set<NSManagedObject>()
-        for claimInvoiceRow in claim.invoceRows {
+        for claimInvoiceRow in claim.invoiceRows {
             claimInvoceRowEntities.insert(claimInvoceRowEntity(claimInvoiceRow))
         }
         object.setValue(claimInvoceRowEntities, forKey: "claimInvoiceRows")
@@ -50,14 +50,15 @@ class DataManager: NSObject {
         let objects = try! context.fetch(request) as! [NSManagedObject]
         var claims: [Claim] = []
         for object in objects {
-            var claim = Claim(user: user, date: object.value(forKey: "date") as! Date)
+            var claim = Claim(user: user,
+                              date: object.value(forKey: "date") as! Date,
+                              invoiceId: object.value(forKey: "invoiceId") as! Int,
+                              invoiceHeadId: object.value(forKey: "invoiceHeadId") as! Int)
             claim.comment = object.value(forKey: "comment") as! String
-            claim.invoiceDetailsHead = InvoiceDetails.Head(id: object.value(forKey: "invoiceDetailsHeadId") as! Int,
-                                                           invoiceId: object.value(forKey: "invoiceId") as! Int)
             claim.subjectId = object.value(forKey: "subjectId") as? Int
-            claim.invoceRows = claimInvoiceRows(object.value(forKey: "claimInvoiceRows") as! Set<NSManagedObject>)
+            claim.invoiceRows = claimInvoiceRows(object.value(forKey: "claimInvoiceRows") as! Set<NSManagedObject>)
             claim.sum = claim.calculateSum()
-            claim.stems = Claim.stemsCount(claim.invoceRows)
+            claim.stems = claim.stemsCount()
             claim.status = .LocalDraft
             claim.plantation = plantation(object.value(forKey: "plantation") as! NSManagedObject)
             claim.photos = photosFromObject(object)

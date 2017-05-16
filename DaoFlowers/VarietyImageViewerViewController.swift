@@ -14,7 +14,7 @@ class VarietyImageViewerViewController: BaseViewController, UICollectionViewData
     @IBOutlet weak var selectedPageLabel: UILabel!
     
     var images: [Variety.Image]!
-    var photos: [UIImage]!
+    var photos: [Photo] = []
     var indexOfCurrentPage = 0
     
     override func viewDidLoad() {
@@ -46,18 +46,33 @@ class VarietyImageViewerViewController: BaseViewController, UICollectionViewData
     }
     
     func adjustSelectedPageLabel() {
-        selectedPageLabel.text = "\(indexOfCurrentPage + 1) from \(images.count)"
+        if photos.count > 0 {
+            selectedPageLabel.text = "\(indexOfCurrentPage + 1) from \(photos.count)"
+        } else {
+            selectedPageLabel.text = "\(indexOfCurrentPage + 1) from \(images.count)"
+        }
     }
     
     // MARK: - UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        var numberOfItems = 0
+        if photos.count > 0 {
+            numberOfItems = photos.count
+        } else {
+            numberOfItems = images.count
+        }
+        return numberOfItems
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VarietyImageCellIdentifier", for: indexPath) as! VarietyImageCollectionViewCell
-        cell.image = images[indexPath.row]
+        
+        if photos.count > 0 {
+            cell.photo = photos[indexPath.row]
+        } else {
+            cell.image = images[indexPath.row]
+        }
 
         return cell
     }

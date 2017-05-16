@@ -30,8 +30,11 @@ class DocumentsPageView: UIView, UITableViewDelegate, UITableViewDataSource, Doc
         var nib = UINib(nibName:"DocumentTableViewCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: "DocumentTableViewCellIdentifier")
         
-        nib = UINib(nibName:"DocumentTableViewHeader", bundle: nil)
-        self.tableView.register(nib, forHeaderFooterViewReuseIdentifier: "DocumentTableViewHeaderIdentifier")
+        nib = UINib(nibName:"InvoiceTableViewCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: "InvoiceTableViewCellIdentifier")
+        
+        nib = UINib(nibName:"DateTableViewHeader", bundle: nil)
+        self.tableView.register(nib, forHeaderFooterViewReuseIdentifier: "DateTableViewHeaderIdentifier")
     }
     
     override func layoutSubviews() {
@@ -72,12 +75,24 @@ class DocumentsPageView: UIView, UITableViewDelegate, UITableViewDataSource, Doc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DocumentTableViewCellIdentifier", for: indexPath) as! DocumentTableViewCell
+        var cellIdentifier = "DocumentTableViewCellIdentifier"
+        
+        if invoicesMode {
+            cellIdentifier = "InvoiceTableViewCellIdentifier"
+        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! DocumentTableViewCell
         cell.delegate = self
         let date = dates![indexPath.section]
         let documentsByDate = documents![date]!
         cell.document = documentsByDate[indexPath.row]
-        cell.fileNameLabel.isHidden = !invoicesMode
+        
+        if invoicesMode {
+            cell.populateInvoiceView(withClaims: delegate!.documentsPageViewShouldDisplayClaims(self))
+        } else {
+            cell.fileNameLabel.isHidden = true
+            cell.populateView()
+        }
         
         if indexPath.section == 0 {
             cell.contentView.backgroundColor = UIColor(red: 255/255, green: 250/255, blue: 205/255, alpha: 1)
@@ -91,16 +106,26 @@ class DocumentsPageView: UIView, UITableViewDelegate, UITableViewDataSource, Doc
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 28
+        return 22
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "DocumentTableViewHeaderIdentifier")!
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "DateTableViewHeaderIdentifier")!
         let dateLabel = headerView.viewWithTag(1) as! UILabel
         let date = dates![section]
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        dateLabel.text = dateFormatter.string(from: date)
+        
+        if invoicesMode {
+            dateLabel.font = UIFont.systemFont(ofSize: 15, weight: UIFontWeightSemibold)
+            let locale = Locale(identifier: LanguageManager.languageCode())
+            dateFormatter.locale = locale
+            dateFormatter.dateFormat = "dd-MM-yyyy [EEEE]"
+        } else {
+            dateFormatter.dateFormat = "dd-MM-yyyy"
+        }
+        
+        dateLabel.text = dateFormatter.string(from: date as Date)
+        
         return headerView
     }
     
@@ -130,8 +155,14 @@ class DocumentsPageView: UIView, UITableViewDelegate, UITableViewDataSource, Doc
         alertController.addAction(yesAlertAction)
         viewController.present(alertController, animated: true, completion: nil)
     }
+    
+    func documentTableViewCell(_ cell: DocumentTableViewCell, didClaimClickWithDocument document: Document) {
+        delegate?.documentsPageView(self, didClickClaimWithDocument: document)
+    }
 }
 
 protocol DocumentsPageViewDelegate: NSObjectProtocol {
     func documentsPageView(_ documentsPageView: DocumentsPageView, didSelectDocument document: Document)
+    func documentsPageView(_ documentsPageView: DocumentsPageView, didClickClaimWithDocument document: Document)
+    func documentsPageViewShouldDisplayClaims(_ documentsPageView: DocumentsPageView) -> Bool
 }

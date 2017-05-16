@@ -17,12 +17,17 @@ class ClaimTableViewCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var statusImageView: UIImageView!
+    @IBOutlet weak var photoImageView: UIImageView!
     
     var claim: Claim! {
         didSet {
-            userLabel.text = claim.user.name
-            photoCountLabel.text = String(claim.photos.count)
-
+            if userLabel != nil {
+                userLabel.text = claim.user.name
+                photoCountLabel.text = String(claim.photos.count)
+            } else {
+                photoImageView.isHidden = (claim.photos.count == 0)
+            }
+            
             if let plantation = claim.plantation {
                 plantationLabel.text = plantation.name
             } else {
@@ -36,11 +41,13 @@ class ClaimTableViewCell: UITableViewCell {
             switch claim.status {
             case .Sent:
                 statusImageView.image = UIImage(named: "send")
-                backgroundColor = UIColor(red: 255/255, green: 250/255, blue: 205/255, alpha: 1.0)
+                if userLabel != nil {
+                    backgroundColor = UIColor(red: 255/255, green: 250/255, blue: 205/255, alpha: 1.0)
+                }
             case .Confirmed:
                 statusImageView.image = UIImage(named: "checkmark")
                 backgroundColor = UIColor.white
-            case .NotConfirmed:
+            case .InProcess:
                 statusImageView.image = UIImage(named: "sand_clock")
                 backgroundColor = UIColor.white
             case .LocalDraft:

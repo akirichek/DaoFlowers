@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ClaimDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, ClaimDetailsPhotoCollectionViewCellDelegate, AddClaimViewControllerDelegate, UIScrollViewDelegate {
+class ClaimDetailsViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, ClaimDetailsPhotoCollectionViewCellDelegate, AddClaimViewControllerDelegate, UIScrollViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var photosCollectionView: UICollectionView!
@@ -30,6 +30,29 @@ class ClaimDetailsViewController: UIViewController, UITableViewDataSource, UITab
     @IBOutlet weak var photosCountLabel: UILabel!
     @IBOutlet weak var removeButton: UIButton!
     @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var detailsContainerView: UIView!
+    @IBOutlet weak var descriptionContainerView: UIView!
+    @IBOutlet weak var headerInvoiceDetailsContainerView: UIView!
+    @IBOutlet weak var quantityOfStemsLabel: UILabel!
+    @IBOutlet weak var costLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var langDateLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
+    
+    @IBOutlet weak var langClientLabel: UILabel!
+    @IBOutlet weak var langClaimTypeLabel: UILabel!
+    @IBOutlet weak var langHintLabel: UILabel!
+    @IBOutlet weak var langQuantityOfStemsLabel: UILabel!
+    @IBOutlet weak var langCostLabel: UILabel!
+    @IBOutlet var langDescriptionLabels: [UILabel]!
+    @IBOutlet weak var langFlowerLabel: UILabel!
+    @IBOutlet weak var langVarietyLabel: UILabel!
+    @IBOutlet weak var langSizeLabel: UILabel!
+    @IBOutlet weak var langStemsLabel: UILabel!
+    @IBOutlet weak var langStemPriceLabel: UILabel!
+    @IBOutlet weak var langTotalCostLabel: UILabel!
+    @IBOutlet weak var langAddPhotoLabel: UILabel!
+    @IBOutlet weak var contentView: UIView!
     
     var claim: Claim!
     var invoice: Document!
@@ -38,10 +61,15 @@ class ClaimDetailsViewController: UIViewController, UITableViewDataSource, UITab
     var claimsSubjects: [Claim.Subject]!
     var subjectPickerView: UIPickerView!
     var lastContentOffset: CGFloat = 0
+    var isEditingMode: Bool {
+        return claim.status != .Confirmed && claim.status != .InProcess
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        localizeView()
+        
         var nib = UINib(nibName:"ClaimDetailsInvoiceRowTableViewCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: "ClaimDetailsInvoiceRowTableViewCellIdentifier")
         
@@ -59,12 +87,16 @@ class ClaimDetailsViewController: UIViewController, UITableViewDataSource, UITab
         
         subjectPickerView = createPickerViewForTextField(subjectTextField)
         
-        
         if claim == nil {
-            claim = Claim(user: User.currentUser()!, date: Date())
+            claim = Claim(user: User.currentUser()!, date: Date(), invoiceId: invoice!.id, invoiceHeadId: invoiceDetailsHead.id)
         }
         
-        fetchClaimSubjects()
+        if isEditingMode {
+            fetchClaimSubjects()
+        } else {
+            RBHUD.sharedInstance.showLoader(self.view, withTitle: nil, withSubTitle: nil, withProgress: true)
+            fetchInvoiceDetails()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,24 +113,54 @@ class ClaimDetailsViewController: UIViewController, UITableViewDataSource, UITab
             addClaimViewController.invoiceDetails = invoiceDetails
             addClaimViewController.invoiceDetailsHead = invoiceDetailsHead
             addClaimViewController.invoiceDetailsRow = invoiceDetailsRow
-            addClaimViewController.claimInvoiceRow = claim.invoceRows.first(where: { $0.rowId == invoiceDetailsRow.id })
+            addClaimViewController.claimInvoiceRow = claim.invoiceRows.first(where: { $0.rowId == invoiceDetailsRow.id })
+        } else if let photosViewController = destinationViewController as? VarietyImageViewerViewController {
+            let indexPath = sender as! IndexPath
+            photosViewController.photos = claim.photos
+            photosViewController.indexOfCurrentPage = indexPath.row
         }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        adjustView()
     }
     
     // MARK: - Private Methods
     
+    func localizeView() {
+        langClientLabel.text = CustomLocalisedString("label").capitalized
+        langClaimTypeLabel.text = CustomLocalisedString("Claim type")
+        langHintLabel.text = CustomLocalisedString("Claim description hint")
+        langCostLabel.text = CustomLocalisedString("Cost")
+        langDescriptionLabels.forEach({ $0.text = CustomLocalisedString("Claim description") })
+        langFlowerLabel.text = CustomLocalisedString("flower").capitalized
+        langVarietyLabel.text = CustomLocalisedString("Variety")
+        langSizeLabel.text = CustomLocalisedString("size").capitalized
+        langStemsLabel.text = CustomLocalisedString("Stems")
+        langStemPriceLabel.text = CustomLocalisedString("Stem price")
+        langTotalCostLabel.text = CustomLocalisedString("Total cost")
+        langAddPhotoLabel.text = CustomLocalisedString("Add photo").uppercased()
+        langQuantityOfStemsLabel.text = CustomLocalisedString("Quantity of stems")
+    }
+    
     func populateView() {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        let dateString = dateFormatter.string(from: invoice.date as Date)
-        let locale = Locale(identifier: LanguageManager.languageCode())
-        dateFormatter.locale = locale
-        dateFormatter.dateFormat = "EEE"
-        let weekdayString = dateFormatter.string(from: invoice.date as Date).lowercased()
-        invoiceDateLabel.text = "\(dateString) [\(weekdayString)]"
-        clientHeaderLabel.text = invoice.label
-        clientLabel.text = invoice.label
-
+        if isEditingMode {
+            dateFormatter.dateFormat = "dd-MM-yyyy [EEE]"
+            let locale = Locale(identifier: LanguageManager.languageCode())
+            dateFormatter.locale = locale
+            invoiceDateLabel.text = dateFormatter.string(from: invoice.date as Date)
+            langDateLabel.text = CustomLocalisedString("Invoice date")
+        } else {
+            dateFormatter.dateFormat = "dd-MM-yyyy"
+            invoiceDateLabel.text = dateFormatter.string(from: claim.date as Date)
+            langDateLabel.text = CustomLocalisedString("date").capitalized
+        }
+        
+        clientHeaderLabel.text = claim.user.name
+        clientLabel.text = claim.user.name
+        
         awbLabel.text = invoiceDetailsHead.awb
         let plantation = invoiceDetails.plantationById(invoiceDetailsHead.plantationId)!
         if plantation.name == plantation.brand {
@@ -116,8 +178,16 @@ class ClaimDetailsViewController: UIViewController, UITableViewDataSource, UITab
         countryLabel.text = country.abr
         piecesLabel.text = invoiceDetailsHead.pieces.replacingOccurrences(of: ";", with: " ")
         commentTextView.text = claim.comment
+        statusLabel.text = CustomLocalisedString(claim.status.toString()).uppercased()
         
         populateSubjectTextField()
+        populateDescriptionView()
+    }
+    
+    func populateDescriptionView() {
+        quantityOfStemsLabel.text = String(claim.stems)
+        costLabel.text = "\(claim.sum) $"
+        descriptionLabel.text = claim.comment
     }
     
     func populateSubjectTextField() {
@@ -131,47 +201,49 @@ class ClaimDetailsViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func adjustView() {
-        tableView.reloadData()
-        tableView.frame.size.height = tableView.contentSize.height
-        invoiceDetailsContainerView.frame.size.height = tableView.frame.origin.y + tableView.frame.height
-        photosContainerView.frame.origin.y = invoiceDetailsContainerView.frame.origin.y + invoiceDetailsContainerView.frame.height + 3
-        photosCollectionView.frame.origin.y = photosContainerView.frame.origin.y + photosContainerView.frame.height + 3
+        contentView.frame = contentViewFrame()
         photosCollectionView.reloadData()
         photosCollectionView.frame.size.height = photosCollectionView.collectionViewLayout.collectionViewContentSize.height
-        scrollView.contentSize = CGSize(width: 320, height: photosCollectionView.frame.origin.y + photosCollectionView.frame.height + 3)
-        
-        photosCountLabel.text = "\(claim!.photos.count)/100"
-        
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
-                                         style: UIBarButtonItemStyle.done,
-                                         target: commentTextView,
-                                         action: #selector(resignFirstResponder))
-        toolbar.setItems([doneButton], animated: true)
-        commentTextView.inputAccessoryView = toolbar
-    }
-    
-    func fetchInvoiceDetails() {
-        ApiManager.fetchInvoices(User.currentUser()!) { (invoices, error) in
-            if let invoices = invoices {
-                self.invoice = invoices.first(where: { $0.id == self.claim.invoiceDetailsHead!.invoiceId })
-                ApiManager.fetchInvoiceDetails(self.invoice, user: User.currentUser()!) { (invoiceDetails, error) in
-                    RBHUD.sharedInstance.hideLoader()
-                    if let invoiceDetails = invoiceDetails {
-                        self.invoiceDetails = invoiceDetails
-                        self.invoiceDetailsHead = invoiceDetails.heads.first(where: { $0.id == self.claim.invoiceDetailsHead!.id })
-                        self.populateView()
-                        self.adjustView()
-                    } else {
-                        Utils.showError(error!, inViewController: self)
-                    }
-                }
-            } else {
-                RBHUD.sharedInstance.hideLoader()
-                Utils.showError(error!, inViewController: self)
+
+        if isEditingMode {
+            photosCountLabel.text = "\(claim!.photos.count)/100"
+            detailsContainerView.isHidden = true
+            tableView.reloadData()
+            tableView.frame.size.height = tableView.contentSize.height
+            invoiceDetailsContainerView.frame.size.height = tableView.frame.origin.y + tableView.frame.height
+            photosContainerView.frame.origin.y = invoiceDetailsContainerView.frame.origin.y + invoiceDetailsContainerView.frame.height + 3
+            photosCollectionView.frame.origin.y = photosContainerView.frame.origin.y + photosContainerView.frame.height + 3
+            
+            let toolbar = UIToolbar()
+            toolbar.sizeToFit()
+            let doneButton = UIBarButtonItem(title: CustomLocalisedString("Done"),
+                                             style: UIBarButtonItemStyle.done,
+                                             target: commentTextView,
+                                             action: #selector(resignFirstResponder))
+            toolbar.setItems([doneButton], animated: true)
+            commentTextView.inputAccessoryView = toolbar
+            
+            if claim.status == .New {
+                removeButton.isHidden = true
             }
+        } else {
+            descriptionContainerView.isHidden = true
+            headerInvoiceDetailsContainerView.isHidden = true
+            photosContainerView.isHidden = true
+            invoiceDetailsContainerView.isHidden = true
+            removeButton.isHidden = true
+            sendButton.isHidden = true
+            
+            let heightForText = Utils.heightForText(claim.comment,
+                                                    havingWidth: 294,
+                                                    andFont: UIFont.systemFont(ofSize: 12, weight: UIFontWeightSemibold))
+            descriptionLabel.frame.size.height = heightForText
+            detailsContainerView.frame.size.height = descriptionLabel.frame.origin.y + descriptionLabel.frame.height + 5
+            
+            photosCollectionView.frame.origin.y = detailsContainerView.frame.origin.y + detailsContainerView.frame.height + 3
         }
+        
+        scrollView.contentSize = CGSize(width: 320, height: photosCollectionView.frame.origin.y + photosCollectionView.frame.height + 3)
     }
     
     func fetchClaimSubjects() {
@@ -184,7 +256,31 @@ class ClaimDetailsViewController: UIViewController, UITableViewDataSource, UITab
                 } else if self.invoice == nil {
                     self.fetchInvoiceDetails()
                 } else {
+                    self.populateView()
+                    self.adjustView()
                     RBHUD.sharedInstance.hideLoader()
+                }
+            } else {
+                RBHUD.sharedInstance.hideLoader()
+                Utils.showError(error!, inViewController: self)
+            }
+        }
+    }
+
+    func fetchInvoiceDetails() {
+        ApiManager.fetchInvoices(User.currentUser()!) { (invoices, error) in
+            if let invoices = invoices {
+                self.invoice = invoices.first(where: { $0.id == self.claim.invoiceId })
+                ApiManager.fetchInvoiceDetails(self.claim.invoiceId, clientId: self.claim.userId, user: User.currentUser()!) { (invoiceDetails, error) in
+                    RBHUD.sharedInstance.hideLoader()
+                    if let invoiceDetails = invoiceDetails {
+                        self.invoiceDetails = invoiceDetails
+                        self.invoiceDetailsHead = invoiceDetails.heads.first(where: { $0.id == self.claim.invoiceHeadId })
+                        self.populateView()
+                        self.adjustView()
+                    } else {
+                        Utils.showError(error!, inViewController: self)
+                    }
                 }
             } else {
                 RBHUD.sharedInstance.hideLoader()
@@ -255,10 +351,29 @@ class ClaimDetailsViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
-    func saveToLocalDraft() {
+    func saveClaimToLocalDraft() {
         self.claim.plantation = self.invoiceDetails.plantationById(self.invoiceDetailsHead.plantationId)!
         DataManager.saveClaim(self.claim)
         self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func removeClaim() {
+        RBHUD.sharedInstance.showLoader(self.view, withTitle: nil, withSubTitle: nil, withProgress: true)
+        ApiManager.isClaimEditingAllowed(self.claim, user: User.currentUser()!) { (error) in
+            if let error = error {
+                RBHUD.sharedInstance.hideLoader()
+                Utils.showError(error, inViewController: self)
+            } else {
+                ApiManager.removeClaim(self.claim, user: User.currentUser()!) { (success) in
+                    RBHUD.sharedInstance.hideLoader()
+                    if success {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    } else {
+                        Utils.showErrorWithMessage("Deleting claim error.", inViewController: self)
+                    }
+                }
+            }
+        }
     }
     
     // MARK: - Actions
@@ -269,20 +384,20 @@ class ClaimDetailsViewController: UIViewController, UITableViewDataSource, UITab
         imagePickerController.sourceType = .savedPhotosAlbum
         
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            let actionSheet = UIAlertController(title: "Adding Photo",
-                                                message: "What source would you like to use to add photo?",
+            let actionSheet = UIAlertController(title: CustomLocalisedString("Adding Photo"),
+                                                message: CustomLocalisedString("What source would you like to use to add photo?"),
                                                 preferredStyle: .actionSheet)
-            let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { (alertAction) in
+            let photoLibraryAction = UIAlertAction(title: CustomLocalisedString("Photo Library"), style: .default) { (alertAction) in
                 imagePickerController.sourceType = .savedPhotosAlbum
                 self.present(imagePickerController, animated: true, completion: nil)
             }
             
-            let cameraAction = UIAlertAction(title: "Camera", style: .default) { (alertAction) in
+            let cameraAction = UIAlertAction(title: CustomLocalisedString("Camera"), style: .default) { (alertAction) in
                 imagePickerController.sourceType = .camera
                 self.present(imagePickerController, animated: true, completion: nil)
             }
             
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let cancelAction = UIAlertAction(title: CustomLocalisedString("Cancel"), style: .cancel, handler: nil)
             actionSheet.addAction(photoLibraryAction)
             actionSheet.addAction(cameraAction)
             actionSheet.addAction(cancelAction)
@@ -302,41 +417,52 @@ class ClaimDetailsViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     @IBAction func sendButtonClicked(_ sender: UIButton) {
-        claim.invoiceDetailsHead = self.invoiceDetailsHead
-        claim.comment = commentTextView.text
-        let alertController = UIAlertController(title: "Saving Claim",
-                                                message: "How would you like to save the claim?",
-                                                preferredStyle: .alert)
-        let localDraftAction = UIAlertAction(title: "Local draft", style: .default) { (action) in
-            self.saveToLocalDraft()
+        if claim.subjectId == nil {
+            Utils.showErrorWithMessage(CustomLocalisedString("Claim type is not selected"), inViewController: self)
+        } else if claim.invoiceRows.count == 0 {
+            Utils.showErrorWithMessage(CustomLocalisedString("You did not select any item in the invoice for lodging the claim."), inViewController: self)
+        } else {
+            claim.comment = commentTextView.text
+            let alertController = UIAlertController(title: CustomLocalisedString("Saving Claim"),
+                                                    message: CustomLocalisedString("How would you like to save the claim?"),
+                                                    preferredStyle: .alert)
+            let localDraftAction = UIAlertAction(title: CustomLocalisedString("Local draft"), style: .default) { (action) in
+                self.saveClaimToLocalDraft()
+            }
+            let sendAction = UIAlertAction(title: CustomLocalisedString("Send to processing"), style: .default) { (action) in
+                self.sendClaim()
+            }
+            
+            let cancelAction = UIAlertAction(title: CustomLocalisedString("Cancel"), style: .cancel, handler: nil)
+            alertController.addAction(localDraftAction)
+            alertController.addAction(sendAction)
+            alertController.addAction(cancelAction)
+            present(alertController, animated: true, completion: nil)
         }
-        let sendAction = UIAlertAction(title: "Send to processing", style: .default) { (action) in
-            self.sendClaim()
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alertController.addAction(localDraftAction)
-        alertController.addAction(sendAction)
-        alertController.addAction(cancelAction)
-        present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func removeButtonClicked(_ sender: UIButton) {
-        let alertController = UIAlertController(title: "Deleting claim",
-                                                message: "Are you sure you want to delete the claim?",
+        let alertController = UIAlertController(title: CustomLocalisedString("Deleting claim"),
+                                                message: CustomLocalisedString("Are you sure you want to delete the claim?"),
                                                 preferredStyle: .alert)
-        let yesAction = UIAlertAction(title: "YES", style: .default) { (action) in
+        let yesAction = UIAlertAction(title: CustomLocalisedString("YES"), style: .default) { (action) in
             if self.claim.objectID != nil {
                 DataManager.removeClaim(self.claim)
                 self.navigationController?.popToRootViewController(animated: true)
             } else {
-                
+                self.removeClaim()
             }
         }
-        let noAction = UIAlertAction(title: "NO", style: .cancel, handler: nil)
+        let noAction = UIAlertAction(title: CustomLocalisedString("NO"), style: .cancel, handler: nil)
         alertController.addAction(yesAction)
         alertController.addAction(noAction)
         present(alertController, animated: true, completion: nil)
+    }
+    
+    @IBAction func helpButtonClicked(_ sender: UIButton) {
+        let hintView = LanguageManager.loadNibNamed("ClaimHintView", owner: self, options: nil).first as! AHintView
+        hintView.frame = self.view.bounds
+        self.navigationController!.view.addSubview(hintView)
     }
     
     // MARK: - UITableViewDataSource
@@ -352,14 +478,14 @@ class ClaimDetailsViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cellIdentifier: String
         if indexPath.row == self.tableView(tableView, numberOfRowsInSection: indexPath.section) - 1 {
-            if claim.invoceRows.count > 0 {
+            if claim.invoiceRows.count > 0 {
                 cellIdentifier = "ClaimDetailsTotalInvoiceRowTableViewCellIdentifier"
             } else {
                 cellIdentifier = "ClaimDetailsTotalTableViewCellIdentifier"
             }
         } else {
             let invoiceDetailsHeadRow = invoiceDetailsHead.rows[indexPath.row]
-            if claim.invoceRows.index(where: { $0.rowId == invoiceDetailsHeadRow.id }) != nil {
+            if claim.invoiceRows.index(where: { $0.rowId == invoiceDetailsHeadRow.id }) != nil {
                 cellIdentifier = "ClaimDetailsInvoiceRowTableViewCellIdentifier"
             } else {
                 cellIdentifier = "ClaimDetailsTableViewCellIdentifier"
@@ -379,7 +505,7 @@ class ClaimDetailsViewController: UIViewController, UITableViewDataSource, UITab
             cell.invoiceDetailsRow = invoiceDetailsHeadRow
             cell.populateCellView()
             
-            if let claimInvoiceRow = claim.invoceRows.first(where: { $0.rowId == invoiceDetailsHeadRow.id }) {
+            if let claimInvoiceRow = claim.invoiceRows.first(where: { $0.rowId == invoiceDetailsHeadRow.id }) {
                 cell.claimInvoiceRow = claimInvoiceRow
                 cell.populateClaimInvoiceView()
             }
@@ -393,7 +519,7 @@ class ClaimDetailsViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var heightForRow: CGFloat
         if indexPath.row == self.tableView(tableView, numberOfRowsInSection: indexPath.section) - 1 {
-            if claim.invoceRows.count > 0 {
+            if claim.invoiceRows.count > 0 {
                 heightForRow = 44
             } else {
                 heightForRow = 20
@@ -464,6 +590,7 @@ class ClaimDetailsViewController: UIViewController, UITableViewDataSource, UITab
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ClaimDetailsPhotoCellIdentifier", for: indexPath) as! ClaimDetailsPhotoCollectionViewCell
         cell.delegate = self
         cell.photo = claim.photos[indexPath.row]
+        cell.removeButtonContainerView.isHidden = !isEditingMode
         
         return cell
     }
@@ -471,7 +598,7 @@ class ClaimDetailsViewController: UIViewController, UITableViewDataSource, UITab
     // MARK: - UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //performSegue(withIdentifier: K.Storyboard.SegueIdentifier.ImageViewer, sender: indexPath)
+        performSegue(withIdentifier: K.Storyboard.SegueIdentifier.PhotosViewer, sender: indexPath)
     }
     
     // MARK: - UIImagePickerControllerDelegate
@@ -510,24 +637,24 @@ class ClaimDetailsViewController: UIViewController, UITableViewDataSource, UITab
     
     func addClaimViewController(_ addClaimViewController: AddClaimViewController, didAddClaimInvoiceRow claimInvoiceRow: Claim.InvoiceRow) {
         addClaimViewController.dismiss(animated: true) {
-            self.claim.invoceRows.append(claimInvoiceRow)
-            self.tableView.reloadData()
+            self.claim.invoiceRows.append(claimInvoiceRow)
+            self.adjustView()
         }
     }
     
     func addClaimViewController(_ addClaimViewController: AddClaimViewController, didEditClaimInvoiceRow claimInvoiceRow: Claim.InvoiceRow) {
         addClaimViewController.dismiss(animated: true) {
-            let index = self.claim.invoceRows.index(where: { $0.rowId == claimInvoiceRow.rowId })!
-            self.claim.invoceRows[index] = claimInvoiceRow
-            self.tableView.reloadData()
+            let index = self.claim.invoiceRows.index(where: { $0.rowId == claimInvoiceRow.rowId })!
+            self.claim.invoiceRows[index] = claimInvoiceRow
+            self.adjustView()
         }
     }
     
     func addClaimViewController(_ addClaimViewController: AddClaimViewController, didRemoveClaimInvoiceRow claimInvoiceRow: Claim.InvoiceRow) {
         addClaimViewController.dismiss(animated: true) {
-            let index = self.claim.invoceRows.index(where: { $0.rowId == claimInvoiceRow.rowId })!
-            self.claim.invoceRows.remove(at: index)
-            self.tableView.reloadData()
+            let index = self.claim.invoiceRows.index(where: { $0.rowId == claimInvoiceRow.rowId })!
+            self.claim.invoiceRows.remove(at: index)
+            self.adjustView()
         }
     }
     

@@ -12,19 +12,32 @@ extension ApiManager: URLSessionDownloadDelegate {
     
     static func fetchInvoices(_ user: User, completion: @escaping (_ invoices: [Document]?, _ error: NSError?) -> ()) {
         let url = K.Api.BaseUrl + K.Api.Documents.Invoices
-        Alamofire.request(url, method: .get, parameters: datesParams(monthCount: 5), headers:["Authorization": user.token]).responseJSON { response in
+        var parameters: [String: AnyObject] = datesParams(monthCount: 5) as [String: AnyObject]
+        parameters["withClaims"] = true as AnyObject
+        
+        Alamofire.request(url, method: .get, parameters: parameters, headers:["Authorization": user.token]).responseJSON { response in
             if response.result.isSuccess {
                 var invoices: [Document] = []
                 if let json = response.result.value as? [String: AnyObject]{
-                    //print("JSON: \(json)")
+                    print("JSON: \(json)")
                     let invoicesDictionaries = json["invoices"] as! [[String: AnyObject]]
                     let users = json["users"] as! [[String: AnyObject]]
                     
                     for invoiceDictionary in invoicesDictionaries {
                         var dictionary = invoiceDictionary
-                        let user = users.first(where: { ($0["id"] as! Int) == (dictionary["userId"] as! Int) })!
-                        dictionary["label"] = user["name"]
-                        let invoice = Document(dictionary: dictionary)
+                        let userDictionary = users.first(where: { ($0["id"] as! Int) == (dictionary["userId"] as! Int) })!
+                        let user = User(dictionary: userDictionary)
+                        dictionary["label"] = user.name as AnyObject?
+                        var invoice = Document(dictionary: dictionary)
+                        
+                        var claims: [Claim] = []
+                        for claim in invoice.claims {
+                            var newClaim = claim
+                            newClaim.user = user
+                            claims.append(newClaim)
+                        }
+                        
+                        invoice.claims = claims
                         invoices.append(invoice)
                     }
                 }
@@ -36,11 +49,11 @@ extension ApiManager: URLSessionDownloadDelegate {
         }
     }
     
-    static func fetchInvoiceDetails(_ invoice: Document, user: User, completion: @escaping (_ invoiceDetails: InvoiceDetails?, _ error: NSError?) -> ()) {
-        let url = K.Api.BaseUrl + K.Api.Documents.Invoices + "/" + String(invoice.id) + "/" + String(invoice.clientId)
+    static func fetchInvoiceDetails(_ invoiceId: Int, clientId: Int, user: User, completion: @escaping (_ invoiceDetails: InvoiceDetails?, _ error: NSError?) -> ()) {
+        let url = K.Api.BaseUrl + K.Api.Documents.Invoices + "/" + String(invoiceId) + "/" + String(clientId)
         let parameters = [
-            "invoice_id": invoice.id,
-            "client_id": invoice.clientId,
+            "invoice_id": invoiceId,
+            "client_id": clientId,
         ]
 
         Alamofire.request(url, method: .get, parameters: parameters, headers:["Authorization": user.token]).responseJSON { response in
@@ -48,7 +61,7 @@ extension ApiManager: URLSessionDownloadDelegate {
             if response.result.isSuccess {
                 var invoiceDetails: InvoiceDetails?
                 if let json = response.result.value {
-                    //print("JSON: \(json)")
+                    print("JSON: \(json)")
                     invoiceDetails = InvoiceDetails(dictionary: json as! [String : AnyObject])
                 }
                 completion(invoiceDetails, nil)

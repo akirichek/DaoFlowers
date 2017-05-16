@@ -22,15 +22,18 @@ struct Claim {
     var plantation: Plantation?
     var user: User!
     var subjectId: Int?
-    var invoceRows: [InvoiceRow] = []
-    var invoiceDetailsHead: InvoiceDetails.Head?
+    var invoiceRows: [InvoiceRow] = []
     var objectID: NSManagedObjectID?
+    var invoiceId: Int
+    var invoiceHeadId: Int
     
-    init(user: User, date: Date) {
+    init(user: User, date: Date, invoiceId: Int, invoiceHeadId: Int) {
         self.status = .New
         self.date = date
         self.user = user
         self.userId = user.id
+        self.invoiceId = invoiceId
+        self.invoiceHeadId = invoiceHeadId
     }
     
     init(dictionary: [String: AnyObject]) {
@@ -60,7 +63,7 @@ struct Claim {
         if let status = Status(rawValue: dictionary["status"] as! Int) {
             self.status = status
         } else {
-            self.status = .NotConfirmed
+            self.status = .InProcess
         }
         if let stems = dictionary["stems"] as? Int {
             self.stems = stems
@@ -83,22 +86,30 @@ struct Claim {
         if let claimInvoiceRowsDictionaries = dictionary["claimInvoiceRows"] as? [[String: AnyObject]] {
             for claimInvoiceRowDictionary in claimInvoiceRowsDictionaries {
                 let invoceRow = InvoiceRow(dictionary: claimInvoiceRowDictionary)
-                invoceRows.append(invoceRow)
+                invoiceRows.append(invoceRow)
             }
+        }
+        
+        if let invoiceDetailsHeadDictionary = dictionary["invoiceDetailsHead"] as? [String: AnyObject] {
+            invoiceId = invoiceDetailsHeadDictionary["invoiceId"] as! Int
+            invoiceHeadId = invoiceDetailsHeadDictionary["id"] as! Int
+        } else {
+            invoiceId = dictionary["invoiceId"] as! Int
+            invoiceHeadId = dictionary["invoiceHeadId"] as! Int
         }
     }
     
     func toDictionary() -> [String: AnyObject] {
         var dictionary: [String: AnyObject] = [:]
         dictionary["status"] = 2 as AnyObject
-        dictionary["claimInvoiceId"] = invoiceDetailsHead!.invoiceId as AnyObject
+        dictionary["claimInvoiceId"] = invoiceId as AnyObject
         dictionary["claimSubjectId"] = subjectId as AnyObject
         dictionary["clientId"] = userId as AnyObject
-        dictionary["claimInvoiceHeadId"] = invoiceDetailsHead!.id as AnyObject
+        dictionary["claimInvoiceHeadId"] = invoiceHeadId as AnyObject
         dictionary["claimComment"] = comment as AnyObject
         
         var claimInvoiceRows: [[String: AnyObject]] = []
-        for invoceRows in invoceRows {
+        for invoceRows in invoiceRows {
             claimInvoiceRows.append(invoceRows.toDictionary())
         }
         
@@ -116,6 +127,10 @@ struct Claim {
         }
         
         dictionary["photos"] = photosDictionaries as AnyObject
+        
+        if let id = id {
+            dictionary["claimId"] = id as AnyObject
+        }
     
         return dictionary
     }
@@ -123,9 +138,28 @@ struct Claim {
     enum Status: Int {
         case New = 1
         case Sent = 2
-        case NotConfirmed = 3
+        case InProcess = 3
         case Confirmed = 4
         case LocalDraft = 5
+        
+        func toString() -> String {
+            var string = ""
+            
+            switch self {
+            case .New:
+                string = "NEW CLAIM"
+            case .Sent:
+                string = "SENT"
+            case .InProcess:
+                string = "IN PROCESS"
+            case .Confirmed:
+                string = "CONFIRMED"
+            case .LocalDraft:
+                string = "LOCAL DRAFT"
+            }
+            
+            return string
+        }
     }
     
     struct Subject {
@@ -138,9 +172,9 @@ struct Claim {
         }
     }
     
-    static func stemsCount(_ claimInvoiceRows: [InvoiceRow]) -> Int {
+    func stemsCount() -> Int {
         var count = 0
-        for claimInvoiceRow in claimInvoiceRows {
+        for claimInvoiceRow in invoiceRows {
             count += claimInvoiceRow.claimStems!
         }
         return count
@@ -148,7 +182,7 @@ struct Claim {
     
     func calculateSum() -> Double {
         var sum: Double = 0.0
-        for invoiceRow in invoceRows {
+        for invoiceRow in invoiceRows {
             sum += invoiceRow.claimPerStemPrice! * Double(invoiceRow.claimStems!)
         }
         

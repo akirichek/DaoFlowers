@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DocumentsViewController: BaseViewController, PageViewerDataSource, DocumentsPageViewDelegate {
+class DocumentsViewController: BaseViewController, PageViewerDataSource, DocumentsPageViewDelegate, InvoiceClaimsViewControllerDelegate {
     
     @IBOutlet weak var pageViewerContainerView: UIView!
     var pageViewer: PageViewer!
@@ -46,6 +46,11 @@ class DocumentsViewController: BaseViewController, PageViewerDataSource, Documen
         let destinationViewController = segue.destination
         if let invoiceDetailsViewController = destinationViewController as? InvoiceDetailsViewController {
             invoiceDetailsViewController.invoice = self.selectedInvoice
+        } else if let invoiceClaimsViewController = destinationViewController as? InvoiceClaimsViewController {
+            invoiceClaimsViewController.invoice = sender as! Document
+            invoiceClaimsViewController.delegate = self
+        } else if let claimDetailsViewController = destinationViewController as? ClaimDetailsViewController {
+            claimDetailsViewController.claim = sender as! Claim
         }
     }
     
@@ -125,6 +130,22 @@ class DocumentsViewController: BaseViewController, PageViewerDataSource, Documen
         if documentsPageView.invoicesMode {
             self.selectedInvoice = document
             self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.InvoiceDetails, sender: self)
+        }
+    }
+    
+    func documentsPageView(_ documentsPageView: DocumentsPageView, didClickClaimWithDocument document: Document) {
+        performSegue(withIdentifier: K.Storyboard.SegueIdentifier.InvoiceClaims, sender: document)
+    }
+    
+    func documentsPageViewShouldDisplayClaims(_ documentsPageView: DocumentsPageView) -> Bool {
+        return navigationController?.viewControllers[0] == self
+    }
+    
+    // MARK: - InvoiceClaimsViewControllerDelegate
+    
+    func invoiceClaimsViewController(_ invoiceClaimsViewController: InvoiceClaimsViewController, didSelectClaim claim: Claim) {
+        dismiss(animated: true) { 
+            self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.ClaimDetails, sender: claim)
         }
     }
 }

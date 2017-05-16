@@ -53,10 +53,10 @@ class ClaimDetailsTableViewCell: UITableViewCell {
         costLabel.text = String(format: "%.2f", invoiceDetailsHead.totalPrice)
         totalFbLabel.text = String(format: "%.2f", invoiceDetailsHead.totalFb)
 
-        if claim.invoceRows.count > 0 {
+        if claim.invoiceRows.count > 0 {
             var totalClaimStems: Int = 0
             var totalClaimCost: Double = 0
-            for invoiceRow in claim.invoceRows {
+            for invoiceRow in claim.invoiceRows {
                 totalClaimStems += invoiceRow.claimStems!
                 totalClaimCost += Double(invoiceRow.claimStems!) * invoiceRow.claimPerStemPrice!
             }

@@ -12,6 +12,7 @@ class ClaimDetailsPhotoCollectionViewCell: UICollectionViewCell {
     weak var delegate: ClaimDetailsPhotoCollectionViewCellDelegate?
     
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var removeButtonContainerView: UIView!
     
     var photo: Photo! {
         didSet {

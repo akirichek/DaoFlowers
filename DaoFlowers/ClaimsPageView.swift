@@ -18,6 +18,10 @@ class ClaimsPageView: UIView, UITableViewDataSource, UITableViewDelegate, UIPick
     @IBOutlet weak var statusTextField: UITextField!
     @IBOutlet weak var fromDateTextField: UITextField!
     @IBOutlet weak var toDateTextField: UITextField!
+    @IBOutlet weak var langMarkingLabel: UILabel!
+    @IBOutlet weak var langStatusLabel: UILabel!
+    @IBOutlet weak var langFromLabel: UILabel!
+    @IBOutlet weak var langToLabel: UILabel!
     
     var lastContentOffset: CGFloat = 0
     
@@ -30,7 +34,7 @@ class ClaimsPageView: UIView, UITableViewDataSource, UITableViewDelegate, UIPick
     var fromDatePicker: UIDatePicker!
     var toDatePicker: UIDatePicker!
     var users: [User] = []
-    var statuses: [Claim.Status] = [.Confirmed, .NotConfirmed]
+    var statuses: [Claim.Status] = [.Confirmed, .InProcess]
     var selectedUser: User?
     var selectedStatus: Claim.Status?
     var filteredClaims: [Date: [Claim]]?
@@ -69,6 +73,9 @@ class ClaimsPageView: UIView, UITableViewDataSource, UITableViewDelegate, UIPick
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        localizeView()
+        
         var nib = UINib(nibName:"ClaimTableViewCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: "ClaimTableViewCellIdentifier")
         
@@ -91,6 +98,13 @@ class ClaimsPageView: UIView, UITableViewDataSource, UITableViewDelegate, UIPick
     }
     
     // MARK: - Private Methods
+    
+    func localizeView() {
+        langMarkingLabel.text = CustomLocalisedString("Marking")
+        langStatusLabel.text = CustomLocalisedString("Status")
+        langFromLabel.text = CustomLocalisedString("From")
+        langToLabel.text = CustomLocalisedString("To")
+    }
     
     func sortDates() {
         dates = Array(filteredClaims!.keys)
@@ -313,10 +327,10 @@ class ClaimsPageView: UIView, UITableViewDataSource, UITableViewDelegate, UIPick
             if row > 0 {
                 let status = statuses[row - 1]
                 switch status {
-                case .NotConfirmed:
-                    titleForRow = "not confirmed"
+                case .InProcess:
+                    titleForRow = CustomLocalisedString("not confirmed")
                 case .Confirmed:
-                    titleForRow = "confirmed"
+                    titleForRow = CustomLocalisedString("confirmed")
                 default:
                     break
                 }
@@ -344,7 +358,7 @@ class ClaimsPageView: UIView, UITableViewDataSource, UITableViewDelegate, UIPick
                 statusTextField.text = "--------"
             } else {
                 selectedStatus = statuses[row - 1]
-                statusTextField.text = (selectedStatus == .Confirmed) ? "confirmed" : "not confirmed"
+                statusTextField.text = (selectedStatus == .Confirmed) ? CustomLocalisedString("confirmed") : CustomLocalisedString("not confirmed")
             }
         default:
             break

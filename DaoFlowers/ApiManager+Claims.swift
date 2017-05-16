@@ -105,15 +105,23 @@ extension ApiManager {
                 if let json = response.result.value as? [String: AnyObject] {
                     print("JSON: \(json)")
                     
-                    let usersDictionaries = json["users"] as! [[String: AnyObject]]
+                    var users: [User] = []
+                    if let usersDictionaries = json["users"] as? [[String: AnyObject]] {
+                        for userDictionary in usersDictionaries {
+                            let user = User(dictionary: userDictionary)
+                            users.append(user)
+                        }
+                    }
+                    
                     var invoiceDictionary = json["invoice"] as! [String: AnyObject]
-                    let userDictionary = usersDictionaries.first(where: { ($0["id"] as! Int) == (invoiceDictionary["userId"] as! Int) })!
-                    invoiceDictionary["label"] = userDictionary["name"]
+                    let user = users.first(where: { $0.id == (invoiceDictionary["userId"] as! Int) })!
+                    invoiceDictionary["label"] = user.name as AnyObject?
                     invoice = Document(dictionary: invoiceDictionary)
                     invoiceDetailsHead = InvoiceDetails.Head(dictionary: json["invoiceDetailsHead"] as! [String: AnyObject])
                     invoiceDetails = InvoiceDetails(dictionary: json)
                     claim = Claim(dictionary: json)
                     claim?.userId = invoiceDictionary["userId"] as! Int
+                    claim?.user = user
                 }
                 completion(claim, invoice, invoiceDetails, invoiceDetailsHead, nil)
             } else {
@@ -124,75 +132,18 @@ extension ApiManager {
     }
     
     static func saveClaim(_ claim: Claim, user: User, completion: @escaping ( _ error: NSError?) -> ()) {
-        let url = K.Api.BaseUrl + K.Api.Documents.ClaimDetails
-//        var parameters: [String: AnyObject] = claim.toDictionary()
-//        parameters["claimInvoiceId"] = invoiceDetailsHead.invoiceId as AnyObject
-//        parameters["claimInvoiceHeadId"] = invoiceDetailsHead.id as AnyObject
-//        
-//        print(url)
-//        print(parameters)
-//        
-//        Alamofire.request(url, method: .post, parameters: parameters, headers:["Authorization": user.token]).responseJSON { response in
-//            print("Code: \(response.response?.statusCode)")
-//            if response.result.isSuccess {
-//                if let json = response.result.value as? [String: AnyObject] {
-//                    print("JSON: \(json)")
-//
-//                }
-//                completion(nil)
-//            } else {
-//                print("Error: \(response.result.error)")
-//                completion(response.result.error as NSError?)
-//            }
-//        }
+        var url = K.Api.BaseUrl + K.Api.Documents.ClaimDetails
         
+        if claim.id != nil {
+            url += "?force_timestamp=\(Int(Date().timeIntervalSince1970 * 1000.0))"
+        }
+        
+        let jsonData = try! JSONSerialization.data(withJSONObject: claim.toDictionary(), options: .prettyPrinted)
 
-        
-        var claimInvoiceRowJson = ""
-        for i in 0..<claim.invoceRows.count {
-            let claimInvoiceRow = claim.invoceRows[i]
-            claimInvoiceRowJson += "{\"claimPerStemPrice\": \(claimInvoiceRow.claimPerStemPrice!), \"claimStems\": \(claimInvoiceRow.claimStems!), \"rowId\": \(claimInvoiceRow.rowId)}"
-            
-            if i < claim.invoceRows.count - 1 {
-                claimInvoiceRowJson += ", "
-            }
-        }
-        
-        var photosJson = ""
-        for i in 0..<claim.photos.count {
-            let photo = claim.photos[i]
-            if let photoId = photo.id {
-                photosJson += "{\"photoId\": \"\(photoId)\"}"
-            } else {
-                photosJson += "{\"fileName\": \"\(photo.name!)\"}"
-            }
-            
-            if i < claim.photos.count - 1 {
-                photosJson += ", "
-            }
-        }
-        
-        let json = "{\"photos\": [\(photosJson)], \"status\": 2, \"claimInvoiceId\": \(invoiceDetailsHead.invoiceId), \"claimSubjectId\": \(claim.subjectId!), \"clientId\": \(claim.userId!), \"claimInvoiceHeadId\": \(invoiceDetailsHead.id), \"claimComment\": \"\(claim.comment)\", \"claimInvoiceRows\": [\(claimInvoiceRowJson)]}"
-        
-        print(json)
-        
-//        do {
-//            let jsonData = try JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted)
-//            // here "jsonData" is the dictionary encoded in JSON data
-//            
-//            let decoded = try JSONSerialization.jsonObject(with: jsonData, options: [])
-//            // here "decoded" is of type `Any`, decoded from JSON data
-//            
-//            // you can now cast it with the right type
-//            if let dictFromJSON = decoded as? [String:String] {
-//                print(dictFromJSON)
-//            }
-//        } catch {
-//            print(error.localizedDescription)
-//        }
-        
+        print(String(data: jsonData, encoding: .utf8)!)
+
         Alamofire.upload(multipartFormData: { (multipartFormData) in
-            multipartFormData.append(json.data(using: .utf8)!, withName: "data", fileName: "data", mimeType: "application/json")
+            multipartFormData.append(jsonData, withName: "data", fileName: "data", mimeType: "application/json")
             for photo in claim.photos {
                 if photo.id == nil {
                     multipartFormData.append(UIImagePNGRepresentation(photo.image!)!,
@@ -229,7 +180,51 @@ extension ApiManager {
                 print("encodingError: \(encodingError)")
             }
         }
+    }
+    
+    static func removeClaim(_ claim: Claim, user: User, completion: @escaping ( _ success: Bool) -> ()) {
+        let url = K.Api.BaseUrl + K.Api.Documents.ClaimDetails
         
+        let parameters =  [
+            "claim_id": claim.id as AnyObject,
+            "force_timestamp": Int(Date().timeIntervalSince1970 * 1000.0) as AnyObject
+        ]
         
+        print(parameters)
+        
+        Alamofire.request(url, method: .delete, parameters: parameters, headers:["Authorization": user.token]).responseJSON { response in
+            print("Code: \(response.response?.statusCode)")
+            if response.response?.statusCode == 200 {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
+    }
+    
+    static func isClaimEditingAllowed(_ claim: Claim, user: User, completion: @escaping ( _ error: NSError?) -> ()) {
+        let url = K.Api.BaseUrl + K.Api.Documents.IsClaimEditingAllowed
+        
+        let timestamp = Int(Date().timeIntervalSince1970 * 1000.0)
+        
+        let parameters =  [
+            "claim_id": claim.id as AnyObject,
+            "timestamp": timestamp as AnyObject
+        ]
+        
+        print(parameters)
+        
+        Alamofire.request(url, method: .get, parameters: parameters, headers:["Authorization": user.token]).responseJSON { response in
+            print("Code: \(response.response?.statusCode)")
+            if response.result.isSuccess {
+                if let json = response.result.value as? [String: AnyObject] {
+                    print("JSON: \(json)")
+                }
+                completion(nil)
+            } else {
+                print("Error: \(response.result.error)")
+                completion(response.result.error as NSError?)
+            }
+        }
     }
 }

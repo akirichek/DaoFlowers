@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddClaimViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
+class AddClaimViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
 
     @IBOutlet var cornerRadiusViews: [UIView]!
     @IBOutlet weak var tableView: UITableView!
@@ -24,6 +24,15 @@ class AddClaimViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var discountTextField: UITextField!
     @IBOutlet weak var percentDiscountTextField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var clearButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
+    
+    @IBOutlet weak var langStemsCountLabel: UILabel!
+    @IBOutlet weak var langStemPriceLabel: UILabel!
+    @IBOutlet weak var langFullPriceLabel: UILabel!
+    @IBOutlet weak var langClaimLabel: UILabel!
+    @IBOutlet weak var langStemsLabel: UILabel!
+    @IBOutlet weak var langPriceLabel: UILabel!
     
     weak var delegate: AddClaimViewControllerDelegate?
     var invoiceDetails: InvoiceDetails!
@@ -42,6 +51,8 @@ class AddClaimViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        localizeView()
+        
         scrollView.contentSize = CGSize(width: 320, height: 693)
         
         cornerRadiusViews.forEach { (view) in
@@ -75,6 +86,17 @@ class AddClaimViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     // MARK: - Private Method
+    
+    func localizeView() {
+        langStemsCountLabel.text = CustomLocalisedString("Stems count")
+        langStemPriceLabel.text = CustomLocalisedString("Stem price2")
+        langFullPriceLabel.text = CustomLocalisedString("Full price")
+        langClaimLabel.text = CustomLocalisedString("Claim")
+        langStemsLabel.text = CustomLocalisedString("Stems2")
+        langPriceLabel.text = CustomLocalisedString("Price")
+        clearButton.setTitle(CustomLocalisedString("CLEAR"), for: .normal)
+        cancelButton.setTitle(CustomLocalisedString("Cancel").uppercased(), for: .normal)
+    }
     
     func populateView() {
         let flower = invoiceDetails.flowerById(invoiceDetailsHead.flowerTypeId)!
@@ -126,12 +148,12 @@ class AddClaimViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func keyboardWillShow(_ notification:Notification){
-        scrollView.isScrollEnabled = true
+        //scrollView.isScrollEnabled = true
         scrollView.contentOffset = CGPoint(x: 0, y: 125)
     }
     
     func keyboardWillHide(_ notification:Notification){
-        scrollView.isScrollEnabled = false
+        //scrollView.isScrollEnabled = false
         scrollView.contentOffset = CGPoint(x: 0, y: 0)
     }
     
@@ -222,7 +244,7 @@ class AddClaimViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AddClaimTypeTableViewCellIdentifier", for: indexPath)
         let claimType = claimTypes[indexPath.row]
-        cell.textLabel?.text = claimType.rawValue
+        cell.textLabel?.text = CustomLocalisedString(claimType.rawValue)
         
         if claimType == selectedClaimType {
             cell.accessoryType = UITableViewCellAccessoryType.checkmark
@@ -269,7 +291,7 @@ class AddClaimViewController: UIViewController, UITableViewDataSource, UITableVi
                 delegate?.addClaimViewController(self, didAddClaimInvoiceRow: claimInvoiceRow)
             }
         } else {
-            Utils.showErrorWithMessage("Validation mistake! Please, check whether you filled in the lines correctly.", inViewController: self)
+            Utils.showErrorWithMessage(CustomLocalisedString("Please, check whether you filled in the lines correctly."), inViewController: self)
         }
     }
     

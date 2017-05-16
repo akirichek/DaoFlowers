@@ -34,6 +34,7 @@ struct K {
             static let Claims = "/documents/claims"
             static let ClaimDetails = "/documents/claims/details"
             static let ClaimSubjects = "/documents/claims/subjects"
+            static let IsClaimEditingAllowed = "/documents/claims/isEditingAllowed"
         }
         struct Support {
             static let OrderCallback = "/support/callback"
@@ -75,6 +76,8 @@ struct K {
             static let ClaimDetails = "ClaimDetailsSegueIdentifier"
             static let ImageViewer = "ImageViewerViewControllerSegueIdentifier"
             static let AddClaim = "AddClaimSegueIdentifier"
+            static let InvoiceClaims = "InvoiceClaimsSegueIdentifier"
+            static let PhotosViewer = "PhotosViewerSegueIdentifier"
         }
         
         struct ViewControllerIdentifier {

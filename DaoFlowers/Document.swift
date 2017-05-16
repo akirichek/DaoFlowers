@@ -12,11 +12,12 @@ struct Document {
     var id: Int
     var clientId: Int
     var date: Date
-    var fb: Int
+    var fb: Double
     var fileName: String
     var label: String
     var number: String?
     var zipFile: String
+    var claims: [Claim] = []
     
     init(dictionary: [String: AnyObject]) {
         id = dictionary["id"] as! Int
@@ -26,7 +27,7 @@ struct Document {
             clientId = dictionary["clientId"] as! Int
         }
         
-        fb = dictionary["fb"] as! Int
+        fb = dictionary["fb"] as! Double
         fileName = dictionary["fileName"] as! String
         label = dictionary["label"] as! String
         number = dictionary["number"] as? String
@@ -35,5 +36,12 @@ struct Document {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         date = dateFormatter.date(from: dictionary["date"] as! String)!
+        
+        if let claimsDictionaries = dictionary["claims"] as? [[String: AnyObject]] {
+            for claimDictionary in claimsDictionaries {
+                let claim = Claim(dictionary: claimDictionary)
+                claims.append(claim)
+            }
+        }
     }
 }

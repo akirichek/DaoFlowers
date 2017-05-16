@@ -84,21 +84,7 @@ class ClaimsViewController: BaseViewController, PageViewerDataSource, PageViewer
             }
         }
     }
-//
-//    func fetchPrealertsForPageViewIndex(_ index: Int) {
-//        ApiManager.fetchPrealerts(User.currentUser()!) { (prealerts, error) in
-//            if let prealerts = prealerts {
-//                if let pageView = self.pageViewer.pageAtIndex(index) as? DocumentsPageView {
-//                    pageView.invoicesMode = false
-//                    pageView.documents = Utils.sortedDocuments(prealerts)
-//                    self.prealerts = prealerts
-//                }
-//            } else {
-//                Utils.showError(error!, inViewController: self)
-//            }
-//        }
-//    }
-//    
+    
     // MARK: - Actions
     
     @IBAction func filterButtonClicked(_ sender: UIBarButtonItem) {
@@ -170,9 +156,5 @@ class ClaimsViewController: BaseViewController, PageViewerDataSource, PageViewer
     
     func claimsPageView(_ claimsPageView: ClaimsPageView, didSelectClaim claim: Claim) {
         performSegue(withIdentifier: K.Storyboard.SegueIdentifier.ClaimDetails, sender: claim)
-//        
-//        ApiManager.fetchClaimDetailsForClaim(claim, user: User.currentUser()!) { (claim, invoice, invoiceDetails, invoiceDetailsHead, error) in
-//            
-//        }
     }
 }

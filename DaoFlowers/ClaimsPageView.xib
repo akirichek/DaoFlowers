@@ -20,15 +20,15 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Marking:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="v8t-CQ-iK8">
-                            <rect key="frame" x="39" y="3" width="84" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <rect key="frame" x="6" y="3" width="150" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Status:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eSc-nX-yOx">
-                            <rect key="frame" x="197" y="3" width="84" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Status:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" id="eSc-nX-yOx">
+                            <rect key="frame" x="164" y="3" width="150" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -131,6 +131,10 @@
                 <outlet property="addButton" destination="GbX-dU-K94" id="NvL-Ql-Xya"/>
                 <outlet property="filterContainerView" destination="yNr-4y-q4B" id="SGm-Kj-sjW"/>
                 <outlet property="fromDateTextField" destination="iFm-zd-9Sp" id="eia-du-oZc"/>
+                <outlet property="langFromLabel" destination="qHr-EX-d55" id="g2A-14-ewz"/>
+                <outlet property="langMarkingLabel" destination="v8t-CQ-iK8" id="dOm-yJ-xh5"/>
+                <outlet property="langStatusLabel" destination="eSc-nX-yOx" id="PTj-6y-NiD"/>
+                <outlet property="langToLabel" destination="D16-xA-TUZ" id="zxH-lH-EU4"/>
                 <outlet property="markingTextField" destination="6Ni-EA-RLb" id="1V1-vB-ed8"/>
                 <outlet property="statusTextField" destination="cvZ-iU-xmD" id="dM1-le-asY"/>
                 <outlet property="tableView" destination="Adh-I7-KWw" id="fj9-Rc-GeT"/>

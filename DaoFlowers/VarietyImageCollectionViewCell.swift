@@ -19,6 +19,18 @@ class VarietyImageCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    var photo: Photo! {
+        didSet {
+            plantationView.isHidden = true
+            if let urlString = photo.url {
+                imageView.image = nil
+                imageView.af_setImage(withURL: URL(string: urlString)!)
+            } else {
+                imageView.image = photo.image
+            }
+        }
+    }
+    
     func populateView() {
         imageView.image = nil
         imageView.af_setImage(withURL: URL(string: image.imgUrl)!)
