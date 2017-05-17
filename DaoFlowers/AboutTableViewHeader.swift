@@ -13,5 +13,10 @@ class AboutTableViewHeader: UITableViewHeaderFooterView {
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
 
-
+    var update: Update! {
+        didSet {
+            versionLabel.text = CustomLocalisedString("VERSION") + " \(update.version)"
+            dateLabel.text = update.date
+        }
+    }
 }

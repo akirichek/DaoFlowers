@@ -117,6 +117,13 @@
                         <outlet property="delegate" destination="iN0-l3-epB" id="Xm1-us-PqU"/>
                     </connections>
                 </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="You have no documents" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MYC-MO-Gqz">
+                    <rect key="frame" x="0.0" y="259" width="320" height="21"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="GbX-dU-K94">
                     <rect key="frame" x="254" y="508" width="50" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
@@ -133,6 +140,7 @@
                 <outlet property="fromDateTextField" destination="iFm-zd-9Sp" id="eia-du-oZc"/>
                 <outlet property="langFromLabel" destination="qHr-EX-d55" id="g2A-14-ewz"/>
                 <outlet property="langMarkingLabel" destination="v8t-CQ-iK8" id="dOm-yJ-xh5"/>
+                <outlet property="langNoDocumentsLabel" destination="MYC-MO-Gqz" id="3wb-Zs-ckk"/>
                 <outlet property="langStatusLabel" destination="eSc-nX-yOx" id="PTj-6y-NiD"/>
                 <outlet property="langToLabel" destination="D16-xA-TUZ" id="zxH-lH-EU4"/>
                 <outlet property="markingTextField" destination="6Ni-EA-RLb" id="1V1-vB-ed8"/>

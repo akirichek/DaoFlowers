@@ -13,16 +13,15 @@ class MenuTableViewCell: UITableViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var sectionLabel: UILabel!
     @IBOutlet weak var customerLabel: UILabel!
+    @IBOutlet weak var versionLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        let shortVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+        let version = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
+
+        if versionLabel != nil {
+            versionLabel.text = "\(shortVersion) (\(version))"
+        }
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

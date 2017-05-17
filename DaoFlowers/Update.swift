@@ -12,4 +12,10 @@ struct Update {
     var version: String
     var date: String
     var news: [String]
+    
+    init(dictionary: [String: AnyObject]) {
+        version = dictionary["Version"] as! String
+        date = dictionary["Date"] as! String
+        news = dictionary["News"] as! [String]
+    }
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Version</key>
+		<string>1.01</string>
+		<key>Date</key>
+		<string>16.05.2017</string>
+		<key>News</key>
+		<array>
+			<string>New service &quot;Claims&quot;. Now you have a possibility to create new, edit and view claims.</string>
+			<string>Implemented &quot;About&quot; section. It contains list of the new features in the app. </string>
+		</array>
+	</dict>
+</array>
+</plist>

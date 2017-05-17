@@ -78,6 +78,7 @@
 		826BD70B1ECA227200BA43F4 /* AboutTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826BD70A1ECA227200BA43F4 /* AboutTableViewHeader.swift */; };
 		826BD70D1ECA229400BA43F4 /* AboutTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 826BD70C1ECA229400BA43F4 /* AboutTableViewHeader.xib */; };
 		826BD70F1ECA25ED00BA43F4 /* Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826BD70E1ECA25ED00BA43F4 /* Update.swift */; };
+		826BD7141ECB084E00BA43F4 /* Updates.plist in Resources */ = {isa = PBXBuildFile; fileRef = 826BD7161ECB084E00BA43F4 /* Updates.plist */; };
 		8272FBCD1DF75FB800100AAA /* VarietyDetailsGeneralInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8272FBCF1DF75FB800100AAA /* VarietyDetailsGeneralInfoView.xib */; };
 		8272FBD81DF8655500100AAA /* help.png in Resources */ = {isa = PBXBuildFile; fileRef = 8272FBDA1DF8655500100AAA /* help.png */; };
 		8272FBDF1DF8667A00100AAA /* icon_link@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8272FBE11DF8667A00100AAA /* icon_link@2x.png */; };
@@ -277,6 +278,9 @@
 		826BD70A1ECA227200BA43F4 /* AboutTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutTableViewHeader.swift; sourceTree = "<group>"; };
 		826BD70C1ECA229400BA43F4 /* AboutTableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutTableViewHeader.xib; sourceTree = "<group>"; };
 		826BD70E1ECA25ED00BA43F4 /* Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Update.swift; sourceTree = "<group>"; };
+		826BD7151ECB084E00BA43F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/Updates.plist; sourceTree = "<group>"; };
+		826BD7171ECB085F00BA43F4 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = ru.lproj/Updates.plist; sourceTree = "<group>"; };
+		826BD7181ECB28C700BA43F4 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/Updates.plist; sourceTree = "<group>"; };
 		8272FBCE1DF75FB800100AAA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/VarietyDetailsGeneralInfoView.xib; sourceTree = "<group>"; };
 		8272FBD41DF75FC600100AAA /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/VarietyDetailsGeneralInfoView.xib; sourceTree = "<group>"; };
 		8272FBD51DF75FC900100AAA /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/VarietyDetailsGeneralInfoView.xib; sourceTree = "<group>"; };
@@ -558,6 +562,7 @@
 				82457ACE1DAEAA5900D87B21 /* DaoFlowers.xcdatamodeld */,
 				82C0598C1DC68E4900F061E6 /* Localizable.strings */,
 				824FF32B1E477BA000BBC723 /* stylo.ttf */,
+				826BD7161ECB084E00BA43F4 /* Updates.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1143,6 +1148,7 @@
 				8209846A1E365B7000C8D112 /* UserProfileStaffView.xib in Resources */,
 				824FF3251E42623B00BBC723 /* UserProfileEmployeeTableViewHeader.xib in Resources */,
 				82C0597B1DC6449C00F061E6 /* VarietyCollectionViewCell.xib in Resources */,
+				826BD7141ECB084E00BA43F4 /* Updates.plist in Resources */,
 				829AF0551E3901340002CF15 /* AddStaffReportTableViewCell.xib in Resources */,
 				8253692F1DE72E0D00A17537 /* InvoiceDetailsAveragePricesSizeTableViewCell.xib in Resources */,
 				82FF96741DF35F0A00A5BB70 /* InvoiceDetailsAveragePricesViewPage.xib in Resources */,
@@ -1377,6 +1383,16 @@
 				82C059891DC68E3E00F061E6 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		826BD7161ECB084E00BA43F4 /* Updates.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				826BD7151ECB084E00BA43F4 /* en */,
+				826BD7171ECB085F00BA43F4 /* ru */,
+				826BD7181ECB28C700BA43F4 /* es */,
+			);
+			name = Updates.plist;
 			sourceTree = "<group>";
 		};
 		8272FBCF1DF75FB800100AAA /* VarietyDetailsGeneralInfoView.xib */ = {

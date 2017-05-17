@@ -22,6 +22,7 @@ class ClaimsPageView: UIView, UITableViewDataSource, UITableViewDelegate, UIPick
     @IBOutlet weak var langStatusLabel: UILabel!
     @IBOutlet weak var langFromLabel: UILabel!
     @IBOutlet weak var langToLabel: UILabel!
+    @IBOutlet weak var langNoDocumentsLabel: UILabel!
     
     var lastContentOffset: CGFloat = 0
     
@@ -104,6 +105,7 @@ class ClaimsPageView: UIView, UITableViewDataSource, UITableViewDelegate, UIPick
         langStatusLabel.text = CustomLocalisedString("Status")
         langFromLabel.text = CustomLocalisedString("From")
         langToLabel.text = CustomLocalisedString("To")
+        langNoDocumentsLabel.text = CustomLocalisedString("You have no documents")
     }
     
     func sortDates() {
@@ -210,6 +212,8 @@ class ClaimsPageView: UIView, UITableViewDataSource, UITableViewDelegate, UIPick
         if let dates = self.dates {
             numberOfRows = dates.count
         }
+        
+        langNoDocumentsLabel.isHidden = (numberOfRows > 0)
         
         return numberOfRows
     }

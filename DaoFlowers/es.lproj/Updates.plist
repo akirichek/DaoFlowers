@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Version</key>
+		<string>1.01</string>
+		<key>Date</key>
+		<string>16.05.2017</string>
+		<key>News</key>
+		<array>
+			<string>Nuevo servicio &quot;Reclamaciones&quot;. Ahora tiene la posibilidad de crear nuevas, editar y ver reclamaciones.</string>
+			<string>Se ha implementado la sección &quot;Acerca de&quot;. Contiene una lista de las nuevas funciones de la aplicación.</string>
+		</array>
+	</dict>
+</array>
+</plist>
