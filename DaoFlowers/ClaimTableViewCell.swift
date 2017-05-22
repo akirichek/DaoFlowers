@@ -22,7 +22,7 @@ class ClaimTableViewCell: UITableViewCell {
     var claim: Claim! {
         didSet {
             if userLabel != nil {
-                userLabel.text = claim.user.name
+                userLabel.text = claim.client.name
                 photoCountLabel.text = String(claim.photos.count)
             } else {
                 photoImageView.isHidden = (claim.photos.count == 0)

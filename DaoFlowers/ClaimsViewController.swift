@@ -121,7 +121,7 @@ class ClaimsViewController: BaseViewController, PageViewerDataSource, PageViewer
             }
         } else if index == 1 {
             pageView.users = [User.currentUser()!]
-            pageView.claims = DataManager.fetchClaims(forUser: User.currentUser()!)
+            pageView.claims = DataManager.fetchClaims()
         }
         
         self.view.endEditing(true)

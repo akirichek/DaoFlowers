@@ -18,12 +18,16 @@ extension ApiManager {
             "date_to": Utils.dateToString(toDate)
         ]
         
+        print("fetchClaims url: \(url)")
+        
         Alamofire.request(url, method: .get, parameters: parameters, headers:["Authorization": user.token]).responseJSON { response in
+            print("fetchClaims code: \(response.response!.statusCode)")
+            print("reponse: \(String(data: response.data!, encoding: String.Encoding.utf8)!)")
             if response.result.isSuccess {
                 var claims: [Claim] = []
                 var users: [User] = []
                 if let json = response.result.value as? [String: AnyObject] {
-                    print("JSON: \(json)")
+                    print("fetchClaims JSON: \(json)")
                                         
                     if let usersDictionaries = json["users"] as? [[String: AnyObject]] {
                         for userDictionary in usersDictionaries {
@@ -44,8 +48,8 @@ extension ApiManager {
                     if let claimsDictionaries = json["claims"] as? [[String: AnyObject]] {
                         for claimDictionary in claimsDictionaries {
                             var claim = Claim(dictionary: claimDictionary)
-                            let userIndex = users.index(where: { $0.id == claim.userId })!
-                            claim.user = users[userIndex]
+                            let clientId = claimDictionary["userId"] as! Int
+                            claim.client = users.first(where: { ($0.id == clientId) })
                             if let plantationIndex = plantations.index(where: { $0.id == claim.plantationId }) {
                                 claim.plantation = plantations[plantationIndex]
                             }
@@ -120,8 +124,7 @@ extension ApiManager {
                     invoiceDetailsHead = InvoiceDetails.Head(dictionary: json["invoiceDetailsHead"] as! [String: AnyObject])
                     invoiceDetails = InvoiceDetails(dictionary: json)
                     claim = Claim(dictionary: json)
-                    claim?.userId = invoiceDictionary["userId"] as! Int
-                    claim?.user = user
+                    claim?.client = user
                 }
                 completion(claim, invoice, invoiceDetails, invoiceDetailsHead, nil)
             } else {
@@ -146,10 +149,10 @@ extension ApiManager {
             multipartFormData.append(jsonData, withName: "data", fileName: "data", mimeType: "application/json")
             for photo in claim.photos {
                 if photo.id == nil {
-                    multipartFormData.append(UIImagePNGRepresentation(photo.image!)!,
+                    multipartFormData.append(UIImageJPEGRepresentation(photo.image!, 1)!,
                                              withName: "img",
                                              fileName: photo.name!,
-                                             mimeType: "image/png")
+                                             mimeType: "image/jpg")
                 }
             }
         }, to: url, method: .post, headers: ["Authorization": user.token]) { (encodingResult) in

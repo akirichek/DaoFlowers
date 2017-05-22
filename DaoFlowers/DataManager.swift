@@ -21,8 +21,10 @@ class DataManager: NSObject {
         } else {
             object = NSEntityDescription.insertNewObject(forEntityName: (entity?.name)!, into: context)
         }
+        object.setValue(User.currentUser()!.id!, forKey: "userId")
         object.setValue(claim.comment, forKey: "comment")
-        object.setValue(claim.userId, forKey: "userId")
+        object.setValue(claim.client.id, forKey: "clientId")
+        object.setValue(claim.client.name, forKey: "clientName")
         object.setValue(claim.invoiceId, forKey: "invoiceId")
         object.setValue(claim.invoiceHeadId, forKey: "invoiceHeadId")
         object.setValue(claim.subjectId!, forKey: "subjectId")
@@ -39,18 +41,20 @@ class DataManager: NSObject {
         appDelegate.saveContext()
     }
     
-    static func fetchClaims(forUser user: User) -> [Claim] {
+    static func fetchClaims() -> [Claim] {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.managedObjectContext
         let request = NSFetchRequest<NSFetchRequestResult>()
         let entity = NSEntityDescription.entity(forEntityName: "LocalClaim", in: context)
         request.entity = entity
-        let predicate = NSPredicate(format: "userId CONTAINS[cd] %d", user.id!)
+        let predicate = NSPredicate(format: "userId CONTAINS[cd] %d", User.currentUser()!.id!)
         request.predicate = predicate
         let objects = try! context.fetch(request) as! [NSManagedObject]
         var claims: [Claim] = []
         for object in objects {
-            var claim = Claim(user: user,
+            let client = User(id: object.value(forKey: "clientId") as! Int,
+                              name: object.value(forKey: "clientId") as! String)
+            var claim = Claim(client: client,
                               date: object.value(forKey: "date") as! Date,
                               invoiceId: object.value(forKey: "invoiceId") as! Int,
                               invoiceHeadId: object.value(forKey: "invoiceHeadId") as! Int)
@@ -130,7 +134,7 @@ class DataManager: NSObject {
         var photos: [Photo] = []
         let photosData = NSKeyedUnarchiver.unarchiveObject(with: object.value(forKey: "photos") as! Data) as! [Data]
         for photoData in photosData {
-            let imageName = UUID().uuidString + ".png"
+            let imageName = UUID().uuidString + ".jpg"
             let photo = Photo(image: UIImage(data: photoData)!, name: imageName)
             photos.append(photo)
         }

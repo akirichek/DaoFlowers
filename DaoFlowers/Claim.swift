@@ -17,21 +17,19 @@ struct Claim {
     var stems: Int = 0
     var sum: Double = 0
     var date: Date
-    var userId: Int!
     var comment: String = ""
     var plantation: Plantation?
-    var user: User!
+    var client: User!
     var subjectId: Int?
     var invoiceRows: [InvoiceRow] = []
     var objectID: NSManagedObjectID?
     var invoiceId: Int
     var invoiceHeadId: Int
     
-    init(user: User, date: Date, invoiceId: Int, invoiceHeadId: Int) {
+    init(client: User, date: Date, invoiceId: Int, invoiceHeadId: Int) {
         self.status = .New
         self.date = date
-        self.user = user
-        self.userId = user.id
+        self.client = client
         self.invoiceId = invoiceId
         self.invoiceHeadId = invoiceHeadId
     }
@@ -39,8 +37,8 @@ struct Claim {
     init(dictionary: [String: AnyObject]) {
         if let comment = dictionary["comment"] as? String {
             self.comment = comment
-        } else {
-            self.comment = dictionary["claimComment"] as! String
+        } else if let comment = dictionary["claimComment"] as? String{
+            self.comment = comment
         }
         
         id = dictionary["id"] as? Int
@@ -77,10 +75,7 @@ struct Claim {
             unixDate = dictionary["timestamp"] as! Int
         }
         date = Date(timeIntervalSince1970: TimeInterval(unixDate/1000))
-        if let userId = dictionary["userId"] as? Int {
-            self.userId = userId
-        }
-        
+
         subjectId = dictionary["claimSubjectId"] as? Int
         
         if let claimInvoiceRowsDictionaries = dictionary["claimInvoiceRows"] as? [[String: AnyObject]] {
@@ -104,7 +99,7 @@ struct Claim {
         dictionary["status"] = 2 as AnyObject
         dictionary["claimInvoiceId"] = invoiceId as AnyObject
         dictionary["claimSubjectId"] = subjectId as AnyObject
-        dictionary["clientId"] = userId as AnyObject
+        dictionary["clientId"] = client.id as AnyObject
         dictionary["claimInvoiceHeadId"] = invoiceHeadId as AnyObject
         dictionary["claimComment"] = comment as AnyObject
         

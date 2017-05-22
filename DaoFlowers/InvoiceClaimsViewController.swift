@@ -40,7 +40,7 @@ class InvoiceClaimsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func adjustView() {
-        let localClaims = DataManager.fetchClaims(forUser: User.currentUser()!)        
+        let localClaims = DataManager.fetchClaims()
         var claims: [Claim] = localClaims.filter({ $0.invoiceId == invoice.id })
         for claim in invoice.claims {
             var newClaim = claim

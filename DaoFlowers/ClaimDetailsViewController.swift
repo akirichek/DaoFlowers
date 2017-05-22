@@ -88,7 +88,8 @@ class ClaimDetailsViewController: BaseViewController, UITableViewDataSource, UIT
         subjectPickerView = createPickerViewForTextField(subjectTextField)
         
         if claim == nil {
-            claim = Claim(user: User.currentUser()!, date: Date(), invoiceId: invoice!.id, invoiceHeadId: invoiceDetailsHead.id)
+            let client = invoiceDetails.users.first(where: { $0.id == invoiceDetailsHead.clientId })!
+            claim = Claim(client: client, date: Date(), invoiceId: invoice!.id, invoiceHeadId: invoiceDetailsHead.id)
         }
         
         if isEditingMode {
@@ -158,8 +159,8 @@ class ClaimDetailsViewController: BaseViewController, UITableViewDataSource, UIT
             langDateLabel.text = CustomLocalisedString("date").capitalized
         }
         
-        clientHeaderLabel.text = claim.user.name
-        clientLabel.text = claim.user.name
+        clientHeaderLabel.text = claim.client.name
+        clientLabel.text = claim.client.name
         
         awbLabel.text = invoiceDetailsHead.awb
         let plantation = invoiceDetails.plantationById(invoiceDetailsHead.plantationId)!
@@ -271,7 +272,7 @@ class ClaimDetailsViewController: BaseViewController, UITableViewDataSource, UIT
         ApiManager.fetchInvoices(User.currentUser()!) { (invoices, error) in
             if let invoices = invoices {
                 self.invoice = invoices.first(where: { $0.id == self.claim.invoiceId })
-                ApiManager.fetchInvoiceDetails(self.claim.invoiceId, clientId: self.claim.userId, user: User.currentUser()!) { (invoiceDetails, error) in
+                ApiManager.fetchInvoiceDetails(self.claim.invoiceId, clientId: self.claim.client.id!, user: User.currentUser()!) { (invoiceDetails, error) in
                     RBHUD.sharedInstance.hideLoader()
                     if let invoiceDetails = invoiceDetails {
                         self.invoiceDetails = invoiceDetails
@@ -611,7 +612,7 @@ class ClaimDetailsViewController: BaseViewController, UITableViewDataSource, UIT
                 image = Utils.resizeImage(image: image, targetSize: CGSize(width: 900, height: 800))
             }
             
-            let imageName = UUID().uuidString + ".png"
+            let imageName = UUID().uuidString + ".jpg"
             print(imageName)
             self.claim.photos.append(Photo(image: image, name: imageName))
             self.adjustView()

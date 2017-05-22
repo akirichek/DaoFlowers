@@ -33,7 +33,7 @@ extension ApiManager: URLSessionDownloadDelegate {
                         var claims: [Claim] = []
                         for claim in invoice.claims {
                             var newClaim = claim
-                            newClaim.user = user
+                            newClaim.client = user
                             claims.append(newClaim)
                         }
                         

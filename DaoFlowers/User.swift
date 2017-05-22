@@ -17,6 +17,11 @@ class User: NSObject, NSCoding {
     var slaves: [User]?
     var marking: String?
     
+    init(id: Int, name: String) {
+        self.id = id
+        self.name = name
+    }
+    
     init(dictionary: [String: AnyObject]) {
         langId = dictionary["langId"] as? Int
         name = dictionary["name"] as! String

@@ -45,7 +45,7 @@ class DocumentTableViewCell: UITableViewCell {
         fbLabel.text = String(format: "%.2f fb", document.fb)
         
         if withClaims {
-            let localClaims = DataManager.fetchClaims(forUser: User.currentUser()!)
+            let localClaims = DataManager.fetchClaims()
             let localClaimsByDocument = localClaims.filter({ $0.invoiceId == document.id })
             let claimsCount = document.claims.count + localClaimsByDocument.count
             claimCountLabel.text = "\(claimsCount)"

@@ -167,7 +167,7 @@ class Utils: NSObject {
         var dictionary: [Date: [Claim]] = [:]
         for claim in claims {
             if let user = user {
-                if claim.userId != user.id {
+                if claim.client.id != user.id {
                    continue
                 }
             }
