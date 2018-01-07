@@ -192,3 +192,6 @@
 "Please, check whether you filled in the lines correctly." = "Проверьте правильность ввода данных.";
 "VERSION" = "ВЕРСИЯ";
 "You have no documents" = "У Вас нет документов";
+"Filter" = "Фильтр";
+"Orders count:" = "Количество заказов:";
+"Type the number" = "Введите число";

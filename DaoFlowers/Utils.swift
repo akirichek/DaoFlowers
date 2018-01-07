@@ -163,6 +163,29 @@ class Utils: NSObject {
         return dictionary
     }
     
+    static func filteredOrders(_ orders: [Order], byDate date: Date?, byLabel label: String?) -> [Date: [Order]] {
+        return orders.reduce([Date: [Order]]()) { (dictionary, order) -> [Date: [Order]] in
+            if let date = date {
+                guard order.headDate == date else {
+                    return dictionary
+                }
+            }
+            if let label = label {
+                guard order.clientLabel == label else {
+                    return dictionary
+                }
+            }
+            var dictionary = dictionary
+            if var array = dictionary[order.headDate] {
+                array.append(order)
+                dictionary[order.headDate] = array
+            } else {
+                dictionary[order.headDate] = [order]
+            }
+            return dictionary
+        }
+    }
+    
     static func sortedClaims(_ claims: [Claim], filteredByUser user: User?, filteredByStatus status: Claim.Status?) -> [Date: [Claim]] {
         var dictionary: [Date: [Claim]] = [:]
         for claim in claims {
@@ -223,10 +246,21 @@ class Utils: NSObject {
         return reportsString
     }
     
+    @available(*, deprecated)
     static func dateToString(_ date: Date) -> String {
         var dateToComponents = Calendar.current.dateComponents([.day, .month, .year], from: date)
         dateToComponents.calendar =  Calendar.current
         let string = "\(dateToComponents.year!)-\(dateToComponents.month!)-\(dateToComponents.day!)"
+        return string
+    }
+    
+    static func string(from date: Date, monthDelta: Int) -> String {
+        var dateComponents = Calendar.current.dateComponents([.day, .month, .year], from: Date())
+        dateComponents.calendar = Calendar.current
+        dateComponents.month! += monthDelta
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let string = formatter.string(from: dateComponents.date!)
         return string
     }
     

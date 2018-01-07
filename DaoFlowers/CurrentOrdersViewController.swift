@@ -11,29 +11,21 @@ import UIKit
 class CurrentOrdersViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var headerLandscapeView: UIView!
-    @IBOutlet weak var headerPortraitView: UIView!
     @IBOutlet weak var labelTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var filterButton: UIBarButtonItem!
     @IBOutlet weak var filterView: UIView!
-    @IBOutlet var dateLabels: [UILabel]!
-    @IBOutlet var markLabels: [UILabel]!
-    @IBOutlet var truckLabels: [UILabel]!
-    @IBOutlet var pointLabels: [UILabel]!
-    @IBOutlet var fbOrdLabels: [UILabel]!
-    @IBOutlet var fbDiffLabels: [UILabel]!
     @IBOutlet weak var filterMarkLabel: UILabel!
     @IBOutlet weak var filterDateLabel: UILabel!
 
     var orders: [Order] = []
-    var filteredOrders: [Order] = []
     var labels: [String] = []
     var dates: [Date] = []
     var labelsPickerView: UIPickerView!
     var datesPickerView: UIPickerView!
     var selectedLabel: String?
     var selectedDate: Date?
+    var filteredOrders: [Date: [Order]] = [:]
     
     // MARK: Override Methods
     
@@ -41,32 +33,23 @@ class CurrentOrdersViewController: BaseViewController, UITableViewDataSource, UI
         super.viewDidLoad()
         
         self.title = CustomLocalisedString("Current Orders")
-        dateLabels.forEach { $0.text = CustomLocalisedString("date") }
-        markLabels.forEach { $0.text = CustomLocalisedString("label") }
-        truckLabels.forEach { $0.text = CustomLocalisedString("truck") }
-        pointLabels.forEach { $0.text = CustomLocalisedString("point") }
-        fbOrdLabels.forEach { $0.text = CustomLocalisedString("fb ord") }
-        fbDiffLabels.forEach { $0.text = CustomLocalisedString("fb diff") }
         filterMarkLabel.text = CustomLocalisedString("label").capitalized + ":"
         filterDateLabel.text = CustomLocalisedString("date").capitalized + ":"
         
         labelsPickerView = createPickerViewForTextField(labelTextField)
         datesPickerView = createPickerViewForTextField(dateTextField)
-        fetchCurrentOrders()
+        fetchCurrentOrders(count: nil)
         
-        let nib = UINib(nibName:"OrderTableViewCell", bundle: nil)
+        var nib = UINib(nibName:"OrderTableViewCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: "CurrentOrderTableViewCellLandscapeIdentifier")
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.adjustViewSize()
+        
+        nib = UINib(nibName:"DateTableViewHeader", bundle: nil)
+        self.tableView.register(nib, forHeaderFooterViewReuseIdentifier: "DateTableViewHeaderIdentifier")
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         self.viewWillTransitionToSize = size
         self.tableView.reloadData()
-        self.adjustViewSize()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -80,71 +63,23 @@ class CurrentOrdersViewController: BaseViewController, UITableViewDataSource, UI
     // MARK: - Private Methods
     
     func filterOrders() {
-        var filteredOrders = orders
-        if let selectedLabel = selectedLabel {
-            filteredOrders = filteredOrders.filter({$0.clientLabel == selectedLabel})
-        }
-        if let selectedDate = selectedDate {
-            filteredOrders = filteredOrders.filter({$0.headDate as Date == selectedDate})
-        }
-        self.filteredOrders = filteredOrders
+        self.filteredOrders = Utils.filteredOrders(orders, byDate: selectedDate, byLabel: selectedLabel)
         self.tableView.reloadData()
     }
     
-    func fetchCurrentOrders() {
+    func fetchCurrentOrders(count: Int?) {
         RBHUD.sharedInstance.showLoader(self.view, withTitle: nil, withSubTitle: nil, withProgress: true)
-        ApiManager.fetchCurrentOrders(User.currentUser()!, completion: { orders, error in
+        ApiManager.fetchCurrentOrders(User.currentUser()!, count: count, completion: { orders, error in
             RBHUD.sharedInstance.hideLoader()
             if let orders = orders {
                 self.orders = orders
-                self.filteredOrders = orders
-                for order in orders {
-                    if self.labels.index(of: order.clientLabel) == nil {
-                        self.labels.append(order.clientLabel)
-                    }
-                    if self.dates.index(of: order.headDate) == nil {
-                        self.dates.append(order.headDate)
-                    }
-                }
+                self.filteredOrders = Utils.filteredOrders(orders, byDate: nil, byLabel: nil)
+                self.dates = Array(self.filteredOrders.keys)
                 self.tableView.reloadData()
             } else {
                 Utils.showError(error!, inViewController: self)
             }
         })
-    }
-    
-    func adjustViewSize() {
-        var filterViewFrame = self.filterView.frame
-        filterViewFrame.origin.y = self.contentViewFrame().origin.y
-        self.filterView.frame = filterViewFrame
-        
-        var headerViewFrame: CGRect
-        
-        if isPortraitOrientation() {
-            self.headerPortraitView.isHidden = false
-            self.headerLandscapeView.isHidden = true
-            headerViewFrame = self.headerPortraitView.frame
-            headerViewFrame.origin.y = filterViewFrame.origin.y
-            if !filterView.isHidden {
-                headerViewFrame.origin.y += filterViewFrame.height
-            }
-            self.headerPortraitView.frame = headerViewFrame
-        } else {
-            self.headerPortraitView.isHidden = true
-            self.headerLandscapeView.isHidden = false
-            self.headerLandscapeView.frame.size.width = self.view.frame.width
-            headerViewFrame = self.headerLandscapeView.frame
-            headerViewFrame.origin.y = filterViewFrame.origin.y
-            if !filterView.isHidden {
-                headerViewFrame.origin.y += filterViewFrame.height
-            }
-            self.headerLandscapeView.frame = headerViewFrame
-        }
-        
-        var tableViewFrame = self.tableView.frame
-        tableViewFrame.origin.y = headerViewFrame.origin.y + headerViewFrame.size.height
-        tableViewFrame.size.height = self.viewWillTransitionToSize.height - tableViewFrame.origin.y
-        self.tableView.frame = tableViewFrame
     }
     
     func createPickerViewForTextField(_ textField: UITextField) -> UIPickerView {
@@ -176,14 +111,31 @@ class CurrentOrdersViewController: BaseViewController, UITableViewDataSource, UI
     }
     
     @IBAction func filterButtonClicked(_ sender: UIBarButtonItem) {
-        filterView.isHidden = !filterView.isHidden
-        adjustViewSize()
+        let alertController = UIAlertController(title: CustomLocalisedString("Filter"), message: CustomLocalisedString("Orders count:"), preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: CustomLocalisedString("Cancel"), style: .cancel, handler: nil)
+        let okAction = UIAlertAction(title: CustomLocalisedString("OK"), style: .default) { (alertAction) in
+            let ordersCount = alertController.textFields![0].text!
+            self.fetchCurrentOrders(count: Int(ordersCount))
+        }
+        alertController.addTextField { (textField) in
+            textField.placeholder = CustomLocalisedString("Type the number")
+            textField.keyboardType = .decimalPad
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
     }
     
     // MARK: - UITableViewDataSource
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return dates.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredOrders.count
+        let date = dates[section]
+        let ordersByDate = filteredOrders[date]!
+        return ordersByDate.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -195,7 +147,10 @@ class CurrentOrdersViewController: BaseViewController, UITableViewDataSource, UI
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! OrderTableViewCell
-        cell.order = filteredOrders[indexPath.row]
+        let date = dates[indexPath.section]
+        let ordersByDate = filteredOrders[date]!
+        cell.order = ordersByDate[indexPath.row]
+        
         return cell
     }
     
@@ -205,15 +160,19 @@ class CurrentOrdersViewController: BaseViewController, UITableViewDataSource, UI
         var heightForRow = tableView.rowHeight
         
         if isPortraitOrientation() {
-            let order = filteredOrders[indexPath.row]
-            let truckLabelWidth: CGFloat = 90
+            let date = dates[indexPath.section]
+            let ordersByDate = filteredOrders[date]!
+            let order = ordersByDate[indexPath.row]
+            let truckLabelWidth: CGFloat = 101
             let truckLabelHeight: CGFloat = 16
             let heightForText = Utils.heightForText(order.truck.name,
                                                     havingWidth: truckLabelWidth,
                                                     andFont: UIFont.systemFont(ofSize: 12))
             if heightForText > truckLabelHeight {
-                heightForRow += heightForText - truckLabelHeight
+                heightForRow = 44 + (heightForText - truckLabelHeight)
             }
+        } else {
+            heightForRow = 36
         }
         
         return heightForRow
@@ -223,6 +182,24 @@ class CurrentOrdersViewController: BaseViewController, UITableViewDataSource, UI
         tableView.deselectRow(at: indexPath, animated: true)
         let cell = tableView.cellForRow(at: indexPath)
         self.performSegue(withIdentifier: K.Storyboard.SegueIdentifier.OrderDetails, sender: cell)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 22
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "DateTableViewHeaderIdentifier")!
+        let dateLabel = headerView.viewWithTag(1) as! UILabel
+        let date = dates[section]
+        let dateFormatter = DateFormatter()
+        dateLabel.font = UIFont.systemFont(ofSize: 15, weight: UIFontWeightSemibold)
+        let locale = Locale(identifier: LanguageManager.languageCode())
+        dateFormatter.locale = locale
+        dateFormatter.dateFormat = "dd-MM-yyyy [EEEE]"
+        dateLabel.text = dateFormatter.string(from: date as Date)
+        
+        return headerView
     }
     
     // MARK: UIPickerViewDataSource

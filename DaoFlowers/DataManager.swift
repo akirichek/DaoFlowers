@@ -53,7 +53,7 @@ class DataManager: NSObject {
         var claims: [Claim] = []
         for object in objects {
             let client = User(id: object.value(forKey: "clientId") as! Int,
-                              name: object.value(forKey: "clientId") as! String)
+                              name: object.value(forKey: "clientName") as! String)
             var claim = Claim(client: client,
                               date: object.value(forKey: "date") as! Date,
                               invoiceId: object.value(forKey: "invoiceId") as! Int,

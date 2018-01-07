@@ -27,6 +27,7 @@ struct K {
         static let PlantationsSearchParametersPath = "/catalog/search/plantations/params"
         static let SearchPlantationsPath = "/catalog/search/plantations"
         static let CurrentOrdersPath = "/orders/current"
+        static let OrdersPath = "/orders"
         struct Documents {
             static let Invoices = "/documents/invoices"
             static let Prealerts = "/documents/prealerts"

@@ -142,7 +142,7 @@ class OrderDetailsViewController: BaseViewController, UITableViewDataSource, UIT
         
         if indexPath.row < totalOrderDetails.count {
             let orderDetails = self.totalOrderDetails[indexPath.row]
-            let labelWidth: CGFloat = isPortraitOrientation() ? 107 : 191
+            let labelWidth: CGFloat = isPortraitOrientation() ? 100 : 180
             let labelHeight: CGFloat = 20
             let text = orderDetails.flowerType.name + ". " + orderDetails.flowerSort.name
             let heightForText = Utils.heightForText(text,

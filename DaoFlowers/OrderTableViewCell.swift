@@ -10,8 +10,6 @@ import UIKit
 
 class OrderTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var dayOfWeekLabel: UILabel!
     @IBOutlet weak var clientLabel: UILabel!
     @IBOutlet weak var truckLabel: UILabel!
     @IBOutlet weak var pointLabel: UILabel!
@@ -41,14 +39,5 @@ class OrderTableViewCell: UITableViewCell {
             fbDifLabel.textColor = UIColor(red: 202/255, green: 5/255, blue: 15/255, alpha: 1)
             checkmarkImageView.isHidden = true
         }
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        dateLabel.text = dateFormatter.string(from: order.headDate as Date)
-        
-        let locale = Locale(identifier: LanguageManager.languageCode())
-        dateFormatter.locale = locale
-        dateFormatter.dateFormat = "EEEE"
-        dayOfWeekLabel.text = dateFormatter.string(from: order.headDate as Date).lowercased()
     }
 }

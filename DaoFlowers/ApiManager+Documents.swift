@@ -61,7 +61,7 @@ extension ApiManager: URLSessionDownloadDelegate {
             if response.result.isSuccess {
                 var invoiceDetails: InvoiceDetails?
                 if let json = response.result.value {
-                    print("JSON: \(json)")
+                    print("\(#function) JSON: \(json)")
                     invoiceDetails = InvoiceDetails(dictionary: json as! [String : AnyObject])
                 }
                 completion(invoiceDetails, nil)

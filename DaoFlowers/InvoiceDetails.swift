@@ -95,7 +95,7 @@ struct InvoiceDetails {
             awb = dictionary["awb"] as! String
             clientId = dictionary["userId"] as! Int
             countryId = dictionary["countryId"] as! Int
-            fb = dictionary["fb"] as! Int
+            fb = (dictionary["fb"] as! NSNumber).intValue
             flowerTypeId = dictionary["flowerTypeId"] as! Int
             id = dictionary["id"] as! Int
             invoiceId = dictionary["invoiceId"] as! Int

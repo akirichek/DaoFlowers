@@ -34,8 +34,8 @@ struct OrderDetails {
     }
     
     init(dictionary: [String: AnyObject]) {
-        confFb = dictionary["confFb"] as! Double
-        orderFb = dictionary["orderFb"] as! Double
+        confFb = dictionary["confirmedFb"] as! Double
+        orderFb = dictionary["orderedFb"] as! Double
 
         let flowerSizeDictionary = dictionary["flowerSize"] as! [String: AnyObject]
         flowerSize = FlowerSize(id: flowerSizeDictionary["id"] as! Int,
