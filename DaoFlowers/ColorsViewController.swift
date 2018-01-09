@@ -37,7 +37,7 @@ class ColorsViewController: BaseViewController, PageViewerDataSource, ColorsPage
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if needsSelectPageView {
-            let index = flowers.index(where: {$0.id == self.selectedFlower.id})!
+            let index = flowers.index(where: {$0.id == self.selectedFlower.id && $0.isGroup == self.selectedFlower.isGroup})!
             self.pageViewer.selectPageAtIndex(index)
         }
     }
@@ -72,7 +72,8 @@ class ColorsViewController: BaseViewController, PageViewerDataSource, ColorsPage
     func fetchColorsForPageViewIndex(_ indexOfPageView: Int) {
         let flower = flowers[indexOfPageView]
         ApiManager.fetchColorsByFlower(flower, completion: { (colors, error) in
-            if let colors = colors {
+            if var colors = colors {
+                colors = self.sortedColors(colors)
                 if let page = self.pageViewer.pageAtIndex(indexOfPageView) as? ColorsPageView {
                     page.flower = flower
                     page.colors = colors
@@ -80,6 +81,19 @@ class ColorsViewController: BaseViewController, PageViewerDataSource, ColorsPage
                 }
             } else {
                 Utils.showError(error!, inViewController: self)
+            }
+        })
+    }
+    
+    func sortedColors(_ colors: [Color]) -> [Color] {
+        guard colors.first?.position != nil else {
+            return colors
+        }
+        return colors.sorted(by: { (lhs, rhs) -> Bool in
+            if lhs.position == rhs.position {
+                return lhs.name < rhs.name
+            } else {
+                return (lhs.position ?? 0) < (rhs.position ?? 0)
             }
         })
     }

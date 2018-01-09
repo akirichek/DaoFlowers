@@ -14,6 +14,8 @@ struct Flower {
     var abr: String?
     var imageUrl: String?
     var sortsCount: Int?
+    var position: Int
+    var isGroup: Bool
     
     init(dictionary: [String: AnyObject]) {
         id = dictionary["id"] as! Int
@@ -21,6 +23,12 @@ struct Flower {
         abr = dictionary["abr"] as? String
         imageUrl = dictionary["imgUrl"] as? String
         sortsCount = dictionary["sortsCount"] as? Int
+        position = (dictionary["position"] as? Int) ?? 0
+        if let isGroup = dictionary["isGroup"] as? NSNumber {
+            self.isGroup = isGroup.boolValue
+        } else {
+            self.isGroup = false
+        }
     }
     
     struct Size {
@@ -40,10 +48,10 @@ struct Flower {
             defaultImage = "img_def_flower_agapanthus"
         case "alstromeria":
             defaultImage = "img_def_flower_alstro"
-        case "":
-            defaultImage = "img_def_flower_bq_exot"
-        case "":
-            defaultImage = "img_def_flower_bq_rond"
+//        case "":
+//            defaultImage = "img_def_flower_bq_exot"
+//        case "":
+//            defaultImage = "img_def_flower_bq_rond"
         case "callas":
             defaultImage = "img_def_flower_callas"
         case "carnations":
@@ -52,20 +60,24 @@ struct Flower {
             defaultImage = "img_def_flower_chrysants_1_bloom"
         case "carnation mini-spray":
             defaultImage = "img_def_flower_chrysants_spray"
-        case "":
-            defaultImage = "img_def_flower_combo"
-        case "":
-            defaultImage = "img_def_flower_foliage"
-        case "":
-            defaultImage = "img_def_flower_gin"
+//        case "":
+//            defaultImage = "img_def_flower_combo"
+//        case "":
+//            defaultImage = "img_def_flower_foliage"
+//        case "":
+//            defaultImage = "img_def_flower_gin"
         case "gypsophila":
             defaultImage = "img_def_flower_gypso"
-        case "":
-            defaultImage = "img_def_flower_helico"
+//        case "":
+//            defaultImage = "img_def_flower_helico"
         case "rose":
             defaultImage = "img_def_flower_rose"
         case "spray roses":
             defaultImage = "img_def_flower_spr_rose"
+        case "exotics":
+            defaultImage = "img_def_flower_heliconia"
+        case "summerflowers":
+            defaultImage = "img_def_flower_solidago"
         default:
             defaultImage = "img_def_flower"
             break

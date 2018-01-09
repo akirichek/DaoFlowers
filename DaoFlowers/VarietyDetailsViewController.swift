@@ -80,14 +80,12 @@ class VarietyDetailsViewController: BaseViewController, PageViewerDataSource, Va
                 if let plantations = plantations {
                     self.plantationsGrowers = plantations
                     if let page = self.pageViewer.pageAtIndex(1) as? VarietyDetailsPlantationsGrowersView {
-                        page.plantations = plantations
+                        page.plantations = Utils.sortedPlantations(plantations, byAssortmentType: .ByPercentsOfPurchase)
                     }
                 } else {
                     Utils.showError(error!, inViewController: self)
                 }
             }
-        } else {
-            
         }
     }
     

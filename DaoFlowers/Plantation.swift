@@ -17,11 +17,13 @@ struct Plantation {
     var posInList: Int!
     var countryName: String?
     var varieties: [Variety]?
+    var isActive: Bool
     
     init(id: Int, brand: String, name: String) {
         self.id = id
         self.brand = brand
         self.name = name
+        self.isActive = true
     }
     
     init(dictionary: [String: AnyObject]) {
@@ -31,5 +33,10 @@ struct Plantation {
         imageUrl = dictionary["imgUrl"] as? String
         name = dictionary["name"] as! String
         posInList = dictionary["posInList"] as? Int
+        if let active = dictionary["active"] as? NSNumber {
+            self.isActive = active.boolValue
+        } else {
+            self.isActive = false
+        }
     }
 }

@@ -36,7 +36,9 @@ class VarietyCollectionViewCell: UICollectionViewCell {
         if let purchasePercent = variety.purchasePercent {
             let rounded = Double(round(10000 * purchasePercent) / 10000)
             purchasePercentLabel.text = String(rounded) + "%"
-            
+        }
+        
+        if variety.isActive {
             nameLabel.textColor = K.Colors.MainBlue
             sizeLabel.textColor = K.Colors.MainBlue
             purchasePercentLabel.textColor = K.Colors.MainBlue

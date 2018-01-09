@@ -19,7 +19,7 @@ extension ApiManager: URLSessionDownloadDelegate {
             if response.result.isSuccess {
                 var invoices: [Document] = []
                 if let json = response.result.value as? [String: AnyObject]{
-                    print("JSON: \(json)")
+                    //print("JSON: \(json)")
                     let invoicesDictionaries = json["invoices"] as! [[String: AnyObject]]
                     let users = json["users"] as! [[String: AnyObject]]
                     

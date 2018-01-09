@@ -108,7 +108,7 @@ class VarietiesPageView: UIView, UICollectionViewDataSource, UICollectionViewDel
         let term = state.searchString.lowercased()
         var filteredVarieties = state.varieties
         if filteredVarieties != nil {
-            if term.characters.count > 0 {
+            if term.count > 0 {
                 filteredVarieties = filteredVarieties!.filter({$0.name.lowercased().contains(term) || $0.abr.lowercased().contains(term)})
             }
             filteredVarieties = Utils.sortedVarieties(filteredVarieties!, byAssortmentType: state.assortment)

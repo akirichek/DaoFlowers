@@ -23,6 +23,7 @@ class FlowersViewController: BaseViewController, UICollectionViewDataSource, UIC
             RBHUD.sharedInstance.hideLoader()
             if let flowers = flowers {
                 self.flowers = flowers
+                self.sortFlowers()
                 self.collectionView.reloadData()
             } else {
                 Utils.showError(error!, inViewController: self)
@@ -50,6 +51,22 @@ class FlowersViewController: BaseViewController, UICollectionViewDataSource, UIC
             colorsViewController.selectedFlower = self.flowers[indexPath.row]
             colorsViewController.flowers = self.flowers
         }
+    }
+    
+    func sortFlowers() {
+        flowers.sort(by: { (lhs, rhs) -> Bool in
+            if (lhs.isGroup && rhs.isGroup) || (!lhs.isGroup && !rhs.isGroup) {
+                if lhs.position == rhs.position {
+                    return lhs.name < rhs.name
+                } else {
+                    return lhs.position < rhs.position
+                }
+            } else if lhs.isGroup {
+                return false
+            } else {
+                return true
+            }
+        })
     }
     
     // MARK: UICollectionViewDataSource

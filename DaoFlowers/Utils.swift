@@ -34,12 +34,18 @@ class Utils: NSObject {
     static func sortedVarietiesByPercentsOfPurchase(_ varieties: [Variety]) -> [Variety] {
         var array = varieties
         array.sort(by: { (obj1, obj2) -> Bool in
-            if let purchasePercent1 = obj1.purchasePercent {
-                if let purchasePercent2 = obj2.purchasePercent {
-                    return purchasePercent1 > purchasePercent2
+            if (obj1.isActive && obj2.isActive) || (!obj1.isActive && !obj2.isActive) {
+                if let purchasePercent1 = obj1.purchasePercent {
+                    if let purchasePercent2 = obj2.purchasePercent {
+                        return purchasePercent1 > purchasePercent2
+                    } else {
+                        return true
+                    }
                 } else {
-                    return true
+                    return false
                 }
+            } else if obj1.isActive {
+                return true
             } else {
                 return false
             }
@@ -126,8 +132,8 @@ class Utils: NSObject {
     }
     
     static func sortedPlantationsByActivePlantations(_ plantations: [Plantation]) -> [Plantation] {
-        var activePlantations = sortedPlantationsByName(plantations.filter({$0.fbSum > 0}))
-        let deactivePlantations = sortedPlantationsByName(plantations.filter({$0.fbSum == 0}))
+        var activePlantations = sortedPlantationsByName(plantations.filter({ $0.isActive }))
+        let deactivePlantations = sortedPlantationsByName(plantations.filter({ !$0.isActive }))
         activePlantations += deactivePlantations
         return activePlantations
     }
@@ -135,7 +141,23 @@ class Utils: NSObject {
     static func sortedPlantationsByPercentsOfPurchase(_ plantations: [Plantation]) -> [Plantation] {
         var array = plantations
         array.sort(by: { (obj1, obj2) -> Bool in
-            return obj1.fbSum > obj2.fbSum
+            if obj1.isActive && obj2.isActive {
+                if let fbSum1 = obj1.fbSum {
+                    if let fbSum2 = obj2.fbSum {
+                        return fbSum1 > fbSum2
+                    } else {
+                        return true
+                    }
+                } else {
+                    return false
+                }
+            } else if obj1.isActive {
+                return true
+            } else if obj2.isActive {
+                return false
+            } else {
+                return obj1.name.lowercased() < obj2.name.lowercased()
+            }
         })
         
         return array

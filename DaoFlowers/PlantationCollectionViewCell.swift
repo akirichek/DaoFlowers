@@ -26,7 +26,7 @@ class PlantationCollectionViewCell: UICollectionViewCell {
         nameLabel.text = plantation.name
         brandLabel.text = plantation.brand
         
-        if plantation.fbSum > 0 {
+        if plantation.isActive {
             nameLabel.textColor = K.Colors.MainBlue
             brandLabel.textColor = K.Colors.MainBlue
         } else {

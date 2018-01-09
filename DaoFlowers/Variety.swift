@@ -31,6 +31,7 @@ class Variety: NSObject {
     var countries: String?
     var fulfillment: Double?
     var lastPurchaseDate: String?
+    var isActive: Bool
     
     struct SizeFrom {
         var id: Int
@@ -71,6 +72,12 @@ class Variety: NSObject {
         
         if let colorDictionary = dictionary["color"] as? [String: AnyObject] {
             color = Color(dictionary: colorDictionary)
+        }
+        
+        if let active = dictionary["active"] as? NSNumber {
+            self.isActive = active.boolValue
+        } else {
+            self.isActive = false
         }
     }
     

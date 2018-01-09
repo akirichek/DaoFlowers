@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import ImagePicker
 
-class ClaimDetailsViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate, ClaimDetailsPhotoCollectionViewCellDelegate, AddClaimViewControllerDelegate, UIScrollViewDelegate {
+class ClaimDetailsViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, ImagePickerDelegate, ClaimDetailsPhotoCollectionViewCellDelegate, AddClaimViewControllerDelegate, UIScrollViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var photosCollectionView: UICollectionView!
@@ -380,34 +381,9 @@ class ClaimDetailsViewController: BaseViewController, UITableViewDataSource, UIT
     // MARK: - Actions
     
     @IBAction func addPhotoButtonClicked(_ sender: UIButton) {
-        let imagePickerController = UIImagePickerController()
+        let imagePickerController = ImagePickerController()
         imagePickerController.delegate = self
-        imagePickerController.sourceType = .savedPhotosAlbum
-        
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            let actionSheet = UIAlertController(title: CustomLocalisedString("Adding Photo"),
-                                                message: CustomLocalisedString("What source would you like to use to add photo?"),
-                                                preferredStyle: .actionSheet)
-            let photoLibraryAction = UIAlertAction(title: CustomLocalisedString("Photo Library"), style: .default) { (alertAction) in
-                imagePickerController.sourceType = .savedPhotosAlbum
-                self.present(imagePickerController, animated: true, completion: nil)
-            }
-            
-            let cameraAction = UIAlertAction(title: CustomLocalisedString("Camera"), style: .default) { (alertAction) in
-                imagePickerController.sourceType = .camera
-                self.present(imagePickerController, animated: true, completion: nil)
-            }
-            
-            let cancelAction = UIAlertAction(title: CustomLocalisedString("Cancel"), style: .cancel, handler: nil)
-            actionSheet.addAction(photoLibraryAction)
-            actionSheet.addAction(cameraAction)
-            actionSheet.addAction(cancelAction)
-            
-            present(actionSheet, animated: true, completion: nil)
-        } else {
-            imagePickerController.sourceType = .savedPhotosAlbum
-            self.present(imagePickerController, animated: true, completion: nil)
-        }
+        present(imagePickerController, animated: true, completion: nil)
     }
     
     @IBAction func subjectTextFieldClicked(_ sender: UITextField) {
@@ -624,6 +600,32 @@ class ClaimDetailsViewController: BaseViewController, UITableViewDataSource, UIT
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - ImagePickerDelegate
+
+    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+
+    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+    }
+
+    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        dismiss(animated: true) {
+            for img in images {
+                var image = img
+                if image.size.width > 900 || image.size.height > 800 {
+                    image = Utils.resizeImage(image: image, targetSize: CGSize(width: 900, height: 800))
+                }
+                let imageName = UUID().uuidString + ".jpg"
+                self.claim.photos.append(Photo(image: image, name: imageName))
+            }
+            self.adjustView()
+            if self.scrollView.contentSize.height > self.scrollView.frame.height {
+                self.scrollView.contentOffset.y = self.scrollView.contentSize.height - self.scrollView.frame.height
+            }
+        }
     }
     
     // MARK: - ClaimDetailsPhotoCollectionViewCellDelegate

@@ -113,7 +113,7 @@ class PlantationsPageView: UIView, UICollectionViewDataSource, UICollectionViewD
         let term = state.searchString.lowercased()
         var filteredPlantations = state.plantations
         if filteredPlantations != nil {
-            if term.characters.count > 0 {
+            if term.count > 0 {
                 filteredPlantations = filteredPlantations!.filter({$0.name.lowercased().contains(term)})
             }
             filteredPlantations = Utils.sortedPlantations(filteredPlantations!, byAssortmentType: state.assortment)

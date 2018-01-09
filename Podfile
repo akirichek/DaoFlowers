@@ -5,4 +5,5 @@ use_frameworks!
 target 'DaoFlowers' do
     pod 'Alamofire', '~> 4.0'
     pod 'AlamofireImage', '~> 3.1'
+    pod 'ImagePicker'
 end
