@@ -4,6 +4,18 @@
 <array>
 	<dict>
 		<key>Version</key>
+		<string>1.02</string>
+		<key>Date</key>
+		<string>11.01.2018</string>
+		<key>News</key>
+		<array>
+			<string>Реализована возможность добавлять несколько фотографий за раз при создании рекламации.</string>
+			<string>Откорректирована сортировка в разделе Сорта и Плантации.</string>
+			<string>Исправлена фильтрация текущих заказов.</string>
+		</array>
+	</dict>
+	<dict>
+		<key>Version</key>
 		<string>1.01</string>
 		<key>Date</key>
 		<string>16.05.2017</string>
