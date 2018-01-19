@@ -4,14 +4,21 @@
 <array>
 	<dict>
 		<key>Version</key>
-		<string>1.02</string>
+		<string>1.03</string>
 		<key>Date</key>
-		<string>11.01.2018</string>
+		<string>19.01.2018</string>
 		<key>News</key>
 		<array>
-			<string>Implementé la capacidad de agregar varias fotos a la vez al crear un reclamo.</string>
-			<string>Corregí la clasificación en las secciones Variedades y plantaciones.</string>
-			<string>Se corrigió el filtrado de los pedidos actuales.</string>
+			<string>Variedades:
+1) Agrego un grupo de flor exotica;
+2) Se actualizo el orden de clasificacion de los tipos de flores: primero ve los tipos de flores por posicion y por nombre, luego los grupos por ID;
+3) Se corrigio la salida de variedades por actividad, porcentaje de compra y nombre.</string>
+			<string>Fincas:
+Se corrigio la salida de variedades por actividad, porcentaje de compra y nombre.</string>
+			<string>Pedidos actuales:
+Se corrigio el filtrado de los pedidos actuales.</string>
+			<string>Reclamos:
+Implemento la posibilidad de agregar varias fotos a la vez al crear un reclamo.</string>
 		</array>
 	</dict>
 	<dict>

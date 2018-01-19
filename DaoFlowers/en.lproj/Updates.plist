@@ -4,14 +4,21 @@
 <array>
 	<dict>
 		<key>Version</key>
-		<string>1.02</string>
+		<string>1.03</string>
 		<key>Date</key>
-		<string>11.01.2018</string>
+		<string>19.01.2018</string>
 		<key>News</key>
 		<array>
-			<string>Implemented the ability to add multiple photos at a time when creating a claim.</string>
-			<string>Corrected the sorting in the Varieties and Plantations sections.</string>
-			<string>Fixed the filtering of current orders.</string>
+			<string>Varieties:
+1) Exotic flowers group added;
+2) Flowers type sortorder updated: in the first place - flowers by position and name are shown, and then groups by id;
+3) Variety sortorder by demand, ratio and name corrected.</string>
+			<string>Farms:
+Farms sortorder by activity, ratio and name corrected.</string>
+			<string>Current Orders:
+Current orders filtering corrected.</string>
+			<string>Claims:
+New option implemented – several images simultaneous upload when claim is created.</string>
 		</array>
 	</dict>
 	<dict>

@@ -78,9 +78,9 @@ class VarietyDetailsViewController: BaseViewController, PageViewerDataSource, Va
         if let user = User.currentUser() {
             ApiManager.fetchPlantationsGrowersByVariety(self.variety, user: user) { (plantations, error) in
                 if let plantations = plantations {
-                    self.plantationsGrowers = plantations
+                    self.plantationsGrowers = Utils.sortedPlantations(plantations, byAssortmentType: .ByPercentsOfPurchase)
                     if let page = self.pageViewer.pageAtIndex(1) as? VarietyDetailsPlantationsGrowersView {
-                        page.plantations = Utils.sortedPlantations(plantations, byAssortmentType: .ByPercentsOfPurchase)
+                        page.plantations = self.plantationsGrowers
                     }
                 } else {
                     Utils.showError(error!, inViewController: self)

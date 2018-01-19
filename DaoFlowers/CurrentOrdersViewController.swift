@@ -75,6 +75,7 @@ class CurrentOrdersViewController: BaseViewController, UITableViewDataSource, UI
                 self.orders = orders
                 self.filteredOrders = Utils.filteredOrders(orders, byDate: nil, byLabel: nil)
                 self.dates = Array(self.filteredOrders.keys)
+                self.dates.sort(by: { $0 > $1 })
                 self.tableView.reloadData()
             } else {
                 Utils.showError(error!, inViewController: self)
